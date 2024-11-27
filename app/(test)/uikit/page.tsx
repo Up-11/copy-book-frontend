@@ -1,25 +1,33 @@
 'use client'
 import { useToast } from '@/shared/lib/hooks/use-toast'
-import { Button } from '@/shared/ui/button'
-import { Checkbox } from '@/shared/ui/checkbox'
-import { Input } from '@/shared/ui/input'
-import { Label } from '@/shared/ui/label'
+import { Button } from '@/shared/ui/other/button'
+import { Calendar } from '@/shared/ui/input/calendar'
+import { Checkbox } from '@/shared/ui/input/checkbox'
+import { Drawer } from '@/shared/ui/modals/drawer'
+import { Input } from '@/shared/ui/input/input'
+import { Label } from '@/shared/ui/input/label'
 import { Loader } from '@/shared/ui/loader'
-import { Modal } from '@/shared/ui/modal'
-import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
-import { Progress } from '@/shared/ui/progress'
-import { ScrollArea } from '@/shared/ui/scroll-area'
-import { SelectItem } from '@/shared/ui/select'
-import { Separator } from '@/shared/ui/separator'
-import { Skeleton } from '@/shared/ui/skeleton'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs'
-import { Textarea } from '@/shared/ui/textarea'
+import { Modal } from '@/shared/ui/modals/modal'
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from '@/shared/ui/modals/popover'
+import { Progress } from '@/shared/ui/input/progress'
+import { ScrollArea } from '@/shared/ui/other/scroll-area'
+import { SelectItem } from '@/shared/ui/input/select'
+import { Separator } from '@/shared/ui/view/separator'
+import { Skeleton } from '@/shared/ui/other/skeleton'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/view/tabs'
+import { Textarea } from '@/shared/ui/input/textarea'
 import Title from '@/shared/ui/title'
-import { UiInputOtp } from '@/shared/ui/ui-input-otp'
-import { UiSelect } from '@/shared/ui/ui-select'
-import { UiTooltip } from '@/shared/ui/ui-tooltip'
+import { UiAlert } from '@/shared/ui/custom/ui-alert'
+import { UiPagination } from '@/shared/ui/custom/ui-pagination'
 import { SelectValue } from '@radix-ui/react-select'
 import { HouseIcon } from 'lucide-react'
+import { UiInputOtp } from '@/shared/ui/custom/ui-input-otp'
+import { UiSelect } from '@/shared/ui/custom/ui-select'
+import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 
 export default function UiKit() {
 	const { toast } = useToast()
@@ -95,6 +103,10 @@ export default function UiKit() {
 							</Tabs>
 						</div>
 					</div>
+					<div className='border-black border p-10 mt-5'>
+						<Title>Navigation Menu</Title>
+						<div className='mt-5 flex flex-col gap-2 '></div>
+					</div>
 				</div>
 				<div className='flex flex-col w-96 '>
 					<div className='border-black border p-10 mt-5'>
@@ -128,8 +140,29 @@ export default function UiKit() {
 							</div>
 						</div>
 					</div>
+					<div className='border-black border p-10 mt-5'>
+						<Title>Calendar</Title>
+						<div className='mt-5 flex  gap-2 '>
+							<Calendar />
+						</div>
+					</div>
+					<div className='border-black border p-10 mt-5'>
+						<Title>Sheet</Title>
+						<div className='mt-5 flex  gap-2 '>
+							<Drawer
+								title={'Drawer'}
+								content={
+									<>
+										<p>123123123</p>
+									</>
+								}
+							>
+								<div className='button'>Open Drawer</div>
+							</Drawer>
+						</div>
+					</div>
 					<div className='border-black border gap-3 p-10 mt-5'>
-						<Title>Scroll Area</Title>
+						<Title>PopOver</Title>
 						<Popover>
 							<PopoverTrigger>Trigger</PopoverTrigger>
 							<PopoverContent sideOffset={3}>
@@ -223,6 +256,14 @@ export default function UiKit() {
 						<Button onClick={() => toast({ title: 'Toast', duration: 1000 })}>
 							Check Toast
 						</Button>
+					</div>
+					<div className='border-black border gap-3 p-10 mt-5'>
+						<Title>Alert</Title>
+						<UiAlert title='Alert' description='Description' />
+					</div>
+					<div className='border-black border gap-3 p-10 mt-5'>
+						<Title>Pagination</Title>
+						<UiPagination />
 					</div>
 				</div>
 			</div>
