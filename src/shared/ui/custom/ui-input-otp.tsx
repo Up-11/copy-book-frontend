@@ -4,7 +4,7 @@ import {
 	InputOTPGroup,
 	InputOTPSeparator,
 	InputOTPSlot,
-} from './input-otp'
+} from '../input/input-otp'
 
 export const UiInputOtp: React.FC = ({}) => {
 	return (

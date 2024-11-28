@@ -11,7 +11,7 @@ import {
 interface Props {
 	className?: string
 	children: React.ReactNode
-	title: string
+	title?: string
 	description?: string
 	content: React.ReactNode
 }

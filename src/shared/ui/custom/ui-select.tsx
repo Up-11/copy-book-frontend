@@ -5,7 +5,7 @@ import {
 	SelectGroup,
 	SelectLabel,
 	SelectTrigger,
-} from './select'
+} from '../input/select'
 
 interface Props {
 	children: React.ReactNode

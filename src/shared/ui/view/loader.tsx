@@ -1,6 +1,6 @@
 import React from 'react'
-import { cn } from '../lib/css'
 import { Loader2 } from 'lucide-react'
+import { cn } from '@/shared/lib/css'
 
 interface Props {
 	className?: string

@@ -47,6 +47,16 @@ export default {
 					'5': 'hsl(var(--chart-5))',
 				},
 			},
+			padding: {
+				layout: 'var(--padding)',
+				header: '74px',
+			},
+			margin: {
+				header: '74px',
+			},
+			height: {
+				header: '74px',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

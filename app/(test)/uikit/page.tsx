@@ -6,7 +6,6 @@ import { Checkbox } from '@/shared/ui/input/checkbox'
 import { Drawer } from '@/shared/ui/modals/drawer'
 import { Input } from '@/shared/ui/input/input'
 import { Label } from '@/shared/ui/input/label'
-import { Loader } from '@/shared/ui/loader'
 import { Modal } from '@/shared/ui/modals/modal'
 import {
 	Popover,
@@ -20,7 +19,6 @@ import { Separator } from '@/shared/ui/view/separator'
 import { Skeleton } from '@/shared/ui/other/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/view/tabs'
 import { Textarea } from '@/shared/ui/input/textarea'
-import Title from '@/shared/ui/title'
 import { UiAlert } from '@/shared/ui/custom/ui-alert'
 import { UiPagination } from '@/shared/ui/custom/ui-pagination'
 import { SelectValue } from '@radix-ui/react-select'
@@ -28,6 +26,9 @@ import { HouseIcon } from 'lucide-react'
 import { UiInputOtp } from '@/shared/ui/custom/ui-input-otp'
 import { UiSelect } from '@/shared/ui/custom/ui-select'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
+import { Title } from '@/shared/ui/view/title'
+import { UiNavigationMenu } from '@/shared/ui/custom/ui-navigation-menu'
+import { Loader } from '@/shared/ui/view/loader'
 
 export default function UiKit() {
 	const { toast } = useToast()
@@ -105,7 +106,9 @@ export default function UiKit() {
 					</div>
 					<div className='border-black border p-10 mt-5'>
 						<Title>Navigation Menu</Title>
-						<div className='mt-5 flex flex-col gap-2 '></div>
+						<div className='mt-5 flex flex-col gap-2 '>
+							<UiNavigationMenu />
+						</div>
 					</div>
 				</div>
 				<div className='flex flex-col w-96 '>
