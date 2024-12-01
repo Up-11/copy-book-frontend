@@ -1,0 +1,26 @@
+.bg-image {
+	background-image: url('/assets/images/noise.png');
+	background-repeat: repeat;
+}
+
+.header {
+	@apply bg-indigo-600 fixed -z-10;
+	transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+	transform: translateY(0);
+
+	&:after {
+		content: '';
+		background-repeat: repeat-x;
+		height: 40px;
+		width: 100%;
+		background-size: contain;
+		background-image: url('/assets/images/vector/wave.png');
+		position: absolute;
+		left: 0;
+		top: 70px;
+	}
+}
+.header--hidden {
+	opacity: 0;
+	transform: translateY(-20px);
+}

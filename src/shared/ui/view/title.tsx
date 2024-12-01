@@ -17,7 +17,7 @@ const titleVariants = cva('font-medium', {
 			medium: 'text-lg sm:text-xl md:text-2xl',
 			large: 'text-xl sm:text-2xl md:text-3xl',
 			extraLarge: 'text-2xl sm:text-3xl md:text-[40px] lg:text-[46px]',
-			giant: 'text-4xl sm:text-5xl md:text-6xl lg:text-[74px]',
+			giant: 'text-4xl sm:text-5xl md:text-6xl lg:text-[68px]',
 		},
 		color: {
 			black: 'text-primary',

@@ -1,4 +1,4 @@
-import '../styles/globals.css'
+import '../styles/globals.scss'
 import { Inter } from 'next/font/google'
 import Providers from '../providers/providers'
 
@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={` ${inter.variable} antialiased`}>
+			<body className={` ${inter.variable} antialiased `}>
 				<Providers>{children}</Providers>
 			</body>
 		</html>

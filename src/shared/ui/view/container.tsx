@@ -7,5 +7,5 @@ interface Props {
 }
 
 export const Container: React.FC<Props> = ({ className, children }) => {
-	return <div className={cn(className, 'md:mx-20 ')}>{children}</div>
+	return <div className={cn(className, ' page-w ')}>{children}</div>
 }

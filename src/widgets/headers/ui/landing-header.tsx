@@ -8,6 +8,7 @@ import { useHeader } from '../model/use-header'
 import { Menu } from 'lucide-react'
 import { Drawer } from '@/shared/ui/modals/drawer'
 import { Separator } from '@/shared/ui/view/separator'
+import './header.styles.scss'
 
 export const LandingHeader: React.FC = ({}) => {
 	const { isScrolled } = useHeader()
@@ -15,7 +16,7 @@ export const LandingHeader: React.FC = ({}) => {
 	return (
 		<header
 			className={cn(
-				'flex p-layout h-header px-10 fixed  justify-between inset-x-0 top-0  '
+				'flex p-layout page-w h-header px-10 fixed  justify-between inset-x-0 top-0 z-20  '
 			)}
 		>
 			<div
@@ -28,8 +29,8 @@ export const LandingHeader: React.FC = ({}) => {
 				<div className='flex items-center gap-1'>
 					<Image
 						src='/assets/images/logo.svg'
-						width={45}
-						height={45}
+						width={40}
+						height={40}
 						alt='logo'
 					/>
 					<Title size='large' gentiumFont className='uppercase text-indigo-50'>
@@ -64,7 +65,7 @@ export const LandingHeader: React.FC = ({}) => {
 									variant={'link'}
 									className='flex justify-start hover:text-indigo-500'
 								>
-									Протестировать редактор кода
+									Редактор кода
 								</Button>
 							</nav>
 

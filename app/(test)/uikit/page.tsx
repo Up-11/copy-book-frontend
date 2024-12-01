@@ -1,5 +1,3 @@
-'use client'
-import { useToast } from '@/shared/lib/hooks/use-toast'
 import { Button } from '@/shared/ui/other/button'
 import { Calendar } from '@/shared/ui/input/calendar'
 import { Checkbox } from '@/shared/ui/input/checkbox'
@@ -29,9 +27,14 @@ import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Title } from '@/shared/ui/view/title'
 import { UiNavigationMenu } from '@/shared/ui/custom/ui-navigation-menu'
 import { Loader } from '@/shared/ui/view/loader'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'UiKit',
+}
 
 export default function UiKit() {
-	const { toast } = useToast()
+	// const { toast } = useToast()
 	return (
 		<div className='m-5'>
 			<h1 className='text-3xl font-extrabold'>UiKit</h1>
@@ -256,9 +259,7 @@ export default function UiKit() {
 					</div>
 					<div className='border-black border gap-3 p-10 mt-5'>
 						<Title>Toasts</Title>
-						<Button onClick={() => toast({ title: 'Toast', duration: 1000 })}>
-							Check Toast
-						</Button>
+						<Button>Check Toast</Button>
 					</div>
 					<div className='border-black border gap-3 p-10 mt-5'>
 						<Title>Alert</Title>

@@ -2,7 +2,7 @@ import LandingLayout from '@/app/layouts/landing-layout'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-	title: 'Copybook',
+	title: 'Главная',
 	description: 'New era education serivce',
 }
 
