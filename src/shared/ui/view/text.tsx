@@ -2,7 +2,7 @@ import React from 'react'
 import { cva } from 'class-variance-authority'
 import { cn } from '@/shared/lib/css'
 
-const textVariants = cva('font-normal', {
+const textVariants = cva('', {
 	variants: {
 		size: {
 			small: 'text-xs sm:text-sm md:text-base', // 12px -> 14px -> 16px

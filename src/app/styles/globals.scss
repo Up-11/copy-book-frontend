@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	font-family: var(--font-inter);
 }
@@ -80,5 +84,5 @@ body {
           bg-clip-text text-transparent bg-[length:300%_300%];
 }
 .page-w {
-	@apply md:mx-auto md:max-w-[95%] lg:max-w-[85%] md:p-layout;
+	@apply md:mx-auto md:max-w-[95%] lg:max-w-[85%] md:p-layout 2xl:max-w-[70%];
 }

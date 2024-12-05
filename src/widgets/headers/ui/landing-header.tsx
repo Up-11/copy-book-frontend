@@ -9,6 +9,8 @@ import { Menu } from 'lucide-react'
 import { Drawer } from '@/shared/ui/modals/drawer'
 import { Separator } from '@/shared/ui/view/separator'
 import './header.styles.scss'
+import Link from 'next/link'
+import { routes } from '@/shared/config/routes'
 
 export const LandingHeader: React.FC = ({}) => {
 	const { isScrolled } = useHeader()
@@ -16,7 +18,7 @@ export const LandingHeader: React.FC = ({}) => {
 	return (
 		<header
 			className={cn(
-				'flex p-layout page-w h-header px-10 fixed  justify-between inset-x-0 top-0 z-20  '
+				'flex p-layout page-w h-header sm:px-10 fixed  justify-between inset-x-0 top-0 z-50  '
 			)}
 		>
 			<div
@@ -38,12 +40,16 @@ export const LandingHeader: React.FC = ({}) => {
 					</Title>
 				</div>
 				<nav className='text-white max-md:hidden'>
-					<Button variant={'link'} className='text-white  '>
-						О нас
-					</Button>
-					<Button variant={'link'} className='text-white '>
-						Протестировать редактор кода
-					</Button>
+					<Link href={routes.home}>
+						<Button variant={'link'} className='text-white  '>
+							О нас
+						</Button>
+					</Link>
+					<Link href={routes.home}>
+						<Button variant={'link'} className='text-white '>
+							Протестировать редактор кода
+						</Button>
+					</Link>
 				</nav>
 			</div>
 
@@ -55,23 +61,29 @@ export const LandingHeader: React.FC = ({}) => {
 					content={
 						<div className='h-full flex flex-col justify-between'>
 							<nav className=' flex flex-col gap-3 '>
-								<Button
-									variant={'link'}
-									className='flex justify-start hover:text-indigo-500 '
-								>
-									О нас
-								</Button>
-								<Button
-									variant={'link'}
-									className='flex justify-start hover:text-indigo-500'
-								>
-									Редактор кода
-								</Button>
+								<Link href={routes.home}>
+									<Button
+										variant={'link'}
+										className='flex justify-start hover:text-indigo-500 '
+									>
+										О нас
+									</Button>
+								</Link>
+								<Link href={routes.home}>
+									<Button
+										variant={'link'}
+										className='flex justify-start hover:text-indigo-500'
+									>
+										Редактор кода
+									</Button>
+								</Link>
 							</nav>
 
 							<div className='flex flex-col gap-3'>
 								<Separator />
-								<Button variant={'secondary'}>Открыть тетрадь</Button>
+								<Link href={routes.home}>
+									<Button variant={'secondary'}>Открыть тетрадь</Button>
+								</Link>
 							</div>
 						</div>
 					}

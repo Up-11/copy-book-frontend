@@ -28,6 +28,7 @@
     "date-fns": "^4.1.0",
     "input-otp": "^1.4.1",
     "lucide-react": "^0.461.0",
+    "motion": "^12.0.0-alpha.2",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-day-picker": "^8.10.1",
@@ -36,7 +37,8 @@
     "sass-loader": "^13.0.0",
     "scss": "^0.2.4",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",

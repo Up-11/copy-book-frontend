@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { cva } from 'class-variance-authority'
 import { cn } from '@/shared/lib/css'
 
@@ -37,6 +37,7 @@ interface TitleProps {
 	children: React.ReactNode
 	className?: string
 	gentiumFont?: boolean
+	style?: CSSProperties
 }
 
 export function Title({
@@ -44,13 +45,14 @@ export function Title({
 	color,
 	children,
 	className,
+	style,
 	gentiumFont = false,
 	...props
 }: TitleProps) {
 	return (
 		<h1
 			{...props}
-			style={gentiumFont ? gentium.style : undefined}
+			style={gentiumFont ? gentium.style : style}
 			className={cn(titleVariants({ size, color, className }))}
 		>
 			{children}
