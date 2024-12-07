@@ -40,6 +40,7 @@ export interface ButtonProps
 		VariantProps<typeof buttonVariants> {
 	asChild?: boolean
 	loading?: boolean
+	isModalTrigger?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -52,12 +53,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			disabled,
 			children,
 			asChild = false,
+			isModalTrigger = false,
 			...props
 		},
-		ref
+		ref?
 	) => {
 		const Comp = asChild ? Slot : 'button'
-		return (
+
+		const IsModalTriggerComponent = () => {
+			return (
+				<div className={cn(buttonVariants({ variant, size, className }))}>
+					{!loading ? children : <Loader className='h-4 w-4 ' />}
+				</div>
+			)
+		}
+		return isModalTrigger ? (
+			<IsModalTriggerComponent />
+		) : (
 			<Comp
 				className={cn(buttonVariants({ variant, size, className }))}
 				ref={ref}

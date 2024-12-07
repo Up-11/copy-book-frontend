@@ -11,11 +11,12 @@ import { routes } from '@/shared/config/routes'
 import Link from 'next/link'
 import { cn } from '@/shared/lib/css'
 import { ListElement } from '@/shared/ui/view/list-element'
+import { ChooseRoleModal } from '@/widgets/modals'
 
 export const Landing: React.FC = ({}) => {
 	return (
 		<main>
-			<section className='bg-indigo-600 bg-image lg:p-layout pt-header'>
+			<section className='bg-indigo-600 bg-image lg:p-layout pt-header   '>
 				<Container>
 					<div className='flex justify-center mt-20'>
 						<Block
@@ -40,25 +41,26 @@ export const Landing: React.FC = ({}) => {
 									</Text>
 								</div>
 								<div className='max-sm:mx-4'>
-									<Link href={routes.home}>
+									<ChooseRoleModal>
 										<Button
+											isModalTrigger
 											size={'lg'}
 											variant={'secondary'}
 											className='bg-indigo-500 hover:bg-indigo-500/90 text-white  max-sm:w-full text-xl'
 										>
 											Начать
 										</Button>
-									</Link>
+									</ChooseRoleModal>
 								</div>
 							</div>
-							<div className='col-span-1 max-sm:mt-4'>
+							<div className='col-span-1 max-sm:mt-4 animate-smoothIn '>
 								<Image
 									src={'/assets/images/vector/cubes.svg'}
 									width={400}
 									height={400}
 									alt='image'
 									className='object-cover h-full w-full rounded-3xl '
-									loading='lazy'
+									priority
 								/>
 							</div>
 						</Block>

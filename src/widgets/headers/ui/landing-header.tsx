@@ -11,6 +11,7 @@ import { Separator } from '@/shared/ui/view/separator'
 import './header.styles.scss'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
+import { ChooseRoleModal } from '@/widgets/modals'
 
 export const LandingHeader: React.FC = ({}) => {
 	const { isScrolled } = useHeader()
@@ -18,7 +19,7 @@ export const LandingHeader: React.FC = ({}) => {
 	return (
 		<header
 			className={cn(
-				'flex p-layout page-w h-header sm:px-10 fixed  justify-between inset-x-0 top-0 z-50  '
+				'flex p-layout page-w h-header sm:px-10 fixed  justify-between inset-x-0  top-0 z-50  '
 			)}
 		>
 			<div
@@ -28,7 +29,10 @@ export const LandingHeader: React.FC = ({}) => {
 				)}
 			></div>
 			<div className='flex items-center gap-5 '>
-				<div className='flex items-center gap-1'>
+				<Link
+					href={routes.home}
+					className='flex items-center gap-1 animate-smoothIn'
+				>
 					<Image
 						src='/assets/images/logo.svg'
 						width={40}
@@ -38,7 +42,7 @@ export const LandingHeader: React.FC = ({}) => {
 					<Title size='large' gentiumFont className='uppercase text-indigo-50'>
 						copybook
 					</Title>
-				</div>
+				</Link>
 				<nav className='text-white max-md:hidden'>
 					<Link href={routes.home}>
 						<Button variant={'link'} className='text-white  '>
@@ -54,9 +58,16 @@ export const LandingHeader: React.FC = ({}) => {
 			</div>
 
 			<div className='flex items-center '>
-				<Button variant={'secondary'} className='max-md:hidden'>
-					Открыть тетрадь
-				</Button>
+				<ChooseRoleModal>
+					<Button
+						isModalTrigger
+						variant={'secondary'}
+						className='max-md:hidden button'
+					>
+						Открыть тетрадь
+					</Button>
+				</ChooseRoleModal>
+
 				<Drawer
 					content={
 						<div className='h-full flex flex-col justify-between'>
@@ -81,9 +92,15 @@ export const LandingHeader: React.FC = ({}) => {
 
 							<div className='flex flex-col gap-3'>
 								<Separator />
-								<Link href={routes.home}>
-									<Button variant={'secondary'}>Открыть тетрадь</Button>
-								</Link>
+								<ChooseRoleModal>
+									<Button
+										variant={'secondary'}
+										isModalTrigger
+										className='w-full'
+									>
+										Открыть тетрадь
+									</Button>
+								</ChooseRoleModal>
 							</div>
 						</div>
 					}

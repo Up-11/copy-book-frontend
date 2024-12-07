@@ -1,0 +1,10 @@
+.kid-image {
+	background-image: url('/assets/images/vector/kid.svg');
+	background-repeat: no-repeat;
+	background-position: bottom center;
+	background-size: initial;
+
+	@media (max-width: 600px) {
+		background-image: none;
+	}
+}

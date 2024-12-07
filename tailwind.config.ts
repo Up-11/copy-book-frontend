@@ -63,6 +63,14 @@ export default {
 				sm: 'calc(var(--radius) - 4px)',
 			},
 			keyframes: {
+				smoothIn: {
+					'0%': {
+						opacity: '0',
+					},
+					'100%': {
+						opacity: '1',
+					},
+				},
 				gradient: {
 					'0%': {
 						backgroundPosition: '0% 50%',
@@ -77,6 +85,7 @@ export default {
 			},
 			animation: {
 				gradient: 'gradient 10s linear infinite',
+				smoothIn: 'smoothIn 0.3s ease-in-out',
 			},
 		},
 	},

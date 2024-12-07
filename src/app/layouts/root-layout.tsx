@@ -3,8 +3,9 @@ import { Inter } from 'next/font/google'
 import Providers from '../providers/providers'
 
 const inter = Inter({
-	variable: '--font-inter',
+	subsets: ['latin', 'cyrillic'],
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+	variable: '--font-inter',
 })
 
 export default function RootLayout({
@@ -14,7 +15,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en'>
-			<body className={` ${inter.variable} antialiased `}>
+			<body
+				className={` ${inter.variable} `}
+				style={{ marginRight: '0px !important' }}
+			>
+				{' '}
 				<Providers>{children}</Providers>
 			</body>
 		</html>
