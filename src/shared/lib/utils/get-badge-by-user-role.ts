@@ -1,12 +1,22 @@
-export const getBadgeByUserRole = (role: string) => {
+import { UserRole } from '@/shared/types/user.types'
+
+export const getBadgeByUserRole = (role: UserRole) => {
+	let text = ''
+	let classNames = ''
 	switch (role) {
 		case 'student':
-			return 'Ученик'
+			text = 'Ученик'
+			classNames = 'border-sky-200 bg-sky-100'
+			return { text, classNames }
 		case 'teacher':
-			return 'Учитель'
+			text = 'Учитель'
+			classNames = 'border-violet-200 bg-violet-100'
+			return { text, classNames }
 		case 'admin':
-			return 'Админ'
+			text = 'Админ'
+			classNames = 'border-red-200 bg-red-100'
+			return { text, classNames }
 		default:
-			return 'Ученик'
+			return { text, classNames }
 	}
 }

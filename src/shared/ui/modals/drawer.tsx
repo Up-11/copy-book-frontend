@@ -7,16 +7,9 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from './sheet'
+import { ModalProps } from '@/shared/types/props.types'
 
-interface Props {
-	className?: string
-	children: React.ReactNode
-	title?: string
-	description?: string
-	content: React.ReactNode
-}
-
-export const Drawer: React.FC<Props> = ({
+export const Drawer: React.FC<Omit<ModalProps, 'footer'>> = ({
 	className,
 	children,
 	title,

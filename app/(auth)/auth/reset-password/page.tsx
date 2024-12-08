@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-	title: 'Вход для ученика',
+	title: 'Восстановление пароля',
 }
-export default function StudentLogin() {
+export default function page() {
 	return <div>123</div>
 }

@@ -8,17 +8,8 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from './dialog'
-
-interface Props {
-	children: React.ReactNode
-	title?: string
-	description?: string
-	footer?: React.ReactNode
-	content: React.ReactNode
-	className?: string
-}
-
-export const Modal: React.FC<Props> = ({
+import { ModalProps } from '@/shared/types/props.types'
+export const Modal: React.FC<ModalProps> = ({
 	children,
 	description,
 	title,

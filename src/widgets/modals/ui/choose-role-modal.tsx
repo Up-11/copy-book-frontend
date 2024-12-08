@@ -3,14 +3,9 @@ import { Modal } from '@/shared/ui/modals/modal'
 import Title from '@/shared/ui/view/title'
 import { ArrowUpRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import './modals.styles.scss'
-
-interface Props {
-	children: React.ReactNode
-}
-
-export const ChooseRoleModal: React.FC<Props> = ({ children }) => {
+export const ChooseRoleModal: React.FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<Modal
 			content={

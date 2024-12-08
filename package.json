@@ -33,6 +33,7 @@
 		"react": "19.0.0-rc-66855b96-20241106",
 		"react-day-picker": "^8.10.1",
 		"react-dom": "19.0.0-rc-66855b96-20241106",
+		"react-hook-form": "^7.54.0",
 		"sass": "^1.58.0",
 		"sass-loader": "^13.0.0",
 		"scss": "^0.2.4",
