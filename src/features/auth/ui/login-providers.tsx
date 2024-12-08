@@ -8,21 +8,21 @@ export const LoginProviders: React.FC<{
 	onClickVk: () => void
 }> = ({ onClickVk, onClickYandex }) => {
 	return (
-		<div className='flex flex-col justify-between gap-2 '>
+		<div className='flex flex-col gap-3 sm:gap-4'>
 			<div
 				onClick={onClickVk}
-				className=' w-full bg-blue-600 h-10 rounded-xl cursor-pointer flex items-center justify-center gap-1'
+				className='w-full bg-blue-600 hover:bg-blue-700 transition-colors duration-200 h-12 rounded-lg cursor-pointer flex items-center justify-center gap-2 px-4'
 			>
-				<VkIcon color='white' className='w-8 h-8' />
-				<Text color='white' size='small'>
-					Войти с VK ID{' '}
+				<VkIcon color='white' className='w-6 h-6 sm:w-8 sm:h-8' />
+				<Text color='white' size='small' className='text-base sm:text-lg'>
+					Войти с VK ID
 				</Text>
 			</div>
 			<div
 				onClick={onClickYandex}
-				className=' w-full bg-black h-10 rounded-xl flex items-center justify-center gap-1 cursor-pointer '
+				className='w-full bg-black hover:bg-gray-800 transition-colors duration-200 h-12 rounded-lg flex items-center justify-center gap-2 px-4 cursor-pointer'
 			>
-				<div className='h-8 w-8'>
+				<div className='h-6 w-6 sm:h-8 sm:w-8'>
 					<Image
 						src='/assets/icons/yandex.svg'
 						width={100}
@@ -30,7 +30,7 @@ export const LoginProviders: React.FC<{
 						alt='yandex'
 					/>
 				</div>
-				<Text color='white' size='small'>
+				<Text color='white' size='small' className='text-base sm:text-lg'>
 					Войти с Яндекс ID
 				</Text>
 			</div>

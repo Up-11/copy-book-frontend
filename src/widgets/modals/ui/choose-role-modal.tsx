@@ -15,7 +15,7 @@ export const ChooseRoleModal: React.FC<PropsWithChildren> = ({ children }) => {
 					</Title>
 					<div className='flex justify-center max-sm:flex-col   gap-4 '>
 						<Link
-							href={routes.home}
+							href={routes.studentAuth}
 							className='bg-yellow-100 rounded-3xl sm:h-[200px] sm:w-[50%] p-layout flex justify-between kid-image '
 						>
 							<Title>Я ученик</Title>

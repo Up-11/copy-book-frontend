@@ -1,4 +1,5 @@
 import { LoginStudent } from '@/features/auth'
+import { RegisterStudent } from '@/features/auth/ui/register-sutdent'
 import { RoleBadge } from '@/shared/ui/view/role-badge'
 import Title from '@/shared/ui/view/title'
 import { Metadata } from 'next'
@@ -15,8 +16,12 @@ export default function TestPage() {
 				<RoleBadge role='teacher' />
 			</div>
 			<div className='flex flex-col gap-2'>
-				<Title>Примитив формы</Title>
+				<Title>Примитив формы LOGIN</Title>
 				<LoginStudent />
+			</div>
+			<div className='flex flex-col gap-2'>
+				<Title>Примитив формы REGISTER</Title>
+				<RegisterStudent />
 			</div>
 		</div>
 	)

@@ -12,6 +12,7 @@ import './header.styles.scss'
 import Link from 'next/link'
 import { routes } from '@/shared/config/routes'
 import { ChooseRoleModal } from '@/widgets/modals'
+import { LogoWithText } from '@/shared/ui/view/logo-with-text'
 
 export const LandingHeader: React.FC = ({}) => {
 	const { isScrolled } = useHeader()
@@ -29,20 +30,7 @@ export const LandingHeader: React.FC = ({}) => {
 				)}
 			></div>
 			<div className='flex items-center gap-5 '>
-				<Link
-					href={routes.home}
-					className='flex items-center gap-1 animate-smoothIn'
-				>
-					<Image
-						src='/assets/images/logo.svg'
-						width={40}
-						height={40}
-						alt='logo'
-					/>
-					<Title size='large' gentiumFont className='uppercase text-indigo-50'>
-						copybook
-					</Title>
-				</Link>
+				<LogoWithText />
 				<nav className='text-white max-md:hidden'>
 					<Link href={routes.home}>
 						<Button variant={'link'} className='text-white  '>

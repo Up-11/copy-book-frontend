@@ -40,30 +40,39 @@ export const FormInput: React.FC<FormInputProps> = ({
 	const onClickClear = () => {
 		setValue(name, '', { shouldValidate: true, shouldDirty: true })
 	}
+
 	const HandlePassword = () => {
 		setIsShown(prev => !prev)
 	}
 
 	return (
-		<div className='flex-col items-start'>
+		<div className='flex flex-col items-start gap-2 w-full'>
 			{label && (
-				<Text size='small' className='font-medium '>
+				<Text
+					size='small'
+					className='font-medium text-gray-700 dark:text-gray-300'
+				>
 					{label} {required && <RequierdSymbol />}
 				</Text>
 			)}
-			<div className='relative'>
+			<div className='relative w-full'>
 				<Input
 					{...props}
 					{...register(name, rules)}
 					type={type === 'password' ? (isShown ? 'text' : 'password') : type}
-					className={cn(className, 'placeholder:text-gray-500')}
+					className={cn(
+						className,
+						'placeholder:text-gray-500 text-sm px-4 py-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+					)}
 				/>
 				{type === 'password' && value && (
 					<ShowPasswordButton onClick={HandlePassword} isShown={isShown} />
 				)}
 				{value && <ClearButton onClick={onClickClear} />}
 			</div>
-			{errorText && <ErrorText text={errorText} className='mt-2 ' />}
+			{errorText && (
+				<ErrorText text={errorText} className='text-sm text-red-600 mt-1' />
+			)}
 		</div>
 	)
 }

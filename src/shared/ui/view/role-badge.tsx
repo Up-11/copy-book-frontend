@@ -9,7 +9,7 @@ export const RoleBadge: React.FC<{ role: UserRole }> = ({ role }) => {
 	return (
 		<div
 			className={cn(
-				'border-2 pointer-events-none rounded-md p-2 px-6 inline-flex',
+				'border-2 pointer-events-none rounded-md p-1 px-6 inline-flex',
 				classNames
 			)}
 		>

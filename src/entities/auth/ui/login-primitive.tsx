@@ -7,16 +7,23 @@ import Text from '@/shared/ui/view/text'
 import Link from 'next/link'
 import React from 'react'
 
-export const LoginStudentPrimitive: React.FC = () => {
+export const LoginPrimitive: React.FC = () => {
 	return (
 		<>
 			<div className='flex flex-col gap-1'>
-				<FormInput name='fisrtName' placeholder='Введите имя...' label='Имя' />
-				<FormInput
-					name='lastName'
-					placeholder='Введите фамилию...'
-					label='Фамилия'
-				/>
+				<div className='flex gap-2'>
+					<FormInput
+						name='fisrtName'
+						placeholder='Введите имя...'
+						label='Имя'
+					/>
+					<FormInput
+						name='lastName'
+						placeholder='Введите фамилию...'
+						label='Фамилия'
+					/>
+				</div>
+
 				<FormInput
 					name='email'
 					placeholder='Введите электронную почту...'

@@ -1,12 +1,12 @@
 'use client'
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { LoginPrimitive } from '@/entities/auth'
+import { RegisterPrimitive } from '@/entities/auth'
 import { Separator } from '@/shared/ui/view/separator'
 import Text from '@/shared/ui/view/text'
 import { LoginProviders } from './login-providers'
 
-export const LoginStudent: React.FC = () => {
+export const RegisterStudent: React.FC = () => {
 	const form = useForm({
 		defaultValues: {
 			login: '',
@@ -26,7 +26,7 @@ export const LoginStudent: React.FC = () => {
 						onSubmit={form.handleSubmit(onSubmit)}
 						className='flex flex-col gap-6'
 					>
-						<LoginPrimitive />
+						<RegisterPrimitive />
 					</form>
 
 					<div className='my-6 relative'>

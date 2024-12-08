@@ -1,1 +1,2 @@
-export { LoginStudentPrimitive } from './ui/login-student-primitive'
+export { LoginPrimitive } from './ui/login-primitive'
+export { RegisterPrimitive } from './ui/register-primitive'
