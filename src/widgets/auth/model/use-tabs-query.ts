@@ -10,11 +10,11 @@ export const useTabsQuery = () => {
 
 	useEffect(() => {
 		if (searchParams) {
-			const tab = searchParams.get('tab') || 'login'
+			const tab = searchParams.get('t') || 'login'
 			setCurrentTab(tab)
 
 			const updatedSearchParams = new URLSearchParams(searchParams.toString())
-			updatedSearchParams.set('tab', tab)
+			updatedSearchParams.set('t', tab)
 
 			router.replace(`${pathname}?${updatedSearchParams.toString()}`)
 		}
@@ -25,7 +25,7 @@ export const useTabsQuery = () => {
 
 		if (searchParams) {
 			const updatedSearchParams = new URLSearchParams(searchParams.toString())
-			updatedSearchParams.set('tab', value)
+			updatedSearchParams.set('t', value)
 
 			router.replace(`${pathname}?${updatedSearchParams.toString()}`)
 		}

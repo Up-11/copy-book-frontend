@@ -1,4 +1,4 @@
-export { AuthStudent as default } from '@/pages/auth'
+export { AuthStudentPage as default } from '@/pages/auth'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

@@ -1,8 +1,6 @@
 'use client'
 import { cn } from '@/shared/lib/css'
 import { Button } from '@/shared/ui/other/button'
-import Title from '@/shared/ui/view/title'
-import Image from 'next/image'
 import React from 'react'
 import { useHeader } from '../model/use-header'
 import { Menu } from 'lucide-react'

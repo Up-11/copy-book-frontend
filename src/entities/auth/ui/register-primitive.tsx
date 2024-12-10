@@ -11,18 +11,12 @@ export const RegisterPrimitive: React.FC = () => {
 	return (
 		<>
 			<div className='flex flex-col gap-1'>
-				<div className='flex gap-2'>
-					<FormInput
-						name='fisrtName'
-						placeholder='Введите имя...'
-						label='Имя'
-					/>
-					<FormInput
-						name='lastName'
-						placeholder='Введите фамилию...'
-						label='Фамилия'
-					/>
-				</div>
+				<FormInput name='fisrtName' placeholder='Введите имя...' label='Имя' />
+				<FormInput
+					name='lastName'
+					placeholder='Введите фамилию...'
+					label='Фамилия'
+				/>
 				<FormInput
 					name='email'
 					placeholder='Введите электронную почту...'

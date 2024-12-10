@@ -21,7 +21,7 @@ export const RegisterStudent: React.FC = () => {
 	return (
 		<FormProvider {...form}>
 			<div className='flex justify-center items-center  '>
-				<div className=' p-layout px-3 md:px-10 rounded-2xl w-[400px] '>
+				<div className=' p-layout px-1 md:px-10 rounded-2xl md:w-[420px] max-md:w-full   '>
 					<form
 						onSubmit={form.handleSubmit(onSubmit)}
 						className='flex flex-col gap-6'
