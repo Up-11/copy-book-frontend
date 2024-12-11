@@ -1,5 +1,5 @@
 import { cn } from '@/shared/lib/css'
-import { getBadgeByUserRole } from '@/shared/lib/utils/get-badge-by-user-role'
+import { getBadgeByUserRole } from '@/shared/lib/utils'
 import { UserRole } from '@/shared/types/user.types'
 import React from 'react'
 import Text from './text'
