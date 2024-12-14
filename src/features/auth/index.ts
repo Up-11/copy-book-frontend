@@ -1,2 +1,2 @@
-export { LoginStudent } from './ui/login-student'
-export { RegisterStudent } from './ui/register-sutdent'
+export { LoginForm } from "./ui/login-form";
+export { RegisterForm } from "./ui/register-form";

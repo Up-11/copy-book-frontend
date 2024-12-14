@@ -1,6 +1,5 @@
 "use client";
-
-import { LoginStudent, RegisterStudent } from "@/features/auth";
+import { LoginForm, RegisterForm } from "@/features/auth";
 import { Skeleton } from "@/shared/ui/other/skeleton";
 import { LogoWithText } from "@/shared/ui/view/logo-with-text";
 import {
@@ -12,9 +11,11 @@ import {
 import Title from "@/shared/ui/view/title";
 import { useTabsQuery } from "../model/use-tabs-query";
 import { RoleBadge } from "@/shared/ui/view/role-badge";
+import { useCurrentUserAuth } from "../model/use-current-user-auth";
 
-export const AuthStudent: React.FC = () => {
+export const AuthWidget: React.FC = () => {
   const { currentTab, handleTabChange } = useTabsQuery();
+  const currentUserRole = useCurrentUserAuth();
 
   if (currentTab === "") {
     return (
@@ -31,7 +32,7 @@ export const AuthStudent: React.FC = () => {
     <>
       <div className="mt-2 flex items-center gap-2">
         <LogoWithText color="primary" />
-        <RoleBadge role="student" />
+        <RoleBadge role={currentUserRole} />
       </div>
       <div className="flex flex-col items-center rounded-xl bg-white pt-3 shadow-lg max-md:w-full md:rounded-2xl">
         <Tabs
@@ -50,13 +51,13 @@ export const AuthStudent: React.FC = () => {
             <Title size="large" color="indigo">
               Вход
             </Title>
-            <LoginStudent />
+            <LoginForm currentUserRole={currentUserRole} />
           </TabsContent>
           <TabsContent value="register" className="flex flex-col items-center">
             <Title size="large" color="indigo">
               Регистрация
             </Title>
-            <RegisterStudent />
+            <RegisterForm currentUserRole={currentUserRole} />
           </TabsContent>
         </Tabs>
       </div>

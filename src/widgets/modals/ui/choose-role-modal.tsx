@@ -22,7 +22,7 @@ export const ChooseRoleModal: React.FC<PropsWithChildren> = ({ children }) => {
               <ArrowUpRightIcon size={30} />
             </Link>
             <Link
-              href={routes.home}
+              href={routes.teacherAuth}
               className="flex justify-between rounded-3xl bg-gray-100 p-layout sm:h-[200px] sm:w-[50%]"
             >
               <Title>Я учитель</Title>

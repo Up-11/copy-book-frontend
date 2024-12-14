@@ -1,1 +1,1 @@
-export { AuthStudent } from './ui/auth-student'
+export { AuthWidget } from "./ui/auth-widget";

@@ -28,6 +28,7 @@ export const WhiteBlock: React.FC<IWhiteBlockProps> = ({
 			)}
 		>
 			{/* Текстовый блок */}
+			
 			<div
 				className={cn(
 					'flex justify-start flex-col md:w-1/2 p-12 max-md:p-6',
