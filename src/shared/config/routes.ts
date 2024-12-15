@@ -17,8 +17,8 @@ export class Routes {
   resetPassword = `/${this.auth}/reset-password`;
 
   //* MAIN
-  mainStudent = `/${this.main}/${this.student}`;
-  mainTeacher = `/${this.main}/${this.teacher}`;
-  mainAdmin = `/${this.main}/${this.admin}`;
+  mainStudent = `/${this.student}/${this.main}`;
+  mainTeacher = `/${this.teacher}/${this.main}`;
+  mainAdmin = `/${this.admin}/${this.main}`;
 }
 export const routes = new Routes();

@@ -10,8 +10,8 @@ import {
 } from "@/shared/ui/view/tabs";
 import Title from "@/shared/ui/view/title";
 import { useTabsQuery } from "../model/use-tabs-query";
-import { RoleBadge } from "@/shared/ui/view/role-badge";
 import { useCurrentUserAuth } from "../model/use-current-user-auth";
+import { LogoWithRoleBadge } from "@/shared/ui/view/logo-with-role-badge";
 
 export const AuthWidget: React.FC = () => {
   const { currentTab, handleTabChange } = useTabsQuery();
@@ -30,9 +30,8 @@ export const AuthWidget: React.FC = () => {
 
   return (
     <>
-      <div className="mt-2 flex items-center gap-2">
-        <LogoWithText color="primary" />
-        <RoleBadge role={currentUserRole} />
+      <div className="mt-2">
+        <LogoWithRoleBadge role={currentUserRole} />
       </div>
       <div className="flex flex-col items-center rounded-xl bg-white pt-3 shadow-lg max-md:w-full md:rounded-2xl">
         <Tabs

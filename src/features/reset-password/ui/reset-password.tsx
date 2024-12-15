@@ -16,6 +16,7 @@ import { UiTooltip } from "@/shared/ui/custom/ui-tooltip";
 export const ResetPassword: React.FC = () => {
   const router = useRouter();
 
+  //TODO Декомпозирвоать компонент(плюс в обсидиане идея по обьекту с инфой)
   const maxSteps = 3;
 
   const [currentStep, helpers] = useStep(maxSteps);
