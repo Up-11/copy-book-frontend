@@ -9,6 +9,10 @@ export class Routes {
 
   main = "main";
 
+  //* CODE
+  code = "code";
+  sandbox = `/${this.code}/sandbox`;
+
   //* AUTH
   studentAuth = `/${this.auth}/${this.student}`;
   teacherAuth = `/${this.auth}/${this.teacher}`;

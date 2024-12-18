@@ -8,3 +8,11 @@ export type MenuItemType = {
 export type MenuDataType = {
   items: MenuItemType[];
 };
+
+export interface MenuItemsProps {
+  items: MenuItemType[];
+  icon: React.ReactNode;
+  title: string;
+  tallItemHref: string;
+  description: string;
+}
