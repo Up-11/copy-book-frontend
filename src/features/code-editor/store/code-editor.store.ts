@@ -12,7 +12,7 @@ interface ICodeEditorStore {
 	setCode: (value: string | undefined) => void
 }
 
-export const useCodeEditor = create<ICodeEditorStore>(set => ({
+export const useCodeEditorStore = create<ICodeEditorStore>(set => ({
 	code: javascriptDefault,
 	language: languageOptions[0],
 	searchTerm: '',

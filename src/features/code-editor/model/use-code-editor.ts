@@ -1,9 +1,9 @@
-import { useCodeEditor } from '../store/code-editor.store'
+import { useCodeEditorStore } from '../store/code-editor.store'
 
 export const useCode = () => {
-	const code = useCodeEditor(state => state.code)
-	const setCode = useCodeEditor(state => state.setCode)
-	const language = useCodeEditor(state => state.language)
+	const code = useCodeEditorStore(state => state.code)
+	const setCode = useCodeEditorStore(state => state.setCode)
+	const language = useCodeEditorStore(state => state.language)
 	const onChange = (action: string, data: string | undefined) => {
 		switch (action) {
 			case 'code':

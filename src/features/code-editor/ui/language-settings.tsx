@@ -8,8 +8,6 @@ export const LanguageSettings: React.FC<{
 	languageOptions: languageOptionsType[]
 }> = ({ onClick, languageOptions }) => {
 	const { debouncedSearchTerm } = useSearch()
-	console.log(debouncedSearchTerm)
-
 	return (
 		<>
 			{[...languageOptions]

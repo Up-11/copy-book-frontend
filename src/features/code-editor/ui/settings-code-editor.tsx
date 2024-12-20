@@ -45,7 +45,7 @@ export const SettingsCodeEditor: React.FC = () => {
 			</DropdownMenuSub>
 			<DropdownMenuSeparator className='bg-zinc-600' />
 			<DropdownMenuItem className='bg-zinc-800 hover:bg-zinc-700'>
-				<Link href={routes.mainStudent}>Выйти из песочницы</Link>
+				<Link href={routes.dashboard.student}>Выйти из песочницы</Link>
 			</DropdownMenuItem>
 		</>
 	)

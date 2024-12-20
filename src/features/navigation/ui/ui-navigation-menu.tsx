@@ -57,7 +57,7 @@ export const UiNavigationMenu: React.FC = () => {
 								items: menuDataStudent[0].items,
 								icon: <LayoutList />,
 								title: 'Ваши задания',
-								tallItemHref: routes.mainStudent,
+								tallItemHref: routes.dashboard.student,
 								description: 'Посмотрите список ваших заданий'
 							})}
 						</ul>
@@ -72,7 +72,7 @@ export const UiNavigationMenu: React.FC = () => {
 								items: menuDataStudent[1].items,
 								icon: <Code2 />,
 								title: 'Песочница',
-								tallItemHref: routes.sandbox,
+								tallItemHref: routes.code.sandbox,
 								description:
 									'Потренеруйтесь в самостоятельном написании кода в песочнице'
 							})}

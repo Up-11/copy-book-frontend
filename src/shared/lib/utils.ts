@@ -20,3 +20,4 @@ export const getBadgeByUserRole = (role: UserRole | null) => {
       return { text, classNames };
   }
 };
+//TODO переписать свич кейс

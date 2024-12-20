@@ -1,28 +1,28 @@
-export class Routes {
-  home = "/";
+export const routes = {
+	// Основные маршруты
+	home: '/',
 
-  auth = "auth";
+	// Аутентификация
+	auth: {
+		student: '/auth/student',
+		teacher: '/auth/teacher',
+		admin: '/auth/admin',
+		reset: '/auth/reset-password'
+	},
 
-  student = "student";
-  teacher = "teacher";
-  admin = "admin";
+	// Дашборды
+	dashboard: {
+		student: '/student',
+		teacher: '/teacher',
+		admin: '/admin'
+	},
 
-  main = "main";
+	// Редактор кода
+	code: {
+		sandbox: '/code/sandbox',
+		editor: '/code/editor'
+	}
+} as const
 
-  //* CODE
-  code = "code";
-  sandbox = `/${this.code}/sandbox`;
-
-  //* AUTH
-  studentAuth = `/${this.auth}/${this.student}`;
-  teacherAuth = `/${this.auth}/${this.teacher}`;
-  adminAuth = `/${this.auth}/${this.admin}/login`;
-
-  resetPassword = `/${this.auth}/reset-password`;
-
-  //* MAIN
-  mainStudent = `/${this.student}/${this.main}`;
-  mainTeacher = `/${this.teacher}/${this.main}`;
-  mainAdmin = `/${this.admin}/${this.main}`;
-}
-export const routes = new Routes();
+// Типизация
+export type AppRoutes = typeof routes
