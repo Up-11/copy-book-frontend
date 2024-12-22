@@ -1,10 +1,13 @@
 {
-  "trailingComma": "none",
-  "tabWidth": 2,
-  "useTabs": true,
-  "semi": false,
-  "singleQuote": true,
-  "jsxSingleQuote": true,
-  "arrowParens": "avoid",
-  "plugins": ["prettier-plugin-tailwindcss"]
+	"trailingComma": "none",
+	"tabWidth": 2,
+	"useTabs": true,
+	"semi": false,
+	"singleQuote": true,
+	"jsxSingleQuote": true,
+	"arrowParens": "avoid",
+	"plugins": [
+		"prettier-plugin-tailwindcss",
+		"@trivago/prettier-plugin-sort-imports"
+	]
 }

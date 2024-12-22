@@ -1,11 +1,11 @@
-import React from 'react'
 import { SandboxHeader } from './sandbox-header'
+import { CodeEditor, EditorFooter, OutputWindow } from '@/features/code-editor'
 import {
 	ResizableHandle,
 	ResizablePanel,
 	ResizablePanelGroup
 } from '@/shared/ui/other/resizable'
-import { CodeEditor, EditorFooter } from '@/features/code-editor'
+import React from 'react'
 
 export const Sandbox: React.FC = () => {
 	return (
@@ -18,7 +18,7 @@ export const Sandbox: React.FC = () => {
 					</ResizablePanel>
 					<ResizableHandle className='w-[5px] bg-transparent active:bg-indigo-400' />
 					<ResizablePanel minSize={25} defaultSize={50}>
-						Two
+						<OutputWindow />
 					</ResizablePanel>
 				</ResizablePanelGroup>
 			</main>

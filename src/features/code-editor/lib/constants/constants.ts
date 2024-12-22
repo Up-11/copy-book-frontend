@@ -59,3 +59,8 @@ export const statuses = [
 		description: 'Exec Format Error'
 	}
 ]
+export const API_REDIS_CONFIG = {
+	url: process.env.NEXT_PUBLIC_RAPID_API_URL,
+	host: process.env.NEXT_PUBLIC_RAPID_API_HOST,
+	key: process.env.NEXT_PUBLIC_RAPID_API_KEY
+}

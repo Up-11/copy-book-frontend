@@ -1,5 +1,5 @@
-import { Toaster } from '@/shared/ui/view/toaster'
 import NextTopLoader from 'nextjs-toploader'
+import { Toaster } from 'sonner'
 
 export default function Providers({ children }: { children: React.ReactNode }) {
 	return (
@@ -11,7 +11,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 			/>
 
 			{children}
-			<Toaster />
+			<Toaster position='bottom-right' closeButton duration={3000} />
 		</>
 	)
 }

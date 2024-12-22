@@ -12,9 +12,9 @@ export const routes = {
 
 	// Дашборды
 	dashboard: {
-		student: '/student',
-		teacher: '/teacher',
-		admin: '/admin'
+		student: '/student/main',
+		teacher: '/teacher/main',
+		admin: '/admin/main'
 	},
 
 	// Редактор кода

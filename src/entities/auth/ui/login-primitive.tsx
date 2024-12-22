@@ -11,12 +11,6 @@ export const LoginPrimitive: React.FC = () => {
 	return (
 		<>
 			<div className='flex flex-col gap-1'>
-				<FormInput name='fisrtName' placeholder='Введите имя...' label='Имя' />
-				<FormInput
-					name='lastName'
-					placeholder='Введите фамилию...'
-					label='Фамилия'
-				/>
 				<FormInput name='role' hidden />
 
 				<FormInput

@@ -1,0 +1,4 @@
+- component witch can be renamed by double click 
+- footer
+- modal on reload page???
+- signin to save progress 

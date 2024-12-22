@@ -1,5 +1,9 @@
 'use client'
-import React from 'react'
+
+import { useLanguage } from '../model/use-language'
+import { LanguageSettings } from './language-settings'
+import { SettingsSearch } from './settings-search'
+import { routes } from '@/shared/config/routes'
 import {
 	DropdownMenuItem,
 	DropdownMenuPortal,
@@ -8,13 +12,10 @@ import {
 	DropdownMenuSubContent,
 	DropdownMenuSubTrigger
 } from '@/shared/ui/modals/dropdown-menu'
+import { ScrollArea } from '@/shared/ui/other/scroll-area'
 import { SquareCode } from 'lucide-react'
 import Link from 'next/link'
-import { routes } from '@/shared/config/routes'
-import { ScrollArea } from '@/shared/ui/other/scroll-area'
-import { LanguageSettings } from './language-settings'
-import { useLanguage } from '../model/use-language'
-import { SettingsSearch } from './settings-search'
+import React from 'react'
 
 export const SettingsCodeEditor: React.FC = () => {
 	const { setLanguage, updatedLanguageOptions } = useLanguage()

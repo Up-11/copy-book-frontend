@@ -45,7 +45,7 @@ export const RegisterPrimitive: React.FC = () => {
 					content='Для восстановления пароля перейдите по этой ссылке'
 					className='max-w-56'
 				>
-					<Link href={routes.resetPassword} className='inline-flex'>
+					<Link href={routes.auth.reset} className='inline-flex'>
 						<Text size='small' className='hover:underline text-indigo-600'>
 							Забыли пароль?
 						</Text>

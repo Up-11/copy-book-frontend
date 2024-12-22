@@ -1,10 +1,10 @@
-import React from 'react'
-import { UiAvatar } from '@/shared/ui/custom/ui-avatar'
-import { Button } from '@/shared/ui/other/button'
 import { IconDropdownTrigger } from './icon-dropdown-trigger'
-import { DraftTitle } from './draft-title'
-import { UiDropdownMenu } from '@/shared/ui/custom/ui-dropdown-menu'
 import { SettingsCodeEditor } from '@/features/code-editor'
+import { RenamedTitle } from '@/shared/ui/custom/renamed-title'
+import { UiAvatar } from '@/shared/ui/custom/ui-avatar'
+import { UiDropdownMenu } from '@/shared/ui/custom/ui-dropdown-menu'
+import { Button } from '@/shared/ui/other/button'
+import React from 'react'
 
 export const SandboxHeader: React.FC = () => {
 	return (
@@ -19,7 +19,9 @@ export const SandboxHeader: React.FC = () => {
 				</UiDropdownMenu>
 			</div>
 			<div className='relative flex w-6/12 items-center'>
-				<DraftTitle />
+				<div className='absolute left-1/2 -translate-x-1/2'>
+					<RenamedTitle />
+				</div>
 			</div>
 			<div className='flex w-6/12 items-center justify-end'>
 				<div className='flex gap-2'>

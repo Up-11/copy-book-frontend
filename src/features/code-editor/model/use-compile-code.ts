@@ -1,6 +1,9 @@
+import { API_REDIS_CONFIG } from '../lib/constants/constants'
+import { encodeCode } from '../lib/utils'
 import { useCodeEditorStore } from '../store/code-editor.store'
 import { useCompileCodeStore } from '../store/compile-code-store'
 import axios from 'axios'
+import { toast } from 'sonner'
 
 export const useCompileCode = () => {
 	const language = useCodeEditorStore(state => state.language)
@@ -12,11 +15,11 @@ export const useCompileCode = () => {
 	const checkStatus = async (token: string) => {
 		const options = {
 			method: 'GET',
-			url: process.env.NEXT_PUBLIC_RAPID_API_URL + '/' + token,
+			url: API_REDIS_CONFIG.url + '/' + token,
 			params: { base64_encoded: 'true', fields: '*' },
 			headers: {
-				'X-RapidAPI-Host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
-				'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPID_API_KEY
+				'X-RapidAPI-Host': API_REDIS_CONFIG.host,
+				'X-RapidAPI-Key': API_REDIS_CONFIG.key
 			}
 		}
 		try {
@@ -29,11 +32,10 @@ export const useCompileCode = () => {
 			} else {
 				setIsProcessing(false)
 				setOutputDetails(response.data)
-				console.log('response.data', response.data)
 				return
 			}
 		} catch (err) {
-			console.log('err', err)
+			toast.error(`Ошибка при компиляции кода. ${err}`)
 			setIsProcessing(false)
 		}
 	}
@@ -42,17 +44,17 @@ export const useCompileCode = () => {
 		setIsProcessing(true)
 		const formData = {
 			language_id: language.id,
-			source_code: btoa(code || '')
+			source_code: encodeCode(code || '')
 		}
 		const options = {
 			method: 'POST',
-			url: process.env.NEXT_PUBLIC_RAPID_API_URL,
+			url: API_REDIS_CONFIG.url,
 			params: { base64_encoded: 'true', fields: '*' },
 			headers: {
 				'content-type': 'application/json',
 				'Content-type': 'application/json',
-				'X-RapidAPI-Host': process.env.NEXT_PUBLIC_RAPID_API_HOST,
-				'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPID_API_KEY
+				'X-RapidAPI-Host': API_REDIS_CONFIG.host,
+				'X-RapidAPI-Key': API_REDIS_CONFIG.key
 			},
 			data: formData
 		}
@@ -60,14 +62,13 @@ export const useCompileCode = () => {
 		axios
 			.request(options)
 			.then(response => {
-				console.log('res data', response.data)
 				const token = response.data.token
 				checkStatus(token)
 			})
 			.catch(error => {
 				const err = error.response ? error.response.data : error
 				setIsProcessing(false)
-				console.log(err)
+				toast.error(err)
 			})
 	}
 
