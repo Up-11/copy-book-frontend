@@ -1,7 +1,7 @@
-import React from 'react'
-import { SettingsItem } from './settings-item'
-import { languageOptionsType } from '../types'
 import { useSearch } from '../model/use-search'
+import { languageOptionsType } from '../types'
+import { SettingsItem } from './settings-item'
+import React from 'react'
 
 export const LanguageSettings: React.FC<{
 	onClick: (item: languageOptionsType) => void
@@ -14,7 +14,6 @@ export const LanguageSettings: React.FC<{
 				.filter(item =>
 					item.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
 				)
-				.sort((a, b) => Number(b.isActive) - Number(a.isActive))
 				.sort((a, b) => Number(b.isActive) - Number(a.isActive))
 				.map(item => (
 					<SettingsItem

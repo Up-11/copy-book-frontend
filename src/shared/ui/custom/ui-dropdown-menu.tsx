@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -6,6 +5,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from '../modals/dropdown-menu'
+import React from 'react'
 
 interface Props {
 	children: React.ReactNode
@@ -22,7 +22,7 @@ export const UiDropdownMenu: React.FC<Props> = ({
 }) => {
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
+			<DropdownMenuTrigger>{children}</DropdownMenuTrigger>
 			<DropdownMenuContent className={className}>
 				{label && (
 					<>

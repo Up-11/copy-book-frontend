@@ -1,7 +1,9 @@
 'use client'
 
+import { StepItem } from '../../reset-password/ui/step-item'
 import { useCompileCodeStore } from '../store/compile-code-store'
 import { OutputDetails } from './output-details'
+import { cn } from '@/shared/lib/css'
 import { Loader } from '@/shared/ui/view/loader'
 import React from 'react'
 
@@ -58,11 +60,21 @@ export const OutputWindow = () => {
 	}
 
 	return (
-		<div className='p-layout'>
+		<div className='p-layout '>
 			<h1 className='font-bold text-xl mb-2'>Результат</h1>
-			<div className='flex justify-center items-center h-full'>
-				<div className='w-full h-96 bg-zinc-900 rounded-md text-white font-normal text-sm overflow-y-auto'>
-					{isPending ? <Loader /> : getOutput()}
+			<div className='flex justify-center items-center '>
+				<div
+					className={cn(
+						'w-full h-96 bg-zinc-900 rounded-md text-white font-normal text-sm overflow-y-auto'
+					)}
+				>
+					{isPending ? (
+						<div className='flex flex-col justify-center h-full'>
+							<Loader size={30} className='m-auto h-full ' />
+						</div>
+					) : (
+						getOutput()
+					)}
 				</div>
 			</div>
 			<OutputDetails outputDetails={outputDetails} />

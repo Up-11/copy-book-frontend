@@ -1,6 +1,11 @@
 export const routes = {
 	// Основные маршруты
 	home: '/',
+	profile: {
+		personal: '/profile/personal',
+		settings: '/profile/settings',
+		statistic: '/profile/statistic'
+	},
 
 	// Аутентификация
 	auth: {
@@ -10,19 +15,17 @@ export const routes = {
 		reset: '/auth/reset-password'
 	},
 
-	// Дашборды
 	dashboard: {
-		student: '/student/main',
-		teacher: '/teacher/main',
-		admin: '/admin/main'
+		student: '/student/dashboard',
+		teacher: '/teacher/dashboard',
+		admin: '/admin/dashboard'
 	},
 
 	// Редактор кода
 	code: {
 		sandbox: '/code/sandbox',
-		editor: '/code/editor'
+		drafts: '/code/drafts'
 	}
 } as const
 
-// Типизация
 export type AppRoutes = typeof routes

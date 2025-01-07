@@ -1,7 +1,9 @@
 'use client'
 
-import * as React from 'react'
-import Link from 'next/link'
+import { menuDataStudent } from '../menu.data'
+import { MenuItemsProps, MenuItemType } from '../nav-menu.types'
+import { routes } from '@/shared/config/routes'
+import { cn } from '@/shared/lib/css'
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -11,10 +13,8 @@ import {
 	NavigationMenuTrigger
 } from '@/shared/ui/modals/navigation-menu'
 import { BookKey, Code2, LayoutList } from 'lucide-react'
-import { routes } from '@/shared/config/routes'
-import { cn } from '@/shared/lib/css'
-import { MenuItemsProps, MenuItemType } from '../nav-menu.types'
-import { menuDataStudent } from '../menu.data'
+import Link from 'next/link'
+import * as React from 'react'
 
 //TODO Сделать меню и под учителя и под ученика
 

@@ -1,4 +1,4 @@
-- component witch can be renamed by double click 
-- footer
+- component witch can be renamed by double click [X]
+- footer[X]
 - modal on reload page???
 - signin to save progress 

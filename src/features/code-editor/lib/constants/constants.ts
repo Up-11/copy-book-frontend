@@ -4,59 +4,59 @@ export const javascriptDefault =
 export const statuses = [
 	{
 		id: 1,
-		description: 'In Queue'
+		description: 'В очереди'
 	},
 	{
 		id: 2,
-		description: 'Processing'
+		description: 'Обработка'
 	},
 	{
 		id: 3,
-		description: 'Accepted'
+		description: 'Принято'
 	},
 	{
 		id: 4,
-		description: 'Wrong Answer'
+		description: 'Неправильный ответ'
 	},
 	{
 		id: 5,
-		description: 'Time Limit Exceeded'
+		description: 'Превышено ограничение времени'
 	},
 	{
 		id: 6,
-		description: 'Compilation Error'
+		description: 'Ошибка компиляции'
 	},
 	{
 		id: 7,
-		description: 'Runtime Error (SIGSEGV)'
+		description: 'Ошибка времени выполнения (SIGSEGV)'
 	},
 	{
 		id: 8,
-		description: 'Runtime Error (SIGXFSZ)'
+		description: 'Ошибка времени выполнения (SIGXFSZ)'
 	},
 	{
 		id: 9,
-		description: 'Runtime Error (SIGFPE)'
+		description: 'Ошибка времени выполнения (SIGFPE)'
 	},
 	{
 		id: 10,
-		description: 'Runtime Error (SIGABRT)'
+		description: 'Ошибка времени выполнения (SIGABRT)'
 	},
 	{
 		id: 11,
-		description: 'Runtime Error (NZEC)'
+		description: 'Ошибка времени выполнения (NZEC)'
 	},
 	{
 		id: 12,
-		description: 'Runtime Error (Other)'
+		description: 'Ошибка времени выполнения (другая)'
 	},
 	{
 		id: 13,
-		description: 'Internal Error'
+		description: 'Внутренняя ошибка'
 	},
 	{
 		id: 14,
-		description: 'Exec Format Error'
+		description: 'Ошибка формата выполнения'
 	}
 ]
 export const API_REDIS_CONFIG = {
