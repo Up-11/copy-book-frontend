@@ -1,11 +1,11 @@
 import Text from './text'
 import { cn } from '@/shared/lib/css'
-import { getBadgeByUserRole } from '@/shared/lib/utils'
-import { UserRole } from '@/shared/types/user.types'
+import { getBadgeByTaskDifficulty } from '@/shared/lib/utils'
+import { TaskDifficulty } from '@/shared/types/task.types'
 import React from 'react'
 
-export const RoleBadge: React.FC<{ role: UserRole }> = ({ role }) => {
-	const { text, classNames } = getBadgeByUserRole(role)
+export const RoleBadge: React.FC<{ diff: TaskDifficulty }> = ({ diff }) => {
+	const { text, classNames } = getBadgeByTaskDifficulty(diff)
 	return (
 		<div
 			className={cn(

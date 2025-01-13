@@ -1,11 +1,8 @@
-import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '../view/avatar'
+import { PropsWithClassName } from '@/shared/types/props.types'
+import React from 'react'
 
-interface IAvatarProps {
-	className?: string
-}
-
-export const UiAvatar: React.FC<IAvatarProps> = ({ className }) => {
+export const UiAvatar: React.FC<PropsWithClassName> = ({ className }) => {
 	return (
 		<Avatar className={className}>
 			<AvatarImage src='https://github.com/shadcn.png' />

@@ -1,9 +1,10 @@
 'use client'
-import React from 'react'
-import Editor from '@monaco-editor/react'
+
+import { useEditorChange } from '../model/use-editor-change'
 import { cn } from '@/shared/lib/css'
 import { Loader } from '@/shared/ui/view/loader'
-import { useEditorChange } from '../model/use-editor-change'
+import Editor from '@monaco-editor/react'
+import React from 'react'
 
 interface Props {
 	language: string

@@ -1,5 +1,6 @@
 import { UiNavigationMenu } from '@/features/navigation'
 import { routes } from '@/shared/config/routes'
+import { UserRole } from '@/shared/types/user.types'
 import { UiAvatar } from '@/shared/ui/custom/ui-avatar'
 // import { Button } from '@/shared/ui/other/button'
 import { LogoWithRoleBadge } from '@/shared/ui/view/logo-with-role-badge'
@@ -12,7 +13,7 @@ export const RootHeader: React.FC = () => {
 		<header className=' mt-2 flex w-full items-center justify-between gap-1 header-w'>
 			<div className='flex items-center gap-3'>
 				<Link href={routes.dashboard.student}>
-					<LogoWithRoleBadge role={'student'} hasLink={false} />
+					<LogoWithRoleBadge role={UserRole.STUDENT} hasLink={false} />
 				</Link>
 				<nav className='flex items-center max-md:hidden'>
 					<UiNavigationMenu />

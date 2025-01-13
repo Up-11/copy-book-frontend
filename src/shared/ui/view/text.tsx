@@ -1,11 +1,11 @@
-import React from 'react'
-import { cva } from 'class-variance-authority'
 import { cn } from '@/shared/lib/css'
+import { cva } from 'class-variance-authority'
+import React from 'react'
 
 const textVariants = cva('', {
 	variants: {
 		size: {
-			extraSmall: ' text-sm ',
+			extraSmall: ' text-xs ',
 			small: 'text-xs sm:text-sm md:text-base', // 12px -> 14px -> 16px
 			medium: 'text-sm sm:text-base md:text-lg lg:text-xl', // 14px -> 16px -> 18px -> 20px
 			large: 'text-base sm:text-lg md:text-xl lg:text-2xl', // 16px -> 18px -> 20px -> 24px

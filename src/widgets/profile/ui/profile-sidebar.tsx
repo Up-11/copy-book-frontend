@@ -11,7 +11,7 @@ export const ProfileSidebar: React.FC<{ role: Omit<UserRole, 'admin'> }> = ({
 }) => {
 	const { currentPage } = useCurrentSidebarItem()
 	return (
-		<aside className='border-r-primary border-r mr-4  h-[85vh]  pr-4 flex flex-col gap-1 '>
+		<aside className='border-r-primary border-r mr-4  h-[87vh]  pr-4 flex flex-col gap-1 '>
 			{role === 'student' &&
 				sidebarItems.map((item, index) => (
 					<SidebarItem

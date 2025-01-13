@@ -1,7 +1,6 @@
 'use client'
 
-import { menuDataStudent } from '../menu.data'
-import { MenuItemsProps, MenuItemType } from '../nav-menu.types'
+import { MenuItemType } from '../nav-menu.types'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import {
@@ -12,54 +11,58 @@ import {
 	NavigationMenuList,
 	NavigationMenuTrigger
 } from '@/shared/ui/modals/navigation-menu'
-import { BookKey, Code2, LayoutList } from 'lucide-react'
+import Title from '@/shared/ui/view/title'
+import {
+	BookAudio,
+	BookKey,
+	Code2,
+	CodeSquare,
+	LayoutList,
+	TerminalSquareIcon
+} from 'lucide-react'
 import Link from 'next/link'
 import * as React from 'react'
 
 //TODO Сделать меню и под учителя и под ученика
 
 export const UiNavigationMenu: React.FC = () => {
-	const renderMenuItems = ({
-		items,
-		icon,
-		title,
-		tallItemHref,
-		description
-	}: MenuItemsProps) => {
-		return (
-			<>
-				<TallMenuItem
-					href={tallItemHref}
-					title={title}
-					description={description}
-					icon={icon}
-				/>
-				{items.map((item, index) => (
-					<MenuItem
-						key={index}
-						href={item.href}
-						title={item.title}
-						description={item.description}
-					/>
-				))}
-			</>
-		)
-	}
-
 	return (
 		<NavigationMenu>
 			<NavigationMenuList>
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>Задания</NavigationMenuTrigger>
 					<NavigationMenuContent>
-						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]'>
-							{renderMenuItems({
-								items: menuDataStudent[0].items,
-								icon: <LayoutList />,
-								title: 'Ваши задания',
-								tallItemHref: routes.dashboard.student,
-								description: 'Посмотрите список ваших заданий'
-							})}
+						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]'>
+							<TallMenuItem
+								href={routes.tasks.student}
+								title={'Ваши задания'}
+								description={'Посмотрите список ваших заданий'}
+								icon={<LayoutList />}
+							/>
+							<TallMenuItem
+								href={routes.dashboard.student}
+								title={'Все задания'}
+								description={'Подберите задания которые подходят именно вам'}
+								icon={<TerminalSquareIcon />}
+							/>
+						</ul>
+						<Title className='px-4'>Важные задания</Title>
+						<ul className='p-4'>
+							<MenuItem
+								title='Проверить задания'
+								description='Просмотрите задания, которые ожидают вашего выполнения'
+								href='/tasks/pending'
+							/>
+							<MenuItem
+								title='Изучить новые темы'
+								description='Получите доступ к материалам для изучения новых тем'
+								href='/topics/new'
+							/>
+							<MenuItem
+								title='Отправить отчет'
+								description='Загрузите выполненные задания или отправьте отчет преподавателю'
+								href='/report/submit'
+							/>
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
@@ -67,15 +70,21 @@ export const UiNavigationMenu: React.FC = () => {
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>Песочница</NavigationMenuTrigger>
 					<NavigationMenuContent>
-						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]'>
-							{renderMenuItems({
-								items: menuDataStudent[1].items,
-								icon: <Code2 />,
-								title: 'Песочница',
-								tallItemHref: routes.code.sandbox,
-								description:
+						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]'>
+							<TallMenuItem
+								href={routes.code.sandbox}
+								title={'Песочница'}
+								description={
 									'Потренеруйтесь в самостоятельном написании кода в песочнице'
-							})}
+								}
+								icon={<Code2 />}
+							/>
+							<TallMenuItem
+								href={routes.code.drafts}
+								title={'Черновики'}
+								description={'Продолжите уже начатые работы'}
+								icon={<CodeSquare />}
+							/>
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
@@ -83,16 +92,48 @@ export const UiNavigationMenu: React.FC = () => {
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>Курсы</NavigationMenuTrigger>
 					<NavigationMenuContent>
-						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]'>
-							{renderMenuItems({
-								items: menuDataStudent[2].items,
-								icon: <BookKey />,
-								title: 'Ваши курсы',
-								tallItemHref: routes.home,
-								description: 'Посмотрите список курсов которые вы проходите'
-							})}
+						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]'>
+							<TallMenuItem
+								href={routes.home}
+								title={'Ваши курсы'}
+								description={'Посмотрите список курсов которые вы проходите'}
+								icon={<BookKey />}
+							/>
+							<TallMenuItem
+								href={routes.home}
+								title={'Все курсы'}
+								description={'Посмотрите список доступных вам курсов '}
+								icon={<BookAudio />}
+							/>
+						</ul>
+						<Title className='px-4'>Текущие курсы</Title>
+						<ul className='p-4'>
+							<MenuItem
+								title='Проверить задания'
+								description='Просмотрите задания, которые ожидают вашего выполнения'
+								href='/tasks/pending'
+							/>
+							<MenuItem
+								title='Изучить новые темы'
+								description='Получите доступ к материалам для изучения новых тем'
+								href='/topics/new'
+							/>
+							<MenuItem
+								title='Отправить отчет'
+								description='Загрузите выполненные задания или отправьте отчет преподавателю'
+								href='/report/submit'
+							/>
 						</ul>
 					</NavigationMenuContent>
+				</NavigationMenuItem>
+				<NavigationMenuItem>
+					<Link
+						href={routes.code.sandbox}
+						className=' cursor-pointer group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50
+'
+					>
+						Календарь
+					</Link>
 				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>
@@ -133,7 +174,7 @@ const MenuItem: React.FC<MenuItemType> = ({ href, title, description }) => (
 				href={href}
 			>
 				<div className='text-sm font-medium leading-none'>{title}</div>
-				<p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>
+				<p className='line-clamp-1 text-sm leading-snug text-muted-foreground '>
 					{description}
 				</p>
 			</Link>

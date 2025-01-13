@@ -1,4 +1,6 @@
 import { DashboardBlockPrimitive } from './dashboard-block-primitive'
+import { DraftItem } from '@/entities/draft'
+import { DRAFT_MOCK } from '@/entities/draft/mock.data'
 import { routes } from '@/shared/config/routes'
 import { Skeleton } from '@/shared/ui/other/skeleton'
 import { DashboardFooter } from '@/widgets/footers'
@@ -37,9 +39,14 @@ export const StudentDashboard: React.FC = () => {
 					link={routes.code.drafts}
 				>
 					<div className='flex flex-col gap-3 '>
-						<Skeleton className='h-[100px] w-full rounded-lg' />
-						<Skeleton className='h-[100px] w-full rounded-lg' />
-						<Skeleton className='h-[100px] w-full rounded-lg' />
+						{DRAFT_MOCK.slice(0, 3).map(draft => (
+							<DraftItem
+								className='h-[100px]'
+								key={draft.id}
+								{...draft}
+								isGrid={false}
+							/>
+						))}
 					</div>
 				</DashboardBlockPrimitive>
 			</div>

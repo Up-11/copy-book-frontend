@@ -14,7 +14,7 @@ body {
 
 @layer base {
 	:root {
-		--padding: 23px;
+		--padding: 18px;
 		--background: 0 0% 100%;
 		--foreground: 210 11% 24%;
 		--card: 0 0% 100%;

@@ -10,3 +10,8 @@ export interface ModalProps {
 	className?: string
 	footer?: React.ReactNode
 }
+
+export enum Layout {
+	LIST = 'list',
+	GRID = 'grid'
+}

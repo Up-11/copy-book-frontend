@@ -1,5 +1,4 @@
 export const routes = {
-	// Основные маршруты
 	home: '/',
 	profile: {
 		personal: '/profile/personal',
@@ -7,12 +6,16 @@ export const routes = {
 		statistic: '/profile/statistic'
 	},
 
-	// Аутентификация
 	auth: {
 		student: '/auth/student',
 		teacher: '/auth/teacher',
 		admin: '/auth/admin',
 		reset: '/auth/reset-password'
+	},
+
+	tasks: {
+		student: '/student/tasks',
+		main: '/tasks'
 	},
 
 	dashboard: {
@@ -21,10 +24,9 @@ export const routes = {
 		admin: '/admin/dashboard'
 	},
 
-	// Редактор кода
 	code: {
 		sandbox: '/code/sandbox',
-		drafts: '/code/drafts'
+		drafts: '/student/drafts'
 	}
 } as const
 
