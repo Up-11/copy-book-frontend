@@ -25,7 +25,7 @@ export default function RootLayout({
 		<html lang='en'>
 			<body
 				className={` ${inter.variable} `}
-				style={{ marginRight: '0px !important' }}
+				style={{ marginRight: '0px !important container' }}
 			>
 				{/* 	<div className='fixed left-0 top-0 z-[999] text-xs opacity-50'>
 					DEVELOPMENT.NON_COMMERCE.FOR_KKRIT

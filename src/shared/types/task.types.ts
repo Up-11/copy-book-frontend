@@ -7,7 +7,9 @@ export enum TaskDifficulty {
 export enum TaskStatus {
 	Pending = 'pending',
 	Active = 'active',
-	Closed = 'closed'
+	Closed = 'closed',
+	New = 'new',
+	NotStarted = ''
 }
 
 export enum TaskResult {
@@ -22,6 +24,8 @@ export enum TaskPrivacy {
 	ForCourse = 'for course'
 }
 
+export type TaskRating = number
+
 export type AnswerType = 'dragAndDrop' | 'writeAnswer' | 'chooseAnswer'
 export type TaskType = 'code' | AnswerType
 
@@ -29,19 +33,19 @@ export type TaskCourse = string
 export type TaskTeacher = string
 
 export interface TaskCommunication {
-	course: TaskCourse
-	teacher: TaskTeacher
+	teacher?: TaskTeacher
+	sutdentsComplete?: number
 }
 
 export interface TaskCreationDate {
 	dateOfCreation: string
 }
 
-export interface TaskCompletionDate {
-	dateOfCompletion?: string
+export interface Deadline {
+	deadline?: string
 }
 export interface TaskTimeToComplete {
-	timeToComplete: string
+	timeToComplete?: string
 }
 export interface TaskCompletionTimes {
 	timeWhenCompletionStarted?: string
@@ -49,20 +53,19 @@ export interface TaskCompletionTimes {
 }
 export interface TaskDateAndTime
 	extends TaskCreationDate,
-		TaskCompletionDate,
+		Deadline,
 		TaskTimeToComplete,
 		TaskCompletionTimes {}
 
 export interface TaskBase {
 	title: string
 	description: string
-	percentOfCompletion: number
 }
 
 export interface Task extends TaskBase {
 	id: string
 	difficulty: TaskDifficulty
-	numberOfMicroTasks: number
+	microtasksQuantity: number
 	status: TaskStatus
 	privacy: TaskPrivacy
 	type: TaskType
@@ -71,9 +74,24 @@ export interface Task extends TaskBase {
 	result?: TaskResult
 }
 
-export interface DashboardTaskProps extends TaskBase {
+export interface DashboardTaskProps extends TaskBase, Deadline {
 	id: string
 	difficulty: TaskDifficulty
-	TaskCourse: TaskCourse
-	TaskCompletionDate: TaskCompletionDate
+	TaskCourse?: TaskCourse
+	microtasksQuantity: number
+	completedMicrotasks?: number
+}
+
+export interface TaskPageProps
+	extends DashboardTaskProps,
+		TaskDateAndTime,
+		TaskCommunication {
+	taskResult?: TaskResult
+	taskStatus: TaskStatus
+	taskRating: TaskRating
+}
+
+export interface TaskPopoverProps extends DashboardTaskProps {
+	id: string
+	taskStatus: TaskStatus
 }

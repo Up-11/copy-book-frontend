@@ -1,4 +1,2 @@
-- component witch can be renamed by double click [X]
-- footer[X]
-- modal on reload page???
-- signin to save progress 
+[] - Sandbox visual 
+[] - task page

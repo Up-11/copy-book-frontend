@@ -8,6 +8,7 @@ import { cn } from '@/shared/lib/css'
 import { SearchBar } from '@/shared/ui/custom/searchbar'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Loader } from '@/shared/ui/view/loader'
+import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
@@ -16,8 +17,9 @@ export const DraftSection = () => {
 	const { isHydrated, layout, setActiveLayout } = useDraft()
 	if (!isHydrated) {
 		return (
-			<div className='flex items-center justify-center h-[88vh] '>
+			<div className='flex items-center flex-col justify-center h-[88vh] '>
 				<Loader size={44} />
+				<Text size='small'>Черновики загружкаются подождите</Text>
 			</div>
 		)
 	}
@@ -26,7 +28,7 @@ export const DraftSection = () => {
 		<>
 			<div className='flex justify-between  mt-8 mb-4'>
 				<Title>Черновики</Title>
-				<div className='flex items-center'>
+				<div className='flex items-center gap-3'>
 					<SearchBar />
 					<LayoutSwitch
 						activeLayout={layout}
@@ -37,7 +39,7 @@ export const DraftSection = () => {
 			<section
 				className={cn(
 					layout === 'grid'
-						? 'grid grid-cols-5 gap-3'
+						? 'grid grid-cols-5 gap-3 mt-8'
 						: 'flex flex-col gap-3 mt-8'
 				)}
 			>

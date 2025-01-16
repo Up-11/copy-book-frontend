@@ -1,5 +1,6 @@
 // import { DashboardFooter } from '@/widgets/footers'
 import { RootHeader } from '@/widgets/headers/ui/root-header'
+import { UserTasksSidebar } from '@/widgets/task'
 
 export default function DashboardLayout({
 	children
@@ -7,12 +8,14 @@ export default function DashboardLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<div className='h-screen'>
+		<div>
 			<RootHeader />
-			<div className='root-page-w '>
+
+			<div className='root-page-w grid grid-cols-[350px,1fr] mt-3'>
+				<UserTasksSidebar />
 				{children}
-				{/* <DashboardFooter /> */}
 			</div>
+			{/* <DashboardFooter /> */}
 		</div>
 	)
 }

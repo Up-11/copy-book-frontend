@@ -1,8 +1,12 @@
 import { DashboardBlockPrimitive } from './dashboard-block-primitive'
 import { DraftItem } from '@/entities/draft'
 import { DRAFT_MOCK } from '@/entities/draft/mock.data'
+import { DashboardTask } from '@/entities/task'
 import { routes } from '@/shared/config/routes'
+import { dashboardTasks } from '@/shared/mock/mock'
 import { Skeleton } from '@/shared/ui/other/skeleton'
+import Text from '@/shared/ui/view/text'
+import Title from '@/shared/ui/view/title'
 import { DashboardFooter } from '@/widgets/footers'
 import React from 'react'
 
@@ -20,18 +24,20 @@ export const StudentDashboard: React.FC = () => {
 			<DashboardBlockPrimitive
 				title='Ваши задания'
 				linkText='Все задания'
-				link={routes.dashboard.student}
+				link={routes.tasks.student}
 			>
 				<div className='grid grid-cols-4 h-[450px] gap-x-5'>
-					<Skeleton className='h-full rounded-lg' />
-					<Skeleton className='h-full rounded-lg' />
-					<Skeleton className='h-full rounded-lg' />
-					<Skeleton className='h-full rounded-lg' />
+					{dashboardTasks.slice(0, 4).map(task => (
+						<DashboardTask key={task.id} className='h-full' item={task} />
+					))}
 				</div>
 			</DashboardBlockPrimitive>
 			<div className='grid grid-cols-2 gap-x-5'>
 				<DashboardBlockPrimitive title='Песочница'>
-					<Skeleton className='h-[330px] w-full rounded-lg' />
+					<div className='h-[330px] w-full rounded-lg flex flex-col'>
+						<Title>Песочница</Title>
+						<Text>Улучшите ваши навыки в написании кода</Text>
+					</div>
 				</DashboardBlockPrimitive>
 				<DashboardBlockPrimitive
 					title='Черновики'
@@ -45,6 +51,7 @@ export const StudentDashboard: React.FC = () => {
 								key={draft.id}
 								{...draft}
 								isGrid={false}
+								isDashboard
 							/>
 						))}
 					</div>
@@ -55,7 +62,7 @@ export const StudentDashboard: React.FC = () => {
 				link={routes.dashboard.student}
 				linkText='Все курсы'
 			>
-				<div className='grid grid-cols-2 gap-3'>
+				<div className='grid grid-cols-2 gap-x-5 gap-3'>
 					<Skeleton className='h-[100px] w-full rounded-lg' />
 					<Skeleton className='h-[100px] w-full rounded-lg' />
 					<Skeleton className='h-[100px] w-full rounded-lg' />

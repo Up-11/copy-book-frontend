@@ -1,5 +1,5 @@
 import { Draft } from '../types'
-import { DraftItemPopover } from './draft-item-popover'
+import { DraftPopover } from './draft-popover'
 import { cn } from '@/shared/lib/css'
 import { PropsWithClassName } from '@/shared/types/props.types'
 import { AccentColorBlock } from '@/shared/ui/custom/accent-color-item'
@@ -8,12 +8,19 @@ import { ArrowDownRightFromSquare, EllipsisVertical } from 'lucide-react'
 import React from 'react'
 
 export const DraftItem: React.FC<
-	Draft & PropsWithClassName & { isGrid: boolean }
-> = ({ name, description, codeLines, isGrid = true, className }) => {
+	Draft & PropsWithClassName & { isGrid: boolean; isDashboard?: boolean }
+> = ({
+	name,
+	description,
+	codeLines,
+	isGrid = true,
+	className,
+	isDashboard = false
+}) => {
 	const listElement = () => (
 		<div
 			className={cn(
-				'flex items-center justify-between bg-indigo-50 rounded-lg p-4',
+				'flex items-center justify-between bg-indigo-50 rounded-lg p-layout',
 				className
 			)}
 		>
@@ -35,11 +42,13 @@ export const DraftItem: React.FC<
 				<div className='p-1 hover:bg-secondary rounded-md transition-colors cursor-pointer'>
 					<ArrowDownRightFromSquare />
 				</div>
-				<DraftItemPopover isGrid={isGrid} className='self-start'>
-					<div className='p-1 self-start hover:bg-secondary rounded-md transition-colors cursor-pointer'>
-						<EllipsisVertical size={20} />
-					</div>
-				</DraftItemPopover>
+				{!isDashboard && (
+					<DraftPopover isGrid={isGrid} className='self-start'>
+						<div className='p-1 self-start hover:bg-secondary rounded-md transition-colors cursor-pointer'>
+							<EllipsisVertical size={20} />
+						</div>
+					</DraftPopover>
+				)}
 			</div>
 		</div>
 	)
@@ -48,11 +57,11 @@ export const DraftItem: React.FC<
 		<div className='flex flex-col gap-2 items-start h-96  bg-indigo-50 rounded-lg p-layout'>
 			<div className='flex justify-between w-full'>
 				<Text>{name}</Text>
-				<DraftItemPopover isGrid={isGrid}>
+				<DraftPopover isGrid={isGrid}>
 					<div className='p-1  hover:bg-secondary rounded-md transition-colors cursor-pointer'>
 						<EllipsisVertical size={20} />
 					</div>
-				</DraftItemPopover>
+				</DraftPopover>
 			</div>
 			<div className='w-full'>
 				<Text color='gray' size='small'>

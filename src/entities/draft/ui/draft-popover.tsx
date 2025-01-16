@@ -9,7 +9,7 @@ import Text from '@/shared/ui/view/text'
 import { SquarePen, Trash2 } from 'lucide-react'
 import React, { PropsWithChildren } from 'react'
 
-export const DraftItemPopover: React.FC<
+export const DraftPopover: React.FC<
 	PropsWithChildren & PropsWithClassName & { isGrid: boolean }
 > = ({ children, className, isGrid }) => {
 	return (
@@ -17,18 +17,18 @@ export const DraftItemPopover: React.FC<
 			<PopoverTrigger className={className}>{children}</PopoverTrigger>
 			<PopoverContent align='end' className='w-44 px-1 py-3'>
 				<section className='flex flex-col'>
-					<DraftPopoverElement icon={<SquarePen size={20} />}>
+					<DraftPopoverItem icon={<SquarePen size={20} />}>
 						Поменять название
-					</DraftPopoverElement>
-					<DraftPopoverElement icon={<SquarePen size={20} />}>
+					</DraftPopoverItem>
+					<DraftPopoverItem icon={<SquarePen size={20} />}>
 						Поменять описание
-					</DraftPopoverElement>
-					<DraftPopoverElement
+					</DraftPopoverItem>
+					<DraftPopoverItem
 						className='text-red-500 '
 						icon={<Trash2 className='place-self-end' size={20} />}
 					>
 						Удалить
-					</DraftPopoverElement>
+					</DraftPopoverItem>
 					{!isGrid && (
 						<>
 							<p className='text-xs pl-2 mt-1'>last update: </p>
@@ -40,13 +40,13 @@ export const DraftItemPopover: React.FC<
 		</Popover>
 	)
 }
-const DraftPopoverElement: React.FC<
+const DraftPopoverItem: React.FC<
 	PropsWithChildren & PropsWithClassName & { icon: React.ReactNode }
 > = ({ children, icon, className }) => {
 	return (
 		<div
 			className={cn(
-				'flex items-center hover:bg-destructive p-2 rounded cursor-pointer  justify-between font-semibold',
+				'flex items-center hover:bg-destructive p-2 rounded cursor-pointer   justify-between font-semibold',
 				className
 			)}
 		>

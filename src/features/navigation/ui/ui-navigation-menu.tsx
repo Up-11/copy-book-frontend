@@ -1,8 +1,10 @@
 'use client'
 
 import { MenuItemType } from '../nav-menu.types'
+import { TaskDifficultyDot } from '@/entities/task'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
+import { dashboardTasks } from '@/shared/mock/mock'
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -48,21 +50,15 @@ export const UiNavigationMenu: React.FC = () => {
 						</ul>
 						<Title className='px-4'>Важные задания</Title>
 						<ul className='p-4'>
-							<MenuItem
-								title='Проверить задания'
-								description='Просмотрите задания, которые ожидают вашего выполнения'
-								href='/tasks/pending'
-							/>
-							<MenuItem
-								title='Изучить новые темы'
-								description='Получите доступ к материалам для изучения новых тем'
-								href='/topics/new'
-							/>
-							<MenuItem
-								title='Отправить отчет'
-								description='Загрузите выполненные задания или отправьте отчет преподавателю'
-								href='/report/submit'
-							/>
+							{dashboardTasks.slice(0, 3).map(task => (
+								<MenuItem
+									key={task.id}
+									title={task.title}
+									description={task.description}
+									diff={task.difficulty}
+									href={routes.tasks.currentUserTask(task.id)}
+								/>
+							))}
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
@@ -107,23 +103,7 @@ export const UiNavigationMenu: React.FC = () => {
 							/>
 						</ul>
 						<Title className='px-4'>Текущие курсы</Title>
-						<ul className='p-4'>
-							<MenuItem
-								title='Проверить задания'
-								description='Просмотрите задания, которые ожидают вашего выполнения'
-								href='/tasks/pending'
-							/>
-							<MenuItem
-								title='Изучить новые темы'
-								description='Получите доступ к материалам для изучения новых тем'
-								href='/topics/new'
-							/>
-							<MenuItem
-								title='Отправить отчет'
-								description='Загрузите выполненные задания или отправьте отчет преподавателю'
-								href='/report/submit'
-							/>
-						</ul>
+						<ul className='p-4'></ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
@@ -164,19 +144,27 @@ const TallMenuItem: React.FC<MenuItemType> = ({
 	</li>
 )
 
-const MenuItem: React.FC<MenuItemType> = ({ href, title, description }) => (
+const MenuItem: React.FC<MenuItemType> = ({
+	href,
+	title,
+	description,
+	diff
+}) => (
 	<li>
 		<NavigationMenuLink asChild>
 			<Link
 				className={cn(
-					'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+					'grid items-center grid-cols-[1fr_auto]  select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-indigo-50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
 				)}
 				href={href}
 			>
-				<div className='text-sm font-medium leading-none'>{title}</div>
-				<p className='line-clamp-1 text-sm leading-snug text-muted-foreground '>
-					{description}
-				</p>
+				<div>
+					<h1 className='text-sm font-medium leading-none'>{title}</h1>
+					<p className='line-clamp-1 text-sm leading-snug text-muted-foreground '>
+						{description}
+					</p>
+				</div>
+				{diff && <TaskDifficultyDot diff={diff} />}
 			</Link>
 		</NavigationMenuLink>
 	</li>

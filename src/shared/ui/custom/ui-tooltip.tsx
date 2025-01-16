@@ -1,19 +1,20 @@
-import React from 'react'
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
-	TooltipTrigger,
+	TooltipTrigger
 } from '../view/tooltip'
+import React from 'react'
 
 export const UiTooltip: React.FC<{
 	children: React.ReactNode
 	content: string
 	className?: string
-}> = ({ children, content, className }) => {
+	delay?: number
+}> = ({ children, content, className, delay = 200 }) => {
 	return (
 		<TooltipProvider>
-			<Tooltip delayDuration={200}>
+			<Tooltip delayDuration={delay}>
 				<TooltipTrigger asChild>{children}</TooltipTrigger>
 				<TooltipContent className={className}>
 					<p>{content}</p>

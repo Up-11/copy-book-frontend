@@ -1,39 +1,81 @@
-import { DashboardTaskProps, TaskDifficulty } from '../types/task.types'
+import {
+	TaskPageProps,
+	TaskDifficulty,
+	TaskStatus,
+	TaskResult
+	// TaskPrivacy,
+	// TaskType
+} from '../types/task.types'
 
-export const dashboardTasks: DashboardTaskProps[] = [
-	{
-		id: '1',
-		title: 'Learn TypeScript Basics',
-		description: 'Complete the tutorial on TypeScript basics.',
-		percentOfCompletion: 50,
-		difficulty: TaskDifficulty.Simple,
-		TaskCourse: 'simple JS',
-		TaskCompletionDate: {
-			dateOfCompletion: '2025-01-15T18:00:00Z'
-		}
-	},
-	{
-		id: '2',
-		title: 'Build a Todo App',
-		description:
-			'Create a functional Todo application using React and TypeScript.',
-		percentOfCompletion: 30,
-		difficulty: TaskDifficulty.Medium,
-		TaskCourse: 'Simple JS',
-		TaskCompletionDate: {
-			dateOfCompletion: '2025-01-20T23:59:59Z'
-		}
-	},
-	{
-		id: '3',
-		title: 'Optimize Database Queries',
-		description:
-			'Analyze and optimize slow database queries for better performance.',
-		percentOfCompletion: 70,
-		difficulty: TaskDifficulty.Hard,
-		TaskCourse: 'sioadjoasid JSJSJJS',
-		TaskCompletionDate: {
-			dateOfCompletion: '2025-02-01T12:00:00Z'
+export const dashboardTasks: TaskPageProps[] = Array.from(
+	{ length: 30 },
+	(_, index) => {
+		const difficulties = [
+			TaskDifficulty.Simple,
+			TaskDifficulty.Medium,
+			TaskDifficulty.Hard
+		]
+		const statuses = [
+			TaskStatus.New,
+			TaskStatus.Closed,
+			TaskStatus.Active,
+			TaskStatus.Pending
+		]
+		const results = [
+			TaskResult.Failed,
+			TaskResult.Completed,
+			TaskResult.TimeIsOver
+		]
+
+		const courses = [
+			'Основы программирования',
+			'React для начинающих',
+			'Базы данных',
+			'Оптимизация производительности',
+			'Алгоритмы и структуры данных',
+			undefined
+		]
+		const teachers = [
+			'Иван Иванов',
+			'Анна Петрова',
+			'Сергей Смирнов',
+			'Екатерина Федорова',
+			'Дмитрий Соколов',
+			undefined
+		]
+
+		const titles = [
+			'Изучить основы TypeScript',
+			'Создать ToDo-приложение',
+			'Оптимизировать запросы к базе данных',
+			'Написать REST API',
+			'Реализовать авторизацию на сайте',
+			'Разработать адаптивный дизайн',
+			'Настроить CI/CD для проекта',
+			'Провести код-ревью',
+			'Изучить GraphQL',
+			'Оптимизировать загрузку изображений'
+		]
+
+		return {
+			id: String(index),
+			title: titles[index % titles.length],
+			description: `Описание задачи номер ${index}: выполните указанное действие для достижения результата.`,
+			completedMicrotasks: 5,
+			difficulty: difficulties[index % difficulties.length],
+			TaskCourse: courses[index % courses.length],
+			microtasksQuantity: 10,
+			deadline: '2025-01-30T00:00:00.000Z',
+			dateOfCreation: '2025-01-01T00:00:00.000Z',
+			timeToComplete: '5h',
+			timeWhenCompletionStarted: '2025-01-10T00:00:00.000Z',
+			timeWhenCompletionCompleted: '2025-01-15T00:00:00.000Z',
+			taskResult: results[index % results.length],
+			taskStatus: statuses[index % statuses.length],
+			course: courses[index % courses.length],
+			teacher: teachers[index % teachers.length],
+			sutdentsComplete: 10,
+			taskRating: 4
 		}
 	}
-]
+)
