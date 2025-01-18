@@ -1,16 +1,14 @@
 'use client'
 
-import * as React from 'react'
-import * as ProgressPrimitive from '@radix-ui/react-progress'
-
 import { cn } from '@/shared/lib/css'
+import * as ProgressPrimitive from '@radix-ui/react-progress'
+import * as React from 'react'
 
 const Progress = React.forwardRef<
 	React.ElementRef<typeof ProgressPrimitive.Root>,
 	React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
 >(({ className, value = 0, max = 100, ...props }, ref) => {
-	// Calculate progress as a percentage of max
-	const progress = (value / max) * 100
+	const progress = ((value ? value : 0) / max) * 100
 
 	return (
 		<ProgressPrimitive.Root

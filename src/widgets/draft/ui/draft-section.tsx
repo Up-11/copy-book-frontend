@@ -1,11 +1,12 @@
 'use client'
 
-import { useDraft } from '../model/use-draft'
+import { useLayout } from '../../../shared/model/use-layout'
 import { DraftItem, LayoutSwitch } from '@/entities/draft'
 import { DRAFT_MOCK } from '@/entities/draft/mock.data'
+import { SearchBar } from '@/entities/search/ui/searchbar'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
-import { SearchBar } from '@/shared/ui/custom/searchbar'
+import { Layout } from '@/shared/types/props.types'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Loader } from '@/shared/ui/view/loader'
 import Text from '@/shared/ui/view/text'
@@ -14,7 +15,7 @@ import { Plus } from 'lucide-react'
 import Link from 'next/link'
 
 export const DraftSection = () => {
-	const { isHydrated, layout, setActiveLayout } = useDraft()
+	const { isHydrated, layout, setActiveLayout } = useLayout()
 	if (!isHydrated) {
 		return (
 			<div className='flex items-center flex-col justify-center h-[88vh] '>
@@ -44,7 +45,11 @@ export const DraftSection = () => {
 				)}
 			>
 				{DRAFT_MOCK.map(draft => (
-					<DraftItem key={draft.id} {...draft} isGrid={layout === 'grid'} />
+					<DraftItem
+						key={draft.id}
+						{...draft}
+						isGrid={layout === Layout.GRID}
+					/>
 				))}
 			</section>
 			<section>

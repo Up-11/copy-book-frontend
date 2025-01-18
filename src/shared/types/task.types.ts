@@ -29,7 +29,7 @@ export type TaskRating = number
 export type AnswerType = 'dragAndDrop' | 'writeAnswer' | 'chooseAnswer'
 export type TaskType = 'code' | AnswerType
 
-export type TaskCourse = string
+export type TaskCourseType = string
 export type TaskTeacher = string
 
 export interface TaskCommunication {
@@ -41,9 +41,8 @@ export interface TaskCreationDate {
 	dateOfCreation: string
 }
 
-export interface Deadline {
-	deadline?: string
-}
+export type Deadline = string | Date
+
 export interface TaskTimeToComplete {
 	timeToComplete?: string
 }
@@ -53,9 +52,10 @@ export interface TaskCompletionTimes {
 }
 export interface TaskDateAndTime
 	extends TaskCreationDate,
-		Deadline,
 		TaskTimeToComplete,
-		TaskCompletionTimes {}
+		TaskCompletionTimes {
+	deadline?: Deadline
+}
 
 export interface TaskBase {
 	title: string
@@ -74,12 +74,13 @@ export interface Task extends TaskBase {
 	result?: TaskResult
 }
 
-export interface DashboardTaskProps extends TaskBase, Deadline {
+export interface DashboardTaskProps extends TaskBase {
 	id: string
 	difficulty: TaskDifficulty
-	TaskCourse?: TaskCourse
+	TaskCourse?: TaskCourseType
 	microtasksQuantity: number
 	completedMicrotasks?: number
+	deadline?: Deadline
 }
 
 export interface TaskPageProps

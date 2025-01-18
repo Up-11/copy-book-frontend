@@ -54,7 +54,7 @@ export const DraftItem: React.FC<
 	)
 
 	const gridElement = () => (
-		<div className='flex flex-col gap-2 items-start h-96  bg-indigo-50 rounded-lg p-layout'>
+		<div className='flex flex-col gap-2 items-start   bg-indigo-50 rounded-lg p-layout'>
 			<div className='flex justify-between w-full'>
 				<Text>{name}</Text>
 				<DraftPopover isGrid={isGrid}>

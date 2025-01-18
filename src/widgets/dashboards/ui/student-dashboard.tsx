@@ -4,10 +4,13 @@ import { DRAFT_MOCK } from '@/entities/draft/mock.data'
 import { DashboardTask } from '@/entities/task'
 import { routes } from '@/shared/config/routes'
 import { dashboardTasks } from '@/shared/mock/mock'
+import { Button } from '@/shared/ui/other/button'
 import { Skeleton } from '@/shared/ui/other/skeleton'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import { DashboardFooter } from '@/widgets/footers'
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 export const StudentDashboard: React.FC = () => {
@@ -34,9 +37,22 @@ export const StudentDashboard: React.FC = () => {
 			</DashboardBlockPrimitive>
 			<div className='grid grid-cols-2 gap-x-5'>
 				<DashboardBlockPrimitive title='Песочница'>
-					<div className='h-[330px] w-full rounded-lg flex flex-col'>
-						<Title>Песочница</Title>
-						<Text>Улучшите ваши навыки в написании кода</Text>
+					<div className='h-[330px] w-full rounded-lg flex flex-col gap-2 bg-indigo-50 p-layout'>
+						<Title size='large'>Песочница</Title>
+						<Text color='gray'>Улучшите ваши навыки в написании кода</Text>
+						<div className='mt-auto flex justify-between'>
+							<Link href={routes.code.sandbox} className='self-end'>
+								<Button>Перейти</Button>
+							</Link>
+							<div className='w-48'>
+								<Image
+									src='/assets/code.png'
+									alt='code'
+									width={400}
+									height={400}
+								/>
+							</div>
+						</div>
 					</div>
 				</DashboardBlockPrimitive>
 				<DashboardBlockPrimitive

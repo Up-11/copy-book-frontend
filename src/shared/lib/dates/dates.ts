@@ -15,7 +15,7 @@ interface SmartFormattingOptions {
 }
 
 interface FormatDateOptions {
-	date: string | Date
+	date?: string | Date
 	format?: string
 	smartFormatting?: SmartFormattingOptions
 }

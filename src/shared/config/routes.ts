@@ -15,7 +15,7 @@ export const routes = {
 
 	tasks: {
 		student: '/student/tasks',
-		main: '/tasks',
+		main: '/all-tasks',
 		currentUserTask: (id: string) => {
 			return `/student/tasks/${id}`
 		}

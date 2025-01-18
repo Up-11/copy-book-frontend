@@ -19,7 +19,8 @@ export const dashboardTasks: TaskPageProps[] = Array.from(
 			TaskStatus.New,
 			TaskStatus.Closed,
 			TaskStatus.Active,
-			TaskStatus.Pending
+			TaskStatus.Pending,
+			TaskStatus.NotStarted
 		]
 		const results = [
 			TaskResult.Failed,
@@ -28,6 +29,7 @@ export const dashboardTasks: TaskPageProps[] = Array.from(
 		]
 
 		const courses = [
+			undefined,
 			'Основы программирования',
 			'React для начинающих',
 			'Базы данных',

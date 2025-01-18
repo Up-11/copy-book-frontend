@@ -128,7 +128,9 @@ export const CurrentTask: React.FC<{ task: TaskPageProps }> = ({ task }) => {
 				)}
 			>
 				{!task.TaskCourse && <Button variant={'outline'}>Удалить</Button>}
-				<Button>Выполнить</Button>
+				<Button>
+					{task.completedMicrotasks != 0 ? 'Продолжить' : 'Выполнить'}
+				</Button>
 			</section>
 		</div>
 	)

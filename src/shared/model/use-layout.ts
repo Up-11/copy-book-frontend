@@ -1,15 +1,15 @@
-import { useDraftStore } from '../store/draft.store'
+import { useLayoutStore } from '@/shared/store/layout-store'
 import { useEffect, useState } from 'react'
 
-export const useDraft = () => {
-	const layout = useDraftStore(state => state.layout)
+export const useLayout = () => {
+	const layout = useLayoutStore(state => state.layout)
 	const [isHydrated, setIsHydrated] = useState(false)
 	const checkHydration = () => {
-		const hydrated = useDraftStore.persist.hasHydrated()
+		const hydrated = useLayoutStore.persist.hasHydrated()
 		setIsHydrated(hydrated)
 	}
 
-	const setActiveLayout = useDraftStore(state => state.setLayout)
+	const setActiveLayout = useLayoutStore(state => state.setLayout)
 
 	useEffect(() => {
 		checkHydration()

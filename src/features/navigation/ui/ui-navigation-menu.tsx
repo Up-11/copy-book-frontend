@@ -42,7 +42,7 @@ export const UiNavigationMenu: React.FC = () => {
 								icon={<LayoutList />}
 							/>
 							<TallMenuItem
-								href={routes.dashboard.student}
+								href={routes.tasks.main}
 								title={'Все задания'}
 								description={'Подберите задания которые подходят именно вам'}
 								icon={<TerminalSquareIcon />}
