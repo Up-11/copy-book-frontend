@@ -1,5 +1,5 @@
+import { UiTooltip } from '../custom/ui-tooltip'
 import { Button } from '../other/button'
-import { UiTooltip } from './ui-tooltip'
 import { Check, X } from 'lucide-react'
 import React from 'react'
 

@@ -1,12 +1,12 @@
+'use client'
+
 import { SidebarTask } from '@/entities/task'
 import { useLastPathnameElement } from '@/shared/lib/hooks/use-last-pathname-element'
-import { DashboardTaskProps } from '@/shared/types/task.types'
+import { TaskProps } from '@/shared/types/task.types'
 import { ScrollArea } from '@/shared/ui/other/scroll-area'
 import React from 'react'
 
-export const TaskList: React.FC<{ items: DashboardTaskProps[] }> = ({
-	items
-}) => {
+export const TaskList: React.FC<{ items: TaskProps[] }> = ({ items }) => {
 	const { currentPage } = useLastPathnameElement()
 	return (
 		<ScrollArea>

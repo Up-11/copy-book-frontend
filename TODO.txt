@@ -1,2 +1,3 @@
 [] - Sandbox visual 
-[] - task page
+[] - Animated tabs
+[X] - task page

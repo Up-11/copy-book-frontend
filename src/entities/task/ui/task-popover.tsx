@@ -6,7 +6,7 @@ import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { getTaskStatus } from '@/shared/lib/map'
 import { PropsWithClassName } from '@/shared/types/props.types'
-import { TaskPageProps } from '@/shared/types/task.types'
+import { TaskProps } from '@/shared/types/task.types'
 import {
 	Popover,
 	PopoverContent,
@@ -21,7 +21,7 @@ import React, { PropsWithChildren } from 'react'
 
 export const TaskPopover: React.FC<
 	PropsWithChildren &
-		PropsWithClassName & { item: TaskPageProps; isDashboard?: boolean }
+		PropsWithClassName & { item: TaskProps; isDashboard?: boolean }
 > = ({ item, className, children, isDashboard = false }) => {
 	return (
 		<Popover>
@@ -45,11 +45,11 @@ export const TaskPopover: React.FC<
 					deadline={item.deadline!}
 					extraCondition={isDashboard}
 				/>
-				<TaskCourse taskCourse={item.TaskCourse!} />
+				<TaskCourse taskCourse={item.course!} />
 				<div className='grid grid-cols-2 gap-3'>
 					<WithCondition
 						className='bg-indigo-200  p-2 rounded-lg'
-						condition={!!item.taskStatus}
+						condition={!!item.status}
 						render={
 							<div className='flex gap-2 items-center'>
 								<Text size='small' className='self-start'>
@@ -59,14 +59,14 @@ export const TaskPopover: React.FC<
 									size='small'
 									className='font-bold line-clamp-2 break-words '
 								>
-									{getTaskStatus(item.taskStatus)}
+									{getTaskStatus(item.status!)}
 								</Text>
 							</div>
 						}
 					/>
 					<WithCondition
 						className='bg-indigo-200  p-2 rounded-lg'
-						condition={!!item.taskRating}
+						condition={!!item.rating}
 						render={
 							<div className='flex gap-2 items-center '>
 								<Text size='small' className='self-start'>
@@ -76,7 +76,7 @@ export const TaskPopover: React.FC<
 									size='small'
 									className='font-bold line-clamp-2 break-words '
 								>
-									{item.taskRating}
+									{item.rating}
 								</Text>
 							</div>
 						}
@@ -85,12 +85,12 @@ export const TaskPopover: React.FC<
 				<div
 					className={cn(
 						'mt-auto flex ',
-						!item.TaskCourse ? 'justify-between' : 'justify-end'
+						!item.course ? 'justify-between' : 'justify-end'
 					)}
 				>
 					<WithCondition
 						className='self-end'
-						condition={!item.TaskCourse}
+						condition={!item.course}
 						render={<Button variant={'outline'}>Удалить</Button>}
 					/>
 

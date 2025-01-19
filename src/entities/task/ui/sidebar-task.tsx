@@ -2,7 +2,7 @@ import { TaskDifficultyDot } from './task-difficulty-dot'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
-import { DashboardTaskProps } from '@/shared/types/task.types'
+import { TaskProps } from '@/shared/types/task.types'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import Link from 'next/link'
@@ -10,9 +10,11 @@ import React from 'react'
 
 export const SidebarTask: React.FC<
 	Pick<
-		DashboardTaskProps,
+		TaskProps,
 		'title' | 'difficulty' | 'description' | 'deadline' | 'id'
-	> & { isActive?: boolean }
+	> & {
+		isActive?: boolean
+	}
 > = ({ title, difficulty, description, deadline, id, isActive }) => {
 	return (
 		<Link

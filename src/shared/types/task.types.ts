@@ -9,7 +9,7 @@ export enum TaskStatus {
 	Active = 'active',
 	Closed = 'closed',
 	New = 'new',
-	NotStarted = ''
+	NotStarted = 'not startd'
 }
 
 export enum TaskResult {
@@ -26,8 +26,12 @@ export enum TaskPrivacy {
 
 export type TaskRating = number
 
-export type AnswerType = 'dragAndDrop' | 'writeAnswer' | 'chooseAnswer'
-export type TaskType = 'code' | AnswerType
+export enum TaskType {
+	Code = 'code',
+	DragAndDrop = 'dragAndDrop',
+	WriteAnswer = 'writeAnswer',
+	ChooseAnswer = 'chooseAnswer'
+}
 
 export type TaskCourseType = string
 export type TaskTeacher = string
@@ -68,31 +72,22 @@ export interface Task extends TaskBase {
 	microtasksQuantity: number
 	status: TaskStatus
 	privacy: TaskPrivacy
-	type: TaskType
 	communication: TaskCommunication
 	dateAndTime: TaskDateAndTime
 	result?: TaskResult
 }
 
-export interface DashboardTaskProps extends TaskBase {
+export interface TaskProps
+	extends TaskBase,
+		TaskDateAndTime,
+		TaskCommunication {
 	id: string
 	difficulty: TaskDifficulty
-	TaskCourse?: TaskCourseType
+	course?: TaskCourseType
 	microtasksQuantity: number
 	completedMicrotasks?: number
 	deadline?: Deadline
-}
-
-export interface TaskPageProps
-	extends DashboardTaskProps,
-		TaskDateAndTime,
-		TaskCommunication {
-	taskResult?: TaskResult
-	taskStatus: TaskStatus
-	taskRating: TaskRating
-}
-
-export interface TaskPopoverProps extends DashboardTaskProps {
-	id: string
-	taskStatus: TaskStatus
+	result?: TaskResult
+	status?: TaskStatus
+	rating?: TaskRating
 }

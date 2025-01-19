@@ -32,7 +32,7 @@ export default async function CurrentTaskPage({
 
 	if (!task) {
 		return (
-			<div className='p-layout flex justify-center items-center'>
+			<div className='p-layout  flex justify-center items-center page-h'>
 				<div className='flex flex-col items-center'>
 					<Image
 						className='w-48'
@@ -47,5 +47,9 @@ export default async function CurrentTaskPage({
 		)
 	}
 
-	return <CurrentTask task={task} />
+	return (
+		<div className='page-h'>
+			<CurrentTask task={task} />
+		</div>
+	)
 }

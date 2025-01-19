@@ -1,6 +1,6 @@
 import { cn } from '@/shared/lib/css'
 import { PropsWithClassName } from '@/shared/types/props.types'
-import { Loader2 } from 'lucide-react'
+import { LoaderIcon } from 'lucide-react'
 import React from 'react'
 
 export const Loader = <T extends PropsWithClassName & { size?: number }>({
@@ -9,7 +9,7 @@ export const Loader = <T extends PropsWithClassName & { size?: number }>({
 }: T) => {
 	return (
 		<div>
-			<Loader2 size={size} className={cn(className, 'animate-spin')} />
+			<LoaderIcon size={size} className={cn(className, 'animate-spin')} />
 		</div>
 	)
 }

@@ -1,13 +1,15 @@
+import { Course } from '../types/course.types'
 import {
-	TaskPageProps,
 	TaskDifficulty,
 	TaskStatus,
-	TaskResult
+	TaskResult,
+	TaskType,
+	TaskProps
 	// TaskPrivacy,
 	// TaskType
 } from '../types/task.types'
 
-export const dashboardTasks: TaskPageProps[] = Array.from(
+export const dashboardTasks: TaskProps[] = Array.from(
 	{ length: 30 },
 	(_, index) => {
 		const difficulties = [
@@ -15,6 +17,13 @@ export const dashboardTasks: TaskPageProps[] = Array.from(
 			TaskDifficulty.Medium,
 			TaskDifficulty.Hard
 		]
+		const types = [
+			TaskType.ChooseAnswer,
+			TaskType.Code,
+			TaskType.DragAndDrop,
+			TaskType.WriteAnswer
+		]
+
 		const statuses = [
 			TaskStatus.New,
 			TaskStatus.Closed,
@@ -65,6 +74,7 @@ export const dashboardTasks: TaskPageProps[] = Array.from(
 			description: `Описание задачи номер ${index}: выполните указанное действие для достижения результата.`,
 			completedMicrotasks: 5,
 			difficulty: difficulties[index % difficulties.length],
+			type: types[index % types.length],
 			TaskCourse: courses[index % courses.length],
 			microtasksQuantity: 10,
 			deadline: '2025-01-30T00:00:00.000Z',
@@ -81,3 +91,35 @@ export const dashboardTasks: TaskPageProps[] = Array.from(
 		}
 	}
 )
+export const courses: Course[] = [
+	{ courseId: 1, title: 'Introduction to Programming' },
+	{ courseId: 2, title: 'Advanced JavaScript' },
+	{ courseId: 3, title: 'Web Development Basics' },
+	{ courseId: 4, title: 'React for Beginners' },
+	{ courseId: 5, title: 'Mastering TypeScript' },
+	{ courseId: 6, title: 'Database Design Fundamentals' },
+	{ courseId: 7, title: 'Node.js Essentials' },
+	{ courseId: 8, title: 'Python for Data Science' },
+	{ courseId: 9, title: 'Machine Learning 101' },
+	{ courseId: 10, title: 'Artificial Intelligence Basics' },
+	{ courseId: 11, title: 'Mobile App Development with Flutter' },
+	{ courseId: 12, title: 'Game Development with Unity' },
+	{ courseId: 13, title: 'Cloud Computing Essentials' },
+	{ courseId: 14, title: 'DevOps Practices and Tools' },
+	{ courseId: 15, title: 'Cybersecurity Fundamentals' },
+	{ courseId: 16, title: 'UI/UX Design Principles' },
+	{ courseId: 17, title: 'Data Structures and Algorithms' },
+	{ courseId: 18, title: 'Big Data Analytics' },
+	{ courseId: 19, title: 'Blockchain Technology Overview' },
+	{ courseId: 20, title: 'Digital Marketing Strategies' },
+	{ courseId: 21, title: 'SEO Optimization Techniques' },
+	{ courseId: 22, title: 'Content Creation for Social Media' },
+	{ courseId: 23, title: 'Project Management Basics' },
+	{ courseId: 24, title: 'Agile Methodologies' },
+	{ courseId: 25, title: 'Introduction to Robotics' },
+	{ courseId: 26, title: '3D Modeling with Blender' },
+	{ courseId: 27, title: 'Photography and Editing Basics' },
+	{ courseId: 28, title: 'Music Production Essentials' },
+	{ courseId: 29, title: 'Video Editing with Premiere Pro' },
+	{ courseId: 30, title: 'Public Speaking and Presentation Skills' }
+]

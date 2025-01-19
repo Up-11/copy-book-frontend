@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 export default function TasksPage() {
 	return (
-		<div className='p-layout flex justify-center items-center'>
+		<div className='p-layout flex justify-center items-center page-h'>
 			<div className='flex flex-col items-center'>
 				<Image
 					className='w-48'

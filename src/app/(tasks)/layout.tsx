@@ -1,6 +1,6 @@
 // import { DashboardFooter } from '@/widgets/footers'
+import { StudentSidebar } from '@/common/task-and-course'
 import { RootHeader } from '@/widgets/headers/ui/root-header'
-import { UserTasksSidebar } from '@/widgets/task'
 
 export default function DashboardLayout({
 	children
@@ -10,10 +10,9 @@ export default function DashboardLayout({
 	return (
 		<div>
 			<RootHeader />
-
 			<div className='root-page-w grid grid-cols-[350px,1fr] mt-3'>
-				<UserTasksSidebar />
-				{children}
+				<StudentSidebar />
+				<div className='h-full'>{children}</div>
 			</div>
 			{/* <DashboardFooter /> */}
 		</div>

@@ -1,4 +1,4 @@
-import { DashboardTaskProps } from '../../../shared/types/task.types'
+import { TaskProps } from '../../../shared/types/task.types'
 import { cn } from '@/shared/lib/css'
 import { getPercentFromNumber } from '@/shared/lib/utils'
 import { PropsWithClassName } from '@/shared/types/props.types'
@@ -9,7 +9,7 @@ import React from 'react'
 
 export const TaskProgress: React.FC<
 	PropsWithClassName & {
-		item: Pick<DashboardTaskProps, 'completedMicrotasks' | 'microtasksQuantity'>
+		item: Pick<TaskProps, 'completedMicrotasks' | 'microtasksQuantity'>
 	}
 > = ({ item, className }) => {
 	const percentOfCompletion = getPercentFromNumber(

@@ -1,4 +1,4 @@
-import { TaskDifficulty, TaskStatus } from '../types/task.types'
+import { TaskDifficulty, TaskStatus, TaskType } from '../types/task.types'
 import { UserRole } from '@/shared/types/user.types'
 
 export const getBadgeByUserRole = (role: UserRole) => {
@@ -16,6 +16,30 @@ export const getBadgeByUserRole = (role: UserRole) => {
 
 	return roleBadgeMap.get(role) ?? { text: '', classNames: '' }
 }
+
+export const getBadgeByTaskType = (type: TaskType) => {
+	const taskBadgeMap = new Map<TaskType, { text: string; classNames: string }>([
+		[
+			TaskType.ChooseAnswer,
+			{ text: 'Выбор ответа', classNames: 'border-sky-200 bg-sky-100' }
+		],
+		[
+			TaskType.Code,
+			{ text: 'Код', classNames: 'border-violet-200 bg-violet-100' }
+		],
+		[
+			TaskType.DragAndDrop,
+			{ text: 'Перетаскивание', classNames: 'border-red-200 bg-red-100' }
+		],
+		[
+			TaskType.WriteAnswer,
+			{ text: 'Запись ответа', classNames: 'border-red-200 bg-red-100' }
+		]
+	])
+
+	return taskBadgeMap.get(type) ?? { text: '', classNames: '' }
+}
+
 export const getBadgeByTaskDifficulty = (diff: TaskDifficulty) => {
 	const taskBadgeMap = new Map<
 		TaskDifficulty,

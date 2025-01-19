@@ -36,7 +36,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 					<motion.div
 						ref={searchBarRef}
 						initial={{ width: 50 }}
-						animate={{ width: 200 }}
+						animate={{ width: 250 }}
 						exit={{ width: 0 }}
 						transition={{ duration: 0.2, ease: 'easeInOut' }}
 						className='flex items-center gap-1 bg-slate-100 p-2 rounded-lg z-10 absolute right-0 overflow-hidden'
@@ -57,7 +57,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 
 									<Input
 										ref={inputRef}
-										className='rounded-sm w-40 p-1 h-5 border-none shadow-none outline-none focus-visible:ring-0'
+										className='rounded-sm w-44 p-1 h-5 border-none shadow-none outline-none focus-visible:ring-0'
 										placeholder='Поиск'
 										value={value}
 										onChange={e => handleChange(e)}

@@ -4,7 +4,7 @@ import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
 import { getTaskStatus } from '@/shared/lib/map'
-import { TaskPageProps } from '@/shared/types/task.types'
+import { TaskProps } from '@/shared/types/task.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'
 import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
@@ -14,10 +14,10 @@ import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-export const CurrentTask: React.FC<{ task: TaskPageProps }> = ({ task }) => {
+export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 	//TODO: Сделать отдельный компонент для отображения такого блоков
 	return (
-		<div className='p-layout flex flex-col'>
+		<div className='p-layout flex flex-col h-full'>
 			<div className='flex justify-between items-center'>
 				<Title size='large'>{task.title}</Title>
 				<TaskDiffBadge diff={task.difficulty} className='text-xl' />
@@ -32,7 +32,7 @@ export const CurrentTask: React.FC<{ task: TaskPageProps }> = ({ task }) => {
 			</div>
 			<section className='grid grid-rows-[1fr_auto] grid-cols-[300px_1fr_1fr] mt-4 gap-3'>
 				<WithCondition
-					condition={!!task.TaskCourse}
+					condition={!!task.course}
 					className='bg-indigo-100 p-layout rounded-lg '
 					render={
 						<div className='group'>
@@ -45,7 +45,7 @@ export const CurrentTask: React.FC<{ task: TaskPageProps }> = ({ task }) => {
 									<ArrowUpRight />
 								</UiIcon>
 							</Link>
-							<Title className='cursor-pointer'>{task.TaskCourse}</Title>
+							<Title className='cursor-pointer'>{task.course}</Title>
 						</div>
 					}
 				/>
@@ -61,11 +61,11 @@ export const CurrentTask: React.FC<{ task: TaskPageProps }> = ({ task }) => {
 				/>
 				<WithCondition
 					className='bg-indigo-100 p-layout rounded-lg'
-					condition={!!task.taskStatus}
+					condition={!!task.status}
 					render={
 						<div>
 							Статус:
-							<Title>{getTaskStatus(task.taskStatus)}</Title>
+							<Title>{getTaskStatus(task.status!)}</Title>
 						</div>
 					}
 				/>
@@ -111,12 +111,12 @@ export const CurrentTask: React.FC<{ task: TaskPageProps }> = ({ task }) => {
 					}
 				/>
 				<WithCondition
-					condition={!!task.taskRating}
+					condition={!!task.rating}
 					className='bg-indigo-100  gap-1 p-layout rounded-lg  col-span-1 '
 					render={
 						<div>
 							Рейтинг:
-							<Title>{task.taskRating}</Title>
+							<Title>{task.rating}</Title>
 						</div>
 					}
 				/>
@@ -124,10 +124,10 @@ export const CurrentTask: React.FC<{ task: TaskPageProps }> = ({ task }) => {
 			<section
 				className={cn(
 					' flex mt-auto gap-3  ',
-					!task.TaskCourse ? ' justify-between' : 'justify-end'
+					!task.course ? ' justify-between' : 'justify-end'
 				)}
 			>
-				{!task.TaskCourse && <Button variant={'outline'}>Удалить</Button>}
+				{!task.course && <Button variant={'outline'}>Удалить</Button>}
 				<Button>
 					{task.completedMicrotasks != 0 ? 'Продолжить' : 'Выполнить'}
 				</Button>

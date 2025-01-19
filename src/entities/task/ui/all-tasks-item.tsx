@@ -1,7 +1,7 @@
 import { TaskPopover } from './task-popover'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
-import { TaskPageProps, TaskStatus } from '@/shared/types/task.types'
+import { TaskProps, TaskStatus } from '@/shared/types/task.types'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
@@ -17,7 +17,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export const AllTasksItem: React.FC<{
-	item: TaskPageProps
+	item: TaskProps
 	isGrid: boolean
 }> = ({ item, isGrid }) => {
 	const listElement = () => {
@@ -27,6 +27,19 @@ export const AllTasksItem: React.FC<{
 					<div className='flex gap-2'>
 						<Title>{item.title}</Title>
 						<TaskDiffBadge diff={item.difficulty} />
+						{item.status !== TaskStatus.NotStarted && (
+							<UiTooltip
+								content='Открыть'
+								className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+							>
+								<Link
+									href={routes.tasks.currentUserTask(item.id)}
+									className='p-1 hover:bg-secondary rounded-md'
+								>
+									<ArrowUpRight size={20} />
+								</Link>
+							</UiTooltip>
+						)}
 					</div>
 					<Text size='small' color='gray'>
 						{item.description}
@@ -48,7 +61,7 @@ export const AllTasksItem: React.FC<{
 								<Bookmark
 									size={20}
 									className={cn(
-										item.taskStatus !== TaskStatus.NotStarted &&
+										item.status !== TaskStatus.NotStarted &&
 											'fill-primary border-primary'
 									)}
 								/>
@@ -101,7 +114,7 @@ export const AllTasksItem: React.FC<{
 								<Bookmark
 									size={20}
 									className={cn(
-										item.taskStatus !== TaskStatus.NotStarted &&
+										item.status !== TaskStatus.NotStarted &&
 											'fill-primary border-primary'
 									)}
 								/>
@@ -119,7 +132,7 @@ export const AllTasksItem: React.FC<{
 								</div>
 							</TaskPopover>
 						</UiTooltip>
-						{item.taskStatus !== TaskStatus.NotStarted && (
+						{item.status !== TaskStatus.NotStarted && (
 							<UiTooltip
 								content='Открыть'
 								className='hover:bg-secondary rounded-md transition-colors cursor-pointer'

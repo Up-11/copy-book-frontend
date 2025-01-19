@@ -5,7 +5,7 @@ import { TaskProgress } from './task-progress'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { PropsWithClassName } from '@/shared/types/props.types'
-import { TaskPageProps } from '@/shared/types/task.types'
+import { TaskProps } from '@/shared/types/task.types'
 import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
 import Text from '@/shared/ui/view/text'
@@ -14,7 +14,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export const DashboardTask: React.FC<
-	{ item: TaskPageProps } & PropsWithClassName
+	{ item: TaskProps } & PropsWithClassName
 > = ({ className, item }) => {
 	return (
 		<div
@@ -38,7 +38,7 @@ export const DashboardTask: React.FC<
 			</div>
 			<TaskProgress item={item} />
 			<TaskDeadline deadline={item.deadline!} />
-			<TaskCourse taskCourse={item.TaskCourse!} />
+			<TaskCourse taskCourse={item.course!} />
 			<div className='flex justify-between mt-auto'>
 				<TaskPopover item={item} isDashboard>
 					<Button variant='default'>Подробнее</Button>
