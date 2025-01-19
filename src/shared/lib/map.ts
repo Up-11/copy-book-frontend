@@ -74,6 +74,7 @@ export const getTaskStatus = (status: TaskStatus) => {
 		[TaskStatus.Active, 'Активно'],
 		[TaskStatus.Closed, 'Завершено'],
 		[TaskStatus.Pending, 'В работе'],
+		[TaskStatus.NotStarted, 'Не начато'],
 		[TaskStatus.New, 'Не начато']
 	])
 	return taskStatusMap.get(status) ?? ''

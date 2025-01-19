@@ -1,25 +1,26 @@
 import { create } from 'zustand'
 
-interface Filters {
+export interface Filters {
 	difficulty: string[]
 	type: string[]
 	status: string[]
 	course: string[]
-	sort: string | null
+	sort: string | undefined
 }
 
 interface IFilterStore {
 	filters: Filters
 	updateFilter: (key: keyof Filters, value: string) => void
 	clear: () => void
+	updateAll: (valuse: Filters) => void
 }
 
-const initialFilters: Filters = {
+export const initialFilters: Filters = {
 	difficulty: [],
 	type: [],
 	status: [],
 	course: [],
-	sort: null
+	sort: undefined
 }
 
 export const useFilterStore = create<IFilterStore>(set => ({
@@ -42,9 +43,17 @@ export const useFilterStore = create<IFilterStore>(set => ({
 			return {
 				filters: {
 					...state.filters,
-					[key]: state.filters.sort === value ? null : value
+					[key]: state.filters.sort === value ? undefined : value
 				}
 			}
 		}),
-	clear: () => set({ filters: initialFilters })
+	clear: () => set({ filters: initialFilters }),
+	updateAll: (values: Filters) => {
+		set(state => ({
+			filters: {
+				...state.filters,
+				...values
+			}
+		}))
+	}
 }))

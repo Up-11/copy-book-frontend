@@ -1,14 +1,13 @@
 'use client'
 
-import { SortPopover } from '../../../features/filter/ui/sort-popover'
 import { ISidebar } from '../types'
 import { SidebarList } from './sidebar-list'
 import { SearchBar } from '@/entities/search/ui/searchbar'
+import { TaskFilter } from '@/features/filter'
 import { Course } from '@/shared/types/course.types'
 import { TaskProps } from '@/shared/types/task.types'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/view/tabs'
 import Title from '@/shared/ui/view/title'
-import { LucideFileDiff, ArrowUpAZ, ClockArrowDown } from 'lucide-react'
 import { motion, AnimatePresence, Variants } from 'motion/react'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -59,6 +58,7 @@ export const UserSidebar = <T extends TaskProps[] | Course[]>({
 				<Link href={mainHref}>
 					<Title>{mainTitle}</Title>
 				</Link>
+				<TaskFilter />
 				{/* <SortPopover items={items} onItemClick={() => console.log(123)} /> */}
 			</div>
 			<div className='ml-2 my-2 flex items-center justify-end'>

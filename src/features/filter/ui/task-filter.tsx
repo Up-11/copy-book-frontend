@@ -7,7 +7,8 @@ import {
 	statusFilter,
 	typeFilter
 } from '../filter.data'
-import { useFilterStore } from '../store/filter.store'
+import { useFilters } from '../model/use-filters'
+import { useQueryFilters } from '../model/use-query-filters'
 import { FilterGroup } from './filter-group'
 import { SwitchItem } from './switch-item'
 import { isObjectEmpty } from '@/shared/lib/utils'
@@ -20,19 +21,18 @@ import { Button } from '@/shared/ui/other/button'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import { ListFilterIcon } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const TaskFilter: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
-	const filters = useFilterStore(state => state.filters)
-	const updateFilter = useFilterStore(state => state.updateFilter)
-	const clear = useFilterStore(state => state.clear)
-	console.log(filters)
+	const { clear, filters, updateAll, handleCheckboxChange } = useFilters()
 
-	const handleCheckboxChange =
-		(key: keyof typeof filters) => (value: string) => {
-			updateFilter(key, value)
-		}
+	const filtersFromUrl = useQueryFilters()
+
+	useEffect(() => {
+		updateAll(filtersFromUrl)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<Popover onOpenChange={isOpen => setIsOpen(isOpen)} open={isOpen}>
