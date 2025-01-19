@@ -3,6 +3,7 @@ import { DraftPopover } from './draft-popover'
 import { cn } from '@/shared/lib/css'
 import { PropsWithClassName } from '@/shared/types/props.types'
 import { AccentColorBlock } from '@/shared/ui/custom/accent-color-item'
+import { Button } from '@/shared/ui/other/button'
 import Text from '@/shared/ui/view/text'
 import { ArrowDownRightFromSquare, EllipsisVertical } from 'lucide-react'
 import React from 'react'
@@ -80,10 +81,10 @@ export const DraftItem: React.FC<
 					</div>
 				</AccentColorBlock>
 			</div>
-			<div className='p-2 hover:bg-secondary justify-between flex gap-2 w-full mt-auto content-end rounded-md transition-colors cursor-pointer'>
+			<Button className='w-full'>
 				Открыть черновик
 				<ArrowDownRightFromSquare />
-			</div>
+			</Button>
 			<div>
 				<p className='text-xs pl-2 '>last update: </p>
 				<p className='text-xs pl-2 '>Создано: </p>

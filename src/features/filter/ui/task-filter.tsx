@@ -8,7 +8,6 @@ import {
 	typeFilter
 } from '../filter.data'
 import { useFilters } from '../model/use-filters'
-import { useQueryFilters } from '../model/use-query-filters'
 import { FilterGroup } from './filter-group'
 import { SwitchItem } from './switch-item'
 import { isObjectEmpty } from '@/shared/lib/utils'
@@ -25,9 +24,8 @@ import React, { useEffect, useState } from 'react'
 
 export const TaskFilter: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
-	const { clear, filters, updateAll, handleCheckboxChange } = useFilters()
-
-	const filtersFromUrl = useQueryFilters()
+	const { clear, filters, updateAll, handleCheckboxChange, filtersFromUrl } =
+		useFilters()
 
 	useEffect(() => {
 		updateAll(filtersFromUrl)
@@ -39,7 +37,10 @@ export const TaskFilter: React.FC = () => {
 			<PopoverTrigger className='text-sm text-gray-500 font-semibold hover:text-primary flex gap-1 items-center'>
 				Фильтры <ListFilterIcon size={18} />
 			</PopoverTrigger>
-			<PopoverContent align='end' className='w-[1000px] p-layout flex flex-col'>
+			<PopoverContent
+				align='end'
+				className='w-[1000px] p-layout flex flex-col ml-20'
+			>
 				<Title className='font-bold' size='medium'>
 					Фильтры
 				</Title>
@@ -53,6 +54,7 @@ export const TaskFilter: React.FC = () => {
 							<div className=' flex flex-col gap-2'>
 								{sortFilter.map(item => (
 									<SwitchItem
+										className='text-sm font-normal'
 										key={item.value}
 										onClick={() => handleCheckboxChange('sort')(item.value)}
 										icon={item.icon}

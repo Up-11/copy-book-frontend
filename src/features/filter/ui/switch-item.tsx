@@ -1,6 +1,5 @@
 import { cn } from '@/shared/lib/css'
 import { PropsWithClassName } from '@/shared/types/props.types'
-import Text from '@/shared/ui/view/text'
 import { Check } from 'lucide-react'
 
 interface SwitchItemProps extends PropsWithClassName {
@@ -28,7 +27,14 @@ export const SwitchItem: React.FC<SwitchItemProps> = ({
 		>
 			<div className='flex justify-start gap-2 items-center'>
 				{icon}
-				<Text size='extraSmall'>{children}</Text>
+				<p
+					className={cn(
+						'	leading-5 cursor-pointer pl-1.5  items-center break-words !line-clamp-1  inline-flex text-xs',
+						className
+					)}
+				>
+					{children}
+				</p>
 			</div>
 			{isActive && <Check size={16} className='self-end' />}
 		</div>

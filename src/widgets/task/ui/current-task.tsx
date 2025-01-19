@@ -1,3 +1,6 @@
+'use client'
+
+import { useQuery } from '@/common/query'
 import { TaskProgress } from '@/entities/task/ui/task-progress'
 import { routes } from '@/shared/config/routes'
 import { WithCondition } from '@/shared/lib/components/with-condition'
@@ -16,6 +19,8 @@ import React from 'react'
 
 export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 	//TODO: Сделать отдельный компонент для отображения такого блоков
+	useQuery()
+	//TODO: Подумать как сделать нормально компонент Сделать компонент микротасков и в нем инвочить функцию
 	return (
 		<div className='p-layout flex flex-col h-full'>
 			<div className='flex justify-between items-center'>

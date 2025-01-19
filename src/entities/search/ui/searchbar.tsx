@@ -4,14 +4,16 @@ import { UiTooltip } from '../../../shared/ui/custom/ui-tooltip'
 import { ClearButton } from '../../../shared/ui/forms/clear-button'
 import { Input } from '../../../shared/ui/input/input'
 import { useSearchBarVisual } from '../model/use-search-bar-visual'
-import useDebounce from '@/shared/lib/hooks/use-debounce'
+import { useQuery, useQueryStore } from '@/common/query'
 import { Search } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDebounceCallback } from 'usehooks-ts'
 
 export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 	tooltipText = 'Поиск'
 }) => {
+	const { getQueryValue } = useQuery()
 	const [value, setValue] = useState<string>('')
 	const {
 		inputRef,
@@ -21,12 +23,33 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 		isAnimationComplete,
 		setIsAnimationComplete
 	} = useSearchBarVisual()
+	const setQuery = useQueryStore(state => state.updateQuery)
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const debouncedValue = useDebounce(value, 500)
+	useEffect(() => {
+		setQuery({ search: getQueryValue('search', '') })
+		setValue(getQueryValue('search', '') as string)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	const updateQueryDebounced = useDebounceCallback(
+		(query: string) => {
+			setQuery({ search: query })
+		},
+		500,
+		{ trailing: true }
+	)
+
+	const handleInputChange = (newValue: string) => {
+		setValue(newValue)
+		updateQueryDebounced(newValue)
+	}
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setValue(event.target.value)
+		handleInputChange(event.target.value)
+	}
+
+	const clearInput = () => {
+		handleInputChange('')
 	}
 
 	return (
@@ -72,7 +95,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 										{value && (
 											<ClearButton
 												className='bg-transparent hover:bg-transparent hover:scale-105 hover:text-zinc-950'
-												onClick={() => setValue('')}
+												onClick={clearInput}
 											/>
 										)}
 									</motion.div>

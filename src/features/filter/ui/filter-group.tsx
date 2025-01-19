@@ -68,7 +68,7 @@ export const FilterGroup: React.FC<Props> = ({
 				<Button
 					variant={'outline'}
 					size={'sm'}
-					className='self-end mt-auto !text-xs px-1.5 h-7'
+					className='self-end  !text-xs px-1.5 h-7 border-none !text-indigo-700 font-bold shadow-none'
 					onClick={() => setShowAll(!showAll)}
 				>
 					{showAll ? (

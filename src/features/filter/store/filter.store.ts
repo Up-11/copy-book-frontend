@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 
 export interface Filters {
-	difficulty: string[]
-	type: string[]
-	status: string[]
-	course: string[]
-	sort: string | undefined
+	difficulty?: string[]
+	type?: string[]
+	status?: string[]
+	course?: string[]
+	sort?: string
 }
 
 interface IFilterStore {
