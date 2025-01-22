@@ -8,14 +8,13 @@ import Title from '@/shared/ui/view/title'
 import Link from 'next/link'
 import React from 'react'
 
-export const SidebarTask: React.FC<
-	Pick<
+export const SidebarTask: React.FC<{
+	isActive?: boolean
+	item: Pick<
 		TaskProps,
 		'title' | 'difficulty' | 'description' | 'deadline' | 'id'
-	> & {
-		isActive?: boolean
-	}
-> = ({ title, difficulty, description, deadline, id, isActive }) => {
+	>
+}> = ({ item: { title, difficulty, description, deadline, id }, isActive }) => {
 	return (
 		<Link
 			href={routes.tasks.currentUserTask(id)}

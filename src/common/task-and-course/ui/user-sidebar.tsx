@@ -3,7 +3,7 @@
 import { ISidebar } from '../types'
 import { SidebarList } from './sidebar-list'
 import { SearchBar } from '@/entities/search/ui/searchbar'
-import { TaskFilter } from '@/features/filter'
+import { Filters } from '@/features/filter'
 import { Course } from '@/shared/types/course.types'
 import { TaskProps } from '@/shared/types/task.types'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/view/tabs'
@@ -54,7 +54,7 @@ export const UserSidebar = <T extends TaskProps[] | Course[]>({
 					<Link href={mainHref}>
 						<Title>{mainTitle}</Title>
 					</Link>
-					<TaskFilter isTask={isTask!} isSidebar />
+					<Filters isTask={isTask!} isSidebar />
 				</div>
 				<div className='ml-2 my-2 flex items-center justify-end'>
 					<SearchBar />

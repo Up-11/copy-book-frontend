@@ -1,7 +1,7 @@
 import './slider.styles.css'
 import { cn } from '@/shared/lib/css'
 import { getBadgeByTaskType, getStatus } from '@/shared/lib/map'
-import { CourseItem } from '@/shared/types/course.types'
+import { CourseChapter } from '@/shared/types/course.types'
 import { MicroTasks, TaskStatus } from '@/shared/types/task.types'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
@@ -15,9 +15,16 @@ interface SliderProps<T> {
 	items: T[]
 }
 
-export const Slider = <T extends CourseItem | MicroTasks>({
+export const Slider = <T extends CourseChapter | MicroTasks>({
 	items
 }: SliderProps<T>) => {
+	const isMicroTaskList = (
+		items: (CourseChapter | MicroTasks)[]
+	): items is MicroTasks[] => {
+		return items.some(item => (item as MicroTasks).type !== undefined)
+	}
+	const isMicroTask = isMicroTaskList(items)
+
 	return (
 		<div className='relative group'>
 			<Swiper
@@ -46,12 +53,19 @@ export const Slider = <T extends CourseItem | MicroTasks>({
 									{getStatus(item.status!)}
 								</Text>
 							</div>
-							<Text size='extraSmall'> {item.description}</Text>
-							<div className='flex justify-end mt-auto'>
-								<Text size='extraSmall' className='font-bold'>
-									{getBadgeByTaskType(item.type!).text}
-								</Text>
-							</div>
+							{isMicroTask && (item as MicroTasks).description && (
+								<>
+									<Text size='extraSmall'>
+										{' '}
+										{(item as MicroTasks).description}
+									</Text>
+									<div className='flex justify-end mt-auto'>
+										<Text size='extraSmall' className='font-bold'>
+											{getBadgeByTaskType((item as MicroTasks).type!).text}
+										</Text>
+									</div>
+								</>
+							)}
 						</div>
 					</SwiperSlide>
 				))}

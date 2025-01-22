@@ -97,19 +97,29 @@ export const CurrentCourse: React.FC<{ course: Course }> = ({ course }) => {
 					}
 				/>
 				<WithCondition
-					condition={!!course.code}
+					condition={course.progress.itemsQuantity > 0}
 					className='bg-indigo-100  gap-1 p-layout rounded-lg  col-span-1 '
 					render={
 						<div>
 							Количество заданий:
-							<Title>{course.items.length}</Title>
+							<Title>{course.progress.itemsQuantity}</Title>
+						</div>
+					}
+				/>
+				<WithCondition
+					condition={course.progress.chaptersQuantity > 0}
+					className='bg-indigo-100  gap-1 p-layout rounded-lg  col-span-1 '
+					render={
+						<div>
+							Количество секций:
+							<Title>{course.progress.chaptersQuantity}</Title>
 						</div>
 					}
 				/>
 			</section>
 			<section className='mt-auto flex flex-col gap-1  '>
-				<Title>Задания</Title>
-				<Slider items={course.items} />
+				<Title>Секции</Title>
+				<Slider items={course.chapters} />
 			</section>
 			<section
 				className={cn(
@@ -120,7 +130,9 @@ export const CurrentCourse: React.FC<{ course: Course }> = ({ course }) => {
 				{!course.metadata.isByCode && (
 					<Button variant={'outline'}>Удалить</Button>
 				)}
-				<Button>{course.items.length != 0 ? 'Продолжить' : 'Выполнить'}</Button>
+				<Button>
+					{course.chapters.length != 0 ? 'Продолжить' : 'Выполнить'}
+				</Button>
 			</section>
 		</div>
 	)

@@ -4,6 +4,7 @@ import { DraftItem } from '@/entities/draft'
 import { DRAFT_MOCK } from '@/entities/draft/mock.data'
 import { DashboardTask } from '@/entities/task'
 import { routes } from '@/shared/config/routes'
+import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { courses, dashboardTasks } from '@/shared/mock/mock'
 import { Button } from '@/shared/ui/other/button'
@@ -32,11 +33,26 @@ export const StudentDashboard: React.FC = () => {
 				linkText='Все задания'
 				link={routes.tasks.student}
 			>
-				<div className='grid grid-cols-4 h-[450px] gap-x-5'>
-					{dashboardTasks.slice(0, 4).map(task => (
-						<DashboardTask key={task.id} className='h-full' item={task} />
-					))}
-				</div>
+				<WithCondition
+					condition={!!dashboardTasks.length}
+					render={
+						<div className='grid grid-cols-4 h-[450px] gap-x-5'>
+							{dashboardTasks.slice(0, 4).map(task => (
+								<DashboardTask key={task.id} className='h-full' item={task} />
+							))}
+						</div>
+					}
+					fallback={
+						<div className='w-full  bg-indigo-50 rounded-lg p-layout flex justify-between'>
+							<Title>
+								Добавьте хотя бы одну задачу, чтобы увидеть ее здесь
+							</Title>
+							<Link href={routes.tasks.main}>
+								<Button>Список всех заданий</Button>
+							</Link>
+						</div>
+					}
+				/>
 			</DashboardBlockPrimitive>
 			<div className='grid grid-cols-2 gap-x-5'>
 				<DashboardBlockPrimitive title='Песочница'>
@@ -58,44 +74,62 @@ export const StudentDashboard: React.FC = () => {
 						</div>
 					</div>
 				</DashboardBlockPrimitive>
-				<DashboardBlockPrimitive
-					title='Черновики'
-					linkText='Все черновики'
-					link={routes.code.drafts}
-				>
-					<div className='flex flex-col gap-3 '>
-						{DRAFT_MOCK.slice(0, 3).map(draft => (
-							<DraftItem
-								className='h-[100px]'
-								key={draft.id}
-								{...draft}
-								isGrid={false}
-								isDashboard
-							/>
-						))}
-					</div>
-				</DashboardBlockPrimitive>
+				<WithCondition
+					condition={DRAFT_MOCK.length > 0}
+					render={
+						<DashboardBlockPrimitive
+							title='Черновики'
+							linkText='Все черновики'
+							link={routes.code.drafts}
+						>
+							<div className='flex flex-col gap-3 '>
+								{DRAFT_MOCK.slice(0, 3).map(draft => (
+									<DraftItem
+										className='h-[100px]'
+										key={draft.id}
+										{...draft}
+										isGrid={false}
+										isDashboard
+									/>
+								))}
+							</div>
+						</DashboardBlockPrimitive>
+					}
+				/>
 			</div>
 			<DashboardBlockPrimitive
 				title='Курсы'
 				link={routes.course.student}
 				linkText='Все курсы'
 			>
-				<div className='grid grid-cols-2 gap-x-5 gap-3 '>
-					{dashboardcourses.map(course => (
-						<AllCoursesItem
-							className={cn(
-								!(dashboardcourses.length % 2 === 0)
-									? 'last:col-span-2'
-									: 'last:col-span-1'
-							)}
-							isDashboard
-							key={course.courseId}
-							item={course}
-							isGrid={false}
-						/>
-					))}
-				</div>
+				<WithCondition
+					condition={dashboardTasks.length > 0}
+					render={
+						<div className='grid grid-cols-2 gap-x-5 gap-3 '>
+							{dashboardcourses.map(course => (
+								<AllCoursesItem
+									className={cn(
+										!(dashboardcourses.length % 2 === 0)
+											? 'last:col-span-2'
+											: 'last:col-span-1'
+									)}
+									isDashboard
+									key={course.courseId}
+									item={course}
+									isGrid={false}
+								/>
+							))}
+						</div>
+					}
+					fallback={
+						<div className='w-full  bg-indigo-50 rounded-lg p-layout flex justify-between'>
+							<Title>Добавьте хотя бы один курс, чтобы увидеть его здесь</Title>
+							<Link href={routes.course.main}>
+								<Button>Список всех курсов</Button>
+							</Link>
+						</div>
+					}
+				/>
 			</DashboardBlockPrimitive>
 
 			<DashboardFooter />

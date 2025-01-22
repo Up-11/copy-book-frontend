@@ -42,13 +42,28 @@ export const CoursePopover: React.FC<
 				</Text>
 
 				<div className='grid grid-cols-2 gap-3'>
-					<div className='bg-indigo-200 col-span-2 flex gap-1 items-center   p-2 rounded-lg'>
-						<Text size='small'>Создатель: </Text>
-						<Text size='small' className='font-bold'>
-							{item.metadata.teacher}
-						</Text>
-					</div>
-					<div className='bg-indigo-200 col-span-1 flex gap-1 items-center   p-2 rounded-lg'>
+					{item.metadata.teacher && (
+						<div className='bg-indigo-200 col-span-2 flex gap-1 items-center   p-2 rounded-lg'>
+							<Text size='small'>Создатель: </Text>
+							<Text size='small' className='font-bold'>
+								{item.metadata.teacher}
+							</Text>
+						</div>
+					)}
+
+					<WithCondition
+						condition={!!item.progress.itemsQuantity}
+						className='bg-indigo-200 col-span-2 flex gap-1 items-center   p-2 rounded-lg'
+						render={
+							<>
+								<Text size='small'>Текущее задание: </Text>
+								<Text size='small' className='font-bold line-clamp-2'>
+									{item.progress.currentItem.title}
+								</Text>
+							</>
+						}
+					/>
+					<div className='bg-indigo-200 col-span-1  flex gap-1 items-center   p-2 rounded-lg'>
 						<Text size='extraSmall'>Заданий: </Text>
 						<Text size='extraSmall' className='font-bold'>
 							{item.progress.itemsQuantity}
@@ -59,9 +74,9 @@ export const CoursePopover: React.FC<
 						className='bg-indigo-200 col-span-1 flex gap-1 items-center   p-2 rounded-lg'
 						render={
 							<>
-								<Text size='extraSmall'>Текущее задание: </Text>
+								<Text size='extraSmall'>Секций: </Text>
 								<Text size='extraSmall' className='font-bold line-clamp-2'>
-									{item.progress.currentItem.title}
+									{item.progress.chaptersQuantity}
 								</Text>
 							</>
 						}

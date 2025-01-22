@@ -2,7 +2,7 @@ import { ISidebar } from '../types'
 import { UserSidebar } from './user-sidebar'
 import { routes } from '@/shared/config/routes'
 import { courses, dashboardTasks } from '@/shared/mock/mock'
-import { Course } from '@/shared/types/course.types'
+import { Course, CourseStatus } from '@/shared/types/course.types'
 import { TaskProps, TaskStatus } from '@/shared/types/task.types'
 import React from 'react'
 
@@ -35,12 +35,16 @@ export const StudentSidebar: React.FC<{ isTask: boolean }> = ({ isTask }) => {
 			{
 				value: 'active',
 				displayedName: 'Активные',
-				itemsList: courses.slice(0, 2)
+				itemsList: courses.filter(
+					course => course.status !== CourseStatus.Archived
+				)
 			},
 			{
 				value: 'archive',
 				displayedName: 'Архив',
-				itemsList: courses.slice(2, 4)
+				itemsList: courses.filter(
+					course => course.status === CourseStatus.Archived
+				)
 			}
 		]
 	}

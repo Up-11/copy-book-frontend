@@ -1,12 +1,15 @@
-import { Filters, initialFilters, useFilterStore } from '../store/filter.store'
+import { initialFilters, useFilterStore } from '../store/filter.store'
+import { Filters, InputFilterKeys } from '../types'
 import { useQueryManager, useQueryStore } from '@/common/query'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useDebounceCallback } from 'usehooks-ts'
 
 export const useFilters = () => {
 	const filters = useFilterStore(state => state.filters)
 	const updateFilter = useFilterStore(state => state.updateFilter)
 	const updateAll = useFilterStore(state => state.updateAll)
+	const updateFilterRating = useFilterStore(state => state.updateFilterRating)
 	const clear = useFilterStore(state => state.clear)
 	const setQuery = useQueryStore(state => state.updateQuery)
 	const router = useRouter()
@@ -16,6 +19,18 @@ export const useFilters = () => {
 		(key: keyof typeof filters) => (value: string) => {
 			updateFilter(key, value)
 		}
+
+	const debouncedUpdate = useDebounceCallback((ratings: number[]) => {
+		updateFilterRating(ratings)
+	}, 100)
+
+	const updateRating = (ratings: number[]) => {
+		debouncedUpdate(ratings)
+	}
+
+	const handleInputValue = (value: string, key: InputFilterKeys) => {
+		updateFilter(key, value)
+	}
 
 	useEffect(() => {
 		setQuery(filters)
@@ -28,7 +43,9 @@ export const useFilters = () => {
 		status: getQueryValue('status', initialFilters.status),
 		course: getQueryValue('course', initialFilters.course),
 		sort: getQueryValue('sort', initialFilters.sort),
-		ai_selected: getQueryValue('ai_selected', initialFilters.ai_selected)
+		aiCompilation: getQueryValue('aiCompilation', initialFilters.aiCompilation),
+		ratingFrom: getQueryValue('ratingFrom', initialFilters.ratingFrom),
+		ratingTo: getQueryValue('ratingTo', initialFilters.ratingTo)
 	}
 	useEffect(() => {
 		updateAll(filtersFromUrl)
@@ -41,6 +58,8 @@ export const useFilters = () => {
 		updateAll,
 		updateFilter,
 		clear,
-		router
+		router,
+		updateRating,
+		handleInputValue
 	}
 }

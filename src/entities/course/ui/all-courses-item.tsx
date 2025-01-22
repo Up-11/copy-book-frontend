@@ -129,12 +129,15 @@ export const AllCoursesItem: React.FC<
 					</Text>
 				</div>
 				<div className='flex flex-col gap-3 mt-auto'>
-					<div className='bg-indigo-200 flex gap-1 items-center  p-2 rounded-lg'>
-						<Text size='small'>Создатель: </Text>
-						<Text size='small' className='font-bold'>
-							{item.metadata.teacher}
-						</Text>
-					</div>
+					{item.metadata.teacher && (
+						<div className='bg-indigo-200 flex gap-1 items-center  p-2 rounded-lg'>
+							<Text size='small'>Создатель: </Text>
+							<Text size='small' className='font-bold'>
+								{item.metadata.teacher}
+							</Text>
+						</div>
+					)}
+
 					<div className='flex flex-col gap-2 mt-auto '>
 						<Button size='sm' className='w-full flex  self'>
 							Открыть <ArrowRightIcon />

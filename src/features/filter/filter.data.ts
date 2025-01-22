@@ -6,6 +6,7 @@ import {
 } from '@/shared/lib/map'
 import { createFilter } from '@/shared/lib/utils'
 import { courses } from '@/shared/mock/mock'
+import { CourseStatus } from '@/shared/types/course.types'
 import { TaskDifficulty, TaskStatus, TaskType } from '@/shared/types/task.types'
 
 export const difficultyFilter = createFilter(
@@ -28,6 +29,17 @@ export const taskStatusFilter = createFilter(
 	status => getStatus<TaskStatus>(status)
 )
 
+export const courseStatusFilter = createFilter(
+	[
+		CourseStatus.Active,
+		CourseStatus.Archived,
+		CourseStatus.Completed,
+		CourseStatus.InProgress,
+		CourseStatus.NotStarted
+	],
+	status => getStatus<CourseStatus>(status)
+)
+
 const courseTitle = courses.map(course => {
 	return course.title
 })
@@ -44,11 +56,11 @@ export const sortFilter: FilterType[] = [
 		value: 'name_desc'
 	},
 	{
-		text: 'По дате (Новые сначала)',
+		text: 'По дате (Более срочные)',
 		value: 'date_desc'
 	},
 	{
-		text: 'По дате (Старые сначала)',
+		text: 'По дате (Менее срочные)',
 		value: 'date_asc'
 	},
 	{
@@ -70,11 +82,19 @@ export const sortFilterCourse: FilterType[] = [
 		value: 'name_desc'
 	},
 	{
-		text: 'По дате (Новые сначала)',
-		value: 'date_desc'
+		text: 'По количеству заданий (Больше)',
+		value: 'tasks_desc'
 	},
 	{
-		text: 'По дате (Старые сначала)',
-		value: 'date_asc'
+		text: 'По количеству заданий (Меньше)',
+		value: 'tasks_asc'
+	},
+	{
+		text: 'По количеству студентов (Больше)',
+		value: 'students_quantity_desc'
+	},
+	{
+		text: 'По количеству студентов (Меньше)',
+		value: 'students_quantity_asc'
 	}
 ]

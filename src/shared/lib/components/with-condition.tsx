@@ -5,7 +5,7 @@ import React from 'react'
 
 export const WithCondition: React.FC<
 	PropsWithClassName & {
-		condition?: boolean
+		condition: boolean
 		render: React.ReactNode
 		fallback?: React.ReactNode
 		isLoading?: boolean

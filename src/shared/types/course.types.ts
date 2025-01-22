@@ -1,4 +1,4 @@
-import { Task, TaskType } from './task.types'
+import { Task, TaskStatus, TaskType } from './task.types'
 
 export enum CourseStatus {
 	NotStarted = 'not started',
@@ -46,20 +46,25 @@ export interface CourseProgress {
 	itemsCompleted: number
 	currentItem: CourseItem
 	itemsQuantity: number
+	chaptersQuantity: number
 }
 
 export interface CourseStatistics {
-	totalStudents: number
 	studentsNow: number
-	averageCompletionTime: string
 	averageRating: CourseRating
+}
+
+export type CourseChapter = {
+	chapterItems: CourseItem[]
+	title: string
+	status: TaskStatus
 }
 
 export interface Course {
 	courseId: string
 	title: string
 	description: string
-	items: CourseItem[]
+	chapters: CourseChapter[]
 	metadata: CourseMetadata
 	progress: CourseProgress
 	statistics: CourseStatistics

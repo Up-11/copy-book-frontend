@@ -1,23 +1,8 @@
+import { Filters, FilterStoreActions } from '../types'
 import { create } from 'zustand'
 
-export interface Filters {
-	difficulty?: string[]
-	type?: string[]
-	status?: string[]
-	course?: string[]
-	sort?: string
-	aiCompilation?: string
-}
-
-interface IFilterStore {
+interface IFilterStore extends FilterStoreActions {
 	filters: Filters
-	updateFilter: (
-		key: keyof Filters,
-		value: string,
-		resetIfMatch?: boolean
-	) => void
-	clear: () => void
-	updateAll: (valuse: Filters) => void
 }
 
 export const initialFilters: Filters = {
@@ -26,7 +11,9 @@ export const initialFilters: Filters = {
 	status: [],
 	course: [],
 	sort: undefined,
-	aiCompilation: undefined
+	aiCompilation: undefined,
+	ratingFrom: undefined,
+	ratingTo: undefined
 }
 
 export const useFilterStore = create<IFilterStore>(set => ({
@@ -67,6 +54,15 @@ export const useFilterStore = create<IFilterStore>(set => ({
 				}
 			}
 		}),
+	updateFilterRating: ratings =>
+		set(state => ({
+			filters: {
+				...state.filters,
+				aiCompilation: initialFilters.aiCompilation,
+				ratingFrom: ratings?.[0],
+				ratingTo: ratings?.[1]
+			}
+		})),
 	clear: () => set({ filters: initialFilters }),
 	updateAll: (values: Filters) => {
 		set(state => ({

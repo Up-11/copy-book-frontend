@@ -2,10 +2,13 @@
 
 import { SidebarCourse } from '@/entities/course'
 import { SidebarTask } from '@/entities/task'
+import { WithCondition } from '@/shared/lib/components/with-condition'
 import { useLastPathnameElement } from '@/shared/lib/hooks/use-last-pathname-element'
 import { Course } from '@/shared/types/course.types'
 import { TaskProps } from '@/shared/types/task.types'
 import { ScrollArea } from '@/shared/ui/other/scroll-area'
+import Text from '@/shared/ui/view/text'
+import Image from 'next/image'
 import React from 'react'
 
 export const SidebarList: React.FC<{
@@ -21,28 +24,41 @@ export const SidebarList: React.FC<{
 	return (
 		<ScrollArea>
 			<div className='screen-no-header flex flex-col gap-1'>
-				{isCourses
-					? items.map(item => (
-							<SidebarCourse
-								key={item.courseId}
-								courseId={item.courseId}
-								title={item.title}
-								description={item.description}
-								isActive={item.courseId === currentPage}
-								teacher={item.metadata.teacher}
+				<WithCondition
+					condition={items.length === 0}
+					render={
+						<div className='flex flex-col items-center justify-center'>
+							<Image
+								src={'/assets/empty.png'}
+								alt='Список пуст'
+								width={100}
+								height={100}
+								loading='lazy'
 							/>
-						))
-					: items.map(item => (
-							<SidebarTask
-								key={item.id}
-								id={item.id}
-								deadline={item.deadline}
-								description={item.description}
-								title={item.title}
-								difficulty={item.difficulty}
-								isActive={item.id === currentPage}
-							/>
-						))}
+							<Text size='small' color='gray'>
+								Список пуст
+							</Text>
+						</div>
+					}
+					fallback={
+						isCourses
+							? items.map(item => (
+									<SidebarCourse
+										key={item.courseId}
+										isActive={item.courseId === currentPage}
+										teacher={item.metadata.teacher}
+										item={item}
+									/>
+								))
+							: items.map(item => (
+									<SidebarTask
+										key={item.id}
+										item={item}
+										isActive={item.id === currentPage}
+									/>
+								))
+					}
+				/>
 			</div>
 		</ScrollArea>
 	)

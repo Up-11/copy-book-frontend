@@ -26,7 +26,7 @@ export const FilterGroup: React.FC<Props> = ({
 	onClickCheckbox,
 	selected,
 	name,
-	limit = 4,
+	limit = 3,
 	defaultItems
 }) => {
 	const [showAll, setShowAll] = React.useState(false)

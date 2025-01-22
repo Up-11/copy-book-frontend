@@ -2,12 +2,14 @@
 
 import { LayoutSwitch } from '@/entities/draft'
 import { SearchBar } from '@/entities/search'
-import { TaskFilter } from '@/features/filter'
+import { Filters } from '@/features/filter'
+import { WithCondition } from '@/shared/lib/components/with-condition'
 import { useLayout } from '@/shared/model/use-layout'
 import { Layout } from '@/shared/types/props.types'
 import { Loader } from '@/shared/ui/view/loader'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
+import Image from 'next/image'
 import React from 'react'
 
 export const PaginationPageLayout: React.FC<{
@@ -35,24 +37,43 @@ export const PaginationPageLayout: React.FC<{
 						activeLayout={layout}
 						setActiveLayout={setActiveLayout}
 					/>
-					{!isDraft && <TaskFilter isTask={isTask} />}
+					{!isDraft && <Filters isTask={isTask} />}
 				</div>
 			</section>
-			<section
-				className={
-					layout === Layout.GRID
-						? isTask
-							? 'grid grid-cols-5 gap-3'
-							: ' grid grid-cols-4 gap-5'
-						: 'flex flex-col gap-3'
+			<WithCondition
+				condition={!!items}
+				render={
+					<section
+						className={
+							layout === Layout.GRID
+								? isTask
+									? 'grid grid-cols-5 gap-3'
+									: ' grid grid-cols-4 gap-5'
+								: 'flex flex-col gap-3'
+						}
+					>
+						{React.Children.map(items, child =>
+							React.cloneElement(child as React.ReactElement, {
+								isGrid: layout === Layout.GRID
+							})
+						)}
+					</section>
 				}
-			>
-				{React.Children.map(items, child =>
-					React.cloneElement(child as React.ReactElement, {
-						isGrid: layout === Layout.GRID
-					})
-				)}
-			</section>
+				fallback={
+					<div className='flex flex-col items-center justify-center'>
+						<Image
+							src={'/assets/empty.png'}
+							alt='Список пуст'
+							width={200}
+							height={200}
+							loading='lazy'
+						/>
+						<Text size='extraLarge' color='gray'>
+							Тут пусто...
+						</Text>
+					</div>
+				}
+			/>
 		</>
 	)
 }
