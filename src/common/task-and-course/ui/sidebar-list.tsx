@@ -1,5 +1,6 @@
 'use client'
 
+import { SidebarCourse } from '@/entities/course'
 import { SidebarTask } from '@/entities/task'
 import { useLastPathnameElement } from '@/shared/lib/hooks/use-last-pathname-element'
 import { Course } from '@/shared/types/course.types'
@@ -21,7 +22,16 @@ export const SidebarList: React.FC<{
 		<ScrollArea>
 			<div className='screen-no-header flex flex-col gap-1'>
 				{isCourses
-					? items.map(item => <div key={item.courseId}> {item.title}</div>)
+					? items.map(item => (
+							<SidebarCourse
+								key={item.courseId}
+								courseId={item.courseId}
+								title={item.title}
+								description={item.description}
+								isActive={item.courseId === currentPage}
+								teacher={item.metadata.teacher}
+							/>
+						))
 					: items.map(item => (
 							<SidebarTask
 								key={item.id}

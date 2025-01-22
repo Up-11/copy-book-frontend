@@ -24,7 +24,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={` ${inter.variable} `}
+				className={` ${inter.variable}  `}
 				style={{ marginRight: '0px !important container' }}
 			>
 				{/* 	<div className='fixed left-0 top-0 z-[999] text-xs opacity-50'>

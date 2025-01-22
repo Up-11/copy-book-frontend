@@ -1,15 +1,16 @@
 import { Query, useQueryStore } from '../store/query.store'
 import { useRouter, useSearchParams } from 'next/navigation'
 import qs from 'qs'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { useIsomorphicLayoutEffect } from 'usehooks-ts'
 
-export const useQuery = () => {
+export const useQueryManager = () => {
 	const query = useQueryStore(state => state.query)
 	const router = useRouter()
 	const isMounted = useRef(false)
 	const searchParams = useSearchParams()
 
-	const getQueryValue = <T extends keyof Query>(
+	const getQueryValueFromParams = <T extends keyof Query>(
 		key: T,
 		defaultValue: Query[T]
 	): Query[T] => {
@@ -28,12 +29,12 @@ export const useQuery = () => {
 
 	const queriesArray = Object.keys(query)
 
-	useEffect(() => {
+	useIsomorphicLayoutEffect(() => {
 		if (isMounted.current) {
 			const queryString = qs.stringify(query, {
 				arrayFormat: 'comma',
 				sort: (a: string, b: string) => {
-					return queriesArray.indexOf(b) - queriesArray.indexOf(a)
+					return queriesArray.indexOf(a) - queriesArray.indexOf(b)
 				}
 			})
 			router.push(`?${queryString}`, { scroll: false })
@@ -42,5 +43,5 @@ export const useQuery = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query, router])
 
-	return { getQueryValue, query }
+	return { getQueryValue: getQueryValueFromParams }
 }

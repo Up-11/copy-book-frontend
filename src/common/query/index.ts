@@ -1,2 +1,2 @@
-export { useQuery } from './model/use-query'
+export { useQueryManager } from './model/use-query-manager'
 export { useQueryStore } from './store/query.store'

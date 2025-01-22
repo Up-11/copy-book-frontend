@@ -1,9 +1,11 @@
 import { DashboardBlockPrimitive } from './dashboard-block-primitive'
+import { AllCoursesItem } from '@/entities/course'
 import { DraftItem } from '@/entities/draft'
 import { DRAFT_MOCK } from '@/entities/draft/mock.data'
 import { DashboardTask } from '@/entities/task'
 import { routes } from '@/shared/config/routes'
-import { dashboardTasks } from '@/shared/mock/mock'
+import { cn } from '@/shared/lib/css'
+import { courses, dashboardTasks } from '@/shared/mock/mock'
 import { Button } from '@/shared/ui/other/button'
 import { Skeleton } from '@/shared/ui/other/skeleton'
 import Text from '@/shared/ui/view/text'
@@ -14,6 +16,7 @@ import Link from 'next/link'
 import React from 'react'
 
 export const StudentDashboard: React.FC = () => {
+	const dashboardcourses = courses.slice(0, 6)
 	return (
 		<div className='flex flex-col gap-4 mt-10'>
 			<DashboardBlockPrimitive
@@ -75,26 +78,26 @@ export const StudentDashboard: React.FC = () => {
 			</div>
 			<DashboardBlockPrimitive
 				title='Курсы'
-				link={routes.dashboard.student}
+				link={routes.course.student}
 				linkText='Все курсы'
 			>
-				<div className='grid grid-cols-2 gap-x-5 gap-3'>
-					<Skeleton className='h-[100px] w-full rounded-lg' />
-					<Skeleton className='h-[100px] w-full rounded-lg' />
-					<Skeleton className='h-[100px] w-full rounded-lg' />
-					<Skeleton className='h-[100px] w-full rounded-lg' />
-					<Skeleton className='h-[100px] w-full rounded-lg' />
-					<Skeleton className='h-[100px] w-full rounded-lg' />
+				<div className='grid grid-cols-2 gap-x-5 gap-3 '>
+					{dashboardcourses.map(course => (
+						<AllCoursesItem
+							className={cn(
+								!(dashboardcourses.length % 2 === 0)
+									? 'last:col-span-2'
+									: 'last:col-span-1'
+							)}
+							isDashboard
+							key={course.courseId}
+							item={course}
+							isGrid={false}
+						/>
+					))}
 				</div>
 			</DashboardBlockPrimitive>
-			<div className='grid grid-cols-2 gap-x-5'>
-				<DashboardBlockPrimitive title='Преподаватели'>
-					<Skeleton className='h-[330px] w-full rounded-lg' />
-				</DashboardBlockPrimitive>
-				<DashboardBlockPrimitive title='Группы'>
-					<Skeleton className='h-[330px] w-full rounded-lg' />
-				</DashboardBlockPrimitive>
-			</div>
+
 			<DashboardFooter />
 		</div>
 	)

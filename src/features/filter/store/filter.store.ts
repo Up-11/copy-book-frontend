@@ -6,11 +6,16 @@ export interface Filters {
 	status?: string[]
 	course?: string[]
 	sort?: string
+	aiCompilation?: string
 }
 
 interface IFilterStore {
 	filters: Filters
-	updateFilter: (key: keyof Filters, value: string) => void
+	updateFilter: (
+		key: keyof Filters,
+		value: string,
+		resetIfMatch?: boolean
+	) => void
 	clear: () => void
 	updateAll: (valuse: Filters) => void
 }
@@ -20,19 +25,32 @@ export const initialFilters: Filters = {
 	type: [],
 	status: [],
 	course: [],
-	sort: undefined
+	sort: undefined,
+	aiCompilation: undefined
 }
 
 export const useFilterStore = create<IFilterStore>(set => ({
 	filters: initialFilters,
-	updateFilter: (key, value) =>
+
+	updateFilter: (key, value, resetIfMatch = false) =>
 		set(state => {
 			const current = state.filters[key]
+
+			if (key === 'aiCompilation') {
+				return {
+					filters: {
+						...initialFilters,
+						aiCompilation:
+							state.filters.aiCompilation === value ? undefined : value
+					}
+				}
+			}
 
 			if (Array.isArray(current)) {
 				return {
 					filters: {
 						...state.filters,
+						aiCompilation: initialFilters.aiCompilation,
 						[key]: current.includes(value)
 							? current.filter(item => item !== value)
 							: [...current, value]
@@ -43,7 +61,9 @@ export const useFilterStore = create<IFilterStore>(set => ({
 			return {
 				filters: {
 					...state.filters,
-					[key]: state.filters.sort === value ? undefined : value
+					aiCompilation: initialFilters.aiCompilation,
+					[key]:
+						resetIfMatch && state.filters[key] === value ? undefined : value
 				}
 			}
 		}),

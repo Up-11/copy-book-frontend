@@ -10,7 +10,7 @@ export default function NotFound() {
 		<div className='w-full h-screen mx-auto flex justify-center items-center bg-background'>
 			<div className='text-center'>
 				<Image
-					src='/assets/not-found.png'
+					src='/assets/not-found-task.png'
 					alt='Not Found'
 					width={300}
 					height={300}

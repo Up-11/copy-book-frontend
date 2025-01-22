@@ -1,67 +1,21 @@
 'use client'
 
-import { useLayout } from '../../../shared/model/use-layout'
-import { DraftItem, LayoutSwitch } from '@/entities/draft'
+import { PaginationPageLayout } from '@/common/layouts'
+import { DraftItem } from '@/entities/draft'
 import { DRAFT_MOCK } from '@/entities/draft/mock.data'
-import { SearchBar } from '@/entities/search/ui/searchbar'
-import { routes } from '@/shared/config/routes'
-import { cn } from '@/shared/lib/css'
-import { Layout } from '@/shared/types/props.types'
-import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
-import { Loader } from '@/shared/ui/view/loader'
-import Text from '@/shared/ui/view/text'
-import Title from '@/shared/ui/view/title'
-import { Plus } from 'lucide-react'
-import Link from 'next/link'
+import { useLayout } from '@/shared/model/use-layout'
+import React from 'react'
 
-export const DraftSection = () => {
-	const { isHydrated, layout, setActiveLayout } = useLayout()
-	if (!isHydrated) {
-		return (
-			<div className='flex items-center flex-col justify-center h-[88vh] '>
-				<Loader size={44} />
-				<Text size='small'>Черновики загружкаются подождите</Text>
-			</div>
-		)
-	}
+export const DraftSection: React.FC = () => {
+	const { isGrid, layout } = useLayout()
 
 	return (
-		<>
-			<div className='flex justify-between  mt-8 mb-4'>
-				<Title>Черновики</Title>
-				<div className='flex items-center gap-3'>
-					<SearchBar />
-					<LayoutSwitch
-						activeLayout={layout}
-						setActiveLayout={setActiveLayout}
-					/>
-				</div>
-			</div>
-			<section
-				className={cn(
-					layout === 'grid'
-						? 'grid grid-cols-5 gap-3 mt-8'
-						: 'flex flex-col gap-3 mt-8'
-				)}
-			>
-				{DRAFT_MOCK.map(draft => (
-					<DraftItem
-						key={draft.id}
-						{...draft}
-						isGrid={layout === Layout.GRID}
-					/>
-				))}
-			</section>
-			<section>
-				<UiTooltip content='Создать новый черновик'>
-					<Link
-						href={routes.code.sandbox}
-						className='bg-indigo-200  transition-opacity p-2 rounded-full fixed bottom-10 right-10  flex font-semibold cursor-pointer items-center justify-between text-base gap-2   '
-					>
-						<Plus size={25} />
-					</Link>
-				</UiTooltip>
-			</section>
-		</>
+		<PaginationPageLayout
+			isDraft
+			layout={layout}
+			items={DRAFT_MOCK.map(draft => (
+				<DraftItem key={draft.id} {...draft} isGrid={isGrid} />
+			))}
+		/>
 	)
 }

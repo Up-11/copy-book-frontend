@@ -2,7 +2,7 @@
 import { StudentSidebar } from '@/common/task-and-course'
 import { RootHeader } from '@/widgets/headers/ui/root-header'
 
-export default function StudentTaskLayout({
+export default function StudentCourseLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode
@@ -11,7 +11,7 @@ export default function StudentTaskLayout({
 		<div>
 			<RootHeader />
 			<div className='root-page-w grid grid-cols-[350px,1fr] mt-3'>
-				<StudentSidebar isTask={true} />
+				<StudentSidebar isTask={false} />
 				<div className='h-full'>{children}</div>
 			</div>
 			{/* <DashboardFooter /> */}

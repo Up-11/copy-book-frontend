@@ -34,11 +34,13 @@ export const useSearchBarVisual = () => {
 	useEventListener('keydown', handleKeyDown)
 	useEventListener('mousedown', handleClickOutside)
 	return {
-		isExpanded,
-		onClickExpand,
-		inputRef,
-		searchBarRef,
-		isAnimationComplete,
-		setIsAnimationComplete
+		control: {
+			isExpanded,
+			onClickExpand,
+			inputRef,
+			searchBarRef,
+			isAnimationComplete,
+			setIsAnimationComplete
+		}
 	}
 }

@@ -1,3 +1,4 @@
+import { Layout } from '../types/props.types'
 import { useLayoutStore } from '@/shared/store/layout-store'
 import { useEffect, useState } from 'react'
 
@@ -11,9 +12,11 @@ export const useLayout = () => {
 
 	const setActiveLayout = useLayoutStore(state => state.setLayout)
 
+	const isGrid = layout === Layout.GRID ? true : false
+
 	useEffect(() => {
 		checkHydration()
 	}, [])
 
-	return { layout, setActiveLayout, checkHydration, isHydrated }
+	return { layout, setActiveLayout, checkHydration, isHydrated, isGrid }
 }

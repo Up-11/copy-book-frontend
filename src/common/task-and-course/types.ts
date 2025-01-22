@@ -12,4 +12,5 @@ export interface ISidebar<T extends TaskProps[] | Course[]> {
 	}[]
 	mainTitle: string
 	mainHref: keyof typeof routes | Url
+	isTask?: boolean
 }

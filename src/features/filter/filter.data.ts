@@ -2,7 +2,7 @@ import { FilterType } from './types'
 import {
 	getBadgeByTaskDifficulty,
 	getBadgeByTaskType,
-	getTaskStatus
+	getStatus
 } from '@/shared/lib/map'
 import { createFilter } from '@/shared/lib/utils'
 import { courses } from '@/shared/mock/mock'
@@ -23,9 +23,9 @@ export const typeFilter = createFilter(
 	type => getBadgeByTaskType(type).text
 )
 
-export const statusFilter = createFilter(
-	[TaskStatus.Active, TaskStatus.Closed, TaskStatus.Pending, TaskStatus.New],
-	status => getTaskStatus(status)
+export const taskStatusFilter = createFilter(
+	[TaskStatus.Active, TaskStatus.Closed, TaskStatus.Pending],
+	status => getStatus<TaskStatus>(status)
 )
 
 const courseTitle = courses.map(course => {
@@ -58,5 +58,23 @@ export const sortFilter: FilterType[] = [
 	{
 		text: 'По сложности (От сложной к простой)',
 		value: 'difficulty_desc'
+	}
+]
+export const sortFilterCourse: FilterType[] = [
+	{
+		text: 'По имени (A-Z)',
+		value: 'name_asc'
+	},
+	{
+		text: 'По имени (Z-A)',
+		value: 'name_desc'
+	},
+	{
+		text: 'По дате (Новые сначала)',
+		value: 'date_desc'
+	},
+	{
+		text: 'По дате (Старые сначала)',
+		value: 'date_asc'
 	}
 ]

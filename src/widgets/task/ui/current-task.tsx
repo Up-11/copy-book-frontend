@@ -1,13 +1,14 @@
 'use client'
 
-import { useQuery } from '@/common/query'
-import { TaskProgress } from '@/entities/task/ui/task-progress'
+import { useQueryManager } from '@/common/query'
+import { Slider } from '@/common/slider/slider'
+import { TaskProgress } from '@/common/task-and-course/ui/progress-bar'
 import { routes } from '@/shared/config/routes'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
-import { getTaskStatus } from '@/shared/lib/map'
-import { TaskProps } from '@/shared/types/task.types'
+import { getStatus } from '@/shared/lib/map'
+import { TaskProps, TaskStatus } from '@/shared/types/task.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'
 import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
@@ -18,16 +19,14 @@ import Link from 'next/link'
 import React from 'react'
 
 export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
-	//TODO: Сделать отдельный компонент для отображения такого блоков
-	useQuery()
-	//TODO: Подумать как сделать нормально компонент Сделать компонент микротасков и в нем инвочить функцию
+	useQueryManager()
 	return (
 		<div className='p-layout flex flex-col h-full'>
 			<div className='flex justify-between items-center'>
 				<Title size='large'>{task.title}</Title>
 				<TaskDiffBadge diff={task.difficulty} className='text-xl' />
 			</div>
-			<div className='my-4'>
+			<div className='my-1'>
 				<Text size='small' color='gray' className='mt-2'>
 					{task.description}
 				</Text>
@@ -70,7 +69,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 					render={
 						<div>
 							Статус:
-							<Title>{getTaskStatus(task.status!)}</Title>
+							<Title>{getStatus<TaskStatus>(task.status!)}</Title>
 						</div>
 					}
 				/>
@@ -125,6 +124,10 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 						</div>
 					}
 				/>
+			</section>
+			<section className='mt-auto flex flex-col gap-1  '>
+				<Title>Упражнения</Title>
+				<Slider items={task.microTasks} />
 			</section>
 			<section
 				className={cn(

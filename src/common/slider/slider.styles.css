@@ -1,0 +1,18 @@
+.custom-prev,
+.custom-next {
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.group:hover .custom-prev,
+.group:hover .custom-next {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.group:hover .custom-prev:disabled,
+.group:hover .custom-next:disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}

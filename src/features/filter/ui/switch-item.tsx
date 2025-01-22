@@ -3,10 +3,11 @@ import { PropsWithClassName } from '@/shared/types/props.types'
 import { Check } from 'lucide-react'
 
 interface SwitchItemProps extends PropsWithClassName {
-	icon: React.ReactNode
+	icon?: React.ReactNode
 	isActive?: boolean
 	onClick: () => void
 	children: React.ReactNode
+	wrapperClassName?: string
 }
 
 export const SwitchItem: React.FC<SwitchItemProps> = ({
@@ -14,14 +15,15 @@ export const SwitchItem: React.FC<SwitchItemProps> = ({
 	icon,
 	className,
 	isActive,
-	onClick
+	onClick,
+	wrapperClassName
 }) => {
 	return (
-		<div
+		<button
 			onClick={onClick}
 			className={cn(
 				'flex items-center font-medium hover:bg-destructive p-2 rounded-sm cursor-pointer gap-2 select-none justify-between',
-				className,
+				wrapperClassName,
 				isActive && 'text-indigo-700'
 			)}
 		>
@@ -36,7 +38,7 @@ export const SwitchItem: React.FC<SwitchItemProps> = ({
 					{children}
 				</p>
 			</div>
-			{isActive && <Check size={16} className='self-end' />}
-		</div>
+			{isActive && <Check size={16} className='' />}
+		</button>
 	)
 }

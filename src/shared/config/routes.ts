@@ -20,6 +20,13 @@ export const routes = {
 			return `/student/tasks/${id}`
 		}
 	},
+	course: {
+		student: '/student/courses',
+		main: '/all-courses',
+		currentUserCourse: (id: string) => {
+			return `/student/courses/${id}`
+		}
+	},
 
 	dashboard: {
 		student: '/student/dashboard',

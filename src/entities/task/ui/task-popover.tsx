@@ -1,12 +1,11 @@
+import { TaskProgress } from '../../../common/task-and-course/ui/progress-bar'
 import { TaskCourse } from './task-primitive/task-course'
 import { TaskDeadline } from './task-primitive/task-deadline'
-import { TaskProgress } from './task-progress'
-import { routes } from '@/shared/config/routes'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
-import { getTaskStatus } from '@/shared/lib/map'
+import { getStatus } from '@/shared/lib/map'
 import { PropsWithClassName } from '@/shared/types/props.types'
-import { TaskProps } from '@/shared/types/task.types'
+import { TaskProps, TaskStatus } from '@/shared/types/task.types'
 import {
 	Popover,
 	PopoverContent,
@@ -16,7 +15,6 @@ import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
-import Link from 'next/link'
 import React, { PropsWithChildren } from 'react'
 
 export const TaskPopover: React.FC<
@@ -29,11 +27,12 @@ export const TaskPopover: React.FC<
 				{children}
 			</PopoverTrigger>
 			<PopoverContent
-				align='center'
-				className='p-layout w-[450px] flex flex-col gap-2'
+				align='start'
+				side='right'
+				className='p-layout w-[380px] flex flex-col gap-2'
 			>
 				<div className='flex justify-between items-center'>
-					<Title>{item.title}</Title>
+					<Title size='small'>{item.title}</Title>
 					<TaskDiffBadge className='text-base' diff={item.difficulty} />
 				</div>
 				<Text size='small' color='gray'>
@@ -52,14 +51,14 @@ export const TaskPopover: React.FC<
 						condition={!!item.status}
 						render={
 							<div className='flex gap-2 items-center'>
-								<Text size='small' className='self-start'>
+								<Text size='extraSmall' className=''>
 									Статус:
 								</Text>
 								<Text
-									size='small'
+									size='extraSmall'
 									className='font-bold line-clamp-2 break-words '
 								>
-									{getTaskStatus(item.status!)}
+									{getStatus<TaskStatus>(item.status!)}
 								</Text>
 							</div>
 						}
@@ -69,11 +68,11 @@ export const TaskPopover: React.FC<
 						condition={!!item.rating}
 						render={
 							<div className='flex gap-2 items-center '>
-								<Text size='small' className='self-start'>
+								<Text size='extraSmall' className='self-start'>
 									Рейтинг:
 								</Text>
 								<Text
-									size='small'
+									size='extraSmall'
 									className='font-bold line-clamp-2 break-words '
 								>
 									{item.rating}
@@ -95,9 +94,6 @@ export const TaskPopover: React.FC<
 					/>
 
 					<div className='flex gap-3 mt-8'>
-						<Link href={routes.tasks.currentUserTask(item.id)}>
-							<Button variant={'destructive'}>Открыть страницу</Button>
-						</Link>
 						<Button>
 							{item.completedMicrotasks !== 0 ? 'Продолжить' : 'Выполнить'}
 						</Button>

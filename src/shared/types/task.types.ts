@@ -8,7 +8,6 @@ export enum TaskStatus {
 	Pending = 'pending',
 	Active = 'active',
 	Closed = 'closed',
-	New = 'new',
 	NotStarted = 'not startd'
 }
 
@@ -66,6 +65,14 @@ export interface TaskBase {
 	description: string
 }
 
+export interface MicroTasks {
+	id: string
+	title: string
+	description: string
+	status: TaskStatus
+	type: TaskType
+}
+
 export interface Task extends TaskBase {
 	id: string
 	difficulty: TaskDifficulty
@@ -90,4 +97,6 @@ export interface TaskProps
 	result?: TaskResult
 	status?: TaskStatus
 	rating?: TaskRating
+	microTasks: MicroTasks[]
+	type?: TaskType
 }

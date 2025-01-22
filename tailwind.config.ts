@@ -10,31 +10,31 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				card: {
 					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))',
+					foreground: 'hsl(var(--card-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))',
+					foreground: 'hsl(var(--popover-foreground))'
 				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
+					foreground: 'hsl(var(--primary-foreground))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))',
+					foreground: 'hsl(var(--secondary-foreground))'
 				},
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))',
+					foreground: 'hsl(var(--muted-foreground))'
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))',
+					foreground: 'hsl(var(--accent-foreground))'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))',
+					foreground: 'hsl(var(--destructive-foreground))'
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -44,51 +44,52 @@ export default {
 					'2': 'hsl(var(--chart-2))',
 					'3': 'hsl(var(--chart-3))',
 					'4': 'hsl(var(--chart-4))',
-					'5': 'hsl(var(--chart-5))',
-				},
+					'5': 'hsl(var(--chart-5))'
+				}
 			},
 			padding: {
 				layout: 'var(--padding)',
-				header: '74px',
+				header: '74px'
 			},
 			margin: {
-				header: '74px',
+				header: '74px'
 			},
 			height: {
-				header: '74px',
+				header: '74px'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)',
+				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
 				smoothIn: {
 					'0%': {
-						opacity: '0',
+						opacity: '0'
 					},
 					'100%': {
-						opacity: '1',
-					},
+						opacity: '1'
+					}
 				},
 				gradient: {
 					'0%': {
-						backgroundPosition: '0% 50%',
+						backgroundPosition: '0% 50%'
 					},
 					'50%': {
-						backgroundPosition: '100% 50%',
+						backgroundPosition: '100% 50%'
 					},
 					'100%': {
-						backgroundPosition: '0% 50%',
-					},
-				},
+						backgroundPosition: '0% 50%'
+					}
+				}
 			},
 			animation: {
 				gradient: 'gradient 10s linear infinite',
-				smoothIn: 'smoothIn 0.3s ease-in-out',
-			},
-		},
+				gradientFast: 'gradient 3s linear infinite',
+				smoothIn: 'smoothIn 0.3s ease-in-out'
+			}
+		}
 	},
 	// eslint-disable-next-line @typescript-eslint/no-require-imports
-	plugins: [require('tailwindcss-animate')],
+	plugins: [require('tailwindcss-animate')]
 } satisfies Config

@@ -15,96 +15,92 @@ import React, { useState } from 'react'
 export const UserSidebar = <T extends TaskProps[] | Course[]>({
 	tabs,
 	mainHref,
-	mainTitle
-}: ISidebar<T>) => {
-	type TabValue = (typeof tabs)[number]['value']
+	mainTitle,
+	isTask
+}: ISidebar<T & { isTask?: boolean }>) => {
+	{
+		type TabValue = (typeof tabs)[number]['value']
 
-	const [activeTab, setActiveTab] = useState<TabValue>(tabs[0]?.value || '')
+		const [activeTab, setActiveTab] = useState<TabValue>(tabs[0]?.value || '')
 
-	const tabContentVariants: Variants = {
-		initial: { opacity: 0, y: 10 },
-		animate: { opacity: 1, y: 0 },
-		exit: { opacity: 0, y: -10 }
-	}
+		const tabContentVariants: Variants = {
+			initial: { opacity: 0, y: 10 },
+			animate: { opacity: 1, y: 0 },
+			exit: { opacity: 0, y: -10 }
+		}
 
-	const motionConfig = {
-		layoutId: 'tab-highlight',
-		className: 'absolute top-0 left-0 h-full bg-indigo-200 rounded-lg',
-		style: (tabsLength: number) => ({
-			width: `${100 / tabsLength}%`
-		}),
-		initial: false,
-		transition: {
-			type: 'spring',
-			stiffness: 900,
-			damping: 50
-		},
-		animate: (index: number) => ({
-			transform: `translateX(${index * 100}%)`
-		})
-	}
+		const motionConfig = {
+			layoutId: 'tab-highlight',
+			className: 'absolute top-0 left-0 h-full bg-indigo-200 rounded-lg',
+			style: (tabsLength: number) => ({
+				width: `${100 / tabsLength}%`
+			}),
+			initial: false,
+			transition: {
+				type: 'spring',
+				stiffness: 900,
+				damping: 50
+			},
+			animate: (index: number) => ({
+				transform: `translateX(${index * 100}%)`
+			})
+		}
 
-	const activeTabIndex = tabs.findIndex(tab => tab.value === activeTab)
+		const activeTabIndex = tabs.findIndex(tab => tab.value === activeTab)
 
-	/* 	const items = [
-		{ value: '1', text: 'Сложности', icon: <LucideFileDiff size={18} /> },
-		{ value: '2', text: 'Названию', icon: <ArrowUpAZ size={18} /> },
-		{ value: '3', text: 'Срочности', icon: <ClockArrowDown size={18} /> }
-	] */
-
-	return (
-		<div className='p-layout h-full'>
-			<div className='ml-2 flex items-center justify-between'>
-				<Link href={mainHref}>
-					<Title>{mainTitle}</Title>
-				</Link>
-				<TaskFilter />
-				{/* <SortPopover items={items} onItemClick={() => console.log(123)} /> */}
-			</div>
-			<div className='ml-2 my-2 flex items-center justify-end'>
-				<SearchBar />
-			</div>
-			<Tabs defaultValue={activeTab}>
-				<TabsList className='relative w-full flex bg-accent rounded-lg overflow-hidden'>
-					<motion.div
-						layoutId={motionConfig.layoutId}
-						className={motionConfig.className}
-						style={motionConfig.style(tabs.length)}
-						initial={motionConfig.initial}
-						animate={motionConfig.animate(activeTabIndex)}
-						transition={motionConfig.transition}
-					/>
-					{tabs.map(tab => (
-						<TabsTrigger
-							key={tab.value}
-							value={tab.value}
-							onClick={() => setActiveTab(tab.value)}
-							className='relative !shadow-none z-10 flex-1 text-center py-2 !bg-transparent'
-						>
-							{tab.displayedName}
-						</TabsTrigger>
-					))}
-				</TabsList>
-				<div className='relative'>
-					<AnimatePresence mode='sync'>
-						{tabs.map(tab => (
-							<TabsContent key={tab.value} value={tab.value}>
-								{activeTab === tab.value && (
-									<motion.div
-										variants={tabContentVariants}
-										initial='initial'
-										animate='animate'
-										exit='exit'
-										transition={{ duration: 0.3 }}
-									>
-										<SidebarList items={tab.itemsList} />
-									</motion.div>
-								)}
-							</TabsContent>
-						))}
-					</AnimatePresence>
+		return (
+			<div className='p-layout h-full'>
+				<div className='ml-2 flex items-center justify-between'>
+					<Link href={mainHref}>
+						<Title>{mainTitle}</Title>
+					</Link>
+					<TaskFilter isTask={isTask!} isSidebar />
 				</div>
-			</Tabs>
-		</div>
-	)
+				<div className='ml-2 my-2 flex items-center justify-end'>
+					<SearchBar />
+				</div>
+				<Tabs defaultValue={activeTab}>
+					<TabsList className='relative w-full flex bg-accent rounded-lg overflow-hidden'>
+						<motion.div
+							layoutId={motionConfig.layoutId}
+							className={motionConfig.className}
+							style={motionConfig.style(tabs.length)}
+							initial={motionConfig.initial}
+							animate={motionConfig.animate(activeTabIndex)}
+							transition={motionConfig.transition}
+						/>
+						{tabs.map(tab => (
+							<TabsTrigger
+								key={tab.value}
+								value={tab.value}
+								onClick={() => setActiveTab(tab.value)}
+								className='relative !shadow-none z-10 flex-1 text-center py-2 !bg-transparent'
+							>
+								{tab.displayedName}
+							</TabsTrigger>
+						))}
+					</TabsList>
+					<div className='relative'>
+						<AnimatePresence mode='sync'>
+							{tabs.map(tab => (
+								<TabsContent key={tab.value} value={tab.value}>
+									{activeTab === tab.value && (
+										<motion.div
+											variants={tabContentVariants}
+											initial='initial'
+											animate='animate'
+											exit='exit'
+											transition={{ duration: 0.3 }}
+										>
+											<SidebarList items={tab.itemsList} />
+										</motion.div>
+									)}
+								</TabsContent>
+							))}
+						</AnimatePresence>
+					</div>
+				</Tabs>
+			</div>
+		)
+	}
 }

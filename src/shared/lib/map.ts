@@ -1,4 +1,10 @@
-import { TaskDifficulty, TaskStatus, TaskType } from '../types/task.types'
+import { CourseStatus } from '../types/course.types'
+import {
+	MicroTasks,
+	TaskDifficulty,
+	TaskStatus,
+	TaskType
+} from '../types/task.types'
 import { UserRole } from '@/shared/types/user.types'
 
 export const getBadgeByUserRole = (role: UserRole) => {
@@ -69,13 +75,24 @@ export const getDotColorByTaskDifficulty = (diff: TaskDifficulty) => {
 	])
 	return taskDotMap.get(diff) ?? { classNames: '' }
 }
-export const getTaskStatus = (status: TaskStatus) => {
-	const taskStatusMap = new Map<TaskStatus, string>([
-		[TaskStatus.Active, 'Активно'],
-		[TaskStatus.Closed, 'Завершено'],
-		[TaskStatus.Pending, 'В работе'],
-		[TaskStatus.NotStarted, 'Не начато'],
-		[TaskStatus.New, 'Не начато']
-	])
+
+export const getStatus = <T extends TaskStatus | CourseStatus | MicroTasks>(
+	status: T
+): string => {
+	const taskStatusMap = new Map<TaskStatus | CourseStatus | MicroTasks, string>(
+		[
+			[TaskStatus.Active, 'Активно'],
+			[CourseStatus.Active, 'Активно'],
+			[TaskStatus.Closed, 'Завершено'],
+			[CourseStatus.Completed, 'Завершено'],
+			[TaskStatus.Pending, 'В работе'],
+			[CourseStatus.InProgress, 'В работе'],
+			[TaskStatus.NotStarted, 'Не начато'],
+			[CourseStatus.NotStarted, 'Не начато'],
+			[CourseStatus.Archived, 'В архиве']
+		]
+	)
+
 	return taskStatusMap.get(status) ?? ''
 }
+//TODO Подумать над разными цветами

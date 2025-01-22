@@ -4,7 +4,7 @@ import { MenuItemType } from '../nav-menu.types'
 import { TaskDifficultyDot } from '@/entities/task'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
-import { dashboardTasks } from '@/shared/mock/mock'
+import { courses, dashboardTasks } from '@/shared/mock/mock'
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -29,7 +29,7 @@ import * as React from 'react'
 
 export const UiNavigationMenu: React.FC = () => {
 	return (
-		<NavigationMenu>
+		<NavigationMenu className='z-[999]'>
 			<NavigationMenuList>
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>Задания</NavigationMenuTrigger>
@@ -90,20 +90,29 @@ export const UiNavigationMenu: React.FC = () => {
 					<NavigationMenuContent>
 						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]'>
 							<TallMenuItem
-								href={routes.home}
+								href={routes.course.student}
 								title={'Ваши курсы'}
 								description={'Посмотрите список курсов которые вы проходите'}
 								icon={<BookKey />}
 							/>
 							<TallMenuItem
-								href={routes.home}
+								href={routes.course.main}
 								title={'Все курсы'}
 								description={'Посмотрите список доступных вам курсов '}
 								icon={<BookAudio />}
 							/>
 						</ul>
 						<Title className='px-4'>Текущие курсы</Title>
-						<ul className='p-4'></ul>
+						<ul className='p-4'>
+							{courses.slice(0, 3).map(course => (
+								<MenuItem
+									key={course.courseId}
+									title={course.title}
+									description={course.description}
+									href={routes.course.currentUserCourse(course.courseId)}
+								/>
+							))}
+						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
