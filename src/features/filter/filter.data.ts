@@ -9,6 +9,9 @@ import { courses } from '@/shared/mock/mock'
 import { CourseStatus } from '@/shared/types/course.types'
 import { TaskDifficulty, TaskStatus, TaskType } from '@/shared/types/task.types'
 
+export const RATING_MIN = 0
+export const RATING_MAX = 5
+
 export const difficultyFilter = createFilter(
 	[TaskDifficulty.Hard, TaskDifficulty.Medium, TaskDifficulty.Simple],
 	difficulty => getBadgeByTaskDifficulty(difficulty).text

@@ -1,8 +1,7 @@
-import { usePathname } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
-export const useLastPathnameElement = () => {
-	const pathname = usePathname()
-	const currentPage = pathname?.split('/').pop()
+export const useParamsId = () => {
+	const params = useParams()
 
-	return { currentPage }
+	return { currentPage: params.id }
 }

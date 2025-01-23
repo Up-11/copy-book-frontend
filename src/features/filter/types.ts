@@ -22,8 +22,8 @@ export interface Filters {
 	course?: string[]
 	sort?: string
 	aiCompilation?: string
-	ratingFrom?: number
-	ratingTo?: number
+	ratingFrom?: string
+	ratingTo?: string
 }
 
 export type InputFilterKeys = Extract<

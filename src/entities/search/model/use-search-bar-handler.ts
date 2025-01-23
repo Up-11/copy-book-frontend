@@ -1,21 +1,20 @@
-import { useQueryManager, useQueryStore } from '@/common/query'
+import { useQueryManager } from '@/common/query'
 import { useEffect, useState } from 'react'
 import { useDebounceCallback } from 'usehooks-ts'
 
 export const useSearchBarHandler = () => {
-	const { getQueryValue } = useQueryManager()
+	const { getQueryValue, updateQuery: setQuery } = useQueryManager()
 	const [value, setValue] = useState<string>('')
 
-	const setQuery = useQueryStore(state => state.updateQuery)
-
 	useEffect(() => {
-		setQuery({ searchQuery: getQueryValue('searchQuery', '') })
-		setValue(getQueryValue('searchQuery', '') as string)
+		const initialQuery = getQueryValue('searchQuery', '') as string
+		setQuery({ searchQuery: initialQuery || undefined })
+		setValue(initialQuery)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const updateQueryDebounced = useDebounceCallback((query: string) => {
-		setQuery({ searchQuery: query })
+		setQuery({ searchQuery: query || undefined })
 	}, 300)
 
 	const handleInputChange = (newValue: string) => {

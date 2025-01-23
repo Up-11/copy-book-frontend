@@ -1,3 +1,4 @@
+import { RATING_MAX, RATING_MIN } from '../filter.data'
 import { Filters, FilterStoreActions } from '../types'
 import { create } from 'zustand'
 
@@ -54,15 +55,45 @@ export const useFilterStore = create<IFilterStore>(set => ({
 				}
 			}
 		}),
+
 	updateFilterRating: ratings =>
-		set(state => ({
-			filters: {
-				...state.filters,
-				aiCompilation: initialFilters.aiCompilation,
-				ratingFrom: ratings?.[0],
-				ratingTo: ratings?.[1]
+		set(state => {
+			const [ratingFrom, ratingTo] = ratings || []
+
+			const shouldResetFilters =
+				ratingFrom === RATING_MIN && ratingTo === RATING_MAX
+
+			let newRatingFrom
+			if (
+				shouldResetFilters ||
+				ratingFrom === undefined ||
+				ratingFrom.toString() === initialFilters.ratingFrom
+			) {
+				newRatingFrom = initialFilters.ratingFrom
+			} else {
+				newRatingFrom = ratingFrom.toString()
 			}
-		})),
+
+			let newRatingTo
+			if (
+				shouldResetFilters ||
+				ratingTo === undefined ||
+				ratingTo.toString() === initialFilters.ratingTo
+			) {
+				newRatingTo = initialFilters.ratingFrom
+			} else {
+				newRatingTo = ratingTo.toString()
+			}
+
+			return {
+				filters: {
+					...state.filters,
+					aiCompilation: initialFilters.aiCompilation,
+					ratingFrom: newRatingFrom,
+					ratingTo: newRatingTo
+				}
+			}
+		}),
 	clear: () => set({ filters: initialFilters }),
 	updateAll: (values: Filters) => {
 		set(state => ({

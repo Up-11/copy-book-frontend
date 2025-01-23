@@ -1,12 +1,13 @@
 'use client'
+
+import { useCurrentUserRoleAuth } from '../model/use-current-user-role-auth'
+import { useTabsQuery } from '../model/use-tabs-query'
 import { LoginForm, RegisterForm } from '@/features/auth'
 import { Skeleton } from '@/shared/ui/other/skeleton'
+import { LogoWithRoleBadge } from '@/shared/ui/view/logo-with-role-badge'
 import { LogoWithText } from '@/shared/ui/view/logo-with-text'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/view/tabs'
 import Title from '@/shared/ui/view/title'
-import { useTabsQuery } from '../model/use-tabs-query'
-import { useCurrentUserRoleAuth } from '../model/use-current-user-role-auth'
-import { LogoWithRoleBadge } from '@/shared/ui/view/logo-with-role-badge'
 
 export const AuthWidget: React.FC = () => {
 	const { currentTab, handleTabChange } = useTabsQuery()
@@ -26,7 +27,7 @@ export const AuthWidget: React.FC = () => {
 	return (
 		<>
 			<div className='mt-2'>
-				<LogoWithRoleBadge role={currentUserRole} />
+				<LogoWithRoleBadge role={currentUserRole!} />
 			</div>
 			<div className='flex flex-col items-center rounded-xl bg-white pt-3 shadow-lg max-md:w-full md:rounded-2xl'>
 				<Tabs

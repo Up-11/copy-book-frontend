@@ -4,6 +4,8 @@ import {
 	courseFilter,
 	courseStatusFilter,
 	difficultyFilter,
+	RATING_MAX,
+	RATING_MIN,
 	sortFilter,
 	sortFilterCourse,
 	taskStatusFilter,
@@ -97,11 +99,14 @@ export const Filters: React.FC<{ isTask: boolean; isSidebar?: boolean }> = ({
 											Рейтинг
 										</Text>
 										<RangeSlider
-											value={[filters.ratingFrom || 0, filters.ratingTo || 5]}
+											value={[
+												Number(filters.ratingFrom) || RATING_MIN,
+												Number(filters.ratingTo) || RATING_MAX
+											]}
 											onValueChange={updateRating}
 											className='mt-3'
-											min={0}
-											max={5}
+											min={RATING_MIN}
+											max={RATING_MAX}
 											step={0.1}
 										/>
 										<div className='flex gap-5'>
@@ -112,10 +117,10 @@ export const Filters: React.FC<{ isTask: boolean; isSidebar?: boolean }> = ({
 														'ratingFrom'
 													)
 												}
-												value={filters.ratingFrom || 0}
+												value={filters.ratingFrom || RATING_MIN}
 												step={0.1}
-												min={0}
-												max={filters.ratingTo || 5}
+												min={RATING_MAX}
+												max={filters.ratingTo || RATING_MAX}
 												type='number'
 											/>
 											<Input
@@ -125,11 +130,13 @@ export const Filters: React.FC<{ isTask: boolean; isSidebar?: boolean }> = ({
 														'ratingTo'
 													)
 												}
-												value={filters.ratingTo || 5}
-												min={filters.ratingFrom || 0}
+												value={filters.ratingTo || RATING_MAX}
+												min={filters.ratingFrom || RATING_MIN}
 												step={0.1}
 												max={
-													filters.ratingTo !== undefined ? filters.ratingTo : 5
+													filters.ratingTo !== undefined
+														? filters.ratingTo
+														: RATING_MAX
 												}
 												type='number'
 											/>
@@ -181,11 +188,14 @@ export const Filters: React.FC<{ isTask: boolean; isSidebar?: boolean }> = ({
 									Рейтинг
 								</Text>
 								<RangeSlider
-									value={[filters.ratingFrom || 0, filters.ratingTo || 5]}
+									value={[
+										Number(filters.ratingFrom) || RATING_MIN,
+										Number(filters.ratingTo) || RATING_MAX
+									]}
 									onValueChange={updateRating}
 									className='mt-3'
-									min={0}
-									max={5}
+									min={RATING_MIN}
+									max={RATING_MAX}
 									step={0.1}
 								/>
 								<div className='flex gap-5'>
@@ -193,18 +203,18 @@ export const Filters: React.FC<{ isTask: boolean; isSidebar?: boolean }> = ({
 										onChange={e =>
 											handleInputValue(e.target.value.toString(), 'ratingFrom')
 										}
-										value={filters.ratingFrom || 0}
+										value={filters.ratingFrom || RATING_MIN}
 										step={0.1}
-										min={0}
-										max={filters.ratingTo || 5}
+										min={RATING_MIN}
+										max={filters.ratingTo || RATING_MAX}
 										type='number'
 									/>
 									<Input
 										onChange={e =>
 											handleInputValue(e.target.value.toString(), 'ratingTo')
 										}
-										value={filters.ratingTo || 5}
-										min={filters.ratingFrom || 0}
+										value={filters.ratingTo || RATING_MAX}
+										min={filters.ratingFrom || RATING_MIN}
 										step={0.1}
 										max={filters.ratingTo !== undefined ? filters.ratingTo : 5}
 										type='number'

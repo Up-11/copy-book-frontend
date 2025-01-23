@@ -6,6 +6,7 @@ import { useIsomorphicLayoutEffect } from 'usehooks-ts'
 
 export const useQueryManager = () => {
 	const query = useQueryStore(state => state.query)
+	const updateQuery = useQueryStore(state => state.updateQuery)
 	const router = useRouter()
 	const isMounted = useRef(false)
 	const searchParams = useSearchParams()
@@ -14,7 +15,7 @@ export const useQueryManager = () => {
 		key: T,
 		defaultValue: Query[T]
 	): Query[T] => {
-		const value = searchParams.get(key)
+		const value = searchParams.get(key.toString())
 
 		if (!value) {
 			return defaultValue
@@ -37,11 +38,11 @@ export const useQueryManager = () => {
 					return queriesArray.indexOf(a) - queriesArray.indexOf(b)
 				}
 			})
-			router.push(`?${queryString}`, { scroll: false })
+			router.replace(`?${queryString}`, { scroll: false })
 		}
 		isMounted.current = true
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query, router])
 
-	return { getQueryValue: getQueryValueFromParams }
+	return { getQueryValue: getQueryValueFromParams, updateQuery }
 }

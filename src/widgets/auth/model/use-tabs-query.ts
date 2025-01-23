@@ -1,38 +1,33 @@
-import { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useQueryManager } from '@/common/query'
+import { useEffect, useState } from 'react'
+import { useUnmount } from 'usehooks-ts'
 
 export const useTabsQuery = () => {
-  const [currentTab, setCurrentTab] = useState("");
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+	const [currentTab, setCurrentTab] = useState('login')
+	const { getQueryValue, updateQuery } = useQueryManager()
 
-  useEffect(() => {
-    if (searchParams) {
-      const tab = searchParams.get("t") || "login";
-      setCurrentTab(tab);
+	const handleTabChange = (tab: string) => {
+		setCurrentTab(tab)
+		updateQuery({ tab })
+	}
 
-      const updatedSearchParams = new URLSearchParams(searchParams.toString());
-      updatedSearchParams.set("t", tab);
+	useEffect(() => {
+		const tab = getQueryValue('tab', currentTab)
 
-      router.replace(`${pathname}?${updatedSearchParams.toString()}`);
-    }
-  }, [pathname, searchParams, router]);
+		// Приведение типа: используем первое значение, если `tab` — это массив
+		const resolvedTab = Array.isArray(tab) ? tab[0] : tab
 
-  const handleTabChange = (value: string) => {
-    setCurrentTab(value);
+		setCurrentTab(resolvedTab || 'login')
+		updateQuery({ tab: resolvedTab || 'login' })
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
-    if (searchParams) {
-      const updatedSearchParams = new URLSearchParams(searchParams.toString());
-      updatedSearchParams.set("t", value);
+	useUnmount(() => {
+		updateQuery({ tab: undefined })
+	})
 
-      router.replace(`${pathname}?${updatedSearchParams.toString()}`);
-    }
-  };
-
-  return {
-    handleTabChange,
-    currentTab,
-  };
-};
+	return {
+		handleTabChange,
+		currentTab
+	}
+}

@@ -1,4 +1,4 @@
-import { Filters } from '@/features/filter/store/filter.store'
+import { Filters } from '@/features/filter/types'
 import { create } from 'zustand'
 
 export type Query = Record<string, string | string[] | undefined> &

@@ -3,6 +3,7 @@ import { cn } from '@/shared/lib/css'
 import { getStatus } from '@/shared/lib/map'
 import { Course, CourseStatus } from '@/shared/types/course.types'
 import { PropsWithClassName } from '@/shared/types/props.types'
+import { Rating } from '@/shared/ui/custom/rating'
 import {
 	Popover,
 	PopoverContent,
@@ -11,7 +12,6 @@ import {
 import { Button } from '@/shared/ui/other/button'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
-import { Star } from 'lucide-react'
 import React, { PropsWithChildren } from 'react'
 
 export const CoursePopover: React.FC<
@@ -26,16 +26,11 @@ export const CoursePopover: React.FC<
 			<PopoverContent
 				align='start'
 				side='right'
-				className='p-layout w-[380px] flex flex-col gap-2'
+				className='flex w-[380px] flex-col gap-2 p-layout'
 			>
-				<div className='flex justify-between items-center'>
+				<div className='flex items-center justify-between'>
 					<Title size='small'>{item.title}</Title>
-					<div className='flex gap-1 items-center select-none cursor-default text-indigo-500'>
-						<Star size={16} fill='#6366f1' />
-						<Text size='small' className='font-semibold'>
-							{item.statistics.averageRating}
-						</Text>
-					</div>
+					<Rating rating={item.statistics.averageRating} />
 				</div>
 				<Text size='small' color='gray'>
 					{item.description}
@@ -43,7 +38,7 @@ export const CoursePopover: React.FC<
 
 				<div className='grid grid-cols-2 gap-3'>
 					{item.metadata.teacher && (
-						<div className='bg-indigo-200 col-span-2 flex gap-1 items-center   p-2 rounded-lg'>
+						<div className='col-span-2 flex items-center gap-1 rounded-lg bg-indigo-200 p-2'>
 							<Text size='small'>Создатель: </Text>
 							<Text size='small' className='font-bold'>
 								{item.metadata.teacher}
@@ -53,17 +48,17 @@ export const CoursePopover: React.FC<
 
 					<WithCondition
 						condition={!!item.progress.itemsQuantity}
-						className='bg-indigo-200 col-span-2 flex gap-1 items-center   p-2 rounded-lg'
+						className='col-span-2 flex items-center gap-1 rounded-lg bg-indigo-200 p-2'
 						render={
 							<>
 								<Text size='small'>Текущее задание: </Text>
-								<Text size='small' className='font-bold line-clamp-2'>
+								<Text size='small' className='line-clamp-2 font-bold'>
 									{item.progress.currentItem.title}
 								</Text>
 							</>
 						}
 					/>
-					<div className='bg-indigo-200 col-span-1  flex gap-1 items-center   p-2 rounded-lg'>
+					<div className='col-span-1 flex items-center gap-1 rounded-lg bg-indigo-200 p-2'>
 						<Text size='extraSmall'>Заданий: </Text>
 						<Text size='extraSmall' className='font-bold'>
 							{item.progress.itemsQuantity}
@@ -71,27 +66,27 @@ export const CoursePopover: React.FC<
 					</div>
 					<WithCondition
 						condition={!!item.progress.itemsQuantity}
-						className='bg-indigo-200 col-span-1 flex gap-1 items-center   p-2 rounded-lg'
+						className='col-span-1 flex items-center gap-1 rounded-lg bg-indigo-200 p-2'
 						render={
 							<>
 								<Text size='extraSmall'>Секций: </Text>
-								<Text size='extraSmall' className='font-bold line-clamp-2'>
+								<Text size='extraSmall' className='line-clamp-2 font-bold'>
 									{item.progress.chaptersQuantity}
 								</Text>
 							</>
 						}
 					/>
 					<WithCondition
-						className='bg-indigo-200  p-2 rounded-lg'
+						className='rounded-lg bg-indigo-200 p-2'
 						condition={!!item.status}
 						render={
-							<div className='flex gap-2 items-center'>
+							<div className='flex items-center gap-2'>
 								<Text size='extraSmall' className=''>
 									Статус:
 								</Text>
 								<Text
 									size='extraSmall'
-									className='font-bold line-clamp-2 break-words '
+									className='line-clamp-2 break-words font-bold'
 								>
 									{getStatus<CourseStatus>(item.status!)}
 								</Text>
@@ -99,16 +94,16 @@ export const CoursePopover: React.FC<
 						}
 					/>
 					<WithCondition
-						className='bg-indigo-200  p-2 rounded-lg'
+						className='rounded-lg bg-indigo-200 p-2'
 						condition={!!item.statistics.studentsNow}
 						render={
-							<div className='flex gap-2 justify-start items-center'>
+							<div className='flex items-center justify-start gap-2'>
 								<Text size='extraSmall' className=''>
 									Студентов сейчас:
 								</Text>
 								<Text
 									size='extraSmall'
-									className='font-bold line-clamp-2 break-words '
+									className='line-clamp-2 break-words font-bold'
 								>
 									{item.statistics.studentsNow}
 								</Text>
@@ -118,7 +113,7 @@ export const CoursePopover: React.FC<
 				</div>
 				<div
 					className={cn(
-						'mt-auto flex ',
+						'mt-auto flex',
 						!item.code ? 'justify-between' : 'justify-end'
 					)}
 				>
@@ -128,7 +123,7 @@ export const CoursePopover: React.FC<
 						render={<Button variant={'outline'}>Отписаться</Button>}
 					/>
 
-					<div className='flex gap-3 mt-8'>
+					<div className='mt-8 flex gap-3'>
 						<Button>
 							{item.progress.itemsCompleted > 1 ? 'Продолжить' : 'Выполнить'}
 						</Button>

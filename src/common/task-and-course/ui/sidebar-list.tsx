@@ -3,7 +3,7 @@
 import { SidebarCourse } from '@/entities/course'
 import { SidebarTask } from '@/entities/task'
 import { WithCondition } from '@/shared/lib/components/with-condition'
-import { useLastPathnameElement } from '@/shared/lib/hooks/use-last-pathname-element'
+import { useParamsId } from '@/shared/lib/hooks/use-last-pathname-element'
 import { Course } from '@/shared/types/course.types'
 import { TaskProps } from '@/shared/types/task.types'
 import { ScrollArea } from '@/shared/ui/other/scroll-area'
@@ -14,7 +14,7 @@ import React from 'react'
 export const SidebarList: React.FC<{
 	items: TaskProps[] | Course[]
 }> = ({ items }) => {
-	const { currentPage } = useLastPathnameElement()
+	const { currentPage } = useParamsId()
 
 	const isCourseList = (items: (TaskProps | Course)[]): items is Course[] => {
 		return items.some(item => (item as Course).courseId !== undefined)
