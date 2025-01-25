@@ -12,7 +12,7 @@ export const useLayout = () => {
 
 	const setActiveLayout = useLayoutStore(state => state.setLayout)
 
-	const isGrid = layout === Layout.GRID ? true : false
+	const isGrid = layout === Layout.GRID
 
 	useEffect(() => {
 		checkHydration()

@@ -1,6 +1,5 @@
-import { courses } from '@/shared/mock/mock'
+import { courseChapters, courses } from '@/shared/mock/mock'
 import Text from '@/shared/ui/view/text'
-import { CurrentCourse } from '@/widgets/course/ui/current-course'
 import Image from 'next/image'
 
 export async function generateMetadata({
@@ -9,7 +8,7 @@ export async function generateMetadata({
 	params: Promise<{ id: string }>
 }) {
 	const id = (await params).id
-	const course = courses[Number(id) - 1]
+	const course = courses[Number(id) + 1]
 
 	if (!course) {
 		return {
@@ -25,10 +24,14 @@ export async function generateMetadata({
 export default async function CurrentTaskPage({
 	params
 }: {
-	params: Promise<{ id: string }>
+	params: Promise<{ chapterId: string; id: string }>
 }) {
+	const chapterId = (await params).chapterId
 	const id = (await params).id
-	const course = courses[Number(id) - 1]
+	console.log(id, chapterId)
+
+	const course = courseChapters[0]
+	console.log(course)
 
 	if (!course) {
 		return (
@@ -47,9 +50,5 @@ export default async function CurrentTaskPage({
 		)
 	}
 
-	return (
-		<div className='page-h'>
-			<CurrentCourse course={course} />
-		</div>
-	)
+	return <div className='h-full'>Часть курса{chapterId}</div>
 }

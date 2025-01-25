@@ -29,7 +29,8 @@ export enum TaskType {
 	Code = 'code',
 	DragAndDrop = 'dragAndDrop',
 	WriteAnswer = 'writeAnswer',
-	ChooseAnswer = 'chooseAnswer'
+	ChooseAnswer = 'chooseAnswer',
+	Theory = 'theory'
 }
 
 export type TaskCourseType = string
@@ -62,7 +63,7 @@ export interface TaskDateAndTime
 
 export interface TaskBase {
 	title: string
-	description: string
+	description?: string
 }
 
 export interface MicroTasks {
@@ -75,13 +76,15 @@ export interface MicroTasks {
 
 export interface Task extends TaskBase {
 	id: string
-	difficulty: TaskDifficulty
-	microtasksQuantity: number
-	status: TaskStatus
-	privacy: TaskPrivacy
-	communication: TaskCommunication
-	dateAndTime: TaskDateAndTime
+	difficulty?: TaskDifficulty
+	microtasksQuantity?: number
+	status?: TaskStatus
+	privacy?: TaskPrivacy
+	communication?: TaskCommunication
+	dateAndTime?: TaskDateAndTime
 	result?: TaskResult
+	type: TaskType
+	content?: string
 }
 
 export interface TaskProps
@@ -100,3 +103,14 @@ export interface TaskProps
 	microTasks: MicroTasks[]
 	type?: TaskType
 }
+
+export type PartialIfTheory<T> = T extends { type: TaskType.Theory }
+	? { [K in keyof T]?: T[K] } & {
+			id: string
+			title: string
+			content: string
+			type: TaskType.Theory
+		}
+	: T
+
+export type CourseTheory = PartialIfTheory<Task>

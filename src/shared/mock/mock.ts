@@ -1,11 +1,18 @@
-import { Course, CoursePrivacy, CourseStatus } from '../types/course.types'
+import {
+	Course,
+	CourseChapter,
+	CoursePrivacy,
+	CourseStatus,
+	CourseTheory
+} from '../types/course.types'
 import {
 	TaskDifficulty,
 	TaskStatus,
 	TaskResult,
 	TaskType,
 	TaskProps,
-	TaskPrivacy
+	TaskPrivacy,
+	Task
 	// TaskType
 } from '../types/task.types'
 
@@ -104,53 +111,57 @@ export const courses: Course[] = [
 		description: 'Learn the basics of programming with practical examples.',
 		chapters: [
 			{
-				title: '123321',
-				status: TaskStatus.Pending,
+				id: 'chapter1',
+				title: 'Introduction to Programming',
 				chapterItems: [
 					{
-						contentItem: {
-							title: 'Введение в машинное обучение',
-							content:
-								'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-						},
-						title: 'Введение в машинное обучение',
-						status: CourseStatus.NotStarted,
-						type: undefined,
-						description:
-							'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
+						id: 'task1',
+						title: 'Basics of Programming',
+						content:
+							'Learn about variables, data types, and control structures.',
+						type: TaskType.Theory
 					},
 					{
-						contentItem: {
-							id: 'task-5',
-							title: 'Линейная регрессия',
-							description:
-								'Научитесь использовать линейную регрессию для прогнозирования.',
-							difficulty: TaskDifficulty.Medium,
-							microtasksQuantity: 2,
-							status: TaskStatus.Active,
-							privacy: TaskPrivacy.Public,
-							communication: {
-								teacher: 'Дмитрий Иванов',
-								sutdentsComplete: 30
-							},
-							dateAndTime: {
-								dateOfCreation: '2024-05-01',
-								timeToComplete: '2 часа',
-								timeWhenCompletionStarted: '2024-05-01 11:00',
-								timeWhenCompletionCompleted: undefined,
-								deadline: '2024-05-03'
-							},
-							result: TaskResult.Completed
-						},
-						title: 'Линейная регрессия',
-						status: CourseStatus.Active,
-						type: TaskType.Code,
-						description:
-							'Научитесь использовать линейную регрессию для прогнозирования.'
+						id: 'task2',
+						title: 'Conditional Statements',
+						content: 'Understand if-else and switch-case statements.',
+						type: TaskType.ChooseAnswer
+					}
+				]
+			},
+			{
+				id: 'chapter2',
+				title: 'Advanced Topics',
+				chapterItems: [
+					{
+						id: 'task3',
+						title: 'Object-Oriented Programming',
+						content: 'Dive into classes, objects, and inheritance.',
+						type: TaskType.Theory
+					},
+					{
+						id: 'task4',
+						title: 'Functional Programming',
+						content:
+							'Explore functions as first-class citizens and immutability.',
+						type: TaskType.Code
+					}
+				]
+			},
+			{
+				id: 'chapter3',
+				title: 'Logic and Decisions',
+				chapterItems: [
+					{
+						id: 'task5',
+						title: 'Understanding Loops',
+						content: 'Learn about for, while, and do-while loops.',
+						type: TaskType.Theory
 					}
 				]
 			}
 		],
+
 		metadata: {
 			teacher: 'John Doe',
 			comments: 'Great course for beginners.',
@@ -160,16 +171,6 @@ export const courses: Course[] = [
 		progress: {
 			chaptersQuantity: 1,
 			itemsCompleted: 3,
-			currentItem: {
-				contentItem: {
-					title: 'Variables and Data Types',
-					content: 'Learn about variables and different data types.'
-				},
-				title: 'Variables and Data Types',
-				status: CourseStatus.NotStarted,
-				type: undefined,
-				description: 'Learn about variables and different data types.'
-			},
 			itemsQuantity: 5
 		},
 		statistics: {
@@ -185,54 +186,57 @@ export const courses: Course[] = [
 		description: 'Deep dive into JavaScript, covering advanced topics.',
 		chapters: [
 			{
-				title: '123321',
-				status: TaskStatus.Pending,
-
+				id: 'chapter1',
+				title: 'Introduction to Programming',
 				chapterItems: [
 					{
-						contentItem: {
-							title: 'Введение в машинное обучение',
-							content:
-								'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-						},
-						title: 'Введение в машинное обучение',
-						status: CourseStatus.NotStarted,
-						type: undefined,
-						description:
-							'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
+						id: 'task1',
+						title: 'Basics of Programming',
+						content:
+							'Learn about variables, data types, and control structures.',
+						type: TaskType.Theory
 					},
 					{
-						contentItem: {
-							id: 'task-5',
-							title: 'Линейная регрессия',
-							description:
-								'Научитесь использовать линейную регрессию для прогнозирования.',
-							difficulty: TaskDifficulty.Medium,
-							microtasksQuantity: 2,
-							status: TaskStatus.Active,
-							privacy: TaskPrivacy.Public,
-							communication: {
-								teacher: 'Дмитрий Иванов',
-								sutdentsComplete: 30
-							},
-							dateAndTime: {
-								dateOfCreation: '2024-05-01',
-								timeToComplete: '2 часа',
-								timeWhenCompletionStarted: '2024-05-01 11:00',
-								timeWhenCompletionCompleted: undefined,
-								deadline: '2024-05-03'
-							},
-							result: TaskResult.Completed
-						},
-						title: 'Линейная регрессия',
-						status: CourseStatus.Active,
-						type: TaskType.Code,
-						description:
-							'Научитесь использовать линейную регрессию для прогнозирования.'
+						id: 'task2',
+						title: 'Conditional Statements',
+						content: 'Understand if-else and switch-case statements.',
+						type: TaskType.ChooseAnswer
+					}
+				]
+			},
+			{
+				id: 'chapter2',
+				title: 'Advanced Topics',
+				chapterItems: [
+					{
+						id: 'task3',
+						title: 'Object-Oriented Programming',
+						content: 'Dive into classes, objects, and inheritance.',
+						type: TaskType.Theory
+					},
+					{
+						id: 'task4',
+						title: 'Functional Programming',
+						content:
+							'Explore functions as first-class citizens and immutability.',
+						type: TaskType.Code
+					}
+				]
+			},
+			{
+				id: 'chapter3',
+				title: 'Logic and Decisions',
+				chapterItems: [
+					{
+						id: 'task5',
+						title: 'Understanding Loops',
+						content: 'Learn about for, while, and do-while loops.',
+						type: TaskType.Theory
 					}
 				]
 			}
 		],
+
 		metadata: {
 			teacher: 'Jane Smith',
 			comments: 'A very detailed course on JavaScript.',
@@ -241,18 +245,7 @@ export const courses: Course[] = [
 		code: 123456,
 		progress: {
 			chaptersQuantity: 1,
-
 			itemsCompleted: 4,
-			currentItem: {
-				contentItem: {
-					title: 'Asynchronous JavaScript',
-					content: 'Understanding async functions and promises.'
-				},
-				title: 'Asynchronous JavaScript',
-				status: CourseStatus.NotStarted,
-				type: undefined,
-				description: 'Understanding async functions and promises.'
-			},
 			itemsQuantity: 6
 		},
 		statistics: {
@@ -261,341 +254,55 @@ export const courses: Course[] = [
 		},
 		status: CourseStatus.InProgress,
 		privacy: CoursePrivacy.Public
+	}
+]
+export const courseChapters = [
+	{
+		id: 'chapter1',
+		title: 'Introduction to Programming',
+		chapterItems: [
+			{
+				id: 'task1',
+				title: 'Basics of Programming',
+				content: 'Learn about variables, data types, and control structures.',
+				type: TaskType.Theory
+			},
+			{
+				id: 'task2',
+				title: 'Conditional Statements',
+				content: 'Understand if-else and switch-case statements.',
+				type: TaskType.ChooseAnswer
+			}
+		]
 	},
 	{
-		courseId: '3',
-		title: 'Web Development Bootcamp',
-		description: 'Learn web development from scratch.',
-		chapters: [
+		id: 'chapter2',
+		title: 'Advanced Topics',
+		chapterItems: [
 			{
-				title: '123321',
-				status: TaskStatus.Pending,
-
-				chapterItems: [
-					{
-						contentItem: {
-							title: 'Введение в машинное обучение',
-							content:
-								'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-						},
-						title: 'Введение в машинное обучение',
-						status: CourseStatus.NotStarted,
-						type: undefined,
-						description:
-							'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-					},
-					{
-						contentItem: {
-							id: 'task-5',
-							title: 'Линейная регрессия',
-							description:
-								'Научитесь использовать линейную регрессию для прогнозирования.',
-							difficulty: TaskDifficulty.Medium,
-							microtasksQuantity: 2,
-							status: TaskStatus.Active,
-							privacy: TaskPrivacy.Public,
-							communication: {
-								teacher: 'Дмитрий Иванов',
-								sutdentsComplete: 30
-							},
-							dateAndTime: {
-								dateOfCreation: '2024-05-01',
-								timeToComplete: '2 часа',
-								timeWhenCompletionStarted: '2024-05-01 11:00',
-								timeWhenCompletionCompleted: undefined,
-								deadline: '2024-05-03'
-							},
-							result: TaskResult.Completed
-						},
-						title: 'Линейная регрессия',
-						status: CourseStatus.Active,
-						type: TaskType.Code,
-						description:
-							'Научитесь использовать линейную регрессию для прогнозирования.'
-					}
-				]
-			}
-		],
-		metadata: {
-			teacher: 'Emily Johnson',
-			comments: 'Excellent for beginners in web development.',
-			creationDate: '2024-03-01'
-		},
-		progress: {
-			chaptersQuantity: 1,
-
-			itemsCompleted: 5,
-			currentItem: {
-				contentItem: {
-					title: 'HTML and CSS Basics',
-					content: 'Learn the fundamentals of HTML and CSS.'
-				},
-				title: 'HTML and CSS Basics',
-				status: CourseStatus.NotStarted,
-				type: undefined,
-				description: 'Learn the fundamentals of HTML and CSS.'
+				id: 'task3',
+				title: 'Object-Oriented Programming',
+				content: 'Dive into classes, objects, and inheritance.',
+				type: TaskType.Theory
 			},
-			itemsQuantity: 7
-		},
-		statistics: {
-			studentsNow: 200,
-			averageRating: 4.9
-		},
-		status: CourseStatus.InProgress,
-		privacy: CoursePrivacy.Public
-	},
-
-	{
-		courseId: '4',
-		title: 'Основы Python',
-		description: 'Изучите основы Python с примерами из реальной жизни.',
-		chapters: [
 			{
-				title: '123321',
-				status: TaskStatus.Pending,
-
-				chapterItems: [
-					{
-						contentItem: {
-							title: 'Введение в машинное обучение',
-							content:
-								'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-						},
-						title: 'Введение в машинное обучение',
-						status: CourseStatus.NotStarted,
-						type: undefined,
-						description:
-							'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-					},
-					{
-						contentItem: {
-							id: 'task-5',
-							title: 'Линейная регрессия',
-							description:
-								'Научитесь использовать линейную регрессию для прогнозирования.',
-							difficulty: TaskDifficulty.Medium,
-							microtasksQuantity: 2,
-							status: TaskStatus.Active,
-							privacy: TaskPrivacy.Public,
-							communication: {
-								teacher: 'Дмитрий Иванов',
-								sutdentsComplete: 30
-							},
-							dateAndTime: {
-								dateOfCreation: '2024-05-01',
-								timeToComplete: '2 часа',
-								timeWhenCompletionStarted: '2024-05-01 11:00',
-								timeWhenCompletionCompleted: undefined,
-								deadline: '2024-05-03'
-							},
-							result: TaskResult.Completed
-						},
-						title: 'Линейная регрессия',
-						status: CourseStatus.Active,
-						type: TaskType.Code,
-						description:
-							'Научитесь использовать линейную регрессию для прогнозирования.'
-					}
-				]
+				id: 'task4',
+				title: 'Functional Programming',
+				content: 'Explore functions as first-class citizens and immutability.',
+				type: TaskType.Code
 			}
-		],
-		metadata: {
-			teacher: 'Анна Смирнова',
-			comments: 'Хороший курс для начинающих.',
-			creationDate: '2024-04-01'
-		},
-		progress: {
-			chaptersQuantity: 1,
-
-			itemsCompleted: 2,
-			currentItem: {
-				contentItem: {
-					title: 'Переменные и структуры данных',
-					content:
-						'Изучите переменные, списки, словари и другие структуры данных.'
-				},
-				title: 'Переменные и структуры данных',
-				status: CourseStatus.NotStarted,
-				type: undefined,
-				description:
-					'Изучите переменные, списки, словари и другие структуры данных.'
-			},
-			itemsQuantity: 4
-		},
-		statistics: {
-			studentsNow: 120,
-			averageRating: 4.7
-		},
-		status: CourseStatus.InProgress,
-		privacy: CoursePrivacy.Public
+		]
 	},
 	{
-		courseId: '5',
-		title: 'Машинное обучение для начинающих',
-		description:
-			'Погружение в основы машинного обучения с примерами и практикой.',
-		chapters: [
+		id: 'chapter3',
+		title: 'Logic and Decisions',
+		chapterItems: [
 			{
-				title: '123321',
-				status: TaskStatus.Active,
-
-				chapterItems: [
-					{
-						contentItem: {
-							title: 'Введение в машинное обучение',
-							content:
-								'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-						},
-						title: 'Введение в машинное обучение',
-						status: CourseStatus.NotStarted,
-						type: undefined,
-						description:
-							'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-					},
-					{
-						contentItem: {
-							id: 'task-5',
-							title: 'Линейная регрессия',
-							description:
-								'Научитесь использовать линейную регрессию для прогнозирования.',
-							difficulty: TaskDifficulty.Medium,
-							microtasksQuantity: 2,
-							status: TaskStatus.Active,
-							privacy: TaskPrivacy.Public,
-							communication: {
-								teacher: 'Дмитрий Иванов',
-								sutdentsComplete: 30
-							},
-							dateAndTime: {
-								dateOfCreation: '2024-05-01',
-								timeToComplete: '2 часа',
-								timeWhenCompletionStarted: '2024-05-01 11:00',
-								timeWhenCompletionCompleted: undefined,
-								deadline: '2024-05-03'
-							},
-							result: TaskResult.Completed
-						},
-						title: 'Линейная регрессия',
-						status: CourseStatus.Active,
-						type: TaskType.Code,
-						description:
-							'Научитесь использовать линейную регрессию для прогнозирования.'
-					}
-				]
+				id: 'task5',
+				title: 'Understanding Loops',
+				content: 'Learn about for, while, and do-while loops.',
+				type: TaskType.Theory
 			}
-		],
-		metadata: {
-			teacher: 'Дмитрий Иванов',
-			comments: 'Интересный курс для старта в ML.',
-			creationDate: '2024-05-01'
-		},
-		progress: {
-			chaptersQuantity: 1,
-
-			itemsCompleted: 1,
-			currentItem: {
-				contentItem: {
-					title: 'Введение в машинное обучение',
-					content:
-						'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-				},
-				title: 'Введение в машинное обучение',
-				status: CourseStatus.NotStarted,
-				type: undefined,
-				description:
-					'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-			},
-			itemsQuantity: 5
-		},
-		statistics: {
-			studentsNow: 150,
-			averageRating: 4.8
-		},
-		status: CourseStatus.InProgress,
-		privacy: CoursePrivacy.Public
-	},
-	{
-		courseId: '6',
-		title: 'Машинное обучение для начинающих',
-		description:
-			'Погружение в основы машинного обучения с примерами и практикой.',
-		chapters: [
-			{
-				title: '123321',
-				status: TaskStatus.Active,
-				chapterItems: [
-					{
-						contentItem: {
-							title: 'Введение в машинное обучение',
-							content:
-								'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-						},
-						title: 'Введение в машинное обучение',
-						status: CourseStatus.NotStarted,
-						type: undefined,
-						description:
-							'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-					},
-					{
-						contentItem: {
-							id: 'task-5',
-							title: 'Линейная регрессия',
-							description:
-								'Научитесь использовать линейную регрессию для прогнозирования.',
-							difficulty: TaskDifficulty.Medium,
-							microtasksQuantity: 2,
-							status: TaskStatus.Active,
-							privacy: TaskPrivacy.Public,
-							communication: {
-								teacher: 'Дмитрий Иванов',
-								sutdentsComplete: 30
-							},
-							dateAndTime: {
-								dateOfCreation: '2024-05-01',
-								timeToComplete: '2 часа',
-								timeWhenCompletionStarted: '2024-05-01 11:00',
-								timeWhenCompletionCompleted: undefined,
-								deadline: '2024-05-03'
-							},
-							result: TaskResult.Completed
-						},
-						title: 'Линейная регрессия',
-						status: CourseStatus.Active,
-						type: TaskType.Code,
-						description:
-							'Научитесь использовать линейную регрессию для прогнозирования.'
-					}
-				]
-			}
-		],
-		metadata: {
-			teacher: 'Дмитрий Иванов',
-			comments: 'Интересный курс для старта в ML.',
-			creationDate: '2024-05-01'
-		},
-		progress: {
-			chaptersQuantity: 1,
-
-			itemsCompleted: 1,
-			currentItem: {
-				contentItem: {
-					title: 'Введение в машинное обучение',
-					content:
-						'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-				},
-				title: 'Введение в машинное обучение',
-				status: CourseStatus.NotStarted,
-				type: undefined,
-				description:
-					'Познакомьтесь с ключевыми понятиями и методами машинного обучения.'
-			},
-			itemsQuantity: 5
-		},
-		statistics: {
-			studentsNow: 150,
-			averageRating: 4.8
-		},
-		status: CourseStatus.InProgress,
-		privacy: CoursePrivacy.Public
+		]
 	}
 ]

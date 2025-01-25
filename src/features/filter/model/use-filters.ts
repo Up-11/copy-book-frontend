@@ -1,5 +1,5 @@
 import { initialFilters, useFilterStore } from '../store/filter.store'
-import { Filters, InputFilterKeys } from '../types'
+import { Filters } from '../types'
 import { useQueryManager, useQueryStore } from '@/common/query'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -27,11 +27,6 @@ export const useFilters = () => {
 	const updateRating = (ratings: number[]) => {
 		debouncedUpdate(ratings)
 	}
-
-	const handleInputValue = (value: string, key: InputFilterKeys) => {
-		updateFilter(key, value)
-	}
-
 	useEffect(() => {
 		setQuery(filters)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,7 +54,6 @@ export const useFilters = () => {
 		updateFilter,
 		clear,
 		router,
-		updateRating,
-		handleInputValue
+		updateRating
 	}
 }

@@ -10,7 +10,7 @@ import React from 'react'
 
 export const RootHeader: React.FC = () => {
 	return (
-		<header className=' mt-2 flex w-full items-center justify-between gap-1 header-w'>
+		<header className='header-w mt-2 flex w-full items-center justify-between gap-1'>
 			<div className='flex items-center gap-3'>
 				<Link href={routes.dashboard.student}>
 					<LogoWithRoleBadge role={UserRole.STUDENT} hasLink={false} />

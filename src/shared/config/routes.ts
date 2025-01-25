@@ -25,6 +25,9 @@ export const routes = {
 		main: '/all-courses',
 		currentUserCourse: (id: string) => {
 			return `/student/courses/${id}`
+		},
+		complitionCourse: (courseId: string, chapterId: string) => {
+			return `/course-complition/${courseId}/chapter/${chapterId}`
 		}
 	},
 

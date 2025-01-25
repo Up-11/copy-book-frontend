@@ -10,7 +10,7 @@ export default function StudentCourseLayout({
 	return (
 		<div>
 			<RootHeader />
-			<div className='root-page-w grid grid-cols-[350px,1fr] mt-3'>
+			<div className='root-page-w mt-3 grid grid-cols-[350px,1fr]'>
 				<StudentSidebar isTask={false} />
 				<div className='h-full'>{children}</div>
 			</div>

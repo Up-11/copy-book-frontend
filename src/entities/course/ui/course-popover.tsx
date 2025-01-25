@@ -53,7 +53,7 @@ export const CoursePopover: React.FC<
 							<>
 								<Text size='small'>Текущее задание: </Text>
 								<Text size='small' className='line-clamp-2 font-bold'>
-									{item.progress.currentItem.title}
+									{item.progress.currentItem?.title}
 								</Text>
 							</>
 						}

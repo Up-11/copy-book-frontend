@@ -1,6 +1,6 @@
 'use client'
 
-import { IconDropdownTrigger } from './icon-dropdown-trigger'
+import { IconDropdownTrigger } from '../../../shared/ui/custom/icon-dropdown-trigger'
 import { SettingsCodeEditor } from '@/features/code-editor'
 import { routes } from '@/shared/config/routes'
 import { UiAvatar } from '@/shared/ui/custom/ui-avatar'

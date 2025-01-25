@@ -38,7 +38,7 @@ export const useQueryManager = () => {
 					return queriesArray.indexOf(a) - queriesArray.indexOf(b)
 				}
 			})
-			router.replace(`?${queryString}`, { scroll: false })
+			history.replaceState(null, '', `?${queryString}`)
 		}
 		isMounted.current = true
 		// eslint-disable-next-line react-hooks/exhaustive-deps

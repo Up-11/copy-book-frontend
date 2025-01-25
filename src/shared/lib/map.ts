@@ -38,6 +38,10 @@ export const getBadgeByTaskType = (type: TaskType) => {
 			{ text: 'Перетаскивание', classNames: 'border-red-200 bg-red-100' }
 		],
 		[
+			TaskType.Theory,
+			{ text: 'Теория', classNames: 'border-red-200 bg-red-100' }
+		],
+		[
 			TaskType.WriteAnswer,
 			{ text: 'Запись ответа', classNames: 'border-red-200 bg-red-100' }
 		]

@@ -1,4 +1,4 @@
-import { Task, TaskStatus, TaskType } from './task.types'
+import { PartialIfTheory, Task, TaskStatus } from './task.types'
 
 export enum CourseStatus {
 	NotStarted = 'not started',
@@ -20,20 +20,7 @@ export type CourseBase = {
 	courseId: string
 }
 
-export type CourseTheory = {
-	title: string
-	content: string
-}
-
 export type CourseCode = number
-
-export type CourseItem = {
-	contentItem: CourseTheory | Task
-	title: string
-	status?: CourseStatus
-	type?: TaskType
-	description?: string
-}
 
 export interface CourseMetadata {
 	teacher: string
@@ -44,7 +31,7 @@ export interface CourseMetadata {
 
 export interface CourseProgress {
 	itemsCompleted: number
-	currentItem: CourseItem
+	currentItem?: Task
 	itemsQuantity: number
 	chaptersQuantity: number
 }
@@ -55,9 +42,10 @@ export interface CourseStatistics {
 }
 
 export type CourseChapter = {
-	chapterItems: CourseItem[]
+	chapterItems: PartialIfTheory<Task[]>
 	title: string
-	status: TaskStatus
+	status?: TaskStatus
+	id: string
 }
 
 export interface Course {

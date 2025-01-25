@@ -1,14 +1,14 @@
 'use client'
 
 import { useQueryManager } from '@/common/query'
-import { Slider } from '@/common/slider/slider'
+import { Slider, SliderMicroTaskItem } from '@/common/slider'
 import { TaskProgress } from '@/common/task-and-course/ui/progress-bar'
 import { routes } from '@/shared/config/routes'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
 import { getStatus } from '@/shared/lib/map'
-import { TaskProps, TaskStatus } from '@/shared/types/task.types'
+import { MicroTasks, TaskProps, TaskStatus } from '@/shared/types/task.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'
 import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
@@ -21,8 +21,8 @@ import React from 'react'
 export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 	useQueryManager()
 	return (
-		<div className='p-layout flex flex-col h-full'>
-			<div className='flex justify-between items-center'>
+		<div className='flex h-full flex-col p-layout'>
+			<div className='flex items-center justify-between'>
 				<Title size='large'>{task.title}</Title>
 				<TaskDiffBadge diff={task.difficulty} className='text-xl' />
 			</div>
@@ -34,18 +34,18 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 			<div className='col-span-3 mb-4'>
 				<TaskProgress className='w-full' item={task} />
 			</div>
-			<section className='grid grid-rows-[1fr_auto] grid-cols-[300px_1fr_1fr] mt-4 gap-3'>
+			<section className='mt-4 grid grid-cols-[300px_1fr_1fr] grid-rows-[1fr_auto] gap-3'>
 				<WithCondition
 					condition={!!task.course}
-					className='bg-indigo-100 p-layout rounded-lg '
+					className='rounded-lg bg-indigo-100 p-layout'
 					render={
 						<div className='group'>
 							<Link
 								href={routes.dashboard.student}
-								className='flex justify-between items-center  cursor-pointer '
+								className='flex cursor-pointer items-center justify-between'
 							>
 								Курс:{' '}
-								<UiIcon className='hover:text-zinc-950  group-hover:scale-105 transition-transform'>
+								<UiIcon className='transition-transform hover:text-zinc-950 group-hover:scale-105'>
 									<ArrowUpRight />
 								</UiIcon>
 							</Link>
@@ -55,7 +55,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 				/>
 				<WithCondition
 					condition={!!task.teacher}
-					className='bg-indigo-100 p-layout rounded-lg'
+					className='rounded-lg bg-indigo-100 p-layout'
 					render={
 						<div>
 							Преподаватель:
@@ -64,7 +64,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 					}
 				/>
 				<WithCondition
-					className='bg-indigo-100 p-layout rounded-lg'
+					className='rounded-lg bg-indigo-100 p-layout'
 					condition={!!task.status}
 					render={
 						<div>
@@ -75,7 +75,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 				/>
 				<WithCondition
 					condition={!!(task.deadline || task.timeToComplete)}
-					className='bg-indigo-100 justify-between flex items-center gap-1 p-layout rounded-lg row-start-2 col-span-3'
+					className='col-span-3 row-start-2 flex items-center justify-between gap-1 rounded-lg bg-indigo-100 p-layout'
 					render={
 						<>
 							<WithCondition
@@ -93,7 +93,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 							<WithCondition
 								condition={!!task.timeToComplete}
 								render={
-									<div className=' flex flex-col'>
+									<div className='flex flex-col'>
 										Время на выполнение ограничено:{' '}
 										<Title className={cn(task.deadline ? 'self-end' : '')}>
 											{task.timeToComplete}
@@ -106,7 +106,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 				/>
 				<WithCondition
 					condition={!!task.sutdentsComplete}
-					className='bg-indigo-100  gap-1 p-layout rounded-lg  col-span-1'
+					className='col-span-1 gap-1 rounded-lg bg-indigo-100 p-layout'
 					render={
 						<div>
 							Студентов выполнило:
@@ -116,7 +116,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 				/>
 				<WithCondition
 					condition={!!task.rating}
-					className='bg-indigo-100  gap-1 p-layout rounded-lg  col-span-1 '
+					className='col-span-1 gap-1 rounded-lg bg-indigo-100 p-layout'
 					render={
 						<div>
 							Рейтинг:
@@ -125,14 +125,17 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 					}
 				/>
 			</section>
-			<section className='mt-auto flex flex-col gap-1  '>
+			<section className='mt-auto flex flex-col gap-1'>
 				<Title>Упражнения</Title>
-				<Slider items={task.microTasks} />
+				<Slider<MicroTasks>
+					items={task.microTasks}
+					renderItems={task => <SliderMicroTaskItem item={task} />}
+				/>
 			</section>
 			<section
 				className={cn(
-					' flex mt-auto gap-3  ',
-					!task.course ? ' justify-between' : 'justify-end'
+					'mt-auto flex gap-3',
+					!task.course ? 'justify-between' : 'justify-end'
 				)}
 			>
 				{!task.course && <Button variant={'outline'}>Удалить</Button>}
