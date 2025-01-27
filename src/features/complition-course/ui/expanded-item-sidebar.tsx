@@ -3,7 +3,7 @@
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { PropsWithClassName } from '@/shared/types/props.types'
-import { TaskType } from '@/shared/types/task.types'
+import { TaskStatus, TaskType } from '@/shared/types/task.types'
 import { Separator } from '@/shared/ui/view/separator'
 import Title from '@/shared/ui/view/title'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -12,9 +12,13 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 export const ExpandedChapterSidebar: React.FC<
-	PropsWithClassName & { renderItems: () => React.ReactNode; title: string }
-> = ({ className, renderItems, title }) => {
-	const [isExpanded, setIsExpanded] = useState(false)
+	PropsWithClassName & {
+		renderItems: () => React.ReactNode
+		title: string
+		isActive?: boolean
+	}
+> = ({ className, renderItems, title, isActive }) => {
+	const [isExpanded, setIsExpanded] = useState(isActive ? true : false)
 
 	return (
 		<section className={cn(className)}>
@@ -22,7 +26,9 @@ export const ExpandedChapterSidebar: React.FC<
 				onClick={() => setIsExpanded(prev => !prev)}
 				className='flex w-full cursor-default select-none items-center justify-between rounded-sm p-2 transition-colors hover:bg-accent'
 			>
-				<Title size='small'>{title}</Title>
+				<Title size='small' className='line-clamp-1'>
+					{title}
+				</Title>
 				<ChevronDown
 					size={16}
 					className={cn('transition-transform', isExpanded && 'rotate-180')}
@@ -52,15 +58,28 @@ export const ExpandedSidebarItem: React.FC<{
 	href: string
 	id: string
 	type?: TaskType
-}> = ({ title, href, id, type }) => {
+	status?: TaskStatus
+}> = ({ title, href, id, type, status }) => {
 	return (
 		<Link
 			href={routes.course.complitionCourse(id, href)}
-			className='flex cursor-pointer select-none items-center justify-between rounded-sm p-2 text-sm transition-colors hover:bg-accent'
+			className={cn(
+				'flex cursor-pointer select-none items-center justify-between rounded-sm p-2 text-sm transition-colors hover:bg-accent',
+				status === TaskStatus.Closed && 'bg-green-50'
+			)}
 		>
-			{title}
+			<p className='line-clamp-2 text-sm'>{title}</p>
 
-			{type !== TaskType.Theory && <div>TASK</div>}
+			{type !== TaskType.Theory && status !== TaskStatus.Closed && (
+				<span className='rounded-sm bg-indigo-100 p-1 text-xs text-muted-foreground'>
+					Задача
+				</span>
+			)}
+			{status === TaskStatus.Closed && (
+				<span className='rounded-sm p-1 text-xs text-muted-foreground'>
+					Оценка
+				</span>
+			)}
 		</Link>
 	)
 }

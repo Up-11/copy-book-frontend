@@ -1,4 +1,4 @@
-import { PartialIfTheory, Task, TaskStatus } from './task.types'
+import { Task, TaskStatus } from './task.types'
 
 export enum CourseStatus {
 	NotStarted = 'not started',
@@ -42,7 +42,7 @@ export interface CourseStatistics {
 }
 
 export type CourseChapter = {
-	chapterItems: PartialIfTheory<Task[]>
+	chapterItems: Task[]
 	title: string
 	status?: TaskStatus
 	id: string

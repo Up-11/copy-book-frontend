@@ -54,7 +54,7 @@ export const UiNavigationMenu: React.FC = () => {
 								<MenuItem
 									key={task.id}
 									title={task.title}
-									description={task.description}
+									description={task.description || ''}
 									diff={task.difficulty}
 									href={routes.tasks.currentUserTask(task.id)}
 								/>
@@ -118,8 +118,7 @@ export const UiNavigationMenu: React.FC = () => {
 				<NavigationMenuItem>
 					<Link
 						href={routes.code.sandbox}
-						className=' cursor-pointer group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50
-'
+						className='group inline-flex h-9 w-max cursor-pointer items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'
 					>
 						Календарь
 					</Link>
@@ -163,13 +162,13 @@ const MenuItem: React.FC<MenuItemType> = ({
 		<NavigationMenuLink asChild>
 			<Link
 				className={cn(
-					'grid items-center grid-cols-[1fr_auto]  select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-indigo-50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
+					'grid select-none grid-cols-[1fr_auto] items-center space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-indigo-50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'
 				)}
 				href={href}
 			>
 				<div>
 					<h1 className='text-sm font-medium leading-none'>{title}</h1>
-					<p className='line-clamp-1 text-sm leading-snug text-muted-foreground '>
+					<p className='line-clamp-1 text-sm leading-snug text-muted-foreground'>
 						{description}
 					</p>
 				</div>

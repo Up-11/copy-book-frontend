@@ -1,24 +1,24 @@
-import React from 'react'
 import {
 	Sheet,
 	SheetContent,
 	SheetDescription,
 	SheetHeader,
 	SheetTitle,
-	SheetTrigger,
+	SheetTrigger
 } from './sheet'
 import { ModalProps } from '@/shared/types/props.types'
+import React from 'react'
 
 export const Drawer: React.FC<Omit<ModalProps, 'footer'>> = ({
 	className,
 	children,
 	title,
 	description,
-	content,
+	content
 }) => {
 	return (
 		<Sheet>
-			<SheetTrigger>{children}</SheetTrigger>
+			<SheetTrigger asChild>{children}</SheetTrigger>
 			<SheetContent className={className}>
 				<SheetHeader>
 					<SheetTitle>{title}</SheetTitle>

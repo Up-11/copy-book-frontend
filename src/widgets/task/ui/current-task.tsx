@@ -1,14 +1,12 @@
 'use client'
 
 import { useQueryManager } from '@/common/query'
-import { Slider, SliderMicroTaskItem } from '@/common/slider'
-import { TaskProgress } from '@/common/task-and-course/ui/progress-bar'
 import { routes } from '@/shared/config/routes'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
-import { getStatus } from '@/shared/lib/map'
-import { MicroTasks, TaskProps, TaskStatus } from '@/shared/types/task.types'
+import { getBadgeByTaskType, getStatus } from '@/shared/lib/map'
+import { TaskProps, TaskStatus } from '@/shared/types/task.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'
 import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
@@ -20,8 +18,9 @@ import React from 'react'
 
 export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 	useQueryManager()
+	//TODO MB AND SIDEBAR FIXED
 	return (
-		<div className='flex h-full flex-col p-layout'>
+		<div className='flex h-full flex-col gap-3 p-layout'>
 			<div className='flex items-center justify-between'>
 				<Title size='large'>{task.title}</Title>
 				<TaskDiffBadge diff={task.difficulty} className='text-xl' />
@@ -31,9 +30,7 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 					{task.description}
 				</Text>
 			</div>
-			<div className='col-span-3 mb-4'>
-				<TaskProgress className='w-full' item={task} />
-			</div>
+
 			<section className='mt-4 grid grid-cols-[300px_1fr_1fr] grid-rows-[1fr_auto] gap-3'>
 				<WithCondition
 					condition={!!task.course}
@@ -124,14 +121,18 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 						</div>
 					}
 				/>
-			</section>
-			<section className='mt-auto flex flex-col gap-1'>
-				<Title>Упражнения</Title>
-				<Slider<MicroTasks>
-					items={task.microTasks}
-					renderItems={task => <SliderMicroTaskItem item={task} />}
+				<WithCondition
+					condition={!!task.type}
+					className='col-span-1 gap-1 rounded-lg bg-indigo-100 p-layout'
+					render={
+						<div>
+							Тип:
+							<Title>{getBadgeByTaskType(task.type).text}</Title>
+						</div>
+					}
 				/>
 			</section>
+
 			<section
 				className={cn(
 					'mt-auto flex gap-3',
@@ -139,9 +140,9 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 				)}
 			>
 				{!task.course && <Button variant={'outline'}>Удалить</Button>}
-				<Button>
-					{task.completedMicrotasks != 0 ? 'Продолжить' : 'Выполнить'}
-				</Button>
+				<Link href={routes.tasks.complitionTask(task.id)}>
+					<Button>Выполнить</Button>
+				</Link>
 			</section>
 		</div>
 	)

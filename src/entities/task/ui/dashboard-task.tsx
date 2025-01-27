@@ -19,19 +19,19 @@ export const DashboardTask: React.FC<
 	return (
 		<div
 			className={cn(
-				' flex flex-col gap-2 bg-indigo-50 rounded-lg p-layout',
+				'flex flex-col gap-2 rounded-lg bg-indigo-50 p-layout',
 				className
 			)}
 		>
 			<div className='h-[35%]'>
-				<div className='flex  justify-between gap-2 '>
+				<div className='flex justify-between gap-2'>
 					<Title size='medium' className='line-clamp-2'>
 						{item.title}
 					</Title>
 					<TaskDiffBadge diff={item.difficulty} />
 				</div>
 				<div className=''>
-					<Text color='gray' size='small'>
+					<Text color='gray' size='small' className='line-clamp-4'>
 						{item.description}
 					</Text>
 				</div>
@@ -39,7 +39,7 @@ export const DashboardTask: React.FC<
 			<TaskProgress item={item} />
 			<TaskDeadline deadline={item.deadline!} />
 			<TaskCourse taskCourse={item.course!} />
-			<div className='flex justify-between mt-auto'>
+			<div className='mt-auto flex justify-between'>
 				<TaskPopover item={item} isDashboard>
 					<Button variant='default'>Подробнее</Button>
 				</TaskPopover>

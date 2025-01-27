@@ -12,11 +12,11 @@ import {
 	typeFilter
 } from '../filter.data'
 import { useFilters } from '../model/use-filters'
-import { FilterGroup } from './filter-group'
 import { RangeSlider } from './range-slider'
 import { SwitchItem } from './switch-item'
 import { cn } from '@/shared/lib/css'
 import { isObjectEmpty } from '@/shared/lib/utils'
+import { CheckBoxGroup } from '@/shared/ui/forms/checkbox-group'
 import {
 	Popover,
 	PopoverContent,
@@ -74,13 +74,13 @@ const TaskFilter: React.FC<{ isSidebar: boolean }> = ({ isSidebar }) => {
 						</div>
 						<div className='flex gap-5'>
 							<div className='grid grid-cols-2 grid-rows-[auto_auto] gap-x-5 gap-y-3'>
-								<FilterGroup
+								<CheckBoxGroup
 									selected={filters.status}
 									onClickCheckbox={handleCheckboxChange('status')}
 									items={taskStatusFilter}
 									title='Статус'
 								/>
-								<FilterGroup
+								<CheckBoxGroup
 									selected={filters.difficulty}
 									onClickCheckbox={handleCheckboxChange('difficulty')}
 									items={difficultyFilter}
@@ -104,13 +104,13 @@ const TaskFilter: React.FC<{ isSidebar: boolean }> = ({ isSidebar }) => {
 								</div>
 							</div>
 							<div className='grid grid-cols-2'>
-								<FilterGroup
+								<CheckBoxGroup
 									selected={filters.type}
 									onClickCheckbox={handleCheckboxChange('type')}
 									items={typeFilter}
 									title='Тип задания'
 								/>
-								<FilterGroup
+								<CheckBoxGroup
 									selected={filters.course}
 									onClickCheckbox={handleCheckboxChange('course')}
 									items={courseFilter}
@@ -206,7 +206,7 @@ const CourseFilter: React.FC<{ isSidebar: boolean }> = ({ isSidebar }) => {
 								step={0.1}
 							/>
 						</div>
-						<FilterGroup
+						<CheckBoxGroup
 							className='w-[30%]'
 							items={courseStatusFilter}
 							selected={filters.status}

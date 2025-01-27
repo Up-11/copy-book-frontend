@@ -42,7 +42,7 @@ export interface TaskCommunication {
 }
 
 export interface TaskCreationDate {
-	dateOfCreation: string
+	dateOfCreation?: string
 }
 
 export type Deadline = string | Date
@@ -65,19 +65,9 @@ export interface TaskBase {
 	title: string
 	description?: string
 }
-
-export interface MicroTasks {
-	id: string
-	title: string
-	description: string
-	status: TaskStatus
-	type: TaskType
-}
-
 export interface Task extends TaskBase {
 	id: string
 	difficulty?: TaskDifficulty
-	microtasksQuantity?: number
 	status?: TaskStatus
 	privacy?: TaskPrivacy
 	communication?: TaskCommunication
@@ -85,6 +75,9 @@ export interface Task extends TaskBase {
 	result?: TaskResult
 	type: TaskType
 	content?: string
+	variants?: string[]
+	answers?: string[]
+	course?: TaskCourseType
 }
 
 export interface TaskProps
@@ -94,14 +87,12 @@ export interface TaskProps
 	id: string
 	difficulty: TaskDifficulty
 	course?: TaskCourseType
-	microtasksQuantity: number
-	completedMicrotasks?: number
 	deadline?: Deadline
 	result?: TaskResult
 	status?: TaskStatus
 	rating?: TaskRating
-	microTasks: MicroTasks[]
-	type?: TaskType
+	type: TaskType
+	content?: string
 }
 
 export type PartialIfTheory<T> = T extends { type: TaskType.Theory }
@@ -114,3 +105,5 @@ export type PartialIfTheory<T> = T extends { type: TaskType.Theory }
 	: T
 
 export type CourseTheory = PartialIfTheory<Task>
+
+// export interface TaskComplition extends TaskProps {}

@@ -1,4 +1,4 @@
-import { FilterType } from '../types'
+import { FilterType } from '../../../features/filter/types'
 import { UiCheckbox } from '@/shared/ui/custom/ui-checkbox'
 import { Button } from '@/shared/ui/other/button'
 import { Skeleton } from '@/shared/ui/other/skeleton'
@@ -8,7 +8,7 @@ import React from 'react'
 
 interface Props {
 	className?: string
-	title: string
+	title?: string
 	items: FilterType[]
 	loading?: boolean
 	onClickCheckbox?: (value: string) => void
@@ -19,7 +19,7 @@ interface Props {
 	defaultItems?: FilterType[]
 }
 
-export const FilterGroup: React.FC<Props> = ({
+export const CheckBoxGroup: React.FC<Props> = ({
 	items,
 	loading,
 	title,
@@ -30,28 +30,34 @@ export const FilterGroup: React.FC<Props> = ({
 	defaultItems
 }) => {
 	const [showAll, setShowAll] = React.useState(false)
-	const list = showAll ? items : (defaultItems || items).slice(0, limit)
+	const list = showAll
+		? items
+		: limit === -1
+			? defaultItems || items
+			: (defaultItems || items).slice(0, limit)
 
 	if (loading) {
 		return (
 			<div>
-				<Text className='font-bold  pb-1 pt-2' size='small'>
+				<Text className='pb-1 pt-2 font-bold' size='small'>
 					{title}
 				</Text>{' '}
 				{...Array(items.length)
 					.fill(0)
 					.map((_, index) => (
-						<Skeleton key={index} className='h-6 mb-4 rounded-[8px]' />
+						<Skeleton key={index} className='mb-4 h-6 rounded-[8px]' />
 					))}
 			</div>
 		)
 	}
 	return (
 		<div className='flex flex-col gap-2'>
-			<Text className='font-bold  pb-1 pt-2' size='small'>
-				{title}
-			</Text>
-			<div className='flex flex-col gap-1 max-h-64  overflow-auto scrollbar'>
+			{title && (
+				<Text className='pb-1 pt-2 font-bold' size='small'>
+					{title}
+				</Text>
+			)}
+			<div className='scrollbar flex max-h-64 flex-col gap-1 overflow-auto'>
 				{list.map((item, index) => (
 					<UiCheckbox
 						key={index}
@@ -64,11 +70,11 @@ export const FilterGroup: React.FC<Props> = ({
 				))}
 			</div>
 
-			{items.length > limit && (
+			{items.length > limit && limit !== -1 && (
 				<Button
 					variant={'outline'}
 					size={'sm'}
-					className='self-end  !text-xs px-1.5 h-7 border-none !text-indigo-700 font-bold shadow-none'
+					className='h-7 self-end border-none px-1.5 !text-xs font-bold !text-indigo-700 shadow-none'
 					onClick={() => setShowAll(!showAll)}
 				>
 					{showAll ? (

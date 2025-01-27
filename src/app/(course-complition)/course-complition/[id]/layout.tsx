@@ -17,12 +17,10 @@ export default async function StudentCourseLayout({
 			<ComplitionHeader
 				title={course.title}
 				teacher={course.metadata.teacher}
+				code={course?.code}
 			/>
 			<ComplitionCourseSidebar courseId={id} />
-			<div className='ml-80 mt-16'>
-				<p>Текущий курс ID: {id}</p>
-				{children}
-			</div>
+			<div className='ml-80 mt-16'>{children}</div>
 		</>
 	)
 }

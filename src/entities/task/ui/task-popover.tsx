@@ -29,13 +29,13 @@ export const TaskPopover: React.FC<
 			<PopoverContent
 				align='start'
 				side='right'
-				className='p-layout w-[380px] flex flex-col gap-2'
+				className='flex w-[380px] flex-col gap-2 p-layout'
 			>
-				<div className='flex justify-between items-center'>
+				<div className='flex items-center justify-between'>
 					<Title size='small'>{item.title}</Title>
 					<TaskDiffBadge className='text-base' diff={item.difficulty} />
 				</div>
-				<Text size='small' color='gray'>
+				<Text size='small' color='gray' className='line-clamp-6'>
 					{item.description}
 				</Text>
 				<TaskProgress item={item} />
@@ -47,16 +47,16 @@ export const TaskPopover: React.FC<
 				<TaskCourse taskCourse={item.course!} />
 				<div className='grid grid-cols-2 gap-3'>
 					<WithCondition
-						className='bg-indigo-200  p-2 rounded-lg'
+						className='rounded-lg bg-indigo-200 p-2'
 						condition={!!item.status}
 						render={
-							<div className='flex gap-2 items-center'>
+							<div className='flex items-center gap-2'>
 								<Text size='extraSmall' className=''>
 									Статус:
 								</Text>
 								<Text
 									size='extraSmall'
-									className='font-bold line-clamp-2 break-words '
+									className='line-clamp-2 break-words font-bold'
 								>
 									{getStatus<TaskStatus>(item.status!)}
 								</Text>
@@ -64,16 +64,16 @@ export const TaskPopover: React.FC<
 						}
 					/>
 					<WithCondition
-						className='bg-indigo-200  p-2 rounded-lg'
+						className='rounded-lg bg-indigo-200 p-2'
 						condition={!!item.rating}
 						render={
-							<div className='flex gap-2 items-center '>
+							<div className='flex items-center gap-2'>
 								<Text size='extraSmall' className='self-start'>
 									Рейтинг:
 								</Text>
 								<Text
 									size='extraSmall'
-									className='font-bold line-clamp-2 break-words '
+									className='line-clamp-2 break-words font-bold'
 								>
 									{item.rating}
 								</Text>
@@ -83,7 +83,7 @@ export const TaskPopover: React.FC<
 				</div>
 				<div
 					className={cn(
-						'mt-auto flex ',
+						'mt-auto flex',
 						!item.course ? 'justify-between' : 'justify-end'
 					)}
 				>
@@ -93,7 +93,7 @@ export const TaskPopover: React.FC<
 						render={<Button variant={'outline'}>Удалить</Button>}
 					/>
 
-					<div className='flex gap-3 mt-8'>
+					<div className='mt-8 flex gap-3'>
 						<Button>
 							{item.completedMicrotasks !== 0 ? 'Продолжить' : 'Выполнить'}
 						</Button>

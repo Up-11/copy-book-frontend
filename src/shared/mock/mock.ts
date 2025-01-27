@@ -28,7 +28,8 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			TaskType.ChooseAnswer,
 			TaskType.Code,
 			TaskType.DragAndDrop,
-			TaskType.WriteAnswer
+			TaskType.WriteAnswer,
+			TaskType.Theory
 		]
 
 		const statuses = [
@@ -42,6 +43,9 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			TaskResult.Completed,
 			TaskResult.TimeIsOver
 		]
+
+		const answers = ['123', '234', '567', '123512', '12556234', '218657453']
+		const variants = ['123', '234', '567', '123512', '12556234', '218657453']
 
 		const courses = [
 			undefined,
@@ -77,7 +81,23 @@ export const dashboardTasks: TaskProps[] = Array.from(
 		return {
 			id: String(index),
 			title: titles[index % titles.length],
-			description: `Описание задачи номер ${index}: выполните указанное действие для достижения результата. Learn the basics of programming with practical examples. `,
+			description: `
+    ${index}Данная задача предназначена для изучения основ программирования через практические примеры. 
+    Вы сможете:
+    - Понять ключевые концепции программирования, такие как переменные, циклы, условия и функции.
+    - Освоить основные инструменты и подходы к решению задач.
+    - Развить навыки логического мышления и структурированного подхода к работе с кодом.
+
+    Каждый шаг задачи подробно объясняется, чтобы вам было легче освоить материал, даже если вы новичок. 
+    Вы получите возможность сразу же применять полученные знания, выполняя конкретные действия для достижения желаемого результата.
+
+    Основные цели задачи:
+    1. Научиться разбираться в коде.
+    2. Понять, как использовать базовые элементы программирования.
+    3. Применить полученные знания для решения простых практических задач.
+
+    Результат выполнения этой задачи станет прочной основой для дальнейшего изучения программирования и поможет вам почувствовать уверенность в своих силах!
+  `,
 			completedMicrotasks: 5,
 			difficulty: difficulties[index % difficulties.length],
 			type: types[index % types.length],
@@ -96,9 +116,22 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			microTasks: Array.from({ length: 5 }, (_, microIndex) => ({
 				id: `${index}-${microIndex}`,
 				title: `Микрозадача ${microIndex + 1}`,
-				description: `Описание микрозадачи ${microIndex + 1} для задачи ${index}`,
+				description: `
+    ${index}Данная задача предназначена для изучения основ программирования через практические примеры. 
+    Вы сможете:
+    - Понять ключевые концепции программирования, такие как переменные, циклы, условия и функции.
+    - Освоить основные инструменты и подходы к решению задач.
+    - Развить навыки логического мышления и структурированного подхода к работе с кодом.
+
+    Каждый шаг задачи подробно объясняется, чтобы вам было легче освоить материал, даже если вы новичок. 
+    Вы получите возможность сразу же применять полученные знания, выполняя конкретные действия для достижения желаемого результата.
+
+    Результат выполнения этой задачи станет прочной основой для дальнейшего изучения программирования и поможет вам почувствовать уверенность в своих силах!
+  `,
 				status: statuses[index % statuses.length],
-				type: types[index % types.length]
+				type: types[index % types.length],
+				answers: answers,
+				variants: variants
 			}))
 		}
 	}
@@ -256,7 +289,7 @@ export const courses: Course[] = [
 		privacy: CoursePrivacy.Public
 	}
 ]
-export const courseChapters = [
+export const courseChapters: CourseChapter[] = [
 	{
 		id: 'chapter1',
 		title: 'Introduction to Programming',
@@ -264,32 +297,39 @@ export const courseChapters = [
 			{
 				id: 'task1',
 				title: 'Basics of Programming',
-				content: 'Learn about variables, data types, and control structures.',
+				description:
+					'Learn about variables, data types, and control structures.',
 				type: TaskType.Theory
 			},
 			{
 				id: 'task2',
 				title: 'Conditional Statements',
-				content: 'Understand if-else and switch-case statements.',
-				type: TaskType.ChooseAnswer
+				description: 'Understand if-else and switch-case statements.',
+				type: TaskType.ChooseAnswer,
+				difficulty: TaskDifficulty.Hard
 			}
 		]
 	},
 	{
 		id: 'chapter2',
 		title: 'Advanced Topics',
+		status: TaskStatus.Active,
+
 		chapterItems: [
 			{
 				id: 'task3',
 				title: 'Object-Oriented Programming',
-				content: 'Dive into classes, objects, and inheritance.',
-				type: TaskType.Theory
+				description: 'Dive into classes, objects, and inheritance.',
+				type: TaskType.WriteAnswer,
+				difficulty: TaskDifficulty.Hard
 			},
 			{
 				id: 'task4',
 				title: 'Functional Programming',
-				content: 'Explore functions as first-class citizens and immutability.',
-				type: TaskType.Code
+				description:
+					'Explore functions as first-class citizens and immutability.',
+				type: TaskType.Code,
+				difficulty: TaskDifficulty.Hard
 			}
 		]
 	},
@@ -300,8 +340,10 @@ export const courseChapters = [
 			{
 				id: 'task5',
 				title: 'Understanding Loops',
-				content: 'Learn about for, while, and do-while loops.',
-				type: TaskType.Theory
+				description: 'Learn about for, while, and do-while loops.',
+				type: TaskType.Theory,
+				status: TaskStatus.Closed,
+				difficulty: TaskDifficulty.Hard
 			}
 		]
 	}
