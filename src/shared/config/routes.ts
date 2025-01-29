@@ -43,7 +43,9 @@ export const routes = {
 	code: {
 		sandbox: '/code/sandbox',
 		drafts: '/student/drafts'
-	}
+	},
+
+	calendar: '/calendar'
 } as const
 
 export type AppRoutes = typeof routes

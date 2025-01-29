@@ -1,3 +1,4 @@
+import { CourseProgressBar } from '@/common/task-and-course/ui/progress-bar'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { getStatus } from '@/shared/lib/map'
@@ -29,13 +30,15 @@ export const CoursePopover: React.FC<
 				className='flex w-[380px] flex-col gap-2 p-layout'
 			>
 				<div className='flex items-center justify-between'>
-					<Title size='small'>{item.title}</Title>
+					<Title size='small' className='line-clamp-2'>
+						{item.title}
+					</Title>
 					<Rating rating={item.statistics.averageRating} />
 				</div>
-				<Text size='small' color='gray'>
+				<Text size='small' color='gray' className='line-clamp-4'>
 					{item.description}
 				</Text>
-
+				<CourseProgressBar item={item.progress} />
 				<div className='grid grid-cols-2 gap-3'>
 					{item.metadata.teacher && (
 						<div className='col-span-2 flex items-center gap-1 rounded-lg bg-indigo-200 p-2'>

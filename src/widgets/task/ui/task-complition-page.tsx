@@ -15,7 +15,9 @@ export const TaskComplitionPage: React.FC<{ task: Task }> = ({ task }) => {
 					<Text size='small' color='gray'>
 						{getBadgeByTaskType(task?.type).text}
 					</Text>
-					{task?.difficulty && <TaskDiffBadge diff={task.difficulty} />}
+					{task?.difficulty && (
+						<TaskDiffBadge className='text-base' diff={task.difficulty} />
+					)}
 				</section>
 				<section className='flex flex-col items-center justify-center'>
 					<Text size='small' className='self-start'>

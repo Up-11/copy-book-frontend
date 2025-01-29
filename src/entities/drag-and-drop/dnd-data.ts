@@ -17,8 +17,10 @@ export const dragElements: DragElementType[] = [
 	{ id: '14', text: 'Tesla' },
 	{ id: '15', text: 'Mercedes' }
 ]
-export const mockDropContainers: Omit<DropContainerType, 'draggedElements'>[] = [
-	{ id: 'Programming Langs', title: 'ЯП' },
-	{ id: 'Fruits ', title: 'Фрукты' },
-	{ id: 'Cars ', title: 'Автомобили' }
-]
+export const mockDropContainers: Omit<DropContainerType, 'draggedElements'>[] =
+	[
+		{ id: 'Programming Langs', title: 'ЯП' },
+		{ id: 'Fruits ', title: 'Фрукты' },
+		{ id: 'prikols ', title: 'пРИКОЛЫ' },
+		{ id: 'Cars ', title: 'Автомобили' }
+	]

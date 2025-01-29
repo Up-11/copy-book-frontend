@@ -1,0 +1,19 @@
+.rbc-month-view {
+	@apply rounded-2xl;
+}
+.rbc-header {
+	@apply !border-b-transparent !font-light uppercase;
+}
+.columnheader {
+	@apply !font-light uppercase;
+}
+.rbc-date-cell {
+	@apply !flex !items-center !justify-center;
+}
+
+.rbc-row-bg .rbc-off-range-bg:last-child {
+	@apply rounded-br-2xl;
+}
+.rbc-today {
+	@apply !bg-indigo-100;
+}

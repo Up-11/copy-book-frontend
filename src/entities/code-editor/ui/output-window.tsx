@@ -1,7 +1,6 @@
 'use client'
 
-import { StepItem } from '../../reset-password/ui/step-item'
-import { useCompileCodeStore } from '../store/compile-code-store'
+import { OutputDetailsNullable } from '../../../features/code-editor/types'
 import { OutputDetails } from './output-details'
 import { cn } from '@/shared/lib/css'
 import { Loader } from '@/shared/ui/view/loader'
@@ -13,10 +12,10 @@ enum CompileStatus {
 	COMPILATION_ERROR = 6
 }
 
-export const OutputWindow = () => {
-	const outputDetails = useCompileCodeStore(state => state.outputDetails)
-	const isPending = useCompileCodeStore(state => state.isProcessing)
-
+export const OutputWindow: React.FC<{
+	outputDetails: OutputDetailsNullable
+	isPending: boolean
+}> = ({ outputDetails, isPending }) => {
 	const decodeOutput = (output: string | null): string => {
 		if (!output) return ''
 		try {
@@ -34,25 +33,25 @@ export const OutputWindow = () => {
 		switch (statusId) {
 			case CompileStatus.COMPILATION_ERROR:
 				return (
-					<pre className='px-2 py-1 font-normal text-xs text-red-500'>
+					<pre className='px-2 py-1 text-xs font-normal text-red-500'>
 						{decodeOutput(outputDetails.compile_output)}
 					</pre>
 				)
 			case CompileStatus.SUCCESS:
 				return (
-					<pre className='px-2 py-1 font-normal text-xs text-green-500'>
+					<pre className='px-2 py-1 text-xs font-normal text-green-500'>
 						{decodeOutput(outputDetails.stdout)}
 					</pre>
 				)
 			case CompileStatus.TIME_LIMIT:
 				return (
-					<pre className='px-2 py-1 font-normal text-xs text-red-500'>
+					<pre className='px-2 py-1 text-xs font-normal text-red-500'>
 						Time Limit Exceeded
 					</pre>
 				)
 			default:
 				return (
-					<pre className='px-2 py-1 font-normal text-xs text-red-500'>
+					<pre className='px-2 py-1 text-xs font-normal text-red-500'>
 						{decodeOutput(outputDetails.stderr)}
 					</pre>
 				)
@@ -60,17 +59,16 @@ export const OutputWindow = () => {
 	}
 
 	return (
-		<div className='p-layout '>
-			<h1 className='font-bold text-xl mb-2'>Результат</h1>
-			<div className='flex justify-center items-center '>
+		<>
+			<div className='flex items-center justify-center'>
 				<div
 					className={cn(
-						'w-full h-96 bg-zinc-900 rounded-md text-white font-normal text-sm overflow-y-auto'
+						'h-96 w-full overflow-y-auto rounded-md bg-zinc-900 text-sm font-normal text-white'
 					)}
 				>
 					{isPending ? (
-						<div className='flex flex-col justify-center h-full'>
-							<Loader size={30} className='m-auto h-full ' />
+						<div className='flex h-full flex-col justify-center'>
+							<Loader size={30} className='m-auto h-full' />
 						</div>
 					) : (
 						getOutput()
@@ -78,6 +76,6 @@ export const OutputWindow = () => {
 				</div>
 			</div>
 			<OutputDetails outputDetails={outputDetails} />
-		</div>
+		</>
 	)
 }

@@ -1,4 +1,3 @@
-import { TaskProgress } from '../../../common/task-and-course/ui/progress-bar'
 import { TaskPopover } from './task-popover'
 import { TaskCourse } from './task-primitive/task-course'
 import { TaskDeadline } from './task-primitive/task-deadline'
@@ -23,20 +22,19 @@ export const DashboardTask: React.FC<
 				className
 			)}
 		>
-			<div className='h-[35%]'>
+			<div className='mb-4 h-[35%]'>
 				<div className='flex justify-between gap-2'>
 					<Title size='medium' className='line-clamp-2'>
 						{item.title}
 					</Title>
 					<TaskDiffBadge diff={item.difficulty} />
 				</div>
-				<div className=''>
+				<div>
 					<Text color='gray' size='small' className='line-clamp-4'>
 						{item.description}
 					</Text>
 				</div>
 			</div>
-			<TaskProgress item={item} />
 			<TaskDeadline deadline={item.deadline!} />
 			<TaskCourse taskCourse={item.course!} />
 			<div className='mt-auto flex justify-between'>

@@ -7,7 +7,7 @@ import Editor from '@monaco-editor/react'
 import React from 'react'
 
 interface Props {
-	language: string
+	language?: string
 	code: string | undefined
 	theme?: string
 	onChange: (action: string, data: string | undefined) => void
@@ -34,6 +34,7 @@ export const CodeEditorWindow: React.FC<Props> = ({
 				onChange={handleEditorChange}
 				loading={<Loader />}
 				options={{ fontSize: 16 }}
+				onMount={() => console.log('mounted')}
 			/>
 		</div>
 	)

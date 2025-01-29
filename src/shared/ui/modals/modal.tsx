@@ -1,4 +1,3 @@
-import React from 'react'
 import {
 	Dialog,
 	DialogContent,
@@ -6,20 +5,22 @@ import {
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
-	DialogTrigger,
+	DialogTrigger
 } from './dialog'
 import { ModalProps } from '@/shared/types/props.types'
+import React from 'react'
+
 export const Modal: React.FC<ModalProps> = ({
 	children,
 	description,
 	title,
 	footer,
 	content,
-	className,
+	className
 }) => {
 	return (
 		<Dialog>
-			<DialogTrigger>{children}</DialogTrigger>
+			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent className={className}>
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>

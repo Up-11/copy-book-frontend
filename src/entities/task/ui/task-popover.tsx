@@ -1,4 +1,3 @@
-import { TaskProgress } from '../../../common/task-and-course/ui/progress-bar'
 import { TaskCourse } from './task-primitive/task-course'
 import { TaskDeadline } from './task-primitive/task-deadline'
 import { WithCondition } from '@/shared/lib/components/with-condition'
@@ -38,7 +37,6 @@ export const TaskPopover: React.FC<
 				<Text size='small' color='gray' className='line-clamp-6'>
 					{item.description}
 				</Text>
-				<TaskProgress item={item} />
 				<TaskDeadline
 					format='lll A'
 					deadline={item.deadline!}
@@ -94,9 +92,7 @@ export const TaskPopover: React.FC<
 					/>
 
 					<div className='mt-8 flex gap-3'>
-						<Button>
-							{item.completedMicrotasks !== 0 ? 'Продолжить' : 'Выполнить'}
-						</Button>
+						<Button>Выполнить</Button>
 					</div>
 				</div>
 			</PopoverContent>

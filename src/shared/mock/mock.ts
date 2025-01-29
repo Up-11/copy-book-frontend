@@ -102,7 +102,7 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			difficulty: difficulties[index % difficulties.length],
 			type: types[index % types.length],
 			microtasksQuantity: 10,
-			deadline: '2025-01-30T00:00:00.000Z',
+			deadline: '2025-02-12T00:00:00.000Z',
 			dateOfCreation: '2025-01-01T00:00:00.000Z',
 			timeToComplete: '5h',
 			timeWhenCompletionStarted: '2025-01-10T00:00:00.000Z',
@@ -343,6 +343,14 @@ export const courseChapters: CourseChapter[] = [
 				description: 'Learn about for, while, and do-while loops.',
 				type: TaskType.Theory,
 				status: TaskStatus.Closed,
+				difficulty: TaskDifficulty.Hard
+			},
+			{
+				id: 'task6',
+				title: 'Understanding Loops',
+				description: 'Learn about for, while, and do-while loops.',
+				type: TaskType.DragAndDrop,
+				status: TaskStatus.Active,
 				difficulty: TaskDifficulty.Hard
 			}
 		]

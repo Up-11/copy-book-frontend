@@ -16,7 +16,7 @@ export const TaskDeadline: React.FC<
 > = ({ deadline, format, extraCondition, className }) => {
 	return (
 		<WithCondition
-			condition={!!deadline && extraCondition}
+			condition={!!(deadline && extraCondition)}
 			render={
 				<UiTooltip
 					content={formatDate({
@@ -29,14 +29,14 @@ export const TaskDeadline: React.FC<
 				>
 					<div
 						className={cn(
-							'flex justify-start bg-indigo-200 p-2 rounded-lg gap-1 mt-2',
+							'mt-2 flex justify-start gap-1 rounded-lg bg-indigo-200 p-2',
 							className
 						)}
 					>
 						<Text size='small' className='self-start'>
 							Срок сдачи:
 						</Text>
-						<Text size='small' className='font-bold line-clamp-2 break-words '>
+						<Text size='small' className='line-clamp-2 break-words font-bold'>
 							{formatDate({ date: deadline, format: format })}
 						</Text>
 					</div>

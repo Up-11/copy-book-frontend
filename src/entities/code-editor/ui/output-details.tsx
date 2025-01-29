@@ -1,4 +1,4 @@
-import { OutputDetailsNullable } from '../types'
+import { OutputDetailsNullable } from '../../../features/code-editor/types'
 import React from 'react'
 
 export const OutputDetails: React.FC<{
@@ -11,19 +11,19 @@ export const OutputDetails: React.FC<{
 					{' '}
 					<p className='text-sm'>
 						Статус:
-						<span className='font-semibold px-2 py-1 rounded-md '>
+						<span className='rounded-md px-2 py-1 font-semibold'>
 							{outputDetails?.status?.description}
 						</span>
 					</p>
 					<p className='text-sm'>
 						Память:
-						<span className='font-semibold px-2 py-1 rounded-md'>
+						<span className='rounded-md px-2 py-1 font-semibold'>
 							{outputDetails?.memory}
 						</span>
 					</p>
 					<p className='text-sm'>
 						Время выполнения:
-						<span className='font-semibold px-2 py-1 rounded-md'>
+						<span className='rounded-md px-2 py-1 font-semibold'>
 							{outputDetails?.time}
 						</span>
 					</p>

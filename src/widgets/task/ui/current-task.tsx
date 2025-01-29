@@ -82,7 +82,11 @@ export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 										Срок сдачи:
 										<Title>
 											{task.deadline &&
-												formatDate({ date: task.deadline, format: 'LLL A' })}
+												formatDate({
+													date: task.deadline,
+													format: 'LLL A',
+													smartFormatting: { relativeFormatting: false }
+												})}
 										</Title>
 									</div>
 								}

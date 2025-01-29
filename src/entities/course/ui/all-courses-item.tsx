@@ -1,4 +1,5 @@
 import { CoursePopover } from './course-popover'
+import { CourseProgressBar } from '@/common/task-and-course/ui/progress-bar'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { Course, CourseStatus } from '@/shared/types/course.types'
@@ -28,7 +29,7 @@ export const AllCoursesItem: React.FC<
 		return (
 			<div
 				className={cn(
-					'flex w-full bg-indigo-50 rounded-lg justify-between p-layout',
+					'flex w-full justify-between rounded-lg bg-indigo-50 p-layout',
 					className
 				)}
 			>
@@ -42,11 +43,11 @@ export const AllCoursesItem: React.FC<
 						{item.status !== CourseStatus.NotStarted && (
 							<UiTooltip
 								content='Открыть'
-								className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+								className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 							>
 								<Link
 									href={routes.course.currentUserCourse(item.courseId)}
-									className='p-1 hover:bg-secondary rounded-md'
+									className='rounded-md p-1 hover:bg-secondary'
 								>
 									<ArrowUpRight size={20} />
 								</Link>
@@ -62,13 +63,14 @@ export const AllCoursesItem: React.FC<
 					</Text>
 				</div>
 				<div className='flex items-center gap-10'>
-					<div className='flex gap-1 items-center select-none cursor-default text-indigo-500'>
+					{!isDashboard && <CourseProgressBar item={item.progress} />}
+					<div className='flex cursor-default select-none items-center gap-1 text-indigo-500'>
 						<Star size={16} fill='#6366f1' />
 						<Text size='small' className='font-semibold'>
 							{item.statistics.averageRating}
 						</Text>
 					</div>
-					<div className='flex gap-3 '>
+					<div className='flex gap-3'>
 						<Button size={'sm'}>
 							Приступить <ArrowRightIcon />
 						</Button>
@@ -79,12 +81,12 @@ export const AllCoursesItem: React.FC<
 							className='self-start'
 							side='left'
 						>
-							<div className='p-1 self-start hover:bg-secondary rounded-md transition-colors cursor-pointer'>
+							<div className='cursor-pointer self-start rounded-md p-1 transition-colors hover:bg-secondary'>
 								<Bookmark
 									size={20}
 									className={cn(
 										item.status !== CourseStatus.NotStarted &&
-											'fill-primary border-primary'
+											'border-primary fill-primary'
 									)}
 								/>
 							</div>
@@ -97,7 +99,7 @@ export const AllCoursesItem: React.FC<
 						>
 							<div>
 								<CoursePopover item={item} isDashboard={false}>
-									<div className='p-1 self-start hover:bg-secondary rounded-md transition-colors cursor-pointer'>
+									<div className='cursor-pointer self-start rounded-md p-1 transition-colors hover:bg-secondary'>
 										<CircleEllipsis size={20} />
 									</div>
 								</CoursePopover>
@@ -111,13 +113,13 @@ export const AllCoursesItem: React.FC<
 
 	const gridElement = () => {
 		return (
-			<div className='flex flex-col bg-indigo-50 rounded-lg p-layout gap-4'>
-				<div className='flex flex-col gap-2 w-full'>
-					<div className='flex justify-between  gap-2'>
+			<div className='flex flex-col gap-4 rounded-lg bg-indigo-50 p-layout'>
+				<div className='flex w-full flex-col gap-2'>
+					<div className='flex justify-between gap-2'>
 						<Title size='small' className='line-clamp-2'>
 							{item.title}
 						</Title>
-						<div className='flex gap-1 items-center select-none cursor-default text-indigo-500'>
+						<div className='flex cursor-default select-none items-center gap-1 text-indigo-500'>
 							<Star size={16} fill='#6366f1' />
 							<Text size='small' className='font-semibold'>
 								{item.statistics.averageRating}
@@ -128,9 +130,10 @@ export const AllCoursesItem: React.FC<
 						{item.description}
 					</Text>
 				</div>
-				<div className='flex flex-col gap-3 mt-auto'>
+				<div className='mt-auto flex flex-col gap-3'>
+					<CourseProgressBar item={item.progress} />
 					{item.metadata.teacher && (
-						<div className='bg-indigo-200 flex gap-1 items-center  p-2 rounded-lg'>
+						<div className='flex items-center gap-1 rounded-lg bg-indigo-200 p-2'>
 							<Text size='small'>Создатель: </Text>
 							<Text size='small' className='font-bold'>
 								{item.metadata.teacher}
@@ -138,21 +141,21 @@ export const AllCoursesItem: React.FC<
 						</div>
 					)}
 
-					<div className='flex flex-col gap-2 mt-auto '>
-						<Button size='sm' className='w-full flex  self'>
+					<div className='mt-auto flex flex-col gap-2'>
+						<Button size='sm' className='self flex w-full'>
 							Открыть <ArrowRightIcon />
 						</Button>
-						<div className='flex gap-3 justify-center'>
+						<div className='flex justify-center gap-3'>
 							<UiTooltip
 								content='Добавить в мои курсы'
-								className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+								className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 							>
-								<div className='p-1 hover:bg-secondary rounded-md'>
+								<div className='rounded-md p-1 hover:bg-secondary'>
 									<Bookmark
 										size={20}
 										className={cn(
 											item.status !== CourseStatus.NotStarted &&
-												'fill-primary border-primary'
+												'border-primary fill-primary'
 										)}
 									/>
 								</div>
@@ -160,11 +163,11 @@ export const AllCoursesItem: React.FC<
 
 							<UiTooltip
 								content='Подробнее'
-								className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+								className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 								side='top'
 							>
 								<CoursePopover item={item} isDashboard={false}>
-									<div className='p-1 self-start hover:bg-secondary rounded-md transition-colors cursor-pointer'>
+									<div className='cursor-pointer self-start rounded-md p-1 transition-colors hover:bg-secondary'>
 										<CircleEllipsis size={20} />
 									</div>
 								</CoursePopover>
@@ -172,11 +175,11 @@ export const AllCoursesItem: React.FC<
 							{item.status !== CourseStatus.NotStarted && (
 								<UiTooltip
 									content='Открыть'
-									className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+									className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 								>
 									<Link
 										href={routes.course.currentUserCourse(item.courseId)}
-										className='p-1 hover:bg-secondary rounded-md'
+										className='rounded-md p-1 hover:bg-secondary'
 									>
 										<ArrowUpRight size={20} />
 									</Link>

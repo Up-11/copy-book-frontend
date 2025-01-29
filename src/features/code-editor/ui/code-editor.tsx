@@ -12,7 +12,7 @@ export const CodeEditor: React.FC = () => {
 	const { handleCompileCode } = useCompileCode()
 	return (
 		<div className='h-full'>
-			<div className='flex h-8 items-center  border-b border-b-zinc-700 text-sm px-2 justify-end '>
+			<div className='flex h-8 items-center justify-end border-b border-b-zinc-700 px-2 text-sm'>
 				<Button
 					onClick={handleCompileCode}
 					size={'sm'}

@@ -46,11 +46,7 @@ export const LandingHeader: React.FC = ({}) => {
 
 			<div className='flex items-center'>
 				<ChooseRoleModal>
-					<Button
-						isModalTrigger
-						variant={'secondary'}
-						className='button max-md:hidden'
-					>
+					<Button variant={'secondary'} className='button max-md:hidden'>
 						Открыть тетрадь
 					</Button>
 				</ChooseRoleModal>
