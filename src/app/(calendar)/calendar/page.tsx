@@ -1,19 +1,13 @@
-import { BigCalendar, SmallCalendar } from '@/features/calendar'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-	title: 'Календарь'
-}
+import { BigCalendar } from '@/features/calendar'
+import { RootHeader } from '@/widgets/headers'
 
 export default function Page() {
 	return (
-		<main className='grid h-screen grid-cols-[20%_1fr] p-layout'>
-			<section className='flex flex-col gap-4'>
-				<SmallCalendar />
-			</section>
-			<section>
+		<main className='flex flex-col'>
+			<RootHeader />
+			<div className='h-[calc(100vh-50px)] p-layout'>
 				<BigCalendar />
-			</section>
+			</div>
 		</main>
 	)
 }

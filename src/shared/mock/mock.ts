@@ -78,35 +78,38 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			'Оптимизировать загрузку изображений'
 		]
 
+		const baseDate = new Date('2025-01-01T00:00:00.000Z')
+		const creationDate = new Date(baseDate)
+		creationDate.setDate(creationDate.getDate() + index)
+
+		const startDate = new Date(creationDate)
+		startDate.setDate(startDate.getDate() + 5)
+
+		const completionDate = new Date(startDate)
+		completionDate.setDate(completionDate.getDate() + 5)
+
+		const deadlineDate = new Date(completionDate)
+		deadlineDate.setDate(deadlineDate.getDate() + 7)
+
 		return {
 			id: String(index),
 			title: titles[index % titles.length],
 			description: `
-    ${index}Данная задача предназначена для изучения основ программирования через практические примеры. 
+    ${index} Данная задача предназначена для изучения основ программирования через практические примеры.
     Вы сможете:
     - Понять ключевые концепции программирования, такие как переменные, циклы, условия и функции.
     - Освоить основные инструменты и подходы к решению задач.
     - Развить навыки логического мышления и структурированного подхода к работе с кодом.
-
-    Каждый шаг задачи подробно объясняется, чтобы вам было легче освоить материал, даже если вы новичок. 
-    Вы получите возможность сразу же применять полученные знания, выполняя конкретные действия для достижения желаемого результата.
-
-    Основные цели задачи:
-    1. Научиться разбираться в коде.
-    2. Понять, как использовать базовые элементы программирования.
-    3. Применить полученные знания для решения простых практических задач.
-
-    Результат выполнения этой задачи станет прочной основой для дальнейшего изучения программирования и поможет вам почувствовать уверенность в своих силах!
-  `,
+    `,
 			completedMicrotasks: 5,
 			difficulty: difficulties[index % difficulties.length],
 			type: types[index % types.length],
 			microtasksQuantity: 10,
-			deadline: '2025-02-12T00:00:00.000Z',
-			dateOfCreation: '2025-01-01T00:00:00.000Z',
+			deadline: deadlineDate.toISOString(),
+			dateOfCreation: creationDate.toISOString(),
 			timeToComplete: '5h',
-			timeWhenCompletionStarted: '2025-01-10T00:00:00.000Z',
-			timeWhenCompletionCompleted: '2025-01-15T00:00:00.000Z',
+			timeWhenCompletionStarted: startDate.toISOString(),
+			timeWhenCompletionCompleted: completionDate.toISOString(),
 			result: results[index % results.length],
 			status: statuses[index % statuses.length],
 			course: courses[index % courses.length],
@@ -116,18 +119,7 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			microTasks: Array.from({ length: 5 }, (_, microIndex) => ({
 				id: `${index}-${microIndex}`,
 				title: `Микрозадача ${microIndex + 1}`,
-				description: `
-    ${index}Данная задача предназначена для изучения основ программирования через практические примеры. 
-    Вы сможете:
-    - Понять ключевые концепции программирования, такие как переменные, циклы, условия и функции.
-    - Освоить основные инструменты и подходы к решению задач.
-    - Развить навыки логического мышления и структурированного подхода к работе с кодом.
-
-    Каждый шаг задачи подробно объясняется, чтобы вам было легче освоить материал, даже если вы новичок. 
-    Вы получите возможность сразу же применять полученные знания, выполняя конкретные действия для достижения желаемого результата.
-
-    Результат выполнения этой задачи станет прочной основой для дальнейшего изучения программирования и поможет вам почувствовать уверенность в своих силах!
-  `,
+				description: `Микрозадача для изучения основ программирования`,
 				status: statuses[index % statuses.length],
 				type: types[index % types.length],
 				answers: answers,

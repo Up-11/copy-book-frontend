@@ -1,2 +1,2 @@
+export { DashboardCalendar } from './ui/dashboard-calendar'
 export { BigCalendar } from './ui/big-calendar'
-export { SmallCalendar } from './ui/small-calendar'

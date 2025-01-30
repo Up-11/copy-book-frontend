@@ -87,7 +87,7 @@ export interface TaskProps
 	id: string
 	difficulty: TaskDifficulty
 	course?: TaskCourseType
-	deadline?: Deadline
+	deadline?: string
 	result?: TaskResult
 	status?: TaskStatus
 	rating?: TaskRating

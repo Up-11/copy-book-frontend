@@ -29,3 +29,12 @@ export const isObjectEmpty = (obj: Record<string, any>): boolean => {
 		return value === null || value === undefined || value === ''
 	})
 }
+
+export const getFirstTwoLetters = (text: string) => {
+	const arrayText = text.split(' ')
+
+	if (arrayText.length === 1) return text.slice(0, 2)
+
+	const formattedText = arrayText[0].slice(0, 1) + arrayText[1].slice(0, 1)
+	return formattedText.toUpperCase()
+}

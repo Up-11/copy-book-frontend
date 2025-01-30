@@ -17,3 +17,19 @@
 .rbc-today {
 	@apply !bg-indigo-100;
 }
+.rbc-toolbar-label {
+	@apply text-lg;
+}
+.rbc-time-view {
+	@apply rounded-2xl;
+}
+.rbc-event,
+rbc-event-allday {
+	@apply !bg-indigo-600;
+}
+.rbc-selected {
+	@apply !bg-indigo-800;
+}
+.rbc-show-more {
+	@apply !text-indigo-800 hover:!text-indigo-600;
+}

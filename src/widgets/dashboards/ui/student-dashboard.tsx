@@ -3,12 +3,12 @@ import { AllCoursesItem } from '@/entities/course'
 import { DraftItem } from '@/entities/draft'
 import { DRAFT_MOCK } from '@/entities/draft/mock.data'
 import { DashboardTask } from '@/entities/task'
+import { DashboardCalendar } from '@/features/calendar'
 import { routes } from '@/shared/config/routes'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { courses, dashboardTasks } from '@/shared/mock/mock'
 import { Button } from '@/shared/ui/other/button'
-import { Skeleton } from '@/shared/ui/other/skeleton'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import { DashboardFooter } from '@/widgets/footers'
@@ -19,14 +19,16 @@ import React from 'react'
 export const StudentDashboard: React.FC = () => {
 	const dashboardcourses = courses.slice(0, 6)
 	return (
-		<div className='flex flex-col gap-4 mt-10'>
+		<div className='mt-10 flex flex-col gap-4'>
 			<DashboardBlockPrimitive
 				title='Календарь заданий'
 				linkText='Открыть'
 				description='Не пропустите важные задания'
-				link={routes.dashboard.student}
+				link={routes.calendar}
 			>
-				<Skeleton className='w-full h-[100px] rounded-lg' />
+				<div className='h-[120px] w-full'>
+					<DashboardCalendar />
+				</div>
 			</DashboardBlockPrimitive>
 			<DashboardBlockPrimitive
 				title='Ваши задания'
@@ -36,14 +38,14 @@ export const StudentDashboard: React.FC = () => {
 				<WithCondition
 					condition={!!dashboardTasks.length}
 					render={
-						<div className='grid grid-cols-4 h-[450px] gap-x-5'>
+						<div className='grid h-[450px] grid-cols-4 gap-x-5'>
 							{dashboardTasks.slice(0, 4).map(task => (
 								<DashboardTask key={task.id} className='h-full' item={task} />
 							))}
 						</div>
 					}
 					fallback={
-						<div className='w-full  bg-indigo-50 rounded-lg p-layout flex justify-between'>
+						<div className='flex w-full justify-between rounded-lg bg-indigo-50 p-layout'>
 							<Title>
 								Добавьте хотя бы одну задачу, чтобы увидеть ее здесь
 							</Title>
@@ -56,7 +58,7 @@ export const StudentDashboard: React.FC = () => {
 			</DashboardBlockPrimitive>
 			<div className='grid grid-cols-2 gap-x-5'>
 				<DashboardBlockPrimitive title='Песочница'>
-					<div className='h-[330px] w-full rounded-lg flex flex-col gap-2 bg-indigo-50 p-layout'>
+					<div className='flex h-[330px] w-full flex-col gap-2 rounded-lg bg-indigo-50 p-layout'>
 						<Title size='large'>Песочница</Title>
 						<Text color='gray'>Улучшите ваши навыки в написании кода</Text>
 						<div className='mt-auto flex justify-between'>
@@ -82,7 +84,7 @@ export const StudentDashboard: React.FC = () => {
 							linkText='Все черновики'
 							link={routes.code.drafts}
 						>
-							<div className='flex flex-col gap-3 '>
+							<div className='flex flex-col gap-3'>
 								{DRAFT_MOCK.slice(0, 3).map(draft => (
 									<DraftItem
 										className='h-[100px]'
@@ -105,7 +107,7 @@ export const StudentDashboard: React.FC = () => {
 				<WithCondition
 					condition={dashboardTasks.length > 0}
 					render={
-						<div className='grid grid-cols-2 gap-x-5 gap-3 '>
+						<div className='grid grid-cols-2 gap-3 gap-x-5'>
 							{dashboardcourses.map(course => (
 								<AllCoursesItem
 									className={cn(
@@ -122,7 +124,7 @@ export const StudentDashboard: React.FC = () => {
 						</div>
 					}
 					fallback={
-						<div className='w-full  bg-indigo-50 rounded-lg p-layout flex justify-between'>
+						<div className='flex w-full justify-between rounded-lg bg-indigo-50 p-layout'>
 							<Title>Добавьте хотя бы один курс, чтобы увидеть его здесь</Title>
 							<Link href={routes.course.main}>
 								<Button>Список всех курсов</Button>

@@ -1,31 +1,30 @@
-import { Button } from '@/shared/ui/other/button'
-import { Calendar } from '@/shared/ui/input/calendar'
+import { UiAlert } from '@/shared/ui/custom/ui-alert'
+import { UiInputOtp } from '@/shared/ui/custom/ui-input-otp'
+import { UiPagination } from '@/shared/ui/custom/ui-pagination'
+import { UiSelect } from '@/shared/ui/custom/ui-select'
+import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Checkbox } from '@/shared/ui/input/checkbox'
-import { Drawer } from '@/shared/ui/modals/drawer'
 import { Input } from '@/shared/ui/input/input'
 import { Label } from '@/shared/ui/input/label'
+import { Progress } from '@/shared/ui/input/progress'
+import { SelectItem } from '@/shared/ui/input/select'
+import { Textarea } from '@/shared/ui/input/textarea'
+import { Drawer } from '@/shared/ui/modals/drawer'
 import { Modal } from '@/shared/ui/modals/modal'
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger
 } from '@/shared/ui/modals/popover'
-import { Progress } from '@/shared/ui/input/progress'
+import { Button } from '@/shared/ui/other/button'
 import { ScrollArea } from '@/shared/ui/other/scroll-area'
-import { SelectItem } from '@/shared/ui/input/select'
-import { Separator } from '@/shared/ui/view/separator'
 import { Skeleton } from '@/shared/ui/other/skeleton'
+import { Loader } from '@/shared/ui/view/loader'
+import { Separator } from '@/shared/ui/view/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/view/tabs'
-import { Textarea } from '@/shared/ui/input/textarea'
-import { UiAlert } from '@/shared/ui/custom/ui-alert'
-import { UiPagination } from '@/shared/ui/custom/ui-pagination'
+import { Title } from '@/shared/ui/view/title'
 import { SelectValue } from '@radix-ui/react-select'
 import { HouseIcon } from 'lucide-react'
-import { UiInputOtp } from '@/shared/ui/custom/ui-input-otp'
-import { UiSelect } from '@/shared/ui/custom/ui-select'
-import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
-import { Title } from '@/shared/ui/view/title'
-import { Loader } from '@/shared/ui/view/loader'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -147,9 +146,7 @@ export default function UiKit() {
 					</div>
 					<div className='mt-5 border border-black p-10'>
 						<Title>Calendar</Title>
-						<div className='mt-5 flex gap-2'>
-							<Calendar />
-						</div>
+						<div className='mt-5 flex gap-2'></div>
 					</div>
 					<div className='mt-5 border border-black p-10'>
 						<Title>Sheet</Title>
