@@ -17,11 +17,12 @@ export const PaginationPageLayout: React.FC<{
 	items: React.ReactNode
 	layout: Layout
 	isTask: boolean
+	filters?: React.ReactNode
 }> = ({ isDraft, items, layout, isTask = true }) => {
 	const { isHydrated, setActiveLayout } = useLayout()
 	if (!isHydrated) {
 		return (
-			<div className='flex items-center flex-col justify-center h-[88vh]'>
+			<div className='flex h-[88vh] flex-col items-center justify-center'>
 				<Loader size={44} />
 				<Text size='small'>Идет загрузка, пожалуйста подождите</Text>
 			</div>
@@ -29,7 +30,7 @@ export const PaginationPageLayout: React.FC<{
 	}
 	return (
 		<>
-			<section className='flex justify-between mt-8 mb-4'>
+			<section className='mb-4 mt-8 flex justify-between'>
 				<Title>{isTask ? 'Все задания' : 'Все курсы'}</Title>
 				<div className='flex items-center gap-3'>
 					<SearchBar />
@@ -48,7 +49,7 @@ export const PaginationPageLayout: React.FC<{
 							layout === Layout.GRID
 								? isTask
 									? 'grid grid-cols-5 gap-3'
-									: ' grid grid-cols-4 gap-5'
+									: 'grid grid-cols-4 gap-5'
 								: 'flex flex-col gap-3'
 						}
 					>

@@ -27,7 +27,7 @@ import * as React from 'react'
 
 //TODO Сделать меню и под учителя и под ученика
 
-export const UiNavigationMenu: React.FC = () => {
+const StudentNavigationMenu: React.FC = () => {
 	return (
 		<NavigationMenu className='z-[999]'>
 			<NavigationMenuList>
@@ -128,6 +128,76 @@ export const UiNavigationMenu: React.FC = () => {
 	)
 }
 
+const TeacherNavigationMenu: React.FC = () => {
+	return (
+		<NavigationMenu className='z-[999]'>
+			<NavigationMenuList>
+				<NavigationMenuItem>
+					<NavigationMenuTrigger>Задания</NavigationMenuTrigger>
+					<NavigationMenuContent>
+						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]'>
+							<TallMenuItem
+								href={routes.tasks.teacher.tasks}
+								title={'Созданные задания'}
+								description={'Список всех заданий созаднных вами'}
+								icon={<LayoutList />}
+							/>
+							<TallMenuItem
+								href={routes.tasks.teacher.create}
+								title={'Создать задание'}
+								description={'Создайте новое задание '}
+								icon={<TerminalSquareIcon />}
+							/>
+						</ul>
+					</NavigationMenuContent>
+				</NavigationMenuItem>
+
+				<NavigationMenuItem>
+					<NavigationMenuTrigger>Журнал</NavigationMenuTrigger>
+					<NavigationMenuContent>
+						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px]'>
+							<TallMenuItem
+								href={routes.journal}
+								title={'Журнал курса'}
+								description={'Следите за результатами необходимых групп'}
+								icon={<Code2 />}
+							/>
+						</ul>
+					</NavigationMenuContent>
+				</NavigationMenuItem>
+
+				<NavigationMenuItem>
+					<NavigationMenuTrigger>Курсы</NavigationMenuTrigger>
+					<NavigationMenuContent>
+						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]'>
+							<TallMenuItem
+								href={routes.course.teacher.courses}
+								title={'Созданные курсы'}
+								description={'Список всех созданных вами курсов'}
+								icon={<BookKey />}
+							/>
+							<TallMenuItem
+								href={routes.course.teacher.create}
+								title={'Создать курс'}
+								description={'Создайте новый курс'}
+								icon={<BookAudio />}
+							/>
+						</ul>
+					</NavigationMenuContent>
+				</NavigationMenuItem>
+				<NavigationMenuItem>
+					<Link
+						href={routes.calendar}
+						className='group inline-flex h-9 w-max cursor-pointer items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'
+					>
+						Календарь
+					</Link>
+				</NavigationMenuItem>
+			</NavigationMenuList>
+		</NavigationMenu>
+	)
+}
+
 const TallMenuItem: React.FC<MenuItemType> = ({
 	href,
 	title,
@@ -177,3 +247,5 @@ const MenuItem: React.FC<MenuItemType> = ({
 		</NavigationMenuLink>
 	</li>
 )
+
+export { StudentNavigationMenu, TeacherNavigationMenu }

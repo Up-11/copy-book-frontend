@@ -35,6 +35,7 @@ export const getFirstTwoLetters = (text: string) => {
 
 	if (arrayText.length === 1) return text.slice(0, 2)
 
-	const formattedText = arrayText[0].slice(0, 1) + arrayText[1].slice(0, 1)
+	const formattedText =
+		arrayText[0].slice(0, 1) + arrayText[arrayText.length - 1].slice(0, 1)
 	return formattedText.toUpperCase()
 }

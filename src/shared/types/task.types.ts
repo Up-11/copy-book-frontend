@@ -78,6 +78,8 @@ export interface Task extends TaskBase {
 	variants?: string[]
 	answers?: string[]
 	course?: TaskCourseType
+	deadline?: string
+	isDraft: boolean
 }
 
 export interface TaskProps
@@ -93,6 +95,8 @@ export interface TaskProps
 	rating?: TaskRating
 	type: TaskType
 	content?: string
+	privacy: TaskPrivacy
+	isDraft: boolean
 }
 
 export type PartialIfTheory<T> = T extends { type: TaskType.Theory }

@@ -1,20 +1,25 @@
 export const routes = {
 	home: '/',
+	calendar: '/calendar',
+	journal: '/journal',
+
 	profile: {
 		personal: '/profile/personal',
 		settings: '/profile/settings',
 		statistic: '/profile/statistic'
 	},
-
 	auth: {
 		student: '/auth/student',
 		teacher: '/auth/teacher',
 		admin: '/auth/admin',
 		reset: '/auth/reset-password'
 	},
-
 	tasks: {
 		student: '/student/tasks',
+		teacher: {
+			tasks: '/teacher/tasks',
+			create: '/teacher/tasks/create'
+		},
 		main: '/all-tasks',
 		currentUserTask: (id: string) => {
 			return `/student/tasks/${id}`
@@ -25,6 +30,10 @@ export const routes = {
 	},
 	course: {
 		student: '/student/courses',
+		teacher: {
+			courses: '/teacher/courses',
+			create: '/teacher/courses/create'
+		},
 		main: '/all-courses',
 		currentUserCourse: (id: string) => {
 			return `/student/courses/${id}`
@@ -33,19 +42,15 @@ export const routes = {
 			return `/course-complition/${courseId}/chapter/${chapterId}`
 		}
 	},
-
 	dashboard: {
 		student: '/student/dashboard',
 		teacher: '/teacher/dashboard',
 		admin: '/admin/dashboard'
 	},
-
 	code: {
 		sandbox: '/code/sandbox',
 		drafts: '/student/drafts'
-	},
-
-	calendar: '/calendar'
+	}
 } as const
 
 export type AppRoutes = typeof routes

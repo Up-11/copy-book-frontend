@@ -1,6 +1,6 @@
 'use client'
 
-import { dashboardTasks } from '../../../shared/mock/mock'
+import { dashboardTasks } from '../../../../shared/mock/mock'
 import { PaginationPageLayout } from '@/common/layouts'
 import { AllTasksItem } from '@/entities/task'
 import { useLayout } from '@/shared/model/use-layout'

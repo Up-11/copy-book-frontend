@@ -1,6 +1,6 @@
+import { TaskCourse } from '../task-primitive/task-course'
+import { TaskDeadline } from '../task-primitive/task-deadline'
 import { TaskPopover } from './task-popover'
-import { TaskCourse } from './task-primitive/task-course'
-import { TaskDeadline } from './task-primitive/task-deadline'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { PropsWithClassName } from '@/shared/types/props.types'

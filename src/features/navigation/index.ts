@@ -1,1 +1,4 @@
-export { UiNavigationMenu } from "./ui/ui-navigation-menu";
+export {
+	StudentNavigationMenu,
+	TeacherNavigationMenu
+} from './ui/ui-navigation-menu'

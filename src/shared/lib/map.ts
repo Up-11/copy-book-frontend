@@ -1,5 +1,10 @@
-import { CourseStatus } from '../types/course.types'
-import { TaskDifficulty, TaskStatus, TaskType } from '../types/task.types'
+import { CoursePrivacy, CourseStatus } from '../types/course.types'
+import {
+	TaskDifficulty,
+	TaskPrivacy,
+	TaskStatus,
+	TaskType
+} from '../types/task.types'
 import { UserRole } from '@/shared/types/user.types'
 
 export const getBadgeByUserRole = (role: UserRole) => {
@@ -93,3 +98,18 @@ export const getStatus = <T extends TaskStatus | CourseStatus>(
 	return taskStatusMap.get(status) ?? ''
 }
 //TODO Подумать над разными цветами
+
+export const getPrivacy = <T extends TaskPrivacy | CoursePrivacy>(
+	privacy: T
+): string => {
+	const taskPrivacyMap = new Map<TaskPrivacy | CoursePrivacy, string>([
+		[TaskPrivacy.ForCourse, 'Задание курса'],
+		[TaskPrivacy.Private, 'Приватно'],
+		[TaskPrivacy.Public, 'Публично'],
+		[CoursePrivacy.Private, 'Приватно'],
+		[CoursePrivacy.Public, 'Публично'],
+		[CoursePrivacy.ByCode, 'По коду']
+	])
+
+	return taskPrivacyMap.get(privacy) ?? ''
+}

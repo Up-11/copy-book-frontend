@@ -22,7 +22,7 @@ export const AllTasksItem: React.FC<{
 }> = ({ item, isGrid }) => {
 	const listElement = () => {
 		return (
-			<div className='flex w-full bg-indigo-50 rounded-lg justify-between p-layout'>
+			<div className='flex w-full justify-between rounded-lg bg-indigo-50 p-layout'>
 				<div className='flex flex-col gap-1'>
 					<div className='flex gap-2'>
 						<Title>{item.title}</Title>
@@ -30,11 +30,11 @@ export const AllTasksItem: React.FC<{
 						{item.status !== TaskStatus.NotStarted && (
 							<UiTooltip
 								content='Открыть'
-								className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+								className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 							>
 								<Link
 									href={routes.tasks.currentUserTask(item.id)}
-									className='p-1 hover:bg-secondary rounded-md'
+									className='rounded-md p-1 hover:bg-secondary'
 								>
 									<ArrowUpRight size={20} />
 								</Link>
@@ -46,7 +46,7 @@ export const AllTasksItem: React.FC<{
 					</Text>
 				</div>
 				<div className='flex items-center gap-10'>
-					<div className='flex gap-3 '>
+					<div className='flex gap-3'>
 						<Button size={'sm'}>
 							Выполнить <ArrowRightIcon />
 						</Button>
@@ -57,12 +57,12 @@ export const AllTasksItem: React.FC<{
 							className='self-start'
 							side='left'
 						>
-							<div className='p-1 self-start hover:bg-secondary rounded-md transition-colors cursor-pointer'>
+							<div className='cursor-pointer self-start rounded-md p-1 transition-colors hover:bg-secondary'>
 								<Bookmark
 									size={20}
 									className={cn(
 										item.status !== TaskStatus.NotStarted &&
-											'fill-primary border-primary'
+											'border-primary fill-primary'
 									)}
 								/>
 							</div>
@@ -75,7 +75,7 @@ export const AllTasksItem: React.FC<{
 						>
 							<div>
 								<TaskPopover item={item} isDashboard={false}>
-									<div className='p-1 self-start hover:bg-secondary rounded-md transition-colors cursor-pointer'>
+									<div className='cursor-pointer self-start rounded-md p-1 transition-colors hover:bg-secondary'>
 										<CircleEllipsis size={20} />
 									</div>
 								</TaskPopover>
@@ -89,33 +89,33 @@ export const AllTasksItem: React.FC<{
 
 	const gridElement = () => {
 		return (
-			<div className='flex flex-col bg-indigo-50 rounded-lg p-layout gap-4'>
-				<div className='flex flex-col gap-2 w-full'>
-					<div className='flex  gap-2'>
+			<div className='flex flex-col gap-4 rounded-lg bg-indigo-50 p-layout'>
+				<div className='flex w-full flex-col gap-2'>
+					<div className='flex gap-2'>
 						<Title size='small' className='line-clamp-2'>
 							{item.title}
 						</Title>
-						<TaskDiffBadge diff={item.difficulty} className='text-xs px-1' />
+						<TaskDiffBadge diff={item.difficulty} className='px-1 text-xs' />
 					</div>
-					<Text size='small' color='gray'>
+					<Text size='small' color='gray' className='line-clamp-6'>
 						{item.description}
 					</Text>
 				</div>
-				<div className='flex flex-col gap-2 mt-auto '>
-					<Button size='sm' className='w-full flex  self'>
+				<div className='mt-auto flex flex-col gap-2'>
+					<Button size='sm' className='self flex w-full'>
 						Выполнить <ArrowRightIcon />
 					</Button>
-					<div className='flex gap-3 justify-center'>
+					<div className='flex justify-center gap-3'>
 						<UiTooltip
 							content='Добавить в мои задания'
-							className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+							className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 						>
-							<div className='p-1 hover:bg-secondary rounded-md'>
+							<div className='rounded-md p-1 hover:bg-secondary'>
 								<Bookmark
 									size={20}
 									className={cn(
 										item.status !== TaskStatus.NotStarted &&
-											'fill-primary border-primary'
+											'border-primary fill-primary'
 									)}
 								/>
 							</div>
@@ -123,11 +123,11 @@ export const AllTasksItem: React.FC<{
 
 						<UiTooltip
 							content='Подробнее'
-							className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+							className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 							side='top'
 						>
 							<TaskPopover item={item} isDashboard={false}>
-								<div className='p-1 hover:bg-secondary rounded-md'>
+								<div className='rounded-md p-1 hover:bg-secondary'>
 									<CircleEllipsis size={20} />
 								</div>
 							</TaskPopover>
@@ -135,11 +135,11 @@ export const AllTasksItem: React.FC<{
 						{item.status !== TaskStatus.NotStarted && (
 							<UiTooltip
 								content='Открыть'
-								className='hover:bg-secondary rounded-md transition-colors cursor-pointer'
+								className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 							>
 								<Link
 									href={routes.tasks.currentUserTask(item.id)}
-									className='p-1 hover:bg-secondary rounded-md'
+									className='rounded-md p-1 hover:bg-secondary'
 								>
 									<ArrowUpRight size={20} />
 								</Link>

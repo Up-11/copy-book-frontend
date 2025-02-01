@@ -1,8 +1,8 @@
-import { TaskCourse } from './task-primitive/task-course'
-import { TaskDeadline } from './task-primitive/task-deadline'
+import { TaskCourse } from '../task-primitive/task-course'
+import { TaskDeadline } from '../task-primitive/task-deadline'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
-import { getStatus } from '@/shared/lib/map'
+import { getBadgeByTaskType, getPrivacy, getStatus } from '@/shared/lib/map'
 import { PropsWithClassName } from '@/shared/types/props.types'
 import { TaskProps, TaskStatus } from '@/shared/types/task.types'
 import {
@@ -16,7 +16,7 @@ import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import React, { PropsWithChildren } from 'react'
 
-export const TaskPopover: React.FC<
+export const TeacherTaskPopover: React.FC<
 	PropsWithChildren &
 		PropsWithClassName & { item: TaskProps; isDashboard?: boolean }
 > = ({ item, className, children, isDashboard = false }) => {
@@ -78,22 +78,62 @@ export const TaskPopover: React.FC<
 							</div>
 						}
 					/>
-				</div>
-				<div
-					className={cn(
-						'mt-auto flex',
-						!item.course ? 'justify-between' : 'justify-end'
-					)}
-				>
 					<WithCondition
-						className='self-end'
-						condition={!item.course}
-						render={<Button variant={'outline'}>Удалить</Button>}
+						className='rounded-lg bg-indigo-200 p-2'
+						condition={!!item.privacy}
+						render={
+							<div className='flex items-center gap-2'>
+								<Text size='extraSmall' className='self-start'>
+									Доступность:
+								</Text>
+								<Text
+									size='extraSmall'
+									className='line-clamp-2 break-words font-bold'
+								>
+									{getPrivacy(item.privacy!)}
+								</Text>
+							</div>
+						}
 					/>
-
-					<div className='mt-8 flex gap-3'>
-						<Button>Выполнить</Button>
-					</div>
+					<WithCondition
+						className='rounded-lg bg-indigo-200 p-2'
+						condition={!!item.type}
+						render={
+							<div className='flex items-center gap-2'>
+								<Text size='extraSmall' className='self-start'>
+									Тип задания:
+								</Text>
+								<Text
+									size='extraSmall'
+									className='line-clamp-2 break-words font-bold'
+								>
+									{getBadgeByTaskType(item.type!).text}
+								</Text>
+							</div>
+						}
+					/>
+					<WithCondition
+						className='col-span-2 rounded-lg bg-red-200 p-2'
+						condition={!!item.isDraft}
+						render={
+							<div className='flex items-center gap-2'>
+								<Text
+									size='small'
+									className='line-clamp-2 break-words font-bold'
+								>
+									Черновик
+								</Text>
+							</div>
+						}
+					/>
+				</div>
+				<div className='mt-auto flex justify-between gap-3'>
+					<Button variant={'outline'}>Удалить</Button>
+					<WithCondition
+						condition={!!item.course && !item.isDraft}
+						render={<Button variant={'destructive'}>Статистика</Button>}
+					/>
+					<Button>Редактировать</Button>
 				</div>
 			</PopoverContent>
 		</Popover>

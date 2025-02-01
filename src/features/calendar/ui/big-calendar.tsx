@@ -13,7 +13,8 @@ import {
 	momentLocalizer,
 	Event,
 	ToolbarProps,
-	View
+	View,
+	NavigateAction
 } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
@@ -32,13 +33,16 @@ const messages = {
 }
 
 export const BigCalendar: React.FC = () => {
-	const [view, setView] = useState<View>('month') // Состояние для текущего вида календаря
+	// Состояние для текущего вида календаря
+	const [view, setView] = useState<View>('month')
+	// Состояние для текущей даты календаря
+	const [date, setDate] = useState<Date>(new Date())
 
 	const localizer = useMemo(() => momentLocalizer(moment), [])
 
 	useEffect(() => {
 		moment.updateLocale('ru', {
-			week: { dow: 1 } // Понедельник - первый день недели
+			week: { dow: 1 }
 		})
 	}, [])
 
@@ -63,7 +67,11 @@ export const BigCalendar: React.FC = () => {
 			endAccessor='end'
 			views={['day', 'month', 'week']}
 			view={view}
-			onView={setView} // Обновление состояния при изменении вида
+			date={date}
+			onView={setView}
+			onNavigate={(newDate: Date) => {
+				setDate(newDate)
+			}}
 		/>
 	)
 }

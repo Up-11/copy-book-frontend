@@ -2,8 +2,7 @@ import {
 	Course,
 	CourseChapter,
 	CoursePrivacy,
-	CourseStatus,
-	CourseTheory
+	CourseStatus
 } from '../types/course.types'
 import {
 	TaskDifficulty,
@@ -11,8 +10,7 @@ import {
 	TaskResult,
 	TaskType,
 	TaskProps,
-	TaskPrivacy,
-	Task
+	TaskPrivacy
 	// TaskType
 } from '../types/task.types'
 
@@ -42,6 +40,11 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			TaskResult.Failed,
 			TaskResult.Completed,
 			TaskResult.TimeIsOver
+		]
+		const privacies = [
+			TaskPrivacy.ForCourse,
+			TaskPrivacy.Private,
+			TaskPrivacy.Public
 		]
 
 		const answers = ['123', '234', '567', '123512', '12556234', '218657453']
@@ -104,7 +107,6 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			completedMicrotasks: 5,
 			difficulty: difficulties[index % difficulties.length],
 			type: types[index % types.length],
-			microtasksQuantity: 10,
 			deadline: deadlineDate.toISOString(),
 			dateOfCreation: creationDate.toISOString(),
 			timeToComplete: '5h',
@@ -116,15 +118,8 @@ export const dashboardTasks: TaskProps[] = Array.from(
 			teacher: teachers[index % teachers.length],
 			sutdentsComplete: 10,
 			rating: 4,
-			microTasks: Array.from({ length: 5 }, (_, microIndex) => ({
-				id: `${index}-${microIndex}`,
-				title: `Микрозадача ${microIndex + 1}`,
-				description: `Микрозадача для изучения основ программирования`,
-				status: statuses[index % statuses.length],
-				type: types[index % types.length],
-				answers: answers,
-				variants: variants
-			}))
+			privacy: privacies[index % privacies.length],
+			isDraft: true
 		}
 	}
 )

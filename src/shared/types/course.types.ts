@@ -13,7 +13,7 @@ export type CourseRating = number
 export enum CoursePrivacy {
 	Public = 'public',
 	Private = 'private',
-	Restricted = 'restricted'
+	ByCode = 'by code'
 }
 
 export type CourseBase = {

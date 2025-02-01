@@ -1,4 +1,4 @@
-import { TaskDifficultyDot } from './task-difficulty-dot'
+import { TaskDifficultyDot } from '../task-difficulty-dot'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
@@ -19,7 +19,7 @@ export const SidebarTask: React.FC<{
 		<Link
 			href={routes.tasks.currentUserTask(id)}
 			className={cn(
-				'grid grid-cols-[1fr_15px] hover:bg-indigo-50 rounded-lg p-3 justify-between relative items-center cursor-pointer ',
+				'relative grid cursor-pointer grid-cols-[1fr_15px] items-center justify-between rounded-lg p-3 hover:bg-indigo-50',
 				isActive && 'bg-accent'
 			)}
 		>
