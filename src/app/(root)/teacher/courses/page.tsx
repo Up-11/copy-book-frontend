@@ -1,3 +1,4 @@
+import { CreatedCourses } from '@/widgets/course'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -5,5 +6,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-	return <div>tc courses</div>
+	return <CreatedCourses />
 }

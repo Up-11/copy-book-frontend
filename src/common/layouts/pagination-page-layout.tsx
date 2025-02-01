@@ -17,8 +17,8 @@ export const PaginationPageLayout: React.FC<{
 	items: React.ReactNode
 	layout: Layout
 	isTask: boolean
-	filters?: React.ReactNode
-}> = ({ isDraft, items, layout, isTask = true }) => {
+	filters?: boolean
+}> = ({ isDraft, items, layout, isTask = true, filters = true }) => {
 	const { isHydrated, setActiveLayout } = useLayout()
 	if (!isHydrated) {
 		return (
@@ -38,7 +38,7 @@ export const PaginationPageLayout: React.FC<{
 						activeLayout={layout}
 						setActiveLayout={setActiveLayout}
 					/>
-					{!isDraft && <Filters isTask={isTask} />}
+					{!isDraft && filters && <Filters isTask={isTask} />}
 				</div>
 			</section>
 			<WithCondition

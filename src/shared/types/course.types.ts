@@ -59,4 +59,5 @@ export interface Course {
 	status: CourseStatus
 	privacy: CoursePrivacy
 	code?: CourseCode
+	isDraft?: boolean
 }

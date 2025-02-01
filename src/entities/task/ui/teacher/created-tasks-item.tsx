@@ -1,4 +1,5 @@
 import { TeacherTaskPopover } from './teacher-task-popover'
+import { cn } from '@/shared/lib/css'
 import { getPrivacy } from '@/shared/lib/map'
 import { TaskProps } from '@/shared/types/task.types'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
@@ -15,7 +16,12 @@ export const CreatedTasksItem: React.FC<{
 }> = ({ item, isGrid }) => {
 	const listElement = () => {
 		return (
-			<div className='flex w-full justify-between rounded-lg bg-indigo-50 p-layout'>
+			<div
+				className={cn(
+					'flex w-full justify-between rounded-lg p-layout',
+					item.isDraft ? 'bg-red-50' : 'bg-indigo-50'
+				)}
+			>
 				<div className='flex flex-col gap-1'>
 					<div className='flex gap-2'>
 						<Title>{item.title}</Title>
@@ -59,7 +65,12 @@ export const CreatedTasksItem: React.FC<{
 
 	const gridElement = () => {
 		return (
-			<div className='flex flex-col gap-4 rounded-lg bg-indigo-50 p-layout'>
+			<div
+				className={cn(
+					'flex flex-col gap-4 rounded-lg bg-indigo-50 p-layout',
+					item.isDraft ? 'bg-red-50' : 'bg-indigo-50'
+				)}
+			>
 				<div className='flex w-full flex-col gap-2'>
 					<div className='flex gap-2'>
 						<Title size='small' className='line-clamp-2'>

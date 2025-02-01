@@ -1,2 +1,5 @@
-export { SidebarCourse } from './ui/sidebar-course'
-export { AllCoursesItem } from './ui/all-courses-item'
+export { TeacherCoursePopover } from './ui/teacher/teacher-course-popover'
+export { CreatedCoursesItem } from './ui/teacher/created-course-item'
+export { CoursePopover } from './ui/student/course-popover'
+export { SidebarCourse } from './ui/student/sidebar-course'
+export { AllCoursesItem } from './ui/student/all-courses-item'

@@ -1,20 +1,21 @@
 'use client'
 
-import { courses } from '../../../shared/mock/mock'
 import { PaginationPageLayout } from '@/common/layouts'
-import { AllCoursesItem } from '@/entities/course'
+import { CreatedCoursesItem } from '@/entities/course'
+import { courses } from '@/shared/mock/mock'
 import { useLayout } from '@/shared/model/use-layout'
 import React from 'react'
 
-export const AllCourses: React.FC = () => {
+export const CreatedCourses: React.FC = () => {
 	const { isGrid, layout } = useLayout()
 
 	return (
 		<PaginationPageLayout
 			isTask={false}
+			filters={false}
 			layout={layout}
 			items={courses.map(course => (
-				<AllCoursesItem
+				<CreatedCoursesItem
 					isDashboard={false}
 					key={course.courseId}
 					item={course}

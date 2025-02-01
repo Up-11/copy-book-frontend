@@ -17,17 +17,17 @@ export const UiCheckbox: React.FC<ICheckBoxProps> = ({
 	onCheckedChange
 }) => {
 	return (
-		<div className='inline-flex items-center select-none py-1 '>
+		<div className='inline-flex select-none items-center py-1'>
 			<Checkbox
 				onCheckedChange={onCheckedChange}
 				checked={checked}
 				value={value}
-				className='rounded-[5px] w-4 h-4 '
+				className='h-4 w-4 rounded-[5px]'
 				id={`checkbox-${String(name)}-${String(value)}`}
 			/>
 			<label
 				htmlFor={`checkbox-${String(name)}-${String(value)}`}
-				className='leading-5 cursor-pointer pl-1.5 max-w-40 items-center break-words !line-clamp-1  inline-flex text-sm'
+				className='!line-clamp-1 inline-flex max-w-44 cursor-pointer items-center break-words pl-1.5 text-sm leading-5'
 			>
 				{text}
 			</label>

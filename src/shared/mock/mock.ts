@@ -198,7 +198,8 @@ export const courses: Course[] = [
 			averageRating: 4.5
 		},
 		status: CourseStatus.InProgress,
-		privacy: CoursePrivacy.Public
+		privacy: CoursePrivacy.Public,
+		isDraft: true
 	},
 	{
 		courseId: '2',

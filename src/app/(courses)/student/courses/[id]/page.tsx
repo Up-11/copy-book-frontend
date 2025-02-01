@@ -1,6 +1,6 @@
 import { courses } from '@/shared/mock/mock'
 import Text from '@/shared/ui/view/text'
-import { CurrentCourse } from '@/widgets/course/ui/current-course'
+import { CurrentCourse } from '@/widgets/course/ui/student/current-course'
 import Image from 'next/image'
 
 export async function generateMetadata({

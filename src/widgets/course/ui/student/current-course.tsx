@@ -95,7 +95,7 @@ export const CurrentCourse: React.FC<{ course: Course }> = ({ course }) => {
 					render={
 						<div>
 							Код курса:
-							<HiddenText text={course.code!} />
+							<HiddenText className='h-7 text-xl' text={course.code!} />
 						</div>
 					}
 				/>

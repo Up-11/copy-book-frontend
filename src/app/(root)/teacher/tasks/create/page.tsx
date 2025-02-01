@@ -1,3 +1,4 @@
+import { TaskCreation, TaskPreview } from '@/features/create-task'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -5,5 +6,10 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-	return <div>creation Taask</div>
+	return (
+		<div className='mt-2 grid grid-cols-2 gap-10'>
+			<TaskCreation />
+			<TaskPreview />
+		</div>
+	)
 }
