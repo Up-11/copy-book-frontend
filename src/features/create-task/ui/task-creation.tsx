@@ -1,4 +1,8 @@
+'use client'
+
+import { useTaskCreation } from '../model/use-task-creation'
 import { CreationMainData } from './creation-main-data'
+import { isObjectFilled } from '@/shared/lib/utils'
 import {
 	Accordion,
 	AccordionContent,
@@ -9,6 +13,8 @@ import { Button } from '@/shared/ui/other/button'
 import React from 'react'
 
 export const TaskCreation: React.FC = () => {
+	const { getters } = useTaskCreation()
+
 	return (
 		<div className='flex h-full flex-col'>
 			<Accordion type='single' defaultValue='item-1' collapsible>
@@ -39,7 +45,7 @@ export const TaskCreation: React.FC = () => {
 			</Accordion>
 			<div className='mt-auto flex items-center justify-between gap-5'>
 				<Button>Сохранить в черновике</Button>
-				<Button>Опубликовать</Button>
+				<Button disabled={!isObjectFilled(getters)}>Опубликовать</Button>
 			</div>
 		</div>
 	)

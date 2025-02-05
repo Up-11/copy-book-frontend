@@ -24,9 +24,32 @@ export function createFilter<T extends string>(
 export const isObjectEmpty = (obj: Record<string, any>): boolean => {
 	return Object.values(obj).every(value => {
 		if (Array.isArray(value)) return value.length === 0
-		if (typeof value === 'object' && value !== null)
-			return Object.keys(value).length === 0
+		if (typeof value === 'object' && value !== null) {
+			return isObjectEmpty(value)
+		}
 		return value === null || value === undefined || value === ''
+	})
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isObjectFilled = (obj: Record<string, any>): boolean => {
+	return Object.values(obj).every(value => {
+		if (Array.isArray(value)) {
+			return (
+				value.length > 0 &&
+				value.every(item => {
+					return typeof item === 'object' && item !== null
+						? isObjectFilled(item)
+						: item !== null && item !== undefined && item !== ''
+				})
+			)
+		}
+
+		if (typeof value === 'object' && value !== null) {
+			return isObjectFilled(value)
+		}
+
+		return value !== null && value !== undefined && value !== ''
 	})
 }
 
