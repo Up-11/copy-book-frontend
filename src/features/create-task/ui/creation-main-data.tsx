@@ -6,6 +6,7 @@ import { difficultyFilter } from '@/features/filter/filter.data'
 import { SwitchItem } from '@/features/filter/ui/switch-item'
 import { cn } from '@/shared/lib/css'
 import { getBadgeByTaskDifficulty } from '@/shared/lib/map'
+import { courses } from '@/shared/mock/mock'
 import { TaskDifficulty } from '@/shared/types/task.types'
 import { UiCheckbox } from '@/shared/ui/custom/ui-checkbox'
 import { Input } from '@/shared/ui/input/input'
@@ -73,7 +74,7 @@ export const CreationMainData: React.FC = () => {
 			<div className='flex items-center justify-between'>
 				<div className='flex flex-col gap-2'>
 					<div>
-						<AddToCoursePopover>
+						<AddToCoursePopover courses={courses}>
 							<Button disabled={getters.anonymus}>
 								Добавить в курс <ArrowRight />
 							</Button>

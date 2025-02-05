@@ -2,6 +2,7 @@
 
 import { useTaskCreation } from '../model/use-task-creation'
 import { CreationMainData } from './creation-main-data'
+import { MarkdownEditor } from '@/entities/markdown'
 import { isObjectFilled } from '@/shared/lib/utils'
 import {
 	Accordion,
@@ -31,7 +32,7 @@ export const TaskCreation: React.FC = () => {
 						Шаг 2: Описание
 					</AccordionTrigger>
 					<AccordionContent>
-						Yes. It adheres to the WAI-ARIA design pattern.
+						<MarkdownEditor />
 					</AccordionContent>
 				</AccordionItem>
 				<AccordionItem value='item-3'>

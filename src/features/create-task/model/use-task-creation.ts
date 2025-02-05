@@ -16,13 +16,24 @@ export const useTaskCreation = () => {
 		setAnonimus(value)
 	}
 
+	const setCourseTitle = (value: string) => {
+		setCourse({
+			title: task.course.title,
+			chapter: task.course.title === value ? task.course.chapter : ''
+		})
+	}
+	const setCourseChapter = (value: string) => {
+		setCourse({ ...task.course, chapter: value })
+	}
+
 	return {
 		getters: task,
 		setters: {
 			title: handleTitleInput,
 			diff: setDifficulty,
 			anonimus: handleChangeAnonimus,
-			course: setCourse
+			setCourseChapter: setCourseChapter,
+			setCourseTitle: setCourseTitle
 		}
 	}
 }

@@ -32,26 +32,30 @@ export const TaskPreview: React.FC = () => {
 					)}
 				</section>
 				<section className='grid-rows-[1fr_auto} mt-2 grid grid-cols-3 gap-3'>
-					<WithCondition
-						condition={!!getters.course.title}
-						className='cursor-default rounded-lg bg-indigo-100 p-layout'
-						render={
-							<div className='group'>
-								Курс:
-								<Title>{getters.course.title}</Title>
-							</div>
-						}
-					/>
-					<WithCondition
-						condition={!!getters.course.chapter}
-						className='cursor-default rounded-lg bg-indigo-100 p-layout'
-						render={
-							<div className='group'>
-								Секция:
-								<Title>{getters.course.chapter}</Title>
-							</div>
-						}
-					/>
+					{!getters.anonymus && (
+						<>
+							<WithCondition
+								condition={!!getters.course.title}
+								className='cursor-default rounded-lg bg-indigo-100 p-layout'
+								render={
+									<div className='group'>
+										Курс:
+										<Title>{getters.course.title}</Title>
+									</div>
+								}
+							/>
+							<WithCondition
+								condition={!!getters.course.chapter}
+								className='cursor-default rounded-lg bg-indigo-100 p-layout'
+								render={
+									<div className='group'>
+										Секция:
+										<Title>{getters.course.chapter}</Title>
+									</div>
+								}
+							/>
+						</>
+					)}
 					<WithCondition
 						condition={!getters.anonymus}
 						className='cursor-default rounded-lg bg-indigo-100 p-layout'

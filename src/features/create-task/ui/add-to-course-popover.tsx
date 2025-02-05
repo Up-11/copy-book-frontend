@@ -3,7 +3,6 @@
 import { useTaskCreation } from '../model/use-task-creation'
 import { SwitchItem } from '@/features/filter/ui/switch-item'
 import { cn } from '@/shared/lib/css'
-import { courses } from '@/shared/mock/mock'
 import { CourseChapter } from '@/shared/types/course.types'
 import {
 	Popover,
@@ -14,9 +13,11 @@ import { Button } from '@/shared/ui/other/button'
 import Title from '@/shared/ui/view/title'
 import React, { Fragment, PropsWithChildren } from 'react'
 
-export const AddToCoursePopover: React.FC<PropsWithChildren> = ({
-	children
-}) => {
+export const AddToCoursePopover: React.FC<
+	PropsWithChildren & {
+		courses: { courseId: string; title: string; chapters: CourseChapter[] }[]
+	}
+> = ({ children, courses }) => {
 	const { setters, getters } = useTaskCreation()
 	return (
 		<Popover>
@@ -32,15 +33,7 @@ export const AddToCoursePopover: React.FC<PropsWithChildren> = ({
 								<PopoverTrigger asChild>
 									<Button
 										variant={'ghost'}
-										onClick={() =>
-											setters.course({
-												title: course.title,
-												chapter:
-													getters.course.title === course.title
-														? getters.course.chapter
-														: ''
-											})
-										}
+										onClick={() => setters.setCourseTitle(course.title)}
 										className={cn(
 											'w-full justify-start',
 											getters.course.title === course.title &&
@@ -62,9 +55,7 @@ export const AddToCoursePopover: React.FC<PropsWithChildren> = ({
 									<RenderChapters
 										currentChapter={getters.course.chapter}
 										chapters={course.chapters}
-										onClickSetChapter={title =>
-											setters.course({ ...course, chapter: title })
-										}
+										onClickSetChapter={title => setters.setCourseChapter(title)}
 									/>
 								</PopoverContent>
 							</Popover>
