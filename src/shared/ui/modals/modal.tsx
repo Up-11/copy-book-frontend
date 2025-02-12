@@ -7,6 +7,7 @@ import {
 	DialogTitle,
 	DialogTrigger
 } from './dialog'
+import { cn } from '@/shared/lib/css'
 import { ModalProps } from '@/shared/types/props.types'
 import React from 'react'
 
@@ -21,7 +22,7 @@ export const Modal: React.FC<ModalProps> = ({
 	return (
 		<Dialog>
 			<DialogTrigger asChild>{children}</DialogTrigger>
-			<DialogContent className={className}>
+			<DialogContent className={cn(className, 'z-[1100]')}>
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
 					<DialogDescription>{description}</DialogDescription>

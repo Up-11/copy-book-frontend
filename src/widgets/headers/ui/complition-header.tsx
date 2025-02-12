@@ -49,7 +49,7 @@ export const ComplitionHeader: React.FC<{
 				{code && (
 					<div className='flex items-center gap-1'>
 						<Text className='font-light'>Код доступа: </Text>
-						<HiddenText text={code} />{' '}
+						<HiddenText className='text-xl' text={code} />
 					</div>
 				)}
 				{teacher && (

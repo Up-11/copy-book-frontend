@@ -29,7 +29,7 @@ import * as React from 'react'
 
 const StudentNavigationMenu: React.FC = () => {
 	return (
-		<NavigationMenu className='z-[999]'>
+		<NavigationMenu className='z-[500]'>
 			<NavigationMenuList>
 				<NavigationMenuItem>
 					<NavigationMenuTrigger>Задания</NavigationMenuTrigger>

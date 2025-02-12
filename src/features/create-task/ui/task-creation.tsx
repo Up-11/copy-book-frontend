@@ -2,7 +2,8 @@
 
 import { useTaskCreation } from '../model/use-task-creation'
 import { CreationMainData } from './creation-main-data'
-import { MarkdownEditor } from '@/entities/markdown'
+import { CreationTaskDescription } from './creation-task-description'
+import { CreationTaskTypeAndAnswer } from './task-type/creation-task-type-and-answer'
 import { isObjectFilled } from '@/shared/lib/utils'
 import {
 	Accordion,
@@ -18,7 +19,7 @@ export const TaskCreation: React.FC = () => {
 
 	return (
 		<div className='flex h-full flex-col'>
-			<Accordion type='single' defaultValue='item-1' collapsible>
+			<Accordion type='single' collapsible>
 				<AccordionItem value='item-1'>
 					<AccordionTrigger className='text-lg'>
 						Шаг 1: Основные данные
@@ -32,7 +33,7 @@ export const TaskCreation: React.FC = () => {
 						Шаг 2: Описание
 					</AccordionTrigger>
 					<AccordionContent>
-						<MarkdownEditor />
+						<CreationTaskDescription />
 					</AccordionContent>
 				</AccordionItem>
 				<AccordionItem value='item-3'>
@@ -40,13 +41,15 @@ export const TaskCreation: React.FC = () => {
 						Шаг 3: Тип задания и ответ
 					</AccordionTrigger>
 					<AccordionContent>
-						Yes. It adheres to the WAI-ARIA design pattern.
+						<CreationTaskTypeAndAnswer />
 					</AccordionContent>
 				</AccordionItem>
 			</Accordion>
 			<div className='mt-auto flex items-center justify-between gap-5'>
 				<Button>Сохранить в черновике</Button>
-				<Button disabled={!isObjectFilled(getters)}>Опубликовать</Button>
+				<Button disabled={!isObjectFilled(getters, ['course'])}>
+					Опубликовать
+				</Button>
 			</div>
 		</div>
 	)

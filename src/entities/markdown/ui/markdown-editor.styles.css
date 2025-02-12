@@ -1,0 +1,29 @@
+.rsw-ce ul {
+	list-style: disc;
+	padding-left: 2em;
+}
+
+.rsw-ce ol {
+	list-style: decimal;
+	padding-left: 2em;
+}
+
+.rsw-ce h1 {
+	@apply text-xl;
+}
+
+.rsw-ce h2 {
+	@apply text-lg;
+}
+.rsw-toolbar {
+	@apply flex !items-center justify-between !bg-indigo-50 p-1;
+}
+.rsw-btn {
+	@apply rounded-md !p-1 hover:!bg-indigo-300;
+}
+.rsw-btn[data-active='true'] {
+	background-color: #a5b4fc;
+}
+.rsw-dd {
+	@apply cursor-pointer rounded-md bg-transparent px-2 py-1;
+}

@@ -37,7 +37,7 @@ export const AddToCoursePopover: React.FC<
 										className={cn(
 											'w-full justify-start',
 											getters.course.title === course.title &&
-												'bg-indigo-50 text-indigo-700'
+												'bg-indigo-50 text-indigo-700 hover:text-indigo-700'
 										)}
 									>
 										{course.title}

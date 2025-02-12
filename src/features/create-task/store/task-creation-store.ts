@@ -1,4 +1,4 @@
-import { TaskDifficulty } from '@/shared/types/task.types'
+import { TaskDifficulty, TaskType } from '@/shared/types/task.types'
 import { create } from 'zustand'
 
 interface ITaskCreationState {
@@ -10,6 +10,8 @@ interface ITaskCreationState {
 			chapter: string
 		}
 		anonymus: boolean
+		description: string
+		type: TaskType | undefined
 	}
 }
 
@@ -20,6 +22,8 @@ type ITaskCreationActions = {
 	updateCourse: (
 		courseUpdate: Partial<ITaskCreationState['task']['course']>
 	) => void
+	setDescription: (value: string) => void
+	setTaskType: (value: TaskType) => void
 }
 
 type ITaskCreationStore = ITaskCreationState & ITaskCreationActions
@@ -32,12 +36,18 @@ const initialState: ITaskCreationState = {
 			title: '',
 			chapter: ''
 		},
-		anonymus: false
+		anonymus: false,
+		description: '',
+		type: undefined
 	}
 }
 
 export const taskCreationStore = create<ITaskCreationStore>(set => ({
 	task: initialState.task,
+	setDescription: (value: string) =>
+		set(state => ({
+			task: { ...state.task, description: value }
+		})),
 	updateTitle: (value: string) =>
 		set(state => ({
 			task: { ...state.task, title: value }
@@ -62,5 +72,9 @@ export const taskCreationStore = create<ITaskCreationStore>(set => ({
 					...courseUpdate
 				}
 			}
+		})),
+	setTaskType: (value: TaskType) =>
+		set(state => ({
+			task: { ...state.task, type: value }
 		}))
 }))

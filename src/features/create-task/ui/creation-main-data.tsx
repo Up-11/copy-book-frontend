@@ -6,6 +6,7 @@ import { difficultyFilter } from '@/features/filter/filter.data'
 import { SwitchItem } from '@/features/filter/ui/switch-item'
 import { cn } from '@/shared/lib/css'
 import { getBadgeByTaskDifficulty } from '@/shared/lib/map'
+import { isObjectEmpty } from '@/shared/lib/utils'
 import { courses } from '@/shared/mock/mock'
 import { TaskDifficulty } from '@/shared/types/task.types'
 import { UiCheckbox } from '@/shared/ui/custom/ui-checkbox'
@@ -20,7 +21,7 @@ import { Button } from '@/shared/ui/other/button'
 import { Separator } from '@/shared/ui/view/separator'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, X } from 'lucide-react'
 import React from 'react'
 
 export const CreationMainData: React.FC = () => {
@@ -92,7 +93,7 @@ export const CreationMainData: React.FC = () => {
 			</div>
 			<Separator className='my-4' />
 			{!getters.anonymus && (
-				<div className='grid grid-cols-2'>
+				<div className='grid grid-cols-[1fr_1fr_auto] items-center'>
 					<div className='flex flex-col'>
 						<Title className='font-bold'>Курс</Title>
 						<Text color='gray'>{getters.course.title || 'Не выбрано'}</Text>
@@ -100,6 +101,16 @@ export const CreationMainData: React.FC = () => {
 					<div className='flex flex-col'>
 						<Title className='font-bold'>Секция</Title>
 						<Text color='gray'>{getters.course.chapter || 'Не выбрано'}</Text>
+					</div>
+					<div>
+						<Button
+							disabled={isObjectEmpty(getters.course)}
+							variant={'link'}
+							onClick={() => setters.course({ title: '', chapter: '' })}
+							className='self-center rounded p-2 !py-1 hover:text-black'
+						>
+							<X size={20} />
+						</Button>
 					</div>
 				</div>
 			)}

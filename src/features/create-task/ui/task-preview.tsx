@@ -1,10 +1,11 @@
 'use client'
 
 import { useTaskCreation } from '../model/use-task-creation'
+import { MarkdownReader } from '@/entities/markdown'
 import { WithCondition } from '@/shared/lib/components/with-condition'
+import { getBadgeByTaskType } from '@/shared/lib/map'
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/view/alert'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
-import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import { FileWarningIcon } from 'lucide-react'
 import React from 'react'
@@ -25,11 +26,7 @@ export const TaskPreview: React.FC = () => {
 					)}
 				</section>
 				<section className='my-1'>
-					{getters.anonymus && (
-						<Text size='small' color='gray' className='mt-2'>
-							123
-						</Text>
-					)}
+					<MarkdownReader text={getters.description} />
 				</section>
 				<section className='grid-rows-[1fr_auto} mt-2 grid grid-cols-3 gap-3'>
 					{!getters.anonymus && (
@@ -63,6 +60,18 @@ export const TaskPreview: React.FC = () => {
 							<div className='group'>
 								Создатель:
 								<Title>Баабуу</Title>
+							</div>
+						}
+					/>
+					<WithCondition
+						condition={!!getters.type}
+						className='cursor-default rounded-lg bg-indigo-100 p-layout'
+						render={
+							<div className='group'>
+								Тип задания:
+								<Title size='small' className='font-bold'>
+									{getters.type && getBadgeByTaskType(getters.type).text}
+								</Title>
 							</div>
 						}
 					/>

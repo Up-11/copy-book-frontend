@@ -1,84 +1,98 @@
-import { useCallback, useMemo } from 'react'
+'use client'
+
+import './markdown-editor.styles.css'
+import { AlignCenter, AlignLeft, AlignRight } from 'lucide-react'
+import React from 'react'
 import {
-	BaseEditor,
-	createEditor,
+	BtnBold,
+	BtnItalic,
 	Editor,
-	Transforms,
-	Element,
-	Node,
-	Descendant
-} from 'slate'
-import { Slate, Editable, withReact, ReactEditor } from 'slate-react'
+	EditorProvider,
+	Toolbar,
+	BtnBulletList,
+	BtnNumberedList,
+	BtnStrikeThrough,
+	BtnClearFormatting,
+	BtnUndo,
+	BtnRedo,
+	BtnUnderline,
+	Separator,
+	createButton,
+	createDropdown,
+	ContentEditableEvent
+} from 'react-simple-wysiwyg'
 
-export type CustomElement = {
-	type: string
-	children: Descendant[]
-}
+const BtnAlignCenter = createButton(
+	'Выравнивание по центру',
+	<AlignCenter size={18} />,
+	'justifyCenter'
+)
+const BtnAlignLeft = createButton(
+	'Выравнивание по левому краю',
 
-export type CustomText = {
-	text: string
-	// Дополнительные свойства для форматирования (если нужны)
-	bold?: boolean
-	italic?: boolean
-	code?: boolean
-}
+	<AlignLeft size={18} />,
+	'justifyLeft'
+)
+const BtnAlignRight = createButton(
+	'Выравнивание по правому краю',
 
-declare module 'slate' {
-	interface CustomTypes {
-		Editor: BaseEditor & ReactEditor
-		Element: CustomElement
-		Text: CustomText
+	<AlignRight size={18} />,
+
+	'justifyRight'
+)
+const BtnStyles = createDropdown('Стили', [
+	['Обычный', 'formatBlock', 'DIV'],
+	['Заголовок 1', 'formatBlock', 'H1'],
+	['Заголовок 2', 'formatBlock', 'H2'],
+	['Код', 'formatBlock', 'PRE']
+])
+
+export const MarkdownEditor: React.FC<{
+	value: string
+	setValue: (value: string) => void
+}> = ({ value, setValue }) => {
+	function onChange(e: ContentEditableEvent) {
+		setValue(e.target.value)
 	}
-}
-
-const initialValue = [
-	{
-		type: 'paragraph',
-		children: [{ text: 'A line of text in a paragraph.' }]
-	}
-]
-
-export const MarkdownEditor = () => {
-	const editor = useMemo(() => withReact(createEditor()), [])
-
-	const renderElement = useCallback(props => {
-		switch (props.element.type) {
-			case 'code':
-				return <CodeElement {...props} />
-			default:
-				return <DefaultElement {...props} />
-		}
-	}, [])
 
 	return (
-		<Slate editor={editor} initialValue={initialValue}>
-			<Editable
-				renderElement={renderElement}
-				onKeyDown={event => {
-					// Проверяем, что нажаты Ctrl и клавиша `
-					if (event.key === '`' && event.ctrlKey) {
-						event.preventDefault()
-						Transforms.setNodes(
-							editor,
-							{ type: 'code' },
-							{ match: n => Element.isElement(n) && Editor.isBlock(editor, n) }
-						)
-					}
-				}}
-				placeholder='Enter some text...'
-			/>
-		</Slate>
-	)
-}
-
-const DefaultElement = props => {
-	return <p {...props.attributes}>{props.children}</p>
-}
-
-const CodeElement = props => {
-	return (
-		<pre {...props.attributes}>
-			<code>{props.children}</code>
-		</pre>
+		<EditorProvider>
+			<Editor
+				autoFocus
+				value={value}
+				className='max-h-[70vh] min-h-64 overflow-y-auto rounded-bl-md rounded-br-md border border-primary/60'
+				onChange={onChange}
+			>
+				<Toolbar>
+					<div>
+						<BtnUndo />
+						<BtnRedo />
+						<BtnClearFormatting title='Очистить форматирование' />
+					</div>
+					<Separator />
+					<div>
+						<BtnAlignLeft />
+						<BtnAlignCenter />
+						<BtnAlignRight />
+					</div>
+					<Separator />
+					<div>
+						<BtnStyles />
+					</div>
+					<Separator />
+					<div>
+						<BtnBold title='Жирный текст' />
+						<BtnItalic title='С наклоном' />
+						<BtnUnderline title='Подчеркнутый' />
+						<BtnStrikeThrough title='Перечеркнутный' />
+					</div>
+					<Separator />
+					<div>
+						<BtnBulletList title='Маркированный список' />
+						<BtnNumberedList title='Нумерованный список' />
+					</div>
+				</Toolbar>
+			</Editor>
+		</EditorProvider>
 	)
 }
