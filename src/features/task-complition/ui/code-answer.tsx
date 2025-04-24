@@ -25,7 +25,7 @@ export const CodeAnswer: React.FC = () => {
 						Открыть
 					</Button>
 				</DialogTrigger>
-				<DialogContent className='h-[90dvh] max-h-[90dvh] max-w-[90%] !rounded-sm'>
+				<DialogContent className='z-[9999] h-[90dvh] max-h-[90dvh] max-w-[90%] !rounded-sm'>
 					<DialogHeader>
 						<DialogTitle>Редактор кода</DialogTitle>
 					</DialogHeader>
