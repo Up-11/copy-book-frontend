@@ -1,3 +1,5 @@
+import { routes } from '../config/routes'
+import { UserRole } from '../types/user.types'
 import { FilterType } from '@/features/filter/types'
 
 export const getPercentFromNumber = (
@@ -69,4 +71,12 @@ export const getFirstTwoLetters = (text: string) => {
 	const formattedText =
 		arrayText[0].slice(0, 1) + arrayText[arrayText.length - 1].slice(0, 1)
 	return formattedText.toUpperCase()
+}
+
+export const generateTaskLink = (taskId: string, role: UserRole) => {
+	return `${routes.base_url}/${role}/tasks/${taskId}`
+}
+
+export const generateCourseLink = (courseId: string, role: UserRole) => {
+	return `${routes.base_url}/${role}/courses/${courseId}`
 }

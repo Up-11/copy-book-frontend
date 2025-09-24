@@ -18,12 +18,7 @@ export const difficultyFilter = createFilter(
 )
 
 export const typeFilter = createFilter(
-	[
-		TaskType.ChooseAnswer,
-		TaskType.Code,
-		TaskType.DragAndDrop,
-		TaskType.WriteAnswer
-	],
+	[TaskType.ChooseAnswer, TaskType.Code, TaskType.WriteAnswer],
 	type => getBadgeByTaskType(type).text
 )
 

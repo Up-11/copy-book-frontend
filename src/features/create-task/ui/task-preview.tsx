@@ -59,7 +59,7 @@ export const TaskPreview: React.FC = () => {
 						render={
 							<div className='group'>
 								Создатель:
-								<Title>Баабуу</Title>
+								<Title>Баабууин</Title>
 							</div>
 						}
 					/>

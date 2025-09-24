@@ -26,9 +26,7 @@ export const CreationTaskTypeAndAnswer: React.FC = () => {
 					<SelectContent>
 						<SelectGroup>
 							<SelectLabel>Тип</SelectLabel>
-							<SelectItem value={TaskType.DragAndDrop}>
-								Перетаскивание
-							</SelectItem>
+
 							<SelectItem value={TaskType.ChooseAnswer}>
 								Выбор ответа
 							</SelectItem>

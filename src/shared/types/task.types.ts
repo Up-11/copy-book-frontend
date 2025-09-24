@@ -27,7 +27,6 @@ export type TaskRating = number
 
 export enum TaskType {
 	Code = 'code',
-	DragAndDrop = 'dragAndDrop',
 	WriteAnswer = 'writeAnswer',
 	ChooseAnswer = 'chooseAnswer',
 	Theory = 'theory'

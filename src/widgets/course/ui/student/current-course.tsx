@@ -10,21 +10,26 @@ import { HiddenText } from '@/shared/lib/components/hidden-text'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { getStatus } from '@/shared/lib/map'
+import { generateCourseLink } from '@/shared/lib/utils'
 import {
 	Course,
 	CourseChapter,
 	CoursePrivacy,
 	CourseStatus
 } from '@/shared/types/course.types'
+import { UserRole } from '@/shared/types/user.types'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Button } from '@/shared/ui/other/button'
 import Title from '@/shared/ui/view/title'
+import { ShareSidebar } from '@/widgets/share/share-sidebar'
 import { Share } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 export const CurrentCourse: React.FC<{ course: Course }> = ({ course }) => {
 	useQueryManager()
+
+	const url = generateCourseLink(course.courseId, UserRole.STUDENT)
 
 	const currentCourse: ICurrentEntityProps = {
 		title: course.title,
@@ -35,9 +40,15 @@ export const CurrentCourse: React.FC<{ course: Course }> = ({ course }) => {
 					content='Поделиться'
 					className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
 				>
-					<div className='rounded-md p-1 hover:bg-secondary'>
-						<Share size={20} />
-					</div>
+					<ShareSidebar
+						title={course.title}
+						trigger={
+							<Button size={'icon'} variant={'ghost'}>
+								<Share />
+							</Button>
+						}
+						qrUrl={url}
+					/>
 				</UiTooltip>
 			)
 		},

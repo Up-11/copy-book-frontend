@@ -8,23 +8,47 @@ import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
 import { getBadgeByTaskType, getStatus } from '@/shared/lib/map'
+import { generateTaskLink } from '@/shared/lib/utils'
 import { TaskProps, TaskStatus } from '@/shared/types/task.types'
+import { UserRole } from '@/shared/types/user.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'
+import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Button } from '@/shared/ui/other/button'
 import { TaskDiffBadge } from '@/shared/ui/view/task-diff-badge'
 import Title from '@/shared/ui/view/title'
-import { ArrowUpRight } from 'lucide-react'
+import { ShareSidebar } from '@/widgets/share/share-sidebar'
+import { ArrowUpRight, Share } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 	useQueryManager()
 
+	const url = generateTaskLink(task.id, UserRole.STUDENT)
+
 	const currentTask: ICurrentEntityProps = {
 		title: task.title,
 		description: task.description!,
 		renderHeaderElement() {
-			return <TaskDiffBadge diff={task.difficulty} className='text-xl' />
+			return (
+				<div className='flex items-center gap-3'>
+					<TaskDiffBadge diff={task.difficulty} className='text-xl' />
+					<UiTooltip
+						content='Поделиться'
+						className='cursor-pointer rounded-md transition-colors hover:bg-secondary'
+					>
+						<ShareSidebar
+							title={task.title}
+							trigger={
+								<Button size={'icon'} variant={'ghost'}>
+									<Share />
+								</Button>
+							}
+							qrUrl={url}
+						/>
+					</UiTooltip>
+				</div>
+			)
 		},
 		renderFooter() {
 			return (

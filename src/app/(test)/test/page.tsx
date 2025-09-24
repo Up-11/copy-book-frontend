@@ -1,3 +1,4 @@
+import { QrCode } from '@/features/qr-code/qr-code'
 import { RoleBadge } from '@/shared/ui/view/role-badge'
 import { Metadata } from 'next'
 
@@ -12,6 +13,7 @@ export default function TestPage() {
 				<RoleBadge role='admin' />
 				<RoleBadge role='teacher' />
 			</div>
+			<QrCode qrUrl='https://www.google.co' />
 		</div>
 	)
 }

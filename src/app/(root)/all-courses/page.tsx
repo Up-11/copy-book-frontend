@@ -1,4 +1,4 @@
-import { AllCourses } from '@/widgets/course/ui/all-courses'
+import { AllCourses } from '@/widgets/course'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

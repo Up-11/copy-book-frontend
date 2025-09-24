@@ -1,4 +1,5 @@
 export const routes = {
+	base_url: 'http://localhost:3000',
 	home: '/',
 	calendar: '/calendar',
 	journal: '/journal',
@@ -46,6 +47,9 @@ export const routes = {
 		student: '/student/dashboard',
 		teacher: '/teacher/dashboard',
 		admin: '/admin/dashboard'
+	},
+	teacher: {
+		messages: '/teacher/messages'
 	},
 	code: {
 		sandbox: '/code/sandbox',

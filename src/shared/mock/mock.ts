@@ -25,7 +25,6 @@ export const dashboardTasks: TaskProps[] = Array.from(
 		const types = [
 			TaskType.ChooseAnswer,
 			TaskType.Code,
-			TaskType.DragAndDrop,
 			TaskType.WriteAnswer,
 			TaskType.Theory
 		]
@@ -337,7 +336,6 @@ export const courseChapters: CourseChapter[] = [
 				id: 'task6',
 				title: 'Understanding Loops',
 				description: 'Learn about for, while, and do-while loops.',
-				type: TaskType.DragAndDrop,
 				status: TaskStatus.Active,
 				difficulty: TaskDifficulty.Hard
 			}
