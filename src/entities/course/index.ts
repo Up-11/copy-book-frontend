@@ -1,3 +1,4 @@
+export { CourseChapterItem } from '@/entities/course/ui/teacher/course-chapter-item'
 export { TeacherCoursePopover } from './ui/teacher/teacher-course-popover'
 export { CreatedCoursesItem } from './ui/teacher/created-course-item'
 export { CoursePopover } from './ui/student/course-popover'

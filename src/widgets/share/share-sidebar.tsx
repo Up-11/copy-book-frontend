@@ -21,6 +21,7 @@ export const ShareSidebar: React.FC<{
 	description?: string
 	trigger: React.ReactNode
 }> = ({ qrUrl, title, description, trigger }) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [copiedText, copy] = useCopyToClipboard()
 
 	const handleCopy = (text: string) => () => {

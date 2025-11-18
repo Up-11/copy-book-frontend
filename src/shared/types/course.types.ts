@@ -42,9 +42,10 @@ export interface CourseStatistics {
 }
 
 export type CourseChapter = {
-	chapterItems: Task[]
+	chapterItems?: Task[]
 	title: string
 	status?: TaskStatus
+
 	id: string
 }
 

@@ -2,6 +2,7 @@
 
 import { LoginProviders } from './login-providers'
 import { LoginPrimitive } from '@/entities/auth'
+import { useGetAllUsersQuery } from '@/shared/graphql/generated/output'
 import { UserRole } from '@/shared/types/user.types'
 import { Separator } from '@/shared/ui/view/separator'
 import Text from '@/shared/ui/view/text'
@@ -19,9 +20,20 @@ export const LoginForm: React.FC<{ currentUserRole: UserRole | null }> = ({
 		},
 		mode: 'onSubmit'
 	})
+	const { data } = useGetAllUsersQuery()
+	// const [loginUserMutation, { data, loading, error }] = useLoginUserMutation({
+	// 	variables: {
+	// 		data: {
+	// 			email: form.getValues('email'),
+	// 			password: form.getValues('password'),
+	// 			role: currentUserRole
+	// 		}
+	// 	}
+	// })
 
 	const onSubmit = (data: unknown) => {
 		console.log('Form Data:', data)
+		// loginUserMutation()
 	}
 	return (
 		<FormProvider {...form}>
@@ -33,7 +45,10 @@ export const LoginForm: React.FC<{ currentUserRole: UserRole | null }> = ({
 					>
 						<LoginPrimitive />
 					</form>
-
+					{/* {loading && <div>Loading...</div>}
+					{error && <div>Error...{error}</div>}
+					{data && <div>{data}</div>} */}
+					{data && <div>{data.getAllUsers.map(user => user.email)}</div>}
 					<div className='relative my-6'>
 						<Text
 							size='extraSmall'

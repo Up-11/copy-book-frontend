@@ -1,8 +1,10 @@
 import { HiddenText } from '@/shared/lib/components/hidden-text'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { getPrivacy } from '@/shared/lib/map'
+import { generateCourseLink } from '@/shared/lib/utils'
 import { Course } from '@/shared/types/course.types'
 import { PropsWithClassName } from '@/shared/types/props.types'
+import { UserRole } from '@/shared/types/user.types'
 import { Rating } from '@/shared/ui/custom/rating'
 import {
 	Popover,
@@ -12,6 +14,7 @@ import {
 import { Button } from '@/shared/ui/other/button'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
+import { ShareSidebar } from '@/widgets/share/share-sidebar'
 import { ShareIcon } from 'lucide-react'
 import React, { PropsWithChildren } from 'react'
 
@@ -19,6 +22,7 @@ export const TeacherCoursePopover: React.FC<
 	PropsWithChildren &
 		PropsWithClassName & { item: Course; isDashboard?: boolean }
 > = ({ item, className, children }) => {
+	const url = generateCourseLink(item.courseId, UserRole.TEACHER)
 	return (
 		<Popover>
 			<PopoverTrigger className={className} asChild>
@@ -119,9 +123,15 @@ export const TeacherCoursePopover: React.FC<
 							</div>
 						}
 					/>
-					<div className='col-span-2 line-clamp-2 flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-200 p-2 text-center text-base font-bold'>
-						Поделиться <ShareIcon size={18} />
-					</div>
+					<ShareSidebar
+						title={item.title}
+						qrUrl={url}
+						trigger={
+							<div className='col-span-2 line-clamp-2 flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-blue-200 p-2 text-center text-base font-bold'>
+								Поделиться <ShareIcon size={18} />
+							</div>
+						}
+					></ShareSidebar>
 				</div>
 				<div className='mt-auto flex justify-between gap-3'>
 					<Button variant={'outline'}>Удалить</Button>
