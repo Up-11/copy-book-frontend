@@ -1,4 +1,4 @@
-import { UserRole } from '../types/user.types'
+import { UserRole } from '../graphql/generated/output'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
@@ -10,7 +10,7 @@ interface IRoleStore {
 export const useRoleStore = create<IRoleStore>()(
 	persist(
 		set => ({
-			role: UserRole.STUDENT,
+			role: UserRole.Student,
 			setRole: value => set({ role: value })
 		}),
 		{

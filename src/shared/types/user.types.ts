@@ -1,10 +1,12 @@
-export enum UserRole {
-	ADMIN = 'admin',
-	STUDENT = 'student',
-	TEACHER = 'teacher',
-	NO_ROLE = 'no role'
+import { UserRole } from "../graphql/generated/output"
+
+export enum VerificationStatus {
+	PENDING = 'PENDING',
+	VERIFIED = 'VERIFIED',
+	FAILED = 'FAILED',
+	NOT_STARTED = 'NOT_STARTED'
 }
 
 export const isUserRole = (value: string): value is UserRole => {
-	return ['admin', 'student', 'teacher'].includes(value)
+	return ['ADMIN', 'STUDENT', 'TEACHER'].includes(value)
 }

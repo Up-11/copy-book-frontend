@@ -1,5 +1,0 @@
-# mutation LoginUser($data: LoginInput!) {
-# 	login(data: $data) {
-# 		email
-# 	}
-# }

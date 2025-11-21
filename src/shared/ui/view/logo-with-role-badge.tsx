@@ -1,6 +1,6 @@
 import { LogoWithText } from './logo-with-text'
 import { RoleBadge } from './role-badge'
-import { UserRole } from '@/shared/types/user.types'
+import { UserRole } from '@/shared/graphql/generated/output'
 import React from 'react'
 
 export const LogoWithRoleBadge: React.FC<{

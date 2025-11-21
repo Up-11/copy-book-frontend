@@ -7,46 +7,63 @@ import Text from '@/shared/ui/view/text'
 import Link from 'next/link'
 import React from 'react'
 
-export const RegisterPrimitive: React.FC = () => {
+export const RegisterPrimitive: React.FC<{
+	isLoading?: boolean
+}> = ({ isLoading }) => {
 	return (
 		<>
 			<div className='flex flex-col gap-1'>
-				<FormInput name='fisrtName' placeholder='Введите имя...' label='Имя' />
+				<FormInput
+					name='firstName'
+					placeholder='Введите имя...'
+					label='Имя'
+					disabled={isLoading}
+				/>
 				<FormInput
 					name='lastName'
 					placeholder='Введите фамилию...'
 					label='Фамилия'
+					disabled={isLoading}
 				/>
 				<FormInput
 					name='email'
 					placeholder='Введите электронную почту...'
 					label='E-mail'
 					type='text'
+					disabled={isLoading}
 				/>
 				<FormInput
 					name='password'
 					placeholder='Введите пароль...'
 					label='Пароль'
 					type='password'
+					disabled={isLoading}
 				/>
 				<FormInput
 					name='passwordRepeat'
 					placeholder='Повторите пароль...'
 					label='Повторите пароль'
 					type='password'
+					disabled={isLoading}
 				/>
+				<input type='hidden' name='role' />
 			</div>
-			<Button variant={'primary'} type='submit' className='mt-6 py-3 h-10  '>
+			<Button
+				loading={isLoading}
+				variant={'primary'}
+				type='submit'
+				className='mt-6 h-10 py-3'
+			>
 				Зарегистрироваться
 			</Button>
-			<Skeleton className='w-9/12 h-20 self-center' />
-			<div className='flex flex-col justify-center items-center '>
+			<Skeleton className='h-20 w-9/12 self-center' />
+			<div className='flex flex-col items-center justify-center'>
 				<UiTooltip
 					content='Для восстановления пароля перейдите по этой ссылке'
 					className='max-w-56'
 				>
 					<Link href={routes.auth.reset} className='inline-flex'>
-						<Text size='small' className='hover:underline text-indigo-600'>
+						<Text size='small' className='text-indigo-600 hover:underline'>
 							Забыли пароль?
 						</Text>
 					</Link>

@@ -1,0 +1,8 @@
+query findProfile {
+	findProfile {
+		email
+		role
+		firstName
+		lastName
+	}
+}

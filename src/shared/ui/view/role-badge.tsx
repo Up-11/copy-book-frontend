@@ -1,7 +1,7 @@
 import Text from './text'
+import { UserRole } from '@/shared/graphql/generated/output'
 import { cn } from '@/shared/lib/css'
 import { getBadgeByUserRole } from '@/shared/lib/map'
-import { UserRole } from '@/shared/types/user.types'
 import React from 'react'
 
 export const RoleBadge: React.FC<{ role: UserRole }> = ({ role }) => {

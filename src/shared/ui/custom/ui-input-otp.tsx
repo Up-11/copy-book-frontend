@@ -6,12 +6,18 @@ import {
 } from '../input/input-otp'
 import React from 'react'
 
-export const UiInputOtp: React.FC<{ disabled?: boolean; value?: string }> = ({
-	disabled,
-	value
-}) => {
+export const UiInputOtp: React.FC<{
+	disabled?: boolean
+	value?: string
+	onChange?: (value: string) => void
+}> = ({ disabled, value, onChange }) => {
 	return (
-		<InputOTP maxLength={6} disabled={disabled} value={value}>
+		<InputOTP
+			maxLength={6}
+			disabled={disabled}
+			value={value}
+			onChange={onChange}
+		>
 			<InputOTPGroup>
 				<InputOTPSlot index={0} />
 				<InputOTPSlot index={1} />

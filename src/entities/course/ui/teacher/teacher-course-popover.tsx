@@ -1,10 +1,10 @@
+import { UserRole } from '@/shared/graphql/generated/output'
 import { HiddenText } from '@/shared/lib/components/hidden-text'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { getPrivacy } from '@/shared/lib/map'
 import { generateCourseLink } from '@/shared/lib/utils'
 import { Course } from '@/shared/types/course.types'
 import { PropsWithClassName } from '@/shared/types/props.types'
-import { UserRole } from '@/shared/types/user.types'
 import { Rating } from '@/shared/ui/custom/rating'
 import {
 	Popover,
@@ -22,7 +22,7 @@ export const TeacherCoursePopover: React.FC<
 	PropsWithChildren &
 		PropsWithClassName & { item: Course; isDashboard?: boolean }
 > = ({ item, className, children }) => {
-	const url = generateCourseLink(item.courseId, UserRole.TEACHER)
+	const url = generateCourseLink(item.courseId, UserRole.Teacher)
 	return (
 		<Popover>
 			<PopoverTrigger className={className} asChild>

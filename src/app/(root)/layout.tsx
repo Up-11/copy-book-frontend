@@ -9,7 +9,7 @@ export default function DashboardLayout({
 	return (
 		<div className='h-screen'>
 			<RootHeader />
-			<div className='root-page-w '>
+			<div className='root-page-w'>
 				{children}
 				{/* <DashboardFooter /> */}
 			</div>

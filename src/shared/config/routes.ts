@@ -7,13 +7,20 @@ export const routes = {
 	profile: {
 		personal: '/profile/personal',
 		settings: '/profile/settings',
-		statistic: '/profile/statistic'
+		statistic: '/profile/statistic',
+		security: '/profile/security',
+		logout: '/profile/logout',
+		accountInfo: '/profile/account-info',
+		notifications: '/profile/notifications',
+		history: '/profile/history',
+		support: '/profile/support'
 	},
 	auth: {
 		student: '/auth/student',
 		teacher: '/auth/teacher',
 		admin: '/auth/admin',
-		reset: '/auth/reset-password'
+		reset: '/auth/reset-password',
+		verifyEmail: '/auth/verify-email'
 	},
 	tasks: {
 		student: '/student/tasks',

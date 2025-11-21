@@ -1,3 +1,4 @@
+import { UserRole } from '../graphql/generated/output'
 import { CoursePrivacy, CourseStatus } from '../types/course.types'
 import {
 	TaskDifficulty,
@@ -5,19 +6,18 @@ import {
 	TaskStatus,
 	TaskType
 } from '../types/task.types'
-import { UserRole } from '@/shared/types/user.types'
 
 export const getBadgeByUserRole = (role: UserRole) => {
 	const roleBadgeMap = new Map<UserRole, { text: string; classNames: string }>([
 		[
-			UserRole.STUDENT,
+			UserRole.Student,
 			{ text: 'Ученик', classNames: 'border-sky-200 bg-sky-100' }
 		],
 		[
-			UserRole.TEACHER,
+			UserRole.Teacher,
 			{ text: 'Учитель', classNames: 'border-violet-200 bg-violet-100' }
 		],
-		[UserRole.ADMIN, { text: 'Админ', classNames: 'border-red-200 bg-red-100' }]
+		[UserRole.Admin, { text: 'Админ', classNames: 'border-red-200 bg-red-100' }]
 	])
 
 	return roleBadgeMap.get(role) ?? { text: '', classNames: '' }
@@ -33,10 +33,7 @@ export const getBadgeByTaskType = (type: TaskType) => {
 			TaskType.Code,
 			{ text: 'Код', classNames: 'border-violet-200 bg-violet-100' }
 		],
-		[
-			TaskType.DragAndDrop,
-			{ text: 'Перетаскивание', classNames: 'border-red-200 bg-red-100' }
-		],
+
 		[
 			TaskType.Theory,
 			{ text: 'Теория', classNames: 'border-red-200 bg-red-100' }

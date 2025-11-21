@@ -29,6 +29,7 @@ export const AuthWidget: React.FC = () => {
 			<div className='mt-2'>
 				<LogoWithRoleBadge role={currentUserRole!} />
 			</div>
+
 			<div className='flex flex-col items-center rounded-xl bg-white pt-3 shadow-lg max-md:w-full md:rounded-2xl'>
 				<Tabs
 					value={currentTab}

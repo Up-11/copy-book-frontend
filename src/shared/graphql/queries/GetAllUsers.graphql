@@ -1,6 +1,0 @@
-query getAllUsers {
-	getAllUsers {
-		id
-		email
-	}
-}

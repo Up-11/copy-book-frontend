@@ -1,4 +1,5 @@
-import { isUserRole, UserRole } from '@/shared/types/user.types'
+import { UserRole } from '@/shared/graphql/generated/output'
+import { isUserRole } from '@/shared/types/user.types'
 import { usePathname } from 'next/navigation'
 
 export const useCurrentUserRoleAuth = (): UserRole | null => {
@@ -6,7 +7,7 @@ export const useCurrentUserRoleAuth = (): UserRole | null => {
 
 	if (!pathname) return null
 
-	const currentUserRole = pathname?.split('/')[2] as UserRole
+	const currentUserRole = pathname?.split('/')[2].toUpperCase() as UserRole
 
 	if (isUserRole(currentUserRole)) {
 		return currentUserRole
