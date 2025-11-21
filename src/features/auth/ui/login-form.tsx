@@ -2,38 +2,66 @@
 
 import { LoginProviders } from './login-providers'
 import { LoginPrimitive } from '@/entities/auth'
+import { getDashboardRoute } from '@/shared/config/routes'
 import {
 	useLoginUserMutation,
 	UserRole
 } from '@/shared/graphql/generated/output'
+import {
+	loginSchema,
+	TypeLoginSchema
+} from '@/shared/schemas/auth/login-schema'
+import { useAuthStore } from '@/shared/store/auth-store'
+import { useRoleStore } from '@/shared/store/user-role.store'
 import { Separator } from '@/shared/ui/view/separator'
 import Text from '@/shared/ui/view/text'
-import React from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 export const LoginForm: React.FC<{ currentUserRole: UserRole | null }> = ({
 	currentUserRole
 }) => {
-	const form = useForm({
+	const router = useRouter()
+	const setRole = useRoleStore(state => state.setRole)
+	const setUserInfo = useAuthStore(state => state.setUserInfo)
+	const [token, setToken] = useState('')
+	const form = useForm<TypeLoginSchema>({
+		resolver: zodResolver(loginSchema),
 		defaultValues: {
 			email: '',
 			password: '',
-			role: currentUserRole
+			role: currentUserRole!
 		},
 		mode: 'onSubmit'
 	})
-	const [] = useLoginUserMutation({
-		variables: {
-			data: {
-				email: form.getValues('email'),
-				password: form.getValues('password'),
-				role: currentUserRole!
-			}
+	const [login, { loading }] = useLoginUserMutation({
+		onCompleted(data) {
+			toast.success('Вход выполнен успешно')
+			const link = getDashboardRoute(data.login.role)
+			setRole(data.login.role)
+			setUserInfo(data.login)
+
+			router.push(link)
+		},
+		onError(error) {
+			toast.error(error.message)
 		}
 	})
 
-	const onSubmit = (data: unknown) => {
+	const onSubmit = (data: TypeLoginSchema) => {
 		console.log('Form Data:', data)
+		login({
+			variables: {
+				data: {
+					email: form.getValues('email'),
+					password: form.getValues('password'),
+					role: currentUserRole!
+				}
+			}
+		})
 	}
 	return (
 		<FormProvider {...form}>
@@ -43,11 +71,13 @@ export const LoginForm: React.FC<{ currentUserRole: UserRole | null }> = ({
 						onSubmit={form.handleSubmit(onSubmit)}
 						className='flex flex-col gap-6'
 					>
-						<LoginPrimitive />
+						<LoginPrimitive
+							isLoading={loading}
+							setToken={setToken}
+							token={token}
+						/>
 					</form>
-					{/* {loading && <div>Loading...</div>}
-					{error && <div>Error...{error}</div>}
-					{data && <div>{data}</div>} */}
+
 					<div className='relative my-6'>
 						<Text
 							size='extraSmall'
@@ -57,7 +87,11 @@ export const LoginForm: React.FC<{ currentUserRole: UserRole | null }> = ({
 						</Text>
 						<Separator />
 					</div>
-					<LoginProviders onClickVk={() => {}} onClickYandex={() => {}} />
+					<LoginProviders
+						onClickVk={() => {}}
+						onClickYandex={() => {}}
+						isLoading={loading}
+					/>
 				</div>
 			</div>
 		</FormProvider>

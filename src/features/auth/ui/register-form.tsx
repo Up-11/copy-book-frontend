@@ -11,17 +11,21 @@ import {
 	createAccountSchema,
 	TypeCreateAccountSchema
 } from '@/shared/schemas/auth/create-account.schema'
+import { useAuthStore } from '@/shared/store/auth-store'
 import { Separator } from '@/shared/ui/view/separator'
 import Text from '@/shared/ui/view/text'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 export const RegisterForm: React.FC<{
 	currentUserRole: UserRole | null
 }> = ({ currentUserRole }) => {
+	const setEmail = useAuthStore(state => state.setEmail)
+	const [token, setToken] = useState('')
+
 	const form = useForm<TypeCreateAccountSchema>({
 		defaultValues: {
 			firstName: 'Булат',
@@ -41,6 +45,7 @@ export const RegisterForm: React.FC<{
 			toast.success(
 				'Аккаунт успешно создан, пожалуйста, подтвердите свою почту'
 			)
+			setEmail(form.getValues().email)
 			router.push(routes.auth.verifyEmail)
 		},
 		onError(error) {
@@ -69,7 +74,11 @@ export const RegisterForm: React.FC<{
 						onSubmit={form.handleSubmit(onSubmit)}
 						className='flex flex-col gap-6'
 					>
-						<RegisterPrimitive isLoading={loading} />
+						<RegisterPrimitive
+							isLoading={loading}
+							setToken={setToken}
+							token={token}
+						/>
 					</form>
 
 					<div className='relative my-6'>

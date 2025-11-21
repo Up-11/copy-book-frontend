@@ -1,19 +1,23 @@
 'use client'
 
-import { routes } from '@/shared/config/routes'
+import { useTimer } from '../model/use-timer'
+import { getDashboardRoute, routes } from '@/shared/config/routes'
 import {
+	useResendTokenMutation,
 	UserRole,
 	useVerifyAccountMutation
 } from '@/shared/graphql/generated/output'
 import { useAuthStore } from '@/shared/store/auth-store'
 import { useRoleStore } from '@/shared/store/user-role.store'
 import { VerificationStatus } from '@/shared/types/user.types'
+import { UiIcon } from '@/shared/ui/custom/ui-icon'
 import { UiInputOtp } from '@/shared/ui/custom/ui-input-otp'
+import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Button } from '@/shared/ui/other/button'
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/view/alert'
 import { Loader } from '@/shared/ui/view/loader'
 import { Label } from '@radix-ui/react-label'
-import { CircleCheck } from 'lucide-react'
+import { ArrowLeftIcon, CircleCheck } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
@@ -24,6 +28,8 @@ export const VerifyEmail: React.FC = () => {
 	const router = useRouter()
 	const setRole = useRoleStore(state => state.setRole)
 	const setUserInfo = useAuthStore(state => state.setUserInfo)
+	const email = useAuthStore(state => state.email)
+	const { start, stop, isActive, value, reset } = useTimer()
 
 	const [token, setToken] = useState(queryToken || '')
 	const [state, setState] = useState({
@@ -46,17 +52,33 @@ export const VerifyEmail: React.FC = () => {
 		})
 	}
 
+	const handleResendToken = () => {
+		resendToken({
+			variables: {
+				data: {
+					email
+				}
+			}
+		})
+	}
+
+	const [resendToken] = useResendTokenMutation({
+		onCompleted() {
+			toast.success('Письмо отправлено повторно')
+			reset()
+		},
+		onError(error) {
+			toast.error(error.message)
+		}
+	})
+
 	const [verify, { loading }] = useVerifyAccountMutation({
 		onCompleted(data) {
 			toast.success('Верификация прошла успешно')
 			setState({
 				verificationStatus: VerificationStatus.VERIFIED
 			})
-			const link =
-				data.verifyAccount.role === UserRole.Student
-					? routes.dashboard.student
-					: routes.dashboard.teacher
-
+			const link = getDashboardRoute(data.verifyAccount.role)
 			setRole(data.verifyAccount.role)
 
 			setUserInfo({
@@ -83,6 +105,13 @@ export const VerifyEmail: React.FC = () => {
 
 	return (
 		<div className='flex flex-col justify-between gap-6'>
+			<div onClick={router.back} className='absolute left-2 top-2'>
+				<UiIcon className='flex h-8 w-8 items-center justify-center rounded-lg text-primary hover:bg-primary/10 hover:text-primary/90'>
+					<UiTooltip content='Назад к авторизации'>
+						<ArrowLeftIcon />
+					</UiTooltip>
+				</UiIcon>
+			</div>
 			{loading ? (
 				<div className='flex items-center justify-center'>
 					<Loader />
@@ -98,7 +127,16 @@ export const VerifyEmail: React.FC = () => {
 							<div className='flex justify-center'>
 								<UiInputOtp value={token} onChange={handleToken} />
 							</div>
-							<Button onClick={sendToken}>Отправить код</Button>
+							<Button onClick={sendToken} disabled={token.length !== 6}>
+								Отправить код
+							</Button>
+							<Button
+								variant={'outline'}
+								onClick={handleResendToken}
+								disabled={isActive}
+							>
+								Отправить письмо повторно {isActive && `(${value} сек.)`}
+							</Button>
 						</>
 					)}
 					{state.verificationStatus === VerificationStatus.FAILED && (
@@ -113,7 +151,16 @@ export const VerifyEmail: React.FC = () => {
 							<div className='flex justify-center'>
 								<UiInputOtp value={token} onChange={handleToken} />
 							</div>
-							<Button onClick={sendToken}>Отправить код</Button>
+							<Button onClick={sendToken} disabled={token.length !== 6}>
+								Отправить код
+							</Button>
+							<Button
+								variant={'outline'}
+								onClick={handleResendToken}
+								disabled={isActive}
+							>
+								Отправить письмо повторно {isActive && `(${value} сек.)`}
+							</Button>
 						</>
 					)}
 				</>

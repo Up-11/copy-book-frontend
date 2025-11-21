@@ -24,23 +24,25 @@ export const RootHeader: React.FC = () => {
 
 	return (
 		<>
-			<header className='header-w mt-2 flex w-full items-center justify-between gap-1'>
-				<div className='flex items-center gap-3'>
-					<Link href={dashboardHrefs[role as keyof typeof dashboardHrefs]}>
-						<LogoWithRoleBadge role={role} hasLink={false} />
-					</Link>
-					<nav className='flex items-center max-md:hidden'>
-						{role === UserRole.Student ? (
-							<StudentNavigationMenu />
-						) : (
-							<TeacherNavigationMenu />
-						)}
-					</nav>
-				</div>
-				<div className='flex items-center gap-14'>
-					<ProfileButton />
-				</div>
-			</header>
+			{role !== null && (
+				<header className='header-w mt-2 flex w-full items-center justify-between gap-1'>
+					<div className='flex items-center gap-3'>
+						<Link href={dashboardHrefs[role as keyof typeof dashboardHrefs]}>
+							<LogoWithRoleBadge role={role} hasLink={false} />
+						</Link>
+						<nav className='flex items-center max-md:hidden'>
+							{role === UserRole.Student ? (
+								<StudentNavigationMenu />
+							) : (
+								<TeacherNavigationMenu />
+							)}
+						</nav>
+					</div>
+					<div className='flex items-center gap-14'>
+						<ProfileButton />
+					</div>
+				</header>
+			)}
 			<div className='fixed bottom-3 right-3'>
 				<Button onClick={() => setRole(UserRole.Student)}>Ученик</Button>
 				<Button onClick={() => setRole(UserRole.Teacher)}>Препод</Button>

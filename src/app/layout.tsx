@@ -1,5 +1,6 @@
 import Providers from './providers/providers'
 import './styles/globals.css'
+import { DevRoutesPanel } from '@/shared/lib/components/dev-routes.test'
 import { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
@@ -24,13 +25,14 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body
-				className={` ${inter.variable}  `}
+				className={` ${inter.variable} `}
 				style={{ marginRight: '0px !important container' }}
 			>
 				{/* 	<div className='fixed left-0 top-0 z-[999] text-xs opacity-50'>
 					DEVELOPMENT.NON_COMMERCE.FOR_KKRIT
 				</div> */}
 				<Providers>{children}</Providers>
+				<DevRoutesPanel />
 			</body>
 		</html>
 	)

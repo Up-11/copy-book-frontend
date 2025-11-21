@@ -3,15 +3,17 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 interface IRoleStore {
-	role: UserRole
+	role: UserRole | null
 	setRole: (value: UserRole) => void
+	resetRole: () => void
 }
 
 export const useRoleStore = create<IRoleStore>()(
 	persist(
 		set => ({
-			role: UserRole.Student,
-			setRole: value => set({ role: value })
+			role: null,
+			setRole: value => set({ role: value }),
+			resetRole: () => set({ role: null })
 		}),
 		{
 			name: 'role',

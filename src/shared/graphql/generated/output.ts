@@ -80,6 +80,7 @@ export type Mutation = {
   logout: Scalars['Boolean']['output'];
   newPassword: Scalars['Boolean']['output'];
   removeSession: Scalars['Boolean']['output'];
+  resendToken: Scalars['Boolean']['output'];
   resetPassword: Scalars['Boolean']['output'];
   verifyAccount: UserModel;
 };
@@ -120,6 +121,11 @@ export type MutationRemoveSessionArgs = {
 };
 
 
+export type MutationResendTokenArgs = {
+  data: ResendTokenInput;
+};
+
+
 export type MutationResetPasswordArgs = {
   data: ResetPasswordInput;
 };
@@ -141,10 +147,24 @@ export type Query = {
   findProfile: UserModel;
   findSessionByUser: Array<SessionModel>;
   getAllUsers: Array<UserModel>;
+  getSessionById: SessionModel;
+};
+
+
+export type QueryGetSessionByIdArgs = {
+  data: SessionIdInput;
+};
+
+export type ResendTokenInput = {
+  email: Scalars['String']['input'];
 };
 
 export type ResetPasswordInput = {
   email: Scalars['String']['input'];
+};
+
+export type SessionIdInput = {
+  sessionId: Scalars['String']['input'];
 };
 
 export type SessionMetadataModel = {
@@ -225,7 +245,7 @@ export type LoginUserMutationVariables = Exact<{
 }>;
 
 
-export type LoginUserMutation = { __typename?: 'Mutation', login: { __typename?: 'UserModel', email: string } };
+export type LoginUserMutation = { __typename?: 'Mutation', login: { __typename?: 'UserModel', email: string, firstName: string, lastName: string, role: UserRole, avatar?: string | null } };
 
 export type LogoutUserMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -257,6 +277,13 @@ export type RemoveSessionMutationVariables = Exact<{
 
 
 export type RemoveSessionMutation = { __typename?: 'Mutation', removeSession: boolean };
+
+export type ResendTokenMutationVariables = Exact<{
+  data: ResendTokenInput;
+}>;
+
+
+export type ResendTokenMutation = { __typename?: 'Mutation', resendToken: boolean };
 
 export type VerifyAccountMutationVariables = Exact<{
   data: VerificationInput;
@@ -414,6 +441,10 @@ export const LoginUserDocument = gql`
     mutation LoginUser($data: LoginInput!) {
   login(data: $data) {
     email
+    firstName
+    lastName
+    role
+    avatar
   }
 }
     `;
@@ -596,6 +627,37 @@ export function useRemoveSessionMutation(baseOptions?: ApolloReactHooks.Mutation
 export type RemoveSessionMutationHookResult = ReturnType<typeof useRemoveSessionMutation>;
 export type RemoveSessionMutationResult = ApolloReactCommon.MutationResult<RemoveSessionMutation>;
 export type RemoveSessionMutationOptions = ApolloReactCommon.BaseMutationOptions<RemoveSessionMutation, RemoveSessionMutationVariables>;
+export const ResendTokenDocument = gql`
+    mutation ResendToken($data: ResendTokenInput!) {
+  resendToken(data: $data)
+}
+    `;
+export type ResendTokenMutationFn = ApolloReactCommon.MutationFunction<ResendTokenMutation, ResendTokenMutationVariables>;
+
+/**
+ * __useResendTokenMutation__
+ *
+ * To run a mutation, you first call `useResendTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResendTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resendTokenMutation, { data, loading, error }] = useResendTokenMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useResendTokenMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ResendTokenMutation, ResendTokenMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<ResendTokenMutation, ResendTokenMutationVariables>(ResendTokenDocument, options);
+      }
+export type ResendTokenMutationHookResult = ReturnType<typeof useResendTokenMutation>;
+export type ResendTokenMutationResult = ApolloReactCommon.MutationResult<ResendTokenMutation>;
+export type ResendTokenMutationOptions = ApolloReactCommon.BaseMutationOptions<ResendTokenMutation, ResendTokenMutationVariables>;
 export const VerifyAccountDocument = gql`
     mutation VerifyAccount($data: VerificationInput!) {
   verifyAccount(data: $data) {

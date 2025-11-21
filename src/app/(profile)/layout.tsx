@@ -9,7 +9,7 @@ export default function DashboardLayout({
 	return (
 		<div>
 			<RootHeader />
-			<div className='grid grid-cols-[250px,1fr] root-page-w mt-8'>
+			<div className='root-page-w mt-8 grid grid-cols-[250px,1fr]'>
 				<ProfileSidebar role='student' />
 				<div>{children}</div>
 			</div>

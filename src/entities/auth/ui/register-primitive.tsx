@@ -1,15 +1,17 @@
+import { ReCaptcha } from './recaptcha'
 import { routes } from '@/shared/config/routes'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { FormInput } from '@/shared/ui/forms/form-input'
 import { Button } from '@/shared/ui/other/button'
-import { Skeleton } from '@/shared/ui/other/skeleton'
 import Text from '@/shared/ui/view/text'
 import Link from 'next/link'
 import React from 'react'
 
 export const RegisterPrimitive: React.FC<{
 	isLoading?: boolean
-}> = ({ isLoading }) => {
+	setToken: (token: string) => void
+	token: string
+}> = ({ isLoading, setToken, token }) => {
 	return (
 		<>
 			<div className='flex flex-col gap-1'>
@@ -48,15 +50,23 @@ export const RegisterPrimitive: React.FC<{
 				/>
 				<input type='hidden' name='role' />
 			</div>
-			<Button
-				loading={isLoading}
-				variant={'primary'}
-				type='submit'
-				className='mt-6 h-10 py-3'
-			>
-				Зарегистрироваться
-			</Button>
-			<Skeleton className='h-20 w-9/12 self-center' />
+			{!token ? (
+				<UiTooltip content='Подтвердите, что вы не робот'>
+					<Button type='button' variant={'primary'} className='mt-6 h-10 py-3'>
+						Зарегистрироваться
+					</Button>
+				</UiTooltip>
+			) : (
+				<Button
+					variant={'primary'}
+					type='submit'
+					className='mt-6 h-10 py-3'
+					disabled={isLoading || !token}
+				>
+					Зарегистрироваться
+				</Button>
+			)}
+			<ReCaptcha setToken={setToken} />
 			<div className='flex flex-col items-center justify-center'>
 				<UiTooltip
 					content='Для восстановления пароля перейдите по этой ссылке'

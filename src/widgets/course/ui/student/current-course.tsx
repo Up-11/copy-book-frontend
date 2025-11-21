@@ -6,6 +6,7 @@ import { useQueryManager } from '@/common/query'
 import { Slider, SliderChapterItem } from '@/common/slider'
 import { CourseProgressBar } from '@/common/task-and-course/ui/progress-bar'
 import { routes } from '@/shared/config/routes'
+import { UserRole } from '@/shared/graphql/generated/output'
 import { HiddenText } from '@/shared/lib/components/hidden-text'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
@@ -17,7 +18,6 @@ import {
 	CoursePrivacy,
 	CourseStatus
 } from '@/shared/types/course.types'
-import { UserRole } from '@/shared/types/user.types'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Button } from '@/shared/ui/other/button'
 import Title from '@/shared/ui/view/title'
@@ -29,7 +29,7 @@ import React from 'react'
 export const CurrentCourse: React.FC<{ course: Course }> = ({ course }) => {
 	useQueryManager()
 
-	const url = generateCourseLink(course.courseId, UserRole.STUDENT)
+	const url = generateCourseLink(course.courseId, UserRole.Student)
 
 	const currentCourse: ICurrentEntityProps = {
 		title: course.title,

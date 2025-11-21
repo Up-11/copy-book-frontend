@@ -1,4 +1,4 @@
-import { VerifyEmail } from '@/entities/auth/ui/verify-email'
+import { VerifyEmail } from '@/features/auth/ui/verify-email'
 import { Metadata } from 'next'
 import React from 'react'
 

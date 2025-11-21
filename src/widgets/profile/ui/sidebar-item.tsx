@@ -10,12 +10,13 @@ export const SidebarItem: React.FC<SidebarItemType> = ({
 	isActive
 }) => {
 	return (
-		<Link href={link}>
+		<Link href={link} className='flex items-center justify-center gap-1'>
+			{isActive && <div className='h-1/2 w-1 rounded-lg bg-purple-400'></div>}
 			<Text
 				size='small'
 				className={cn(
-					' hover:bg-destructive transition-colors inline-flex p-2.5 w-full text-start rounded-lg',
-					isActive && 'bg-secondary'
+					'inline-flex w-full rounded-lg p-2 text-start transition-colors hover:bg-destructive',
+					isActive && 'bg-destructive'
 				)}
 			>
 				{title}

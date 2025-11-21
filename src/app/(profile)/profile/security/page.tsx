@@ -4,13 +4,13 @@ import { Separator } from '@radix-ui/react-separator'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-	title: 'Личные данные'
+	title: 'Безопасность'
 }
 
 export default function PersonalInfoPage() {
 	return (
 		<section className='flex flex-col gap-1'>
-			<Title size='large'>Личные данные</Title>
+			<Title size='large'>Безопасность</Title>
 			<Separator className='h-[0.1] w-full bg-black' />
 			<ProfilePersonal />
 		</section>

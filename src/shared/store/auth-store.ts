@@ -14,6 +14,7 @@ interface IAuthActions {
 	setAvatar: (avatar: string) => void
 	setUserInfo: (userInfo: IAuthState) => void
 	getFullName(): string
+	resetUser(): void
 }
 
 interface IAuthStore extends IAuthState, IAuthActions {}
@@ -37,7 +38,8 @@ export const useAuthStore = create<IAuthStore>()(
 			getFullName: () => {
 				const { firstName, lastName } = get()
 				return `${firstName} ${lastName}`.trim()
-			}
+			},
+			resetUser: () => set({ ...initialState })
 		}),
 		{
 			name: 'auth',

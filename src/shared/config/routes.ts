@@ -1,3 +1,6 @@
+import { UserRole } from '../graphql/generated/output'
+import { getAllValues } from '../lib/utils'
+
 export const routes = {
 	base_url: 'http://localhost:3000',
 	home: '/',
@@ -63,5 +66,63 @@ export const routes = {
 		drafts: '/student/drafts'
 	}
 } as const
+
+export const dynamicRoutePatterns = {
+	course: {
+		currentUserCourse: '/student/courses/[id]',
+		complitionCourse: '/course-complition/[courseId]/chapter/[chapterId]'
+	},
+	tasks: {
+		currentUserTask: '/student/tasks/[id]',
+		complitionTask: '/task-complition/[id]'
+	}
+}
+
+const routeValues = getAllValues(routes)
+
+export const unAuthorizedRoutes: string[] = [
+	routes.auth.student,
+	routes.auth.teacher,
+	routes.auth.admin,
+	routes.auth.reset,
+	routes.auth.verifyEmail,
+	routes.code.sandbox,
+	routes.home
+]
+
+export const authorizedRoutes: string[] = routeValues.filter(
+	route => !unAuthorizedRoutes.includes(route)
+)
+
+export const studentRoutes = [
+	routes.dashboard.student,
+	routes.tasks.student,
+	routes.course.student,
+	routes.code.drafts
+]
+
+export const teacherRoutes = [
+	routes.dashboard.teacher,
+	routes.tasks.teacher.tasks,
+	routes.tasks.teacher.create,
+	routes.course.teacher.courses,
+	routes.course.teacher.create,
+	routes.teacher.messages
+]
+
+export const adminRoutes = [routes.dashboard.admin]
+
+export const getDashboardRoute = (role: UserRole) => {
+	switch (role) {
+		case UserRole.Student:
+			return routes.dashboard.student
+		case UserRole.Teacher:
+			return routes.dashboard.teacher
+		case UserRole.Admin:
+			return routes.dashboard.admin
+		default:
+			return routes.home
+	}
+}
 
 export type AppRoutes = typeof routes

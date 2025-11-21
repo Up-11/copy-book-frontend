@@ -12,7 +12,7 @@ export const ProfileSidebar: React.FC<{ role: Omit<UserRole, 'admin'> }> = ({
 	const pathname = usePathname()
 
 	return (
-		<aside className='mr-4 flex h-[87vh] flex-col gap-1 border-r border-r-primary pr-4'>
+		<aside className='mr-4 flex h-[87vh] flex-col  pr-4'>
 			{role === 'student' &&
 				sidebarItems.map((item, index) => (
 					<SidebarItem
