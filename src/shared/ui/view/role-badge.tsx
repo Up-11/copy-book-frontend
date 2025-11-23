@@ -4,13 +4,17 @@ import { cn } from '@/shared/lib/css'
 import { getBadgeByUserRole } from '@/shared/lib/map'
 import React from 'react'
 
-export const RoleBadge: React.FC<{ role: UserRole }> = ({ role }) => {
+export const RoleBadge: React.FC<{ role: UserRole; className?: string }> = ({
+	role,
+	className
+}) => {
 	const { text, classNames } = getBadgeByUserRole(role)
 	return (
 		<div
 			className={cn(
 				'pointer-events-none inline-flex rounded-md border-2 p-1 px-6',
-				classNames
+				classNames,
+				className
 			)}
 		>
 			<Text size='medium'> {text}</Text>

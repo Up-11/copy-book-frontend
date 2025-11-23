@@ -4,13 +4,13 @@ import { CurrentEntity } from '@/common/current-entity'
 import { ICurrentEntityProps } from '@/common/current-entity/types'
 import { useQueryManager } from '@/common/query'
 import { routes } from '@/shared/config/routes'
+import { UserRole } from '@/shared/graphql/generated/output'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { cn } from '@/shared/lib/css'
 import { formatDate } from '@/shared/lib/dates/dates'
 import { getBadgeByTaskType, getStatus } from '@/shared/lib/map'
 import { generateTaskLink } from '@/shared/lib/utils'
 import { TaskProps, TaskStatus } from '@/shared/types/task.types'
-import { UserRole } from '@/shared/types/user.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'
 import { UiTooltip } from '@/shared/ui/custom/ui-tooltip'
 import { Button } from '@/shared/ui/other/button'
@@ -24,7 +24,7 @@ import React from 'react'
 export const CurrentTask: React.FC<{ task: TaskProps }> = ({ task }) => {
 	useQueryManager()
 
-	const url = generateTaskLink(task.id, UserRole.STUDENT)
+	const url = generateTaskLink(task.id, UserRole.Student)
 
 	const currentTask: ICurrentEntityProps = {
 		title: task.title,

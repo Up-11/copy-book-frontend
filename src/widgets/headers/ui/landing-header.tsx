@@ -2,6 +2,7 @@
 
 import { useHeader } from '../model/use-header'
 import './header.styles.css'
+import { LoginButtonSlot } from './login-button-slot'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { Drawer } from '@/shared/ui/modals/drawer'
@@ -45,12 +46,7 @@ export const LandingHeader: React.FC = ({}) => {
 			</div>
 
 			<div className='flex items-center'>
-				<ChooseRoleModal>
-					<Button variant={'secondary'} className='button max-md:hidden'>
-						Открыть тетрадь
-					</Button>
-				</ChooseRoleModal>
-
+				<LoginButtonSlot />
 				<Drawer
 					content={
 						<div className='flex h-full flex-col justify-between'>

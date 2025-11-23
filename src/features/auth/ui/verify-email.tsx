@@ -8,7 +8,6 @@ import {
 	useVerifyAccountMutation
 } from '@/shared/graphql/generated/output'
 import { useAuthStore } from '@/shared/store/auth-store'
-import { useRoleStore } from '@/shared/store/user-role.store'
 import { VerificationStatus } from '@/shared/types/user.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'
 import { UiInputOtp } from '@/shared/ui/custom/ui-input-otp'
@@ -26,10 +25,9 @@ export const VerifyEmail: React.FC = () => {
 	const searchParams = useSearchParams()
 	const queryToken = searchParams.get('token')
 	const router = useRouter()
-	const setRole = useRoleStore(state => state.setRole)
 	const setUserInfo = useAuthStore(state => state.setUserInfo)
-	const email = useAuthStore(state => state.email)
-	const { start, stop, isActive, value, reset } = useTimer()
+	const email = searchParams.get('email')
+	const { isActive, value, reset } = useTimer()
 
 	const [token, setToken] = useState(queryToken || '')
 	const [state, setState] = useState({
@@ -79,13 +77,14 @@ export const VerifyEmail: React.FC = () => {
 				verificationStatus: VerificationStatus.VERIFIED
 			})
 			const link = getDashboardRoute(data.verifyAccount.role)
-			setRole(data.verifyAccount.role)
 
 			setUserInfo({
 				email: data.verifyAccount.email,
 				firstName: data.verifyAccount.firstName,
 				lastName: data.verifyAccount.lastName,
-				avatar: data.verifyAccount.avatar
+				avatar: data.verifyAccount.avatar,
+				isAuth: true,
+				role: data.verifyAccount.role
 			})
 			router.push(link)
 		},
@@ -122,7 +121,7 @@ export const VerifyEmail: React.FC = () => {
 					{state.verificationStatus === VerificationStatus.NOT_STARTED && (
 						<>
 							<Label className='text-lg'>
-								Проверьте введенную электронную почту и введите код
+								Проверьте введенную электронную почту ({email}) и введите код
 							</Label>
 							<div className='flex justify-center'>
 								<UiInputOtp value={token} onChange={handleToken} />

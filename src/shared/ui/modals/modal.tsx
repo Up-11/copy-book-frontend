@@ -17,10 +17,12 @@ export const Modal: React.FC<ModalProps> = ({
 	title,
 	footer,
 	content,
-	className
+	className,
+	open,
+	onOpenChange
 }) => {
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent className={cn(className, 'z-[1100]')}>
 				<DialogHeader>

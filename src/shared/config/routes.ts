@@ -1,5 +1,5 @@
 import { UserRole } from '../graphql/generated/output'
-import { getAllValues } from '../lib/utils'
+import { getAllValues } from '../utils/get-all-values'
 
 export const routes = {
 	base_url: 'http://localhost:3000',
@@ -23,7 +23,8 @@ export const routes = {
 		teacher: '/auth/teacher',
 		admin: '/auth/admin',
 		reset: '/auth/reset-password',
-		verifyEmail: '/auth/verify-email'
+		verifyEmail: '/auth/verify-email',
+		deactivated: '/auth/deactivated'
 	},
 	tasks: {
 		student: '/student/tasks',
@@ -69,36 +70,42 @@ export const routes = {
 
 export const dynamicRoutePatterns = {
 	course: {
-		currentUserCourse: '/student/courses/[id]',
-		complitionCourse: '/course-complition/[courseId]/chapter/[chapterId]'
+		currentUserCourse: '/student/courses/:id',
+		complitionCourse: '/course-complition/:courseId/chapter/:chapterId'
 	},
 	tasks: {
-		currentUserTask: '/student/tasks/[id]',
-		complitionTask: '/task-complition/[id]'
+		currentUserTask: '/student/tasks/:id',
+		complitionTask: '/task-complition/:id'
 	}
 }
 
 const routeValues = getAllValues(routes)
+const dynamicRoutePatternsValues = getAllValues(dynamicRoutePatterns)
 
 export const unAuthorizedRoutes: string[] = [
 	routes.auth.student,
 	routes.auth.teacher,
 	routes.auth.admin,
 	routes.auth.reset,
-	routes.auth.verifyEmail,
 	routes.code.sandbox,
+	routes.auth.verifyEmail,
+	routes.auth.deactivated,
 	routes.home
 ]
 
-export const authorizedRoutes: string[] = routeValues.filter(
-	route => !unAuthorizedRoutes.includes(route)
-)
+export const authorizedRoutes: string[] = routeValues
+	.filter(route => !unAuthorizedRoutes.includes(route))
+	.concat(dynamicRoutePatternsValues)
 
 export const studentRoutes = [
 	routes.dashboard.student,
 	routes.tasks.student,
 	routes.course.student,
-	routes.code.drafts
+	routes.code.drafts,
+	dynamicRoutePatterns.course.complitionCourse,
+	dynamicRoutePatterns.course.currentUserCourse,
+	dynamicRoutePatterns.tasks.complitionTask,
+	dynamicRoutePatterns.tasks.currentUserTask
 ]
 
 export const teacherRoutes = [
@@ -108,6 +115,22 @@ export const teacherRoutes = [
 	routes.course.teacher.courses,
 	routes.course.teacher.create,
 	routes.teacher.messages
+]
+
+export const commonRoutes = [
+	routes.profile.accountInfo,
+	routes.profile.history,
+	routes.profile.logout,
+	routes.profile.notifications,
+	routes.profile.personal,
+	routes.profile.security,
+	routes.profile.settings,
+	routes.profile.statistic,
+	routes.profile.support,
+	routes.auth.deactivated,
+
+	routes.calendar,
+	routes.journal
 ]
 
 export const adminRoutes = [routes.dashboard.admin]
@@ -123,6 +146,27 @@ export const getDashboardRoute = (role: UserRole) => {
 		default:
 			return routes.home
 	}
+}
+
+export const hasRoleAccess = (role: UserRole, pathname: string): boolean => {
+	const routeList =
+		{
+			[UserRole.Student]: studentRoutes,
+			[UserRole.Teacher]: teacherRoutes,
+			[UserRole.Admin]: adminRoutes
+		}[role] || []
+
+	const isCommonRoute = commonRoutes.some(
+		route => pathname === route || pathname.startsWith(route + '/')
+	)
+	if (isCommonRoute) return true
+
+	const hasAccess = routeList.some(
+		route => pathname === route || pathname.startsWith(route + '/')
+	)
+
+	if (hasAccess) return true
+	return false
 }
 
 export type AppRoutes = typeof routes

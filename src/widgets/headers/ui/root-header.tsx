@@ -6,16 +6,14 @@ import {
 } from '@/features/navigation'
 import { routes } from '@/shared/config/routes'
 import { UserRole } from '@/shared/graphql/generated/output'
-import { useRoleStore } from '@/shared/store/user-role.store'
-import { Button } from '@/shared/ui/other/button'
+import { useAuthStore } from '@/shared/store/auth-store'
 import { LogoWithRoleBadge } from '@/shared/ui/view/logo-with-role-badge'
 import { ProfileButton } from '@/widgets/profile/ui/profile-button'
 import Link from 'next/link'
 import React from 'react'
 
 export const RootHeader: React.FC = () => {
-	const role = useRoleStore(state => state.role)
-	const setRole = useRoleStore(state => state.setRole)
+	const role = useAuthStore(state => state.role)
 
 	const dashboardHrefs = {
 		[UserRole.Student]: routes.dashboard.student,
@@ -43,10 +41,6 @@ export const RootHeader: React.FC = () => {
 					</div>
 				</header>
 			)}
-			<div className='fixed bottom-3 right-3'>
-				<Button onClick={() => setRole(UserRole.Student)}>Ученик</Button>
-				<Button onClick={() => setRole(UserRole.Teacher)}>Препод</Button>
-			</div>
 		</>
 	)
 }

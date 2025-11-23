@@ -1,8 +1,10 @@
+import { DialogProps } from '@radix-ui/react-dialog'
+
 export interface PropsWithClassName {
 	className?: string
 }
 
-export interface ModalProps {
+export interface ModalProps extends DialogProps {
 	children: React.ReactNode
 	title?: string
 	description?: string

@@ -1,9 +1,9 @@
-import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import { Textarea } from '../input/textarea'
 import { ClearButton } from './clear-button'
 import { ErrorText } from './error-text'
 import { RequierdSymbol } from './requierd-symbol'
-import { Textarea } from '../input/textarea'
+import React from 'react'
+import { useFormContext } from 'react-hook-form'
 
 interface FormTextareaProps {
 	className?: string
@@ -13,6 +13,7 @@ interface FormTextareaProps {
 	required?: boolean
 	id: string
 	placeholder?: string
+	helpText?: string
 }
 
 export const FormTextarea: React.FC<FormTextareaProps> = ({
@@ -21,6 +22,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
 	label,
 	rows,
 	placeholder,
+	helpText,
 	required = false,
 	id,
 	...props
@@ -29,7 +31,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
 		register,
 		formState: { errors },
 		watch,
-		setValue,
+		setValue
 	} = useFormContext()
 
 	const value = watch(name)
@@ -42,7 +44,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
 	return (
 		<div className={className}>
 			{label && (
-				<p className='font-medium mb-2'>
+				<p className='mb-2 font-medium'>
 					{label} {required && <RequierdSymbol />}
 				</p>
 			)}
@@ -53,10 +55,18 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
 					{...props}
 					{...register(name)}
 					rows={rows}
-					className=' text-md resize-none placeholder:text-gray-500'
+					className='text-md resize-none placeholder:text-gray-500'
 				/>
-				{value && <ClearButton onClick={onClickClear} />}
+				{value && (
+					<ClearButton
+						className='absolute right-2 top-4'
+						onClick={onClickClear}
+					/>
+				)}
 			</div>
+			{helpText && (
+				<ErrorText text={helpText} className='text-sm !text-gray-600' />
+			)}
 			{errorText && <ErrorText text={errorText} className='mt-2' />}
 		</div>
 	)

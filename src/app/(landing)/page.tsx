@@ -7,6 +7,7 @@ import { ListElement } from '@/shared/ui/view/list-element'
 import Text from '@/shared/ui/view/text'
 import Title from '@/shared/ui/view/title'
 import { WhiteBlock } from '@/widgets/landing'
+import { MainButtonSlot } from '@/widgets/landing/ui/main-button-slot'
 import { ChooseRoleModal } from '@/widgets/modals'
 import { ArrowUpRightIcon, BookOpen, CodeXml, Wrench } from 'lucide-react'
 import Image from 'next/image'
@@ -16,60 +17,51 @@ import React from 'react'
 export default function Landing() {
 	return (
 		<main>
-			<section className='bg-indigo-600 bg-image lg:p-layout pt-header   '>
+			<section className='bg-image bg-indigo-600 pt-header lg:p-layout'>
 				<Container>
-					<div className='flex justify-center mt-20'>
+					<div className='mt-20 flex justify-center'>
 						<Block
-							className=' grid grid-cols-1 lg:grid-cols-2 gap-4 '
+							className='grid grid-cols-1 gap-4 lg:grid-cols-2'
 							color='white'
 							size='extraLarge'
 						>
-							<div className=' flex flex-col gap-10 lg:p-10 max-md:p-5 p-4 max-sm:p-2  '>
-								<div className='flex flex-col '>
+							<div className='flex flex-col gap-10 p-4 max-md:p-5 max-sm:p-2 lg:p-10'>
+								<div className='flex flex-col'>
 									<Title
 										gentiumFont
 										size='giant'
-										className='uppercase gr-text animate-gradient'
+										className='gr-text animate-gradient uppercase'
 									>
 										COPYBOOK
 									</Title>
 									<Text
 										size='extraLarge'
-										className='font-semibold text-4xl max-sm:text-xl  '
+										className='text-4xl font-semibold max-sm:text-xl'
 									>
 										Делаем образование <br /> доступным каждому!
 									</Text>
 								</div>
 								<div className='max-sm:mx-4'>
-									<ChooseRoleModal>
-										<Button
-											isModalTrigger
-											size={'lg'}
-											variant={'secondary'}
-											className='bg-indigo-500 hover:bg-indigo-500/90 text-white  max-sm:w-full text-xl'
-										>
-											Начать
-										</Button>
-									</ChooseRoleModal>
+									<MainButtonSlot />
 								</div>
 							</div>
-							<div className='col-span-1 max-sm:mt-4 animate-smoothIn '>
+							<div className='col-span-1 animate-smoothIn max-sm:mt-4'>
 								<Image
 									src={'/assets/images/vector/cubes.svg'}
 									width={400}
 									height={400}
 									alt='image'
-									className='object-cover h-full w-full rounded-3xl '
+									className='h-full w-full rounded-3xl object-cover'
 									priority
 								/>
 							</div>
 						</Block>
 					</div>
-					<div className=' my-8  '>
-						<div className=' flex sm:justify-center max-lg:flex-col lg:flex-row lg:justify-between gap-3 pb-4  lg:gap-8 '>
+					<div className='my-8'>
+						<div className='flex gap-3 pb-4 max-lg:flex-col sm:justify-center lg:flex-row lg:justify-between lg:gap-8'>
 							<Block
 								className={cn(
-									'grid grid-cols-12 items-start p-7 relative  rounded-3xl'
+									'relative grid grid-cols-12 items-start rounded-3xl p-7'
 								)}
 							>
 								<div className='col-span-2 flex items-center justify-center p-2'>
@@ -81,14 +73,14 @@ export default function Landing() {
 								</div>
 								<Link
 									href={routes.home}
-									className='col-span-2 justify-self-end place-self-start self-start'
+									className='col-span-2 place-self-start self-start justify-self-end'
 								>
 									<ArrowUpRightIcon size={40} />
 								</Link>
 							</Block>
 							<Block
 								className={cn(
-									'grid grid-cols-12 items-start p-7 relative  rounded-3xl'
+									'relative grid grid-cols-12 items-start rounded-3xl p-7'
 								)}
 							>
 								<div className='col-span-2 flex items-center justify-center p-2'>
@@ -100,14 +92,14 @@ export default function Landing() {
 								</div>
 								<Link
 									href={routes.home}
-									className='col-span-2 justify-self-end place-self-start self-start'
+									className='col-span-2 place-self-start self-start justify-self-end'
 								>
 									<ArrowUpRightIcon size={40} />
 								</Link>
 							</Block>
 							<Block
 								className={cn(
-									'grid grid-cols-12 items-start p-7 relative  rounded-3xl'
+									'relative grid grid-cols-12 items-start rounded-3xl p-7'
 								)}
 							>
 								<div className='col-span-2 flex items-center justify-center p-2'>
@@ -126,14 +118,14 @@ export default function Landing() {
 			</section>
 			<section>
 				<Container>
-					<div className='grid gap-4 relative lg:grid-cols-3 max-lg:grid-cols-1 auto-rows-min grid-rows-2'>
+					<div className='relative grid auto-rows-min grid-rows-2 gap-4 max-lg:grid-cols-1 lg:grid-cols-3'>
 						{/* Первый блок */}
 						<Link
 							href={routes.home}
-							className='bg-purple-100 rounded-3xl flex max-md:flex-col col-span-2 max-lg:col-span-3 row-span-1'
+							className='col-span-2 row-span-1 flex rounded-3xl bg-purple-100 max-lg:col-span-3 max-md:flex-col'
 						>
-							<div className='flex px-layout pt-layout '>
-								<div className='flex flex-col gap-3 '>
+							<div className='flex px-layout pt-layout'>
+								<div className='flex flex-col gap-3'>
 									<Title className='font-semibold' size='large'>
 										Бесплатные курсы по информатике
 									</Title>
@@ -146,16 +138,16 @@ export default function Landing() {
 									<ArrowUpRightIcon size={40} className='text-purple-400' />
 								</div>
 							</div>
-							<div className='flex justify-end h-full items-end max-w-[350px] w-full'>
+							<div className='flex h-full w-full max-w-[350px] items-end justify-end'>
 								<Image
 									width={500}
 									height={500}
 									src='/assets/images/vector/notebook.svg'
 									alt='Бесплатные курсы по информатике'
-									className='object-cover h-auto'
+									className='h-auto object-cover'
 								/>
 							</div>
-							<div className='max-md:hidden px-layout pt-layout'>
+							<div className='px-layout pt-layout max-md:hidden'>
 								<ArrowUpRightIcon size={40} className='text-purple-400' />
 							</div>
 						</Link>
@@ -163,7 +155,7 @@ export default function Landing() {
 						{/* Второй блок */}
 						<Link
 							href={routes.home}
-							className='bg-sky-100  rounded-3xl flex max-md:flex-col items-start gap-4 col-span-2 max-lg:col-span-3 row-start-2 row-span-1'
+							className='col-span-2 row-span-1 row-start-2 flex items-start gap-4 rounded-3xl bg-sky-100 max-lg:col-span-3 max-md:flex-col'
 						>
 							<div className='flex px-layout pt-layout'>
 								<div className='flex flex-col gap-3'>
@@ -176,27 +168,27 @@ export default function Landing() {
 										поможет детям найти верный ответ.
 									</Text>
 								</div>
-								<div className='max-md:block hidden'>
+								<div className='hidden max-md:block'>
 									<ArrowUpRightIcon size={40} className='text-sky-400' />
 								</div>
 							</div>
-							<div className='flex justify-end items-end w-full'>
+							<div className='flex w-full items-end justify-end'>
 								<Image
 									width={300}
 									height={300}
 									src='/assets/images/vector/hand.svg'
 									alt='Подготовка к ЕГЭ'
-									className='object-cover max-w-[200px] h-auto'
+									className='h-auto max-w-[200px] object-cover'
 								/>
 							</div>
-							<div className='max-md:hidden px-layout pt-layout'>
+							<div className='px-layout pt-layout max-md:hidden'>
 								<ArrowUpRightIcon size={40} className='text-sky-400' />
 							</div>
 						</Link>
 
 						{/* Третий блок (справа, вертикально) */}
-						<div className='bg-sky-100  rounded-3xl flex flex-col items-start gap-4 lg:col-span-1 max-lg:col-span-3 row-span-2'>
-							<div className='flex px-layout pt-layout justify-between w-full'>
+						<div className='row-span-2 flex flex-col items-start gap-4 rounded-3xl bg-sky-100 max-lg:col-span-3 lg:col-span-1'>
+							<div className='flex w-full justify-between px-layout pt-layout'>
 								<div className='flex flex-col gap-3'>
 									<Title className='font-semibold' size='large'>
 										Удобные инструменты для учителей
@@ -211,22 +203,22 @@ export default function Landing() {
 								задания проверяются автоматически, а вся статистика учеников
 								появляется в личном кабинете.
 							</Text>
-							<div className='flex justify-end items-end w-full'>
+							<div className='flex w-full items-end justify-end'>
 								<Image
 									width={300}
 									height={300}
 									src='/assets/images/vector/guy.svg'
 									alt='Удобные инструменты'
-									className='object-cover  h-auto'
+									className='h-auto object-cover'
 								/>
 							</div>
 						</div>
 					</div>
 				</Container>
 			</section>
-			<section className='bg-indigo-50 lg:p-layout rounded-3xl mt-4'>
-				<Container className='flex justify-center  '>
-					<div className='flex flex-col gap-4 text-center my-4 w-full'>
+			<section className='mt-4 rounded-3xl bg-indigo-50 lg:p-layout'>
+				<Container className='flex justify-center'>
+					<div className='my-4 flex w-full flex-col gap-4 text-center'>
 						<Title color='indigo' size='extraLarge'>
 							Что можно делать в Copybook
 						</Title>
@@ -234,7 +226,7 @@ export default function Landing() {
 							Copybook — это универсальная онлайн-платформа для улучшения ваших
 							навыков в программировании и решения задач.
 						</Text>
-						<div className='flex justify-center mt-5 flex-col gap-4 '>
+						<div className='mt-5 flex flex-col justify-center gap-4'>
 							<WhiteBlock
 								link={routes.home}
 								title='Удобные инструменты для учителей'
@@ -270,12 +262,12 @@ export default function Landing() {
 			</section>
 			<section>
 				<Container className='mx-auto'>
-					<div className='flex flex-col justify-center mt-10'>
+					<div className='mt-10 flex flex-col justify-center'>
 						<div className='flex justify-center'>
 							<Title size='extraLarge'>Помогаем развиваться</Title>
 						</div>
-						<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8'>
-							<div className='bg-sky-100 flex rounded-3xl col-span-1 sm:col-span-2 lg:col-span-3 max-lg:flex-col'>
+						<div className='mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+							<div className='col-span-1 flex rounded-3xl bg-sky-100 max-lg:flex-col sm:col-span-2 lg:col-span-3'>
 								<div className='flex flex-col gap-3 px-layout pt-layout'>
 									<Title className='font-semibold' size='large'>
 										Бесплатные курсы по информатике
@@ -290,19 +282,19 @@ export default function Landing() {
 										</Button>
 									</Link>
 								</div>
-								<div className='flex flex-col h-full justify-start items-start w-full'>
+								<div className='flex h-full w-full flex-col items-start justify-start'>
 									<Image
 										width={800}
 										height={800}
 										src='/assets/images/vector/notebook-2.svg'
 										alt='Бесплатные курсы по информатике'
-										className='object-cover h-auto w-full'
+										className='h-auto w-full object-cover'
 									/>
 								</div>
 							</div>
 
 							{/* Повышение квалификации */}
-							<div className='bg-sky-100 flex flex-col gap-2 p-layout rounded-3xl col-span-1'>
+							<div className='col-span-1 flex flex-col gap-2 rounded-3xl bg-sky-100 p-layout'>
 								<Title className='font-semibold' size='large'>
 									Повышение квалификации
 								</Title>
@@ -314,8 +306,8 @@ export default function Landing() {
 							</div>
 
 							{/* Профессиональные конкурсы */}
-							<div className='bg-sky-100 flex flex-col gap-2 p-layout rounded-3xl col-span-1'>
-								<Title className='font-semibold break-words' size='large'>
+							<div className='col-span-1 flex flex-col gap-2 rounded-3xl bg-sky-100 p-layout'>
+								<Title className='break-words font-semibold' size='large'>
 									Профессиональные конкурсы
 								</Title>
 								<Text size='small'>
@@ -326,7 +318,7 @@ export default function Landing() {
 							</div>
 
 							{/* Призы и награды */}
-							<div className='bg-sky-100 flex flex-col gap-2 p-layout rounded-3xl col-span-1'>
+							<div className='col-span-1 flex flex-col gap-2 rounded-3xl bg-sky-100 p-layout'>
 								<Title className='font-semibold' size='large'>
 									Призы и награды
 								</Title>
@@ -343,9 +335,9 @@ export default function Landing() {
 						</div>
 
 						{/* Курсы повышения квалификации и диагностика */}
-						<div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8'>
-							<div className='col-span-1 bg-purple-100 rounded-3xl flex flex-col'>
-								<div className='p-layout flex flex-col items-start gap-4'>
+						<div className='mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+							<div className='col-span-1 flex flex-col rounded-3xl bg-purple-100'>
+								<div className='flex flex-col items-start gap-4 p-layout'>
 									<Title size='large'>Курсы повышения квалификации</Title>
 									<Text size='small'>
 										Курсы по нейросетям, программированию и гибким навыкам для
@@ -355,12 +347,12 @@ export default function Landing() {
 									<Button
 										variant={'outline'}
 										size={'default'}
-										className='px-6 py-5 self-start'
+										className='self-start px-6 py-5'
 									>
 										Попробовать
 									</Button>
 								</div>
-								<div className='flex flex-col justify-end items-end  '>
+								<div className='flex flex-col items-end justify-end'>
 									<Image
 										width={500}
 										height={500}
@@ -371,8 +363,8 @@ export default function Landing() {
 								</div>
 							</div>
 
-							<div className='col-span-1 bg-orange-100 rounded-3xl flex flex-col'>
-								<div className='p-layout flex flex-col items-start gap-4'>
+							<div className='col-span-1 flex flex-col rounded-3xl bg-orange-100'>
+								<div className='flex flex-col items-start gap-4 p-layout'>
 									<Title size='large'>Диагностика по информатике</Title>
 									<Text size='small'>
 										Помогает учителям проверить свои знания и оценить учебный
@@ -381,17 +373,17 @@ export default function Landing() {
 									<Button
 										variant={'outline'}
 										size={'default'}
-										className='px-6 py-5 self-start'
+										className='self-start px-6 py-5'
 									>
 										Попробовать
 									</Button>
 								</div>
-								<div className='flex flex-col justify-end items-end  '>
+								<div className='flex flex-col items-end justify-end'>
 									<Image
 										width={500}
 										height={500}
 										alt='Диагностика по информатике'
-										className='rounded-br-3xl w-[325px]'
+										className='w-[325px] rounded-br-3xl'
 										src='/assets/images/vector/diagnistic.svg'
 									/>
 								</div>

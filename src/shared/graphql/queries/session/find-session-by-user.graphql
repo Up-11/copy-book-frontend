@@ -9,6 +9,10 @@ query findSessionByUser {
 				browser
 			}
 			ip
+			location {
+				country
+				city
+			}
 		}
 	}
 }

@@ -8,11 +8,10 @@ import { AtomIcon } from '@/shared/ui/icons/atom'
 import { TelegramIcon } from '@/shared/ui/icons/telegram'
 import { VkIcon } from '@/shared/ui/icons/vk'
 import { YoutubeIcon } from '@/shared/ui/icons/youtube'
-import { Button } from '@/shared/ui/other/button'
 import { Container } from '@/shared/ui/view/container'
 import Text from '@/shared/ui/view/text'
 import { Title } from '@/shared/ui/view/title'
-import { ChooseRoleModal } from '@/widgets/modals'
+import { MainButtonSlot } from '@/widgets/landing/ui/main-button-slot'
 import Image from 'next/image'
 import React from 'react'
 
@@ -31,15 +30,7 @@ export const LandingFooter = ({}) => {
 								Прямо сейчас
 							</Text>
 						</div>
-						<ChooseRoleModal>
-							<Button
-								isModalTrigger
-								variant={'destructive'}
-								className='self-center font-bold text-indigo-500'
-							>
-								Перейти в тетрадь
-							</Button>
-						</ChooseRoleModal>
+						<MainButtonSlot buttonVariant='2' />
 					</div>
 				</div>
 				<div className='footer-wave'></div>

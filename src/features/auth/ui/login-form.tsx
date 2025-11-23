@@ -12,7 +12,6 @@ import {
 	TypeLoginSchema
 } from '@/shared/schemas/auth/login-schema'
 import { useAuthStore } from '@/shared/store/auth-store'
-import { useRoleStore } from '@/shared/store/user-role.store'
 import { Separator } from '@/shared/ui/view/separator'
 import Text from '@/shared/ui/view/text'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -25,7 +24,6 @@ export const LoginForm: React.FC<{ currentUserRole: UserRole | null }> = ({
 	currentUserRole
 }) => {
 	const router = useRouter()
-	const setRole = useRoleStore(state => state.setRole)
 	const setUserInfo = useAuthStore(state => state.setUserInfo)
 	const [token, setToken] = useState('')
 	const form = useForm<TypeLoginSchema>({
@@ -41,8 +39,14 @@ export const LoginForm: React.FC<{ currentUserRole: UserRole | null }> = ({
 		onCompleted(data) {
 			toast.success('Вход выполнен успешно')
 			const link = getDashboardRoute(data.login.role)
-			setRole(data.login.role)
-			setUserInfo(data.login)
+			setUserInfo({
+				firstName: data.login.firstName,
+				lastName: data.login.lastName,
+				email: data.login.email,
+				role: data.login.role,
+				avatar: data.login.avatar,
+				isAuth: true
+			})
 
 			router.push(link)
 		},

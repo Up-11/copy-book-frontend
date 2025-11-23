@@ -9,6 +9,10 @@ query findCurrentSession {
 				browser
 			}
 			ip
+			location {
+				country
+				city
+			}
 		}
 	}
 }

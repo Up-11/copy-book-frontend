@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 export default function PersonalInfoPage() {
 	return (
 		<section className='flex flex-col gap-1'>
-			<Title size='large'>Личные данные</Title>
-			<Separator className='h-[0.1] w-full bg-black' />
 			<ProfilePersonal />
 		</section>
 	)

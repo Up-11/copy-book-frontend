@@ -11,7 +11,7 @@ export const SidebarItem: React.FC<SidebarItemType> = ({
 }) => {
 	return (
 		<Link href={link} className='flex items-center justify-center gap-1'>
-			{isActive && <div className='h-1/2 w-1 rounded-lg bg-purple-400'></div>}
+			{isActive && <div className='h-1/2 w-1 rounded-lg bg-indigo-400'></div>}
 			<Text
 				size='small'
 				className={cn(

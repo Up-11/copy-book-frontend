@@ -5,11 +5,14 @@ import { PropsWithClassName } from '@/shared/types/props.types'
 import React from 'react'
 
 export const UiAvatar: React.FC<
-	PropsWithClassName & { fallbackText: string }
-> = ({ className, fallbackText }) => {
+	PropsWithClassName & {
+		fallbackText: string
+		avatarUrl?: string | null | undefined
+	}
+> = ({ className, fallbackText, avatarUrl }) => {
 	return (
 		<Avatar className={className}>
-			<AvatarImage src='https://gitub.com/shadcn.png' />
+			<AvatarImage src={avatarUrl || ''} />
 			<AvatarFallback>{fallbackText || 'CN'}</AvatarFallback>
 		</Avatar>
 	)

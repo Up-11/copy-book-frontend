@@ -27,7 +27,7 @@ export const AuthWidget: React.FC = () => {
 	return (
 		<>
 			<div className='mt-2'>
-				<LogoWithRoleBadge role={currentUserRole!} />
+				<LogoWithRoleBadge role={currentUserRole!} hasChoice={true} />
 			</div>
 
 			<div className='flex flex-col items-center rounded-xl bg-white pt-3 shadow-lg max-md:w-full md:rounded-2xl'>

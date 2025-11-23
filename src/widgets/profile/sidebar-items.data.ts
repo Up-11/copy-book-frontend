@@ -9,6 +9,5 @@ export const sidebarItems: SidebarItemType[] = [
 	{ title: 'Информация о аккаунте', link: routes.profile.accountInfo },
 	{ title: 'Уведомления', link: routes.profile.notifications },
 	{ title: 'История', link: routes.profile.history },
-	{ title: 'Поддержка', link: routes.profile.support },
-	{ title: 'Выход', link: routes.profile.logout }
+	{ title: 'Поддержка', link: routes.profile.support }
 ]

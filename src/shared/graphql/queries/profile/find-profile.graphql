@@ -4,5 +4,12 @@ query findProfile {
 		role
 		firstName
 		lastName
+		bio
+		avatar
+		isDeactivated
+		createdAt
+		deactivatedAt
+		updatedAt
+		isEmailVerified
 	}
 }
