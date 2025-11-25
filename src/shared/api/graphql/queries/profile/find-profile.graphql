@@ -1,0 +1,16 @@
+query findProfile {
+	findProfile {
+		email
+		role
+		firstName
+		lastName
+		bio
+		avatar
+		isDeactivated
+		createdAt
+		deactivatedAt
+		updatedAt
+		isEmailVerified
+		id
+	}
+}
