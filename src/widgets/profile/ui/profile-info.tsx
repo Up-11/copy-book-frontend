@@ -1,6 +1,6 @@
 'use client'
 
-import { useFindProfileQuery } from '@/shared/graphql/generated/output'
+import { useUserDataSync } from '@/shared/hooks/use-sync-user-data'
 import { getFirstTwoLetters } from '@/shared/lib/utils'
 import { Badge } from '@/shared/ui/badge'
 import { Card, CardContent, CardHeader } from '@/shared/ui/card'
@@ -9,12 +9,11 @@ import { Button } from '@/shared/ui/other/button'
 import { Skeleton } from '@/shared/ui/other/skeleton'
 import { RoleBadge } from '@/shared/ui/view/role-badge'
 import { TitleWithSeparator } from '@/shared/ui/view/title-with-separator'
+import { getMediaSource } from '@/shared/utils/get-media-source'
 import React from 'react'
 
 export const ProfileInfo: React.FC = () => {
-	const { data, loading, error, refetch } = useFindProfileQuery()
-
-	const user = data?.findProfile
+	const { user, loading, error, syncUserData: refetch } = useUserDataSync()
 
 	if (loading) {
 		return <ProfileSkeleton />
@@ -52,7 +51,7 @@ export const ProfileInfo: React.FC = () => {
 						<div className='flex items-center space-x-4'>
 							<UiAvatar
 								className='size-20 text-3xl'
-								avatarUrl={user?.avatar}
+								avatarUrl={getMediaSource(user?.avatar ?? '')}
 								fallbackText={getFirstTwoLetters(
 									`${user?.firstName} ${user?.lastName}`
 								)}
@@ -80,13 +79,12 @@ export const ProfileInfo: React.FC = () => {
 									user.isEmailVerified ? 'text-green-600' : 'text-yellow-600'
 								}
 							/>
-							{user.bio && (
-								<InfoField
-									label='О себе'
-									value={user.bio}
-									className='md:col-span-2'
-								/>
-							)}
+
+							<InfoField
+								label='О себе'
+								value={user.bio || 'Пусто :('}
+								className='md:col-span-2'
+							/>
 						</div>
 					</CardContent>
 				</Card>
@@ -119,6 +117,16 @@ export const ProfileInfo: React.FC = () => {
 					</CardContent>
 				</Card>
 			</div>
+			<Card className='lg:col-span-1'>
+				<CardHeader>
+					<h2 className='text-xl font-semibold'>Отладочная информация</h2>
+				</CardHeader>
+				<CardContent>
+					<div className='flex flex-col gap-2'>
+						<InfoField label='ID пользователя' value={user.id} />
+					</div>
+				</CardContent>
+			</Card>
 		</div>
 	)
 }

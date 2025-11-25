@@ -1,12 +1,11 @@
 'use client'
 
 import { useTimer } from '../model/use-timer'
-import { getDashboardRoute, routes } from '@/shared/config/routes'
 import {
 	useResendTokenMutation,
-	UserRole,
 	useVerifyAccountMutation
-} from '@/shared/graphql/generated/output'
+} from '@/shared/api/graphql/generated/output'
+import { getDashboardRoute, routes } from '@/shared/config/routes'
 import { useAuthStore } from '@/shared/store/auth-store'
 import { VerificationStatus } from '@/shared/types/user.types'
 import { UiIcon } from '@/shared/ui/custom/ui-icon'

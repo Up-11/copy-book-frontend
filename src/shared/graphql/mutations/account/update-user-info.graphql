@@ -1,3 +1,0 @@
-mutation UpdateUserInfo ($data:UpdateUserInfoInput!){
-  updateUserInfo(data:$data)
-}

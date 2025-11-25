@@ -1,3 +1,0 @@
-mutation ResendToken($data: ResendTokenInput!) {
-	resendToken(data: $data)
-}

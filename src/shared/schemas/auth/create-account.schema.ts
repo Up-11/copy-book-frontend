@@ -1,4 +1,4 @@
-import { UserRole } from '@/shared/graphql/generated/output'
+import { UserRole } from '@/shared/api/graphql/generated/output'
 import { z } from 'zod'
 
 export const createAccountSchema = z

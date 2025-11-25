@@ -1,5 +1,5 @@
+import { useDeactivateAccountMutation } from '@/shared/api/graphql/generated/output'
 import { routes } from '@/shared/config/routes'
-import { useDeactivateAccountMutation } from '@/shared/graphql/generated/output'
 import { useIsAuth } from '@/shared/hooks/is-auth'
 import {
 	deactivateAccountSchema,

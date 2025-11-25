@@ -22,12 +22,6 @@ export const personalDataSchema = z.object({
 		.trim()
 		.regex(/^[a-zA-Zа-яА-ЯёЁ\s\-]+$/, 'Фамилия может содержать только буквы'),
 
-	avatar: z
-		.string()
-		.url('Некорректный URL аватара')
-		.optional()
-		.or(z.literal('')),
-
 	bio: z
 		.string()
 		.max(500, 'Биография не должна превышать 500 символов')

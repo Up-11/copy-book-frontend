@@ -2,11 +2,11 @@
 
 import { LoginProviders } from './login-providers'
 import { RegisterPrimitive } from '@/entities/auth'
-import { routes } from '@/shared/config/routes'
 import {
 	useCreateUserMutation,
 	UserRole
-} from '@/shared/graphql/generated/output'
+} from '@/shared/api/graphql/generated/output'
+import { routes } from '@/shared/config/routes'
 import {
 	createAccountSchema,
 	TypeCreateAccountSchema

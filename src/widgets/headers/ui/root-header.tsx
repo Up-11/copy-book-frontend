@@ -4,8 +4,8 @@ import {
 	StudentNavigationMenu,
 	TeacherNavigationMenu
 } from '@/features/navigation'
+import { UserRole } from '@/shared/api/graphql/generated/output'
 import { routes } from '@/shared/config/routes'
-import { UserRole } from '@/shared/graphql/generated/output'
 import { useAuthStore } from '@/shared/store/auth-store'
 import { LogoWithRoleBadge } from '@/shared/ui/view/logo-with-role-badge'
 import { ProfileButton } from '@/widgets/profile/ui/profile-button'

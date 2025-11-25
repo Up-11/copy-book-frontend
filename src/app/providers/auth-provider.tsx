@@ -1,29 +1,46 @@
 'use client'
 
-import { useCheckSessionValidQuery } from '@/shared/graphql/generated/output'
+import { useCheckSessionValidQuery } from '@/shared/api/graphql/generated/output'
 import { useIsAuth } from '@/shared/hooks/is-auth'
-import { Loader } from '@/shared/ui/view/loader'
+import { FullscreenLoader } from '@/shared/ui/view/fullscreen-loader'
 import React, { PropsWithChildren, useEffect } from 'react'
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	const { clientLogout } = useIsAuth()
-	const { data, loading, error } = useCheckSessionValidQuery({
-		errorPolicy: 'all'
-	})
+	const { loading, refetch } = useCheckSessionValidQuery()
 
 	useEffect(() => {
-		if (!loading) {
-			const hasAuthData = localStorage.getItem('auth')
-
-			if ((error || !data?.checkSessionValid) && hasAuthData) {
+		const checkAuth = async () => {
+			try {
+				const result = await refetch()
+				if (!result.data?.checkSessionValid) {
+					clientLogout()
+				}
+				if (result.data?.checkSessionValid) {
+				}
+			} catch {
 				clientLogout()
-			} else if (error || !data?.checkSessionValid) {
 			}
 		}
-	}, [data, loading, error, clientLogout])
+
+		if (localStorage.getItem('auth')) {
+			checkAuth()
+		}
+	}, [])
+
+	useEffect(() => {
+		const handleStorageChange = () => {
+			if (localStorage.getItem('auth')) {
+				refetch()
+			}
+		}
+
+		window.addEventListener('storage', handleStorageChange)
+		return () => window.removeEventListener('storage', handleStorageChange)
+	}, [refetch])
 
 	if (loading) {
-		return <Loader />
+		return <FullscreenLoader />
 	}
 
 	return <>{children}</>

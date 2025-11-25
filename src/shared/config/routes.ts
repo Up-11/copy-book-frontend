@@ -1,4 +1,4 @@
-import { UserRole } from '../graphql/generated/output'
+import { UserRole } from '../api/graphql/generated/output'
 import { getAllValues } from '../utils/get-all-values'
 
 export const routes = {
@@ -6,7 +6,6 @@ export const routes = {
 	home: '/',
 	calendar: '/calendar',
 	journal: '/journal',
-
 	profile: {
 		personal: '/profile/personal',
 		settings: '/profile/settings',
@@ -128,7 +127,7 @@ export const commonRoutes = [
 	routes.profile.statistic,
 	routes.profile.support,
 	routes.auth.deactivated,
-
+	routes.tasks.main,
 	routes.calendar,
 	routes.journal
 ]

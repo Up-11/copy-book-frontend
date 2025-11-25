@@ -1,8 +1,8 @@
-import { UserRole } from '../graphql/generated/output'
+import { UserRole } from '../api/graphql/generated/output'
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-interface IAuthState {
+export interface IAuthState {
 	firstName: string
 	lastName: string
 	email: string
@@ -15,7 +15,7 @@ interface IAuthActions {
 	setLastName: (lastName: string) => void
 	setEmail: (email: string) => void
 	setAvatar: (avatar: string) => void
-	setUserInfo: (userInfo: IAuthState) => void
+	setUserInfo: (userInfo: Partial<IAuthState>) => void
 	getFullName(): string
 	resetUser(): void
 	setRole: (role: UserRole) => void
@@ -41,7 +41,7 @@ export const useAuthStore = create<IAuthStore>()(
 			setLastName: lastName => set({ lastName }),
 			setEmail: email => set({ email }),
 			setAvatar: avatar => set({ avatar }),
-			setUserInfo: (userInfo: IAuthState) => set({ ...userInfo, isAuth: true }),
+			setUserInfo: (userInfo: Partial<IAuthState>) => set({ ...userInfo }),
 			getFullName: () => {
 				const { firstName, lastName } = get()
 				return `${firstName} ${lastName}`.trim()

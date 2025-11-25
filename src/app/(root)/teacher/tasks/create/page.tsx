@@ -1,4 +1,7 @@
-import { TaskCreation, TaskPreview } from '@/features/create-task'
+import { TaskCreation } from '@/features/create-task'
+import { SectionItem } from '@/shared/ui/custom/section-item'
+import { SectionList } from '@/shared/ui/custom/section-list'
+import Title from '@/shared/ui/view/title'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -7,9 +10,11 @@ export const metadata: Metadata = {
 
 export default function Page() {
 	return (
-		<div className='mt-2 grid grid-cols-2 gap-10'>
-			<TaskCreation />
-			<TaskPreview />
+		<div className='mb-4 mt-8'>
+			<Title>Создание нового задания</Title>
+			<div className='my-4'>
+				<TaskCreation />
+			</div>
 		</div>
 	)
 }

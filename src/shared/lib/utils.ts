@@ -1,5 +1,5 @@
+import { UserRole } from '../api/graphql/generated/output'
 import { routes } from '../config/routes'
-import { UserRole } from '../graphql/generated/output'
 import { FilterType } from '@/features/filter/types'
 
 export const getPercentFromNumber = (

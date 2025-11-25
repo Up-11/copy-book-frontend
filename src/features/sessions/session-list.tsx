@@ -1,5 +1,5 @@
 import { SessionItem } from './session-item'
-import { FindSessionByUserQuery } from '@/shared/graphql/generated/output'
+import { FindSessionByUserQuery } from '@/shared/api/graphql/generated/output'
 
 interface SessionListProps {
 	sessions: FindSessionByUserQuery['findSessionByUser']

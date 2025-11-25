@@ -1,3 +1,4 @@
+import { getSessionData } from './shared/api/graphql/graphql'
 import {
 	authorizedRoutes,
 	getDashboardRoute,
@@ -5,7 +6,6 @@ import {
 	routes,
 	unAuthorizedRoutes
 } from './shared/config/routes'
-import { getSessionData } from './shared/graphql/graphql'
 import { sessionCache } from './shared/utils/session-cache'
 import { NextRequest, NextResponse } from 'next/server'
 

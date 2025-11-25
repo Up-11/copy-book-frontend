@@ -1,6 +1,5 @@
+import { useChangeEmailMutation } from '@/shared/api/graphql/generated/output'
 import { routes } from '@/shared/config/routes'
-import { useChangeEmailMutation } from '@/shared/graphql/generated/output'
-import { useIsAuth } from '@/shared/hooks/is-auth'
 import {
 	changeEmailSchema,
 	TypeChangeEmailSchema

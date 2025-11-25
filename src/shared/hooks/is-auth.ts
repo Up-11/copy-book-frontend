@@ -1,5 +1,8 @@
+import {
+	useFindProfileQuery,
+	useLogoutUserMutation
+} from '../api/graphql/generated/output'
 import { routes } from '../config/routes'
-import { useLogoutUserMutation } from '../graphql/generated/output'
 import { useAuthStore } from '../store/auth-store'
 import Cookie from 'js-cookie'
 import { useRouter } from 'next/navigation'

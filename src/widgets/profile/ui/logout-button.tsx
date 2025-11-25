@@ -1,7 +1,7 @@
 'use client'
 
+import { useLogoutUserMutation } from '@/shared/api/graphql/generated/output'
 import { routes } from '@/shared/config/routes'
-import { useLogoutUserMutation } from '@/shared/graphql/generated/output'
 import { useAuthStore } from '@/shared/store/auth-store'
 import { Button } from '@/shared/ui/other/button'
 import { useRouter } from 'next/navigation'

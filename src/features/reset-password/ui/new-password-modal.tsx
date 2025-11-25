@@ -1,4 +1,4 @@
-import { useChangePasswordMutation } from '@/shared/graphql/generated/output'
+import { useChangePasswordMutation } from '@/shared/api/graphql/generated/output'
 import {
 	newPasswordSchema,
 	TypeNewPasswordSchema

@@ -1,4 +1,4 @@
-import { UserRole } from '@/shared/graphql/generated/output'
+import { UserRole } from '@/shared/api/graphql/generated/output'
 import { HiddenText } from '@/shared/lib/components/hidden-text'
 import { WithCondition } from '@/shared/lib/components/with-condition'
 import { getPrivacy } from '@/shared/lib/map'

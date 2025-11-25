@@ -7,12 +7,12 @@ import { RecoveryCodesModal } from '@/features/recovery/recovery-codes-modal'
 import { NewPasswordModal } from '@/features/reset-password/ui/new-password-modal'
 import { SessionItem } from '@/features/sessions/session-item'
 import { SessionList } from '@/features/sessions/session-list'
-import { routes } from '@/shared/config/routes'
 import {
 	useFindCurrentSessionQuery,
 	useFindSessionByUserQuery,
 	useRemoveSessionMutation
-} from '@/shared/graphql/generated/output'
+} from '@/shared/api/graphql/generated/output'
+import { routes } from '@/shared/config/routes'
 import { useIsAuth } from '@/shared/hooks/is-auth'
 import {
 	Dialog,

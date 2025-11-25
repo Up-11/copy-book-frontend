@@ -1,13 +1,12 @@
 'use client'
 
-import { useStepWithQuery } from '../model/use-step-with-query'
 import { StepItem } from './step-item'
 import { useQueryManager } from '@/common/query'
-import { routes } from '@/shared/config/routes'
 import {
 	useNewPasswordMutation,
 	useResetPasswordMutation
-} from '@/shared/graphql/generated/output'
+} from '@/shared/api/graphql/generated/output'
+import { routes } from '@/shared/config/routes'
 import {
 	step1Schema,
 	step2Schema,

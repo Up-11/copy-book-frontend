@@ -2,11 +2,11 @@
 
 import { LoginProviders } from './login-providers'
 import { LoginPrimitive } from '@/entities/auth'
-import { getDashboardRoute } from '@/shared/config/routes'
 import {
 	useLoginUserMutation,
 	UserRole
-} from '@/shared/graphql/generated/output'
+} from '@/shared/api/graphql/generated/output'
+import { getDashboardRoute } from '@/shared/config/routes'
 import {
 	loginSchema,
 	TypeLoginSchema

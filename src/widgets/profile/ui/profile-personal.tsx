@@ -1,26 +1,18 @@
 'use client'
 
+import { ChangeAvatar } from '@/features/change-avatar/change-avatar'
 import {
 	UpdateUserInfoInput,
-	useFindProfileQuery,
 	useUpdateUserInfoMutation
-} from '@/shared/graphql/generated/output'
+} from '@/shared/api/graphql/generated/output'
+import { useUserDataSync } from '@/shared/hooks/use-sync-user-data'
 import { getFirstTwoLetters } from '@/shared/lib/utils'
 import {
 	personalDataSchema,
 	TypePersonalDataSchema
 } from '@/shared/schemas/profile/personal-data-schema'
-import { useAuthStore } from '@/shared/store/auth-store'
-import { UiAvatar } from '@/shared/ui/custom/ui-avatar'
 import { FormInput } from '@/shared/ui/forms/form-input'
 import { FormTextarea } from '@/shared/ui/forms/form-textarea'
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuGroup,
-	DropdownMenuItem,
-	DropdownMenuTrigger
-} from '@/shared/ui/modals/dropdown-menu'
 import { Button } from '@/shared/ui/other/button'
 import Text from '@/shared/ui/view/text'
 import { TitleWithSeparator } from '@/shared/ui/view/title-with-separator'
@@ -30,31 +22,23 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 export const ProfilePersonal: React.FC = () => {
-	const { data, loading, refetch } = useFindProfileQuery()
-	const setFirstName = useAuthStore(state => state.setFirstName)
-	const setLastName = useAuthStore(state => state.setLastName)
+	const { user, loading, syncUserData: refetch } = useUserDataSync()
 	const [updateUserInfo] = useUpdateUserInfoMutation({
 		async onCompleted() {
 			toast.success('Личная информация успешно обновлена')
 			refetch()
-
-			setFirstName(form.getValues('firstName'))
-			setLastName(form.getValues('lastName'))
 		},
 		onError(error) {
 			toast.error(error.message)
 		}
 	})
 
-	const user = data?.findProfile
-
 	const form = useForm<TypePersonalDataSchema>({
 		defaultValues: {
 			firstName: '',
 			lastName: '',
 			email: '',
-			bio: '',
-			avatar: ''
+			bio: ''
 		},
 		resolver: zodResolver(personalDataSchema),
 		mode: 'onSubmit'
@@ -66,8 +50,7 @@ export const ProfilePersonal: React.FC = () => {
 				firstName: user.firstName || '',
 				lastName: user.lastName || '',
 				email: user.email || '',
-				bio: user.bio || '',
-				avatar: user.avatar || ''
+				bio: user.bio || ''
 			})
 		}
 	}, [user, form])
@@ -149,35 +132,9 @@ export const ProfilePersonal: React.FC = () => {
 						)}
 					</div>
 				</form>
-				<div className='relative max-h-[220px]'>
-					<UiAvatar
-						className='size-[220px] text-7xl'
-						avatarUrl={user?.avatar}
-						fallbackText={getFirstTwoLetters(
-							`${user?.firstName} ${user?.lastName}`
-						)}
-					/>
-					<DropdownMenu modal={false}>
-						<DropdownMenuTrigger
-							asChild
-							className='absolute bottom-7 flex items-center gap-2'
-						>
-							<Button size='sm' variant={'secondary'}>
-								Изменить
-							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent side='left'>
-							<DropdownMenuGroup>
-								<DropdownMenuItem className='hover:bg-gray-100'>
-									Обновить фото
-								</DropdownMenuItem>
-								<DropdownMenuItem className='hover:bg-gray-100'>
-									Удалить фото
-								</DropdownMenuItem>
-							</DropdownMenuGroup>
-						</DropdownMenuContent>
-					</DropdownMenu>
-				</div>
+				<ChangeAvatar
+					fullName={getFirstTwoLetters(`${user?.firstName} ${user?.lastName}`)}
+				/>
 			</section>
 		</FormProvider>
 	)

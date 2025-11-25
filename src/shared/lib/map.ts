@@ -1,4 +1,4 @@
-import { UserRole } from '../graphql/generated/output'
+import { UserRole } from '../api/graphql/generated/output'
 import { CoursePrivacy, CourseStatus } from '../types/course.types'
 import {
 	TaskDifficulty,

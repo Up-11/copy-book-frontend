@@ -2,7 +2,7 @@ import { getBrowserIcon } from './lib/get-browser-icon'
 import {
 	FindSessionByUserQuery,
 	useRemoveSessionMutation
-} from '@/shared/graphql/generated/output'
+} from '@/shared/api/graphql/generated/output'
 import { Modal } from '@/shared/ui/modals/modal'
 import { Button } from '@/shared/ui/other/button'
 import { format } from 'date-fns'

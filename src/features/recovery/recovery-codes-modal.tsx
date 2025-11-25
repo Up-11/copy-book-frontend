@@ -1,4 +1,4 @@
-import { useGetUserRecoveryCodesQuery } from '@/shared/graphql/generated/output'
+import { useGetUserRecoveryCodesQuery } from '@/shared/api/graphql/generated/output'
 import { Modal } from '@/shared/ui/modals/modal'
 import { Button } from '@/shared/ui/other/button'
 import { Skeleton } from '@/shared/ui/other/skeleton'
