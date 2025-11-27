@@ -1,5 +1,6 @@
 'use client'
 
+import { useCourseCreation } from '@/features/create-course/model/use-course-creation'
 import {
 	StudentNavigationMenu,
 	TeacherNavigationMenu

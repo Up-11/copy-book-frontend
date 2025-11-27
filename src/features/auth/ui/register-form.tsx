@@ -45,8 +45,7 @@ export const RegisterForm: React.FC<{
 			toast.success(
 				'Аккаунт успешно создан, пожалуйста, подтвердите свою почту'
 			)
-			setEmail(form.getValues().email)
-			router.push(routes.auth.verifyEmail)
+			router.push(routes.auth.verifyEmail + '?email=' + form.getValues().email)
 		},
 		onError(error) {
 			toast.error(error.message)

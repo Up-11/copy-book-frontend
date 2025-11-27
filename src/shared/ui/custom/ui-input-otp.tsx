@@ -10,7 +10,8 @@ export const UiInputOtp: React.FC<{
 	disabled?: boolean
 	value?: string
 	onChange?: (value: string) => void
-}> = ({ disabled, value, onChange }) => {
+	slotClassName?: string
+}> = ({ disabled, value, onChange, slotClassName }) => {
 	return (
 		<InputOTP
 			maxLength={6}
@@ -19,15 +20,15 @@ export const UiInputOtp: React.FC<{
 			onChange={onChange}
 		>
 			<InputOTPGroup>
-				<InputOTPSlot index={0} />
-				<InputOTPSlot index={1} />
-				<InputOTPSlot index={2} />
+				<InputOTPSlot className={slotClassName} index={0} />
+				<InputOTPSlot className={slotClassName} index={1} />
+				<InputOTPSlot className={slotClassName} index={2} />
 			</InputOTPGroup>
 			<InputOTPSeparator />
 			<InputOTPGroup>
-				<InputOTPSlot index={3} />
-				<InputOTPSlot index={4} />
-				<InputOTPSlot index={5} />
+				<InputOTPSlot className={slotClassName} index={3} />
+				<InputOTPSlot className={slotClassName} index={4} />
+				<InputOTPSlot className={slotClassName} index={5} />
 			</InputOTPGroup>
 		</InputOTP>
 	)

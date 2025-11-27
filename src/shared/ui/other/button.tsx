@@ -20,7 +20,9 @@ const buttonVariants = cva(
 				ghost: 'hover:bg-accent cursor-pointer hover:text-accent-foreground',
 				link: 'text-primary underline-offset-4  	 hover:text-secondary',
 				primary:
-					'bg-indigo-500 text-primary-foreground shadow hover:bg-indigo-500/90 '
+					'bg-indigo-500 text-primary-foreground shadow hover:bg-indigo-500/90 ',
+				danger:
+					'bg-red-300 text-red-900 text-red-foreground shadow hover:bg-red-500/90 '
 			},
 			size: {
 				default: 'h-9 px-4 py-2',
@@ -64,7 +66,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		const IsModalTriggerComponent = () => {
 			return (
 				<div className={cn(buttonVariants({ variant, size, className }))}>
-					{!loading ? children : <Loader className='h-4 w-4 ' />}
+					{!loading ? children : <Loader className='h-4 w-4' />}
 				</div>
 			)
 		}
@@ -78,7 +80,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				disabled={loading || disabled}
 			>
 				{' '}
-				{!loading ? children : <Loader className='h-4 w-4 ' />}
+				{!loading ? children : <Loader className='h-4 w-4' />}
 			</Comp>
 		)
 	}

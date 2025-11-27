@@ -1,6 +1,4 @@
 import { TaskCreation } from '@/features/create-task'
-import { SectionItem } from '@/shared/ui/custom/section-item'
-import { SectionList } from '@/shared/ui/custom/section-list'
 import Title from '@/shared/ui/view/title'
 import { Metadata } from 'next'
 

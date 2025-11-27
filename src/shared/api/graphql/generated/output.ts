@@ -28,6 +28,57 @@ export type ChangePasswordInput = {
   oldPassword: Scalars['String']['input'];
 };
 
+export type CourseModel = {
+  __typename?: 'CourseModel';
+  accessToken?: Maybe<Scalars['String']['output']>;
+  author: UserModel;
+  createdAt: Scalars['DateTime']['output'];
+  description: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  isDraft: Scalars['Boolean']['output'];
+  privacy: CoursePrivacy;
+  sections: Array<SectionModel>;
+  statistic: CourseStatisticModel;
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export enum CoursePrivacy {
+  ByToken = 'BY_TOKEN',
+  Private = 'PRIVATE',
+  Public = 'PUBLIC'
+}
+
+export type CourseStatisticModel = {
+  __typename?: 'CourseStatisticModel';
+  activeStudents: Scalars['Float']['output'];
+  averageProgress: Scalars['Float']['output'];
+  averageRating: Scalars['Float']['output'];
+  completedStudents: Scalars['Float']['output'];
+  course?: Maybe<CourseModel>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  lastCalculatedAt: Scalars['DateTime']['output'];
+  totalRatings: Scalars['Float']['output'];
+  totalStudents: Scalars['Float']['output'];
+  totalTasks: Scalars['Float']['output'];
+  totalViews: Scalars['Float']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+export type CreateCourseInput = {
+  accessToken?: InputMaybe<Scalars['String']['input']>;
+  description: Scalars['String']['input'];
+  isDraft: Scalars['Boolean']['input'];
+  privacy: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+};
+
+export type CreateSectionInput = {
+  courseId: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+};
+
 export type CreateUserInput = {
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
@@ -74,8 +125,12 @@ export type Mutation = {
   changeEmail: Scalars['Boolean']['output'];
   changePassword: Scalars['Boolean']['output'];
   clearSessionCookie: Scalars['Boolean']['output'];
+  createCourse: CourseModel;
+  createSection: Scalars['Boolean']['output'];
   createUser: Scalars['Boolean']['output'];
   deactivateAccount: DeactivateModel;
+  deleteCourse: Scalars['Boolean']['output'];
+  deleteSection: Scalars['Boolean']['output'];
   login: UserModel;
   logout: Scalars['Boolean']['output'];
   newPassword: Scalars['Boolean']['output'];
@@ -83,6 +138,8 @@ export type Mutation = {
   removeSession: Scalars['Boolean']['output'];
   resendToken: Scalars['Boolean']['output'];
   resetPassword: Scalars['Boolean']['output'];
+  updateCourse: Scalars['Boolean']['output'];
+  updateSection: Scalars['Boolean']['output'];
   updateUserInfo: Scalars['Boolean']['output'];
   verifyAccount: UserModel;
 };
@@ -98,6 +155,16 @@ export type MutationChangePasswordArgs = {
 };
 
 
+export type MutationCreateCourseArgs = {
+  data: CreateCourseInput;
+};
+
+
+export type MutationCreateSectionArgs = {
+  data: CreateSectionInput;
+};
+
+
 export type MutationCreateUserArgs = {
   data: CreateUserInput;
 };
@@ -105,6 +172,16 @@ export type MutationCreateUserArgs = {
 
 export type MutationDeactivateAccountArgs = {
   data: DeactivateAccountInput;
+};
+
+
+export type MutationDeleteCourseArgs = {
+  courseId: Scalars['String']['input'];
+};
+
+
+export type MutationDeleteSectionArgs = {
+  sectionId: Scalars['String']['input'];
 };
 
 
@@ -133,6 +210,16 @@ export type MutationResetPasswordArgs = {
 };
 
 
+export type MutationUpdateCourseArgs = {
+  data: UpdateCourseInput;
+};
+
+
+export type MutationUpdateSectionArgs = {
+  data: UpdateSectionInput;
+};
+
+
 export type MutationUpdateUserInfoArgs = {
   data: UpdateUserInfoInput;
 };
@@ -154,9 +241,17 @@ export type Query = {
   findCurrentSession: SessionModel;
   findProfile: UserModel;
   findSessionByUser: Array<SessionModel>;
-  getAllUsers: Array<UserModel>;
+  generateAccessToken: Scalars['String']['output'];
+  getCoursesByTeacher: Array<CourseModel>;
+  getSectionsByCourse: Array<SectionModel>;
   getSessionById: SessionModel;
   getUserRecoveryCodes: Array<Scalars['String']['output']>;
+};
+
+
+export type QueryGetSectionsByCourseArgs = {
+  courseId: Scalars['String']['input'];
+  searchTerms: Scalars['String']['input'];
 };
 
 
@@ -170,6 +265,16 @@ export type ResendTokenInput = {
 
 export type ResetPasswordInput = {
   email: Scalars['String']['input'];
+};
+
+export type SectionModel = {
+  __typename?: 'SectionModel';
+  course: CourseModel;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  order: Scalars['Float']['output'];
+  title: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type SessionIdInput = {
@@ -190,6 +295,20 @@ export type SessionModel = {
   metadata: SessionMetadataModel;
   role: UserRole;
   userId: Scalars['String']['output'];
+};
+
+export type UpdateCourseInput = {
+  courseId: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+  isDraft?: InputMaybe<Scalars['Boolean']['input']>;
+  privacy?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateSectionInput = {
+  newOrder?: InputMaybe<Scalars['Float']['input']>;
+  sectionId: Scalars['String']['input'];
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateUserInfoInput = {
@@ -291,6 +410,27 @@ export type ResetPasswordMutationVariables = Exact<{
 
 export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword: boolean };
 
+export type CreateCourseMutationVariables = Exact<{
+  data: CreateCourseInput;
+}>;
+
+
+export type CreateCourseMutation = { __typename?: 'Mutation', createCourse: { __typename?: 'CourseModel', id: string } };
+
+export type CreateSectionMutationVariables = Exact<{
+  data: CreateSectionInput;
+}>;
+
+
+export type CreateSectionMutation = { __typename?: 'Mutation', createSection: boolean };
+
+export type DeleteSectionMutationVariables = Exact<{
+  sectionId: Scalars['String']['input'];
+}>;
+
+
+export type DeleteSectionMutation = { __typename?: 'Mutation', deleteSection: boolean };
+
 export type RemoveAvatarMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -321,6 +461,24 @@ export type VerifyAccountMutationVariables = Exact<{
 
 
 export type VerifyAccountMutation = { __typename?: 'Mutation', verifyAccount: { __typename?: 'UserModel', email: string, firstName: string, lastName: string, avatar?: string | null, role: UserRole } };
+
+export type GenerateAccessTokenQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GenerateAccessTokenQuery = { __typename?: 'Query', generateAccessToken: string };
+
+export type GetCoursesByTeacherQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCoursesByTeacherQuery = { __typename?: 'Query', getCoursesByTeacher: Array<{ __typename?: 'CourseModel', id: string, isDraft: boolean, title: string, accessToken?: string | null, description: string, privacy: CoursePrivacy, statistic: { __typename?: 'CourseStatisticModel', totalTasks: number, averageRating: number, activeStudents: number }, sections: Array<{ __typename?: 'SectionModel', title: string }> }> };
+
+export type GetSectionsByCourseQueryVariables = Exact<{
+  courseId: Scalars['String']['input'];
+  searchTerms: Scalars['String']['input'];
+}>;
+
+
+export type GetSectionsByCourseQuery = { __typename?: 'Query', getSectionsByCourse: Array<{ __typename?: 'SectionModel', id: string, title: string, order: number }> };
 
 export type FindProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -637,6 +795,101 @@ export function useResetPasswordMutation(baseOptions?: ApolloReactHooks.Mutation
 export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
 export type ResetPasswordMutationResult = ApolloReactCommon.MutationResult<ResetPasswordMutation>;
 export type ResetPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ResetPasswordMutation, ResetPasswordMutationVariables>;
+export const CreateCourseDocument = gql`
+    mutation createCourse($data: CreateCourseInput!) {
+  createCourse(data: $data) {
+    id
+  }
+}
+    `;
+export type CreateCourseMutationFn = ApolloReactCommon.MutationFunction<CreateCourseMutation, CreateCourseMutationVariables>;
+
+/**
+ * __useCreateCourseMutation__
+ *
+ * To run a mutation, you first call `useCreateCourseMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCourseMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCourseMutation, { data, loading, error }] = useCreateCourseMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateCourseMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateCourseMutation, CreateCourseMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<CreateCourseMutation, CreateCourseMutationVariables>(CreateCourseDocument, options);
+      }
+export type CreateCourseMutationHookResult = ReturnType<typeof useCreateCourseMutation>;
+export type CreateCourseMutationResult = ApolloReactCommon.MutationResult<CreateCourseMutation>;
+export type CreateCourseMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateCourseMutation, CreateCourseMutationVariables>;
+export const CreateSectionDocument = gql`
+    mutation createSection($data: CreateSectionInput!) {
+  createSection(data: $data)
+}
+    `;
+export type CreateSectionMutationFn = ApolloReactCommon.MutationFunction<CreateSectionMutation, CreateSectionMutationVariables>;
+
+/**
+ * __useCreateSectionMutation__
+ *
+ * To run a mutation, you first call `useCreateSectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSectionMutation, { data, loading, error }] = useCreateSectionMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateSectionMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSectionMutation, CreateSectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<CreateSectionMutation, CreateSectionMutationVariables>(CreateSectionDocument, options);
+      }
+export type CreateSectionMutationHookResult = ReturnType<typeof useCreateSectionMutation>;
+export type CreateSectionMutationResult = ApolloReactCommon.MutationResult<CreateSectionMutation>;
+export type CreateSectionMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateSectionMutation, CreateSectionMutationVariables>;
+export const DeleteSectionDocument = gql`
+    mutation deleteSection($sectionId: String!) {
+  deleteSection(sectionId: $sectionId)
+}
+    `;
+export type DeleteSectionMutationFn = ApolloReactCommon.MutationFunction<DeleteSectionMutation, DeleteSectionMutationVariables>;
+
+/**
+ * __useDeleteSectionMutation__
+ *
+ * To run a mutation, you first call `useDeleteSectionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteSectionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteSectionMutation, { data, loading, error }] = useDeleteSectionMutation({
+ *   variables: {
+ *      sectionId: // value for 'sectionId'
+ *   },
+ * });
+ */
+export function useDeleteSectionMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteSectionMutation, DeleteSectionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<DeleteSectionMutation, DeleteSectionMutationVariables>(DeleteSectionDocument, options);
+      }
+export type DeleteSectionMutationHookResult = ReturnType<typeof useDeleteSectionMutation>;
+export type DeleteSectionMutationResult = ApolloReactCommon.MutationResult<DeleteSectionMutation>;
+export type DeleteSectionMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteSectionMutation, DeleteSectionMutationVariables>;
 export const RemoveAvatarDocument = gql`
     mutation RemoveAvatar {
   removeAvatar
@@ -796,6 +1049,138 @@ export function useVerifyAccountMutation(baseOptions?: ApolloReactHooks.Mutation
 export type VerifyAccountMutationHookResult = ReturnType<typeof useVerifyAccountMutation>;
 export type VerifyAccountMutationResult = ApolloReactCommon.MutationResult<VerifyAccountMutation>;
 export type VerifyAccountMutationOptions = ApolloReactCommon.BaseMutationOptions<VerifyAccountMutation, VerifyAccountMutationVariables>;
+export const GenerateAccessTokenDocument = gql`
+    query generateAccessToken {
+  generateAccessToken
+}
+    `;
+
+/**
+ * __useGenerateAccessTokenQuery__
+ *
+ * To run a query within a React component, call `useGenerateAccessTokenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGenerateAccessTokenQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGenerateAccessTokenQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGenerateAccessTokenQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GenerateAccessTokenQuery, GenerateAccessTokenQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GenerateAccessTokenQuery, GenerateAccessTokenQueryVariables>(GenerateAccessTokenDocument, options);
+      }
+export function useGenerateAccessTokenLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GenerateAccessTokenQuery, GenerateAccessTokenQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GenerateAccessTokenQuery, GenerateAccessTokenQueryVariables>(GenerateAccessTokenDocument, options);
+        }
+export function useGenerateAccessTokenSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<GenerateAccessTokenQuery, GenerateAccessTokenQueryVariables>) {
+          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<GenerateAccessTokenQuery, GenerateAccessTokenQueryVariables>(GenerateAccessTokenDocument, options);
+        }
+export type GenerateAccessTokenQueryHookResult = ReturnType<typeof useGenerateAccessTokenQuery>;
+export type GenerateAccessTokenLazyQueryHookResult = ReturnType<typeof useGenerateAccessTokenLazyQuery>;
+export type GenerateAccessTokenSuspenseQueryHookResult = ReturnType<typeof useGenerateAccessTokenSuspenseQuery>;
+export type GenerateAccessTokenQueryResult = ApolloReactCommon.QueryResult<GenerateAccessTokenQuery, GenerateAccessTokenQueryVariables>;
+export const GetCoursesByTeacherDocument = gql`
+    query getCoursesByTeacher {
+  getCoursesByTeacher {
+    id
+    isDraft
+    title
+    accessToken
+    description
+    privacy
+    statistic {
+      totalTasks
+      averageRating
+      activeStudents
+    }
+    sections {
+      title
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetCoursesByTeacherQuery__
+ *
+ * To run a query within a React component, call `useGetCoursesByTeacherQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCoursesByTeacherQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCoursesByTeacherQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCoursesByTeacherQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetCoursesByTeacherQuery, GetCoursesByTeacherQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetCoursesByTeacherQuery, GetCoursesByTeacherQueryVariables>(GetCoursesByTeacherDocument, options);
+      }
+export function useGetCoursesByTeacherLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetCoursesByTeacherQuery, GetCoursesByTeacherQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetCoursesByTeacherQuery, GetCoursesByTeacherQueryVariables>(GetCoursesByTeacherDocument, options);
+        }
+export function useGetCoursesByTeacherSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<GetCoursesByTeacherQuery, GetCoursesByTeacherQueryVariables>) {
+          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<GetCoursesByTeacherQuery, GetCoursesByTeacherQueryVariables>(GetCoursesByTeacherDocument, options);
+        }
+export type GetCoursesByTeacherQueryHookResult = ReturnType<typeof useGetCoursesByTeacherQuery>;
+export type GetCoursesByTeacherLazyQueryHookResult = ReturnType<typeof useGetCoursesByTeacherLazyQuery>;
+export type GetCoursesByTeacherSuspenseQueryHookResult = ReturnType<typeof useGetCoursesByTeacherSuspenseQuery>;
+export type GetCoursesByTeacherQueryResult = ApolloReactCommon.QueryResult<GetCoursesByTeacherQuery, GetCoursesByTeacherQueryVariables>;
+export const GetSectionsByCourseDocument = gql`
+    query getSectionsByCourse($courseId: String!, $searchTerms: String!) {
+  getSectionsByCourse(courseId: $courseId, searchTerms: $searchTerms) {
+    id
+    title
+    order
+  }
+}
+    `;
+
+/**
+ * __useGetSectionsByCourseQuery__
+ *
+ * To run a query within a React component, call `useGetSectionsByCourseQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSectionsByCourseQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSectionsByCourseQuery({
+ *   variables: {
+ *      courseId: // value for 'courseId'
+ *      searchTerms: // value for 'searchTerms'
+ *   },
+ * });
+ */
+export function useGetSectionsByCourseQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetSectionsByCourseQuery, GetSectionsByCourseQueryVariables> & ({ variables: GetSectionsByCourseQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetSectionsByCourseQuery, GetSectionsByCourseQueryVariables>(GetSectionsByCourseDocument, options);
+      }
+export function useGetSectionsByCourseLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetSectionsByCourseQuery, GetSectionsByCourseQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetSectionsByCourseQuery, GetSectionsByCourseQueryVariables>(GetSectionsByCourseDocument, options);
+        }
+export function useGetSectionsByCourseSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<GetSectionsByCourseQuery, GetSectionsByCourseQueryVariables>) {
+          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<GetSectionsByCourseQuery, GetSectionsByCourseQueryVariables>(GetSectionsByCourseDocument, options);
+        }
+export type GetSectionsByCourseQueryHookResult = ReturnType<typeof useGetSectionsByCourseQuery>;
+export type GetSectionsByCourseLazyQueryHookResult = ReturnType<typeof useGetSectionsByCourseLazyQuery>;
+export type GetSectionsByCourseSuspenseQueryHookResult = ReturnType<typeof useGetSectionsByCourseSuspenseQuery>;
+export type GetSectionsByCourseQueryResult = ApolloReactCommon.QueryResult<GetSectionsByCourseQuery, GetSectionsByCourseQueryVariables>;
 export const FindProfileDocument = gql`
     query findProfile {
   findProfile {

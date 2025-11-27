@@ -28,17 +28,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 		}
 	}, [])
 
-	useEffect(() => {
-		const handleStorageChange = () => {
-			if (localStorage.getItem('auth')) {
-				refetch()
-			}
-		}
-
-		window.addEventListener('storage', handleStorageChange)
-		return () => window.removeEventListener('storage', handleStorageChange)
-	}, [refetch])
-
 	if (loading) {
 		return <FullscreenLoader />
 	}

@@ -2,9 +2,12 @@
 
 import { MenuItemType } from '../nav-menu.types'
 import { TaskDifficultyDot } from '@/entities/task'
+import { useCourseCreation } from '@/features/create-course/model/use-course-creation'
 import { routes } from '@/shared/config/routes'
 import { cn } from '@/shared/lib/css'
 import { courses, dashboardTasks } from '@/shared/mock/mock'
+import { Badge } from '@/shared/ui/badge'
+import { NotificationDot } from '@/shared/ui/custom/notifiation-dot'
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -129,6 +132,8 @@ const StudentNavigationMenu: React.FC = () => {
 }
 
 const TeacherNavigationMenu: React.FC = () => {
+	const { getters } = useCourseCreation()
+
 	return (
 		<NavigationMenu className='z-[999]'>
 			<NavigationMenuList>
@@ -167,7 +172,12 @@ const TeacherNavigationMenu: React.FC = () => {
 				</NavigationMenuItem>
 
 				<NavigationMenuItem>
-					<NavigationMenuTrigger>Курсы</NavigationMenuTrigger>
+					<NavigationMenuTrigger className='relative'>
+						Курсы{' '}
+						{getters.id !== null && getters.id && (
+							<NotificationDot className='absolute right-1 top-1' />
+						)}
+					</NavigationMenuTrigger>
 					<NavigationMenuContent>
 						<ul className='grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[1fr_1fr]'>
 							<TallMenuItem
@@ -178,8 +188,16 @@ const TeacherNavigationMenu: React.FC = () => {
 							/>
 							<TallMenuItem
 								href={routes.course.teacher.create}
-								title={'Создать курс'}
-								description={'Создайте новый курс'}
+								title={
+									getters.id !== null && getters.id
+										? 'Продолжить создание курса'
+										: 'Создать курс'
+								}
+								description={
+									getters.id !== null && getters.id
+										? 'У вас есть незаконченный процесс создания курса'
+										: 'Создайте новый курс'
+								}
 								icon={<BookAudio />}
 							/>
 						</ul>

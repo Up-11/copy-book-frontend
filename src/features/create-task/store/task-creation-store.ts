@@ -1,4 +1,6 @@
+import { SECTIONS } from '../create-task-sections'
 import { TaskDifficulty, TaskType } from '@/shared/types/task.types'
+import { Section } from '@/shared/ui/custom/section-list'
 import { create } from 'zustand'
 
 interface ITaskCreationState {
@@ -6,8 +8,12 @@ interface ITaskCreationState {
 		title: string
 		difficulty: TaskDifficulty | null
 		course: {
+			id: string
 			title: string
-			chapter: string
+			chapter: {
+				id: string
+				title: string
+			}
 		}
 		anonymus: boolean
 		description: string
@@ -33,8 +39,12 @@ const initialState: ITaskCreationState = {
 		title: '',
 		difficulty: null,
 		course: {
+			id: '',
 			title: '',
-			chapter: ''
+			chapter: {
+				id: '',
+				title: ''
+			}
 		},
 		anonymus: false,
 		description: '',
@@ -43,7 +53,7 @@ const initialState: ITaskCreationState = {
 }
 
 export const taskCreationStore = create<ITaskCreationStore>(set => ({
-	task: initialState.task,
+	...initialState,
 	setDescription: (value: string) =>
 		set(state => ({
 			task: { ...state.task, description: value }
@@ -76,5 +86,10 @@ export const taskCreationStore = create<ITaskCreationStore>(set => ({
 	setTaskType: (value: TaskType) =>
 		set(state => ({
 			task: { ...state.task, type: value }
+		})),
+	setActiveSection: (value: Section) =>
+		set(state => ({
+			...state,
+			activeSection: value
 		}))
 }))

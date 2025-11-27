@@ -18,14 +18,21 @@ export const useTaskCreation = () => {
 		setAnonimus(value)
 	}
 
-	const setCourseTitle = (value: string) => {
+	const setTaskCourse = (course: { title: string; id: string }) => {
 		setCourse({
-			title: value,
-			chapter: task.course.title === value ? '' : task.course.chapter
+			id: course.id,
+			title: course.title
 		})
 	}
-	const setCourseChapter = (value: string) => {
-		setCourse({ ...task.course, chapter: value })
+	const setCourseChapter = (chapter: { id: string; title: string }) => {
+		setCourse({ ...task.course, chapter: chapter })
+	}
+
+	const resetCourse = () => {
+		setCourse({ id: '', title: '' })
+	}
+	const resetChapter = () => {
+		setCourse({ ...task.course, chapter: { id: '', title: '' } })
 	}
 
 	const setTaskType = (value: string) => {
@@ -42,7 +49,9 @@ export const useTaskCreation = () => {
 			course: setCourse,
 			anonimus: handleChangeAnonimus,
 			setCourseChapter: setCourseChapter,
-			setCourseTitle: setCourseTitle
+			setTaskCourse,
+			resetCourse,
+			resetChapter
 		}
 	}
 }

@@ -3,9 +3,13 @@ import { cn } from '@/shared/lib/css'
 export const SectionItem: React.FC<{
 	isActive?: boolean
 	name?: string
-}> = ({ isActive = false, name }) => {
+	onClick?: () => void
+	canOpen?: boolean
+}> = ({ isActive = false, name, onClick, canOpen }) => {
 	return (
-		<div
+		<button
+			onClick={onClick}
+			disabled={!canOpen}
 			className={cn(
 				'inline-flex items-center justify-center gap-2 rounded-md border px-3 py-1.5 font-normal',
 				isActive
@@ -14,6 +18,6 @@ export const SectionItem: React.FC<{
 			)}
 		>
 			{name && <h3 className='text-md'>{name}</h3>}
-		</div>
+		</button>
 	)
 }

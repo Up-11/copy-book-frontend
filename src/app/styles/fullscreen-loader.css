@@ -1,6 +1,5 @@
 .card {
 	background-color: var(--bg-color);
-	padding: 1rem 2rem;
 	border-radius: 1.25rem;
 	display: flex;
 	justify-content: center;
@@ -18,8 +17,6 @@
 	font-size: 25px;
 	-webkit-box-sizing: content-box;
 	box-sizing: content-box;
-	height: 40px;
-	padding: 10px 10px;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;

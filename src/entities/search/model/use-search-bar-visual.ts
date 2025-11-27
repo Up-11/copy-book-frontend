@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useEventListener } from 'usehooks-ts'
 
-export const useSearchBarVisual = () => {
-	const [isExpanded, setIsExpanded] = useState<boolean>(false)
+export const useSearchBarVisual = (initialExpand: boolean = false) => {
+	const [isExpanded, setIsExpanded] = useState<boolean>(initialExpand)
 	const [isAnimationComplete, setIsAnimationComplete] = useState(false)
 
 	const inputRef = useRef<HTMLInputElement>(null)

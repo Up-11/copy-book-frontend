@@ -1,51 +1,118 @@
 'use client'
 
-import { CourseCreationDescription } from './course-creation-description'
-import { CourseCreationMainData } from './course-creation-main-data'
-import { CourseCreationSectionsAndTasks } from './course-creation-sections-and-tasks'
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger
-} from '@/shared/ui/accordion'
+import { COURSE_SECTIONS } from './create-course-sections'
+import { useCourseCreation } from './model/use-course-creation'
+import { useCreateCourseMutation } from '@/shared/api/graphql/generated/output'
+import { Section, SectionList } from '@/shared/ui/custom/section-list'
+import { ConfirmModal } from '@/shared/ui/modals/confirm-modal'
 import { Button } from '@/shared/ui/other/button'
-import React from 'react'
+import React, { useState } from 'react'
+import { toast } from 'sonner'
 
 export const CourseCreation: React.FC = () => {
+	const [activeSection, setActiveSection] = useState(COURSE_SECTIONS.BASIC)
+	const { getters, setters } = useCourseCreation()
+
+	const [createCourse, { loading }] = useCreateCourseMutation({
+		onCompleted(data) {
+			toast.success('Курс успешно создан!')
+			setters.id(data.createCourse.id)
+			setActiveSection(COURSE_SECTIONS.SECTIONS_AND_TASKS)
+		},
+		onError(error) {
+			toast.error(error.message)
+		}
+	})
+
+	const handleCreateCourse = () => {
+		createCourse({
+			variables: {
+				data: {
+					title: getters.title,
+					description: getters.description,
+					isDraft: true,
+					accessToken: getters.accessToken,
+					privacy: getters.privacy
+				}
+			}
+		})
+	}
+
+	const sections = Object.values(COURSE_SECTIONS)
+	const currentIndex = sections.findIndex(
+		section => section.id === activeSection.id
+	)
+	const isFirstSection = currentIndex === 0
+	const isLastSection = currentIndex === sections.length - 1
+
+	const handleNext = () => {
+		if (!isLastSection) {
+			const nextSection = sections[currentIndex + 1]
+			setActiveSection(nextSection)
+		}
+	}
+
+	const handlePrev = () => {
+		if (!isFirstSection) {
+			const prevSection = sections[currentIndex - 1]
+			setActiveSection(prevSection)
+		}
+	}
+
+	const handleSectionChange = (section: Section) => {
+		setActiveSection(section)
+	}
+
 	return (
-		<div className='flex h-full flex-col'>
-			<Accordion type='single' collapsible>
-				<AccordionItem value='item-1'>
-					<AccordionTrigger className='text-lg'>
-						Шаг 1: Основные данные
-					</AccordionTrigger>
-					<AccordionContent>
-						<CourseCreationMainData />
-					</AccordionContent>
-				</AccordionItem>
-				<AccordionItem value='item-2'>
-					<AccordionTrigger className='text-lg'>
-						Шаг 2: Описание
-					</AccordionTrigger>
-					<AccordionContent>
-						<CourseCreationDescription />
-					</AccordionContent>
-				</AccordionItem>
-				<AccordionItem value='item-3'>
-					<AccordionTrigger className='text-lg'>
-						Шаг 3: Секции и задания
-					</AccordionTrigger>
-					<AccordionContent>
-						<CourseCreationSectionsAndTasks />
-					</AccordionContent>
-				</AccordionItem>
-			</Accordion>
-			<div className='mt-auto flex items-center justify-between gap-5'>
-				<Button>Сохранить в черновике</Button>
-				{/* <Button disabled={!isObjectFilled(getters, ['course'])}>
-					Опубликовать
-				</Button> */}
+		<div className='space-y-6'>
+			<SectionList
+				sections={sections}
+				activeSection={activeSection}
+				onSectionChange={handleSectionChange}
+			/>
+
+			<div className='flex justify-between'>
+				<Button
+					variant='outline'
+					onClick={handlePrev}
+					disabled={isFirstSection || loading}
+				>
+					Назад
+				</Button>
+				{(() => {
+					if (setters.id !== undefined && !isLastSection) {
+						return (
+							<Button onClick={handleNext} disabled={loading}>
+								Следующий этап
+							</Button>
+						)
+					}
+					if (isLastSection) {
+						return (
+							<ConfirmModal
+								title='Удалить раздел?'
+								description='Для этого в разделе не должно быть уроков, перед удалением убедитель в этом'
+								onConfirm={() => {}}
+								confirmText='Удалить раздел'
+							>
+								<Button>Завершить</Button>
+							</ConfirmModal>
+						)
+					}
+
+					if (
+						activeSection.id !== COURSE_SECTIONS.DESCRIPTION.id &&
+						setters.id === undefined
+					) {
+						return (
+							<Button disabled={loading} onClick={handleCreateCourse}>
+								Создать курс
+							</Button>
+						)
+					}
+
+					return null
+				})()}
 			</div>
 		</div>
 	)

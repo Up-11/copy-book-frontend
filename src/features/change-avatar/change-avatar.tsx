@@ -94,7 +94,7 @@ export const ChangeAvatar: React.FC<{
 					<Text size='extraSmall'>
 						• <span className='font-semibold'>Макс. размер файла:</span>
 						{'  '}
-						10 МБ
+						15 МБ
 					</Text>
 				</div>
 				<DropdownMenu modal={false}>

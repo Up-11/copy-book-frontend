@@ -64,31 +64,45 @@ export const ProfileButton: React.FC<PropsWithClassName> = ({ className }) => {
 							<DropdownMenuContent>
 								<DropdownMenuLabel> Мой Аккаунт</DropdownMenuLabel>
 								<DropdownMenuGroup>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.personal}>Личные данные</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.security}>Безопасность</Link>
-									</DropdownMenuItem>
+									<Link href={routes.profile.personal}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											Личные данные
+										</DropdownMenuItem>
+									</Link>
+									<Link href={routes.profile.security}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											Безопасность
+										</DropdownMenuItem>
+									</Link>
 
 									<DropdownMenuSeparator></DropdownMenuSeparator>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.settings}>Настройки</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.statistic}>Статистика</Link>
-									</DropdownMenuItem>
+									<Link href={routes.profile.settings}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											Настройки
+										</DropdownMenuItem>
+									</Link>
+									<Link href={routes.profile.statistic}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											Статистика
+										</DropdownMenuItem>
+									</Link>
 
 									<DropdownMenuSeparator></DropdownMenuSeparator>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.notifications}>Уведомления</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.history}>История</Link>
-									</DropdownMenuItem>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.support}>Поддержка</Link>
-									</DropdownMenuItem>
+									<Link href={routes.profile.notifications}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											Уведомления
+										</DropdownMenuItem>
+									</Link>
+									<Link href={routes.profile.history}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											История
+										</DropdownMenuItem>
+									</Link>
+									<Link href={routes.profile.support}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											Поддержка
+										</DropdownMenuItem>
+									</Link>
 
 									<DropdownMenuSeparator></DropdownMenuSeparator>
 									<DropdownMenuLabel> Информация о аккаунте</DropdownMenuLabel>
@@ -98,14 +112,16 @@ export const ProfileButton: React.FC<PropsWithClassName> = ({ className }) => {
 									<DropdownMenuLabel className='text-xs'>
 										Почта: {user.email}
 									</DropdownMenuLabel>
-									<DropdownMenuItem className='hover:bg-gray-100'>
-										<Link href={routes.profile.accountInfo}>Подробнее</Link>
-									</DropdownMenuItem>
+									<Link href={routes.profile.accountInfo}>
+										<DropdownMenuItem className='hover:bg-gray-100'>
+											Подробнее
+										</DropdownMenuItem>
+									</Link>
 
 									<DropdownMenuSeparator></DropdownMenuSeparator>
 
 									<DropdownMenuItem
-										className='hover:bg-red-100'
+										className='text-red-600 hover:bg-red-100'
 										onClick={() => setIsOpen(true)}
 									>
 										Выход из аккаунта

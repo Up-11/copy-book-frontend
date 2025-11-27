@@ -8,14 +8,25 @@ import { useSearchBarVisual } from '../model/use-search-bar-visual'
 import { Search } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
 
-export const SearchBar: React.FC<{ tooltipText?: string }> = ({
-	tooltipText = 'Поиск'
+export const SearchBar: React.FC<{
+	tooltipText?: string
+	initialExpanded?: boolean
+	externalValue?: string
+	onChange?: (value: string) => void
+}> = ({
+	tooltipText = 'Поиск',
+	initialExpanded = false,
+	externalValue,
+	onChange
 }) => {
-	const { control } = useSearchBarVisual()
+	const { control } = useSearchBarVisual(initialExpanded)
 
-	const { clearInput, value, handleChange } = useSearchBarHandler()
+	const { clearInput, value, handleChange } = useSearchBarHandler({
+		value: externalValue,
+		onChange
+	})
 	return (
-		<div className='flex z-20 relative'>
+		<div className='relative z-20 flex'>
 			<AnimatePresence>
 				{control.isExpanded && (
 					<motion.div
@@ -24,7 +35,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 						animate={{ width: 250, opacity: 1 }}
 						exit={{ width: 0, opacity: 0 }}
 						transition={{ duration: 0.2, ease: 'easeInOut' }}
-						className='flex items-center gap-1 bg-slate-100 p-2 rounded-lg z-10 absolute right-0 overflow-hidden'
+						className='absolute right-0 z-10 flex items-center gap-1 overflow-hidden rounded-lg bg-slate-100 p-2'
 					>
 						<AnimatePresence>
 							{control.isExpanded && (
@@ -36,7 +47,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 									onAnimationComplete={() =>
 										control.setIsAnimationComplete(true)
 									}
-									className='flex items-center gap-1 w-full'
+									className='flex w-full items-center gap-1'
 								>
 									<div>
 										<Search size={18} className='text-gray-500' />
@@ -44,7 +55,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 
 									<Input
 										ref={control.inputRef}
-										className='rounded-sm w-44 p-1 h-5 border-none shadow-none outline-none focus-visible:ring-0'
+										className='h-5 w-44 rounded-sm border-none p-1 shadow-none outline-none focus-visible:ring-0'
 										placeholder='Поиск'
 										value={value}
 										onChange={e => handleChange(e)}
@@ -58,7 +69,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 									>
 										{value && (
 											<ClearButton
-												className='bg-transparent hover:bg-transparent hover:scale-105 hover:text-zinc-950'
+												className='bg-transparent hover:scale-105 hover:bg-transparent hover:text-zinc-950'
 												onClick={clearInput}
 											/>
 										)}
@@ -76,7 +87,7 @@ export const SearchBar: React.FC<{ tooltipText?: string }> = ({
 					initial={{ opacity: 1 }}
 					animate={control.isExpanded ? { opacity: 0 } : { opacity: 1 }}
 					transition={{ duration: 0.3, ease: 'easeInOut' }}
-					className='hover:bg-destructive rounded-full p-2 cursor-pointer '
+					className='cursor-pointer rounded-full p-2 hover:bg-destructive'
 				>
 					<Search size={20} className='hover:text-zinc-950' />
 				</motion.button>

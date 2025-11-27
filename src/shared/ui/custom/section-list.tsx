@@ -5,14 +5,20 @@ export interface Section {
 	id: string
 	name: string
 	component: React.ComponentType<any>
+	canOpen?: boolean
 }
 
 interface Props {
 	sections: Section[]
 	activeSection: Section
+	onSectionChange?: (section: Section) => void
 }
 
-export const SectionList: React.FC<Props> = ({ sections, activeSection }) => {
+export const SectionList: React.FC<Props> = ({
+	sections,
+	activeSection,
+	onSectionChange
+}) => {
 	const ActiveComponent = activeSection.component
 	return (
 		<div className='w-full'>
@@ -22,6 +28,8 @@ export const SectionList: React.FC<Props> = ({ sections, activeSection }) => {
 						<SectionItem
 							name={section.name}
 							isActive={activeSection.id === section.id}
+							onClick={() => onSectionChange?.(section)}
+							canOpen={section.canOpen}
 						/>
 						{index < sections.length - 1 && (
 							<div
