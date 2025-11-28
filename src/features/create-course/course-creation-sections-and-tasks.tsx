@@ -18,6 +18,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import React, { useState } from 'react'
 import { toast } from 'sonner'
+import { useDebounceValue } from 'usehooks-ts'
 
 export const CourseCreationSectionsAndTasks: React.FC = () => {
 	const { getters, setters } = useCourseCreation()
@@ -25,8 +26,10 @@ export const CourseCreationSectionsAndTasks: React.FC = () => {
 	const [sectionsSearchTerms, setSectionsSearchTerms] = useState(
 		searchParams.get('searchQuery') || ''
 	)
+
+	const debouncedSearchTerms = useDebounceValue(sectionsSearchTerms, 500)
 	const { data, loading, refetch } = useGetSectionsByCourseQuery({
-		variables: { courseId: getters.id, searchTerms: sectionsSearchTerms }
+		variables: { courseId: getters.id, searchTerms: debouncedSearchTerms[0] }
 	})
 
 	const [deleteSection, { loading: deleteSectionLoading }] =
@@ -89,7 +92,7 @@ export const CourseCreationSectionsAndTasks: React.FC = () => {
 												variant='warning'
 												description='Для этого в разделе не должно быть уроков, перед удалением убедитель в этом'
 												onConfirm={() => handleDeleteSection(section.id)}
-												confirmText='Удалить раздел'
+												confirmButtonLabel='Удалить раздел'
 												loading={deleteSectionLoading}
 											>
 												<Button

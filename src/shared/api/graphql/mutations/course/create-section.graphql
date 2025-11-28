@@ -1,0 +1,3 @@
+mutation createSection($data: CreateSectionInput!) {
+	createSection(data: $data)
+}

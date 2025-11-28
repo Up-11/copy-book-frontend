@@ -1,0 +1,18 @@
+query getCoursesByTeacher {
+	getCoursesByTeacher {
+		id
+		isDraft
+		title
+		accessToken
+		description
+		privacy
+		statistic {
+			totalTasks
+			averageRating
+			activeStudents
+		}
+		sections {
+			title
+		}
+	}
+}

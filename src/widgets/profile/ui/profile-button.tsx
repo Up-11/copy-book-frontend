@@ -1,6 +1,7 @@
 'use client'
 
 import { LogoutButton } from './logout-button'
+import { SwitchColorTheme } from '@/features/theming/switch-color-theme'
 import { routes } from '@/shared/config/routes'
 import { useUserDataSync } from '@/shared/hooks/use-sync-user-data'
 import { cn } from '@/shared/lib/css'
@@ -117,6 +118,14 @@ export const ProfileButton: React.FC<PropsWithClassName> = ({ className }) => {
 											Подробнее
 										</DropdownMenuItem>
 									</Link>
+
+									<DropdownMenuSeparator></DropdownMenuSeparator>
+									<DropdownMenuItem
+										className='hover:bg-gray-100'
+										onSelect={e => e.preventDefault()}
+									>
+										Тема приложения : <SwitchColorTheme />
+									</DropdownMenuItem>
 
 									<DropdownMenuSeparator></DropdownMenuSeparator>
 

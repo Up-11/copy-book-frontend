@@ -63,6 +63,10 @@ export const CourseCreation: React.FC = () => {
 		setActiveSection(section)
 	}
 
+const handleUpdateCourse = () => {
+
+}
+
 	return (
 		<div className='space-y-6'>
 			<SectionList

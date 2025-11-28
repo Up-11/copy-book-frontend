@@ -1,0 +1,7 @@
+query getSectionsByCourse($courseId: String!, $searchTerms: String!) {
+	getSectionsByCourse(courseId: $courseId, searchTerms: $searchTerms) {
+		id
+		title
+		order
+	}
+}
